@@ -1,0 +1,2 @@
+# COMP7506SmartPhoneApp
+COMP7506SmartPhoneApp Assignment2
