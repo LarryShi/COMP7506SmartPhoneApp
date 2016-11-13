@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light">
+
+
+    <TextView
+        android:id="@+id/gametitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="The Avengers"
+        android:textSize="55dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="cursive"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/usernameRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username :"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/gametitle"
+        android:layout_alignLeft="@+id/gametitle"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/usernameRegisterText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameRegister"
+        android:layout_alignLeft="@+id/gametitle"
+        android:layout_alignRight="@+id/gametitle"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
+        android:background="@drawable/registrationedittext"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/passwordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password :"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/usernameRegisterText"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@+id/gametitle"/>
+
+    <EditText
+        android:id="@+id/passwordRegisterText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordRegister"
+        android:layout_alignLeft="@+id/gametitle"
+        android:layout_alignRight="@+id/gametitle"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
+        android:background="@drawable/registrationedittext"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/passwordRegisterConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password :"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/passwordRegisterText"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@+id/gametitle"/>
+
+    <EditText
+        android:id="@+id/passwordConfirmText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordRegisterConfirm"
+        android:layout_alignLeft="@+id/gametitle"
+        android:layout_alignRight="@+id/gametitle"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
+        android:background="@drawable/registrationedittext"
+        android:maxLines="1"/>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordConfirmText"
+        android:layout_alignLeft="@+id/passwordConfirmText"
+        android:layout_alignRight="@+id/passwordConfirmText"
+        android:layout_marginTop="30dp"
+        android:text="Register NOW"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:background="@android:color/holo_blue_dark"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerButton"
+        android:layout_alignLeft="@+id/passwordConfirmText"
+        android:layout_alignRight="@+id/passwordConfirmText"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:background="@android:color/holo_blue_dark"/>
+
+
+</RelativeLayout>
