@@ -11,20 +11,21 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        android:src="@drawable/background"/>
+        android:src="@drawable/background2"/>
 
     <RelativeLayout
         android:layout_width="300dp"
-        android:layout_height="160dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp">
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
 
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username :"
+            android:text="@string/user_name"
             android:textSize="25dp"
             android:textColor="#ffffffff"
             android:padding="10dp"/>
@@ -33,7 +34,7 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password :"
+            android:text="@string/password"
             android:layout_below="@id/username"
             android:textSize="25dp"
             android:textColor="#ffffffff"
@@ -71,24 +72,29 @@
             android:id="@+id/login"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Login"
-            android:textSize="25dp"
+            android:text="@string/login"
+            android:textSize="30dp"
             android:textColor="@android:color/white"
             android:background="@drawable/frontpagebutton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@id/password"/>
+            android:layout_below="@+id/passwordText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
 
         <Button
             android:id="@+id/register"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="Register"
+            android:textSize="30dp"
+            android:text="@string/register"
             android:textColor="@android:color/white"
             android:background="@drawable/frontpagebutton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@id/passwordText"/>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/login"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
 
     </RelativeLayout>
 
