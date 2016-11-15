@@ -162,4 +162,34 @@ class Server extends CI_Controller {
         			->set_output(json_encode($data));
 		}
 	}
+
+	public function loginM()
+	{
+		$json_string = $this->input->post();
+		
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+		$paramemter['UserName'] = $json['UserName'];
+        $paramemter['Password'] = md5($json['Password']);
+     
+		$result = $this->user_model->login($paramemter);
+		if($result['ret']==200)
+		{
+		
+			$data['code'] = 0;
+			$data['UserInfo']=$result['UserInfo'];
+			$this->output
+        			->set_content_type('application/json')
+        			->set_output(json_encode($data));
+		}else{
+			$data['code']=2;
+			$data['message'] = "UserName/Password not Match";
+			$this->output
+        			->set_content_type('application/json')
+        			->set_output(json_encode($data));
+		}
+	}
 }
