@@ -68,15 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<?php 
-
-		$array = json_decode(json_encode($display_value),true);
-		foreach($array as $row){ 
-		   echo $row['UserName'];
-		}
-	?>
+	<h1>Registration</h1>
 
 	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/register" method="post">
 	  <p>UserName: <input type="text" name="UserName" /></p>
@@ -85,14 +77,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <p>Alliance: <input type="text" name="Alliance" /></p>
 	  <input type="submit" value="Register" />
 	</form>
+</div>
+<div id="container">
+	<h1>Login</h1>
+
 
 	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/login" method="post">
 	  <p>UserName: <input type="text" name="UserName" /></p>
 	  <p>Password: <input type="text" name="Password" /></p>
 	  <input type="submit" value="Login" />
 	</form>
+
 	
 </div>
+
+
 
 </body>
 </html>
