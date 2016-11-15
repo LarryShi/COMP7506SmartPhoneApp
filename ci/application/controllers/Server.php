@@ -47,6 +47,7 @@ class Server extends CI_Controller {
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
+    	$json2 = json_encode($json_string, true);
 		$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
         $paramemter['Password'] = md5($json['Password']);
@@ -84,6 +85,7 @@ class Server extends CI_Controller {
         			->set_output(json_encode($data));
 			
 		}
+		echo 'Input:'.$json2.'"<br/>"';
 	}
 
 	public function registerM()
@@ -141,6 +143,7 @@ class Server extends CI_Controller {
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
+    	$json2 = json_encode($json_string, true);
 		$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
         $paramemter['Password'] = md5($json['Password']);
@@ -161,6 +164,7 @@ class Server extends CI_Controller {
         			->set_content_type('application/json')
         			->set_output(json_encode($data));
 		}
+		echo 'Input:'.$json2.'"<br/>"';
 	}
 
 	public function loginM()
@@ -186,7 +190,7 @@ class Server extends CI_Controller {
         			->set_output(json_encode($data));
 		}else{
 			$data['code']=2;
-			$data['message'] = "UserName/Password not Match";
+			$data['message'] = "UserName or Password not Match";
 			$this->output
         			->set_content_type('application/json')
         			->set_output(json_encode($data));

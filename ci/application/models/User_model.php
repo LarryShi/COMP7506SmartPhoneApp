@@ -60,12 +60,14 @@ class User_model extends CI_Model {
         if ($query->num_rows() > 0)
         {
             $result['UserInfo'] = $query->row_array(); 
+
+            $result['ret']=200;
             
             $password = $paramemter['Password'];
             if($result['UserInfo']['Password'] != $password){
                 $result['ret'] = 401;
             }
-            $result['ret']=200;
+            
             return $result;
         }else{
            
