@@ -47,7 +47,7 @@ class Server extends CI_Controller {
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
-    	$json2 = json_encode($json_string, true);
+    	
 		$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
         $paramemter['Password'] = md5($json['Password']);
@@ -63,29 +63,25 @@ class Server extends CI_Controller {
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;
-			$data['message'] = "Successful";
-			$this->output
-        			->set_content_type('application/json')
-        			->set_output(json_encode($data));
-			
+			$data['message'] = "Successful";	
 		}
 		else if($result['ret'] === 401)
 		{
 			$data['code'] = 2;
 			$data['message'] = "Used UserName";
-			$this->output
-        			->set_content_type('application/json')
-        			->set_output(json_encode($data));
 		}
 		else{
 			$data['code'] = 3;
-			$data['message'] = "Fail";
-			$this->output
-        			->set_content_type('application/json')
-        			->set_output(json_encode($data));
-			
+			$data['message'] = "Fail";		
 		}
-		echo 'Input:'.$json2.'"<br/>"';
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/registerM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data);
+
+		$this->load->view('result',$content_data);
+		
 	}
 
 	public function registerM()
@@ -147,24 +143,25 @@ class Server extends CI_Controller {
 		$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
         $paramemter['Password'] = md5($json['Password']);
-     
 		$result = $this->user_model->login($paramemter);
 		if($result['ret']==200)
 		{
 		
 			$data['code'] = 0;
 			$data['UserInfo']=$result['UserInfo'];
-			$this->output
-        			->set_content_type('application/json')
-        			->set_output(json_encode($data));
+
 		}else{
 			$data['code']=2;
-			$data['message'] = "UserName/Password not Match";
-			$this->output
-        			->set_content_type('application/json')
-        			->set_output(json_encode($data));
+			$data['message'] = "UserName or Password not Match";
+
 		}
-		echo 'Input:'.$json2.'"<br/>"';
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/loginM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data);
+
+		$this->load->view('result',$content_data);
 	}
 
 	public function loginM()
