@@ -89,6 +89,8 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         Log.i(TAG, "onPostExecute(Result result) called");
         if(str_function.equals(GameModel.str_login_function))
             gameModel.login_finished(result);
+        if(str_function.equals(GameModel.str_registration_function))
+            gameModel.registration_finished(result);
     }
               
     //onCancelled方法用于在取消执行中的任务时更改UI

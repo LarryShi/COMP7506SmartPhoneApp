@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     private class bt_LoginListener implements View.OnClickListener {
 
         public void onClick(View v) {
@@ -86,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void startGame(){
+    public void successful(){
         Intent myIntent = new Intent(LoginActivity.this, MainGameActivity.class);
         startActivityForResult(myIntent, 0);
     }
