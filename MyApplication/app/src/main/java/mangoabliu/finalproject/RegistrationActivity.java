@@ -15,7 +15,7 @@ import org.json.JSONObject;
  * Created by herenjie on 2016/11/13.
  */
 
-public class Registration extends Activity {
+public class RegistrationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class Registration extends Activity {
         Button cancel = (Button)findViewById(R.id.cancelButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
                 startActivityForResult(myIntent,0);
             }
         });
@@ -39,7 +39,7 @@ public class Registration extends Activity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServerConnector myServer = new ServerConnector();
+
                 String url = "http://i.cs.hku.hk/~zqshi/ci/index.php/Server/register";
                 JSONObject jsonObject = new JSONObject();
 

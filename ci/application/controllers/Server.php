@@ -89,7 +89,7 @@ class Server extends CI_Controller {
 
 	public function registerM()
 	{
-		$json_string = $this->input->post();
+		$json_string = $this->input->raw_input_stream;
 		
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
@@ -176,11 +176,13 @@ class Server extends CI_Controller {
 
 	public function loginM()
 	{
-		$json_string = $this->input->post();
-		
+		$json_string = $this->input->raw_input_stream;
+	
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
+
     	$json = json_decode($json_string, true);
+    	
     	//传过来的是JSON Object，用下面这句
 		//$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
