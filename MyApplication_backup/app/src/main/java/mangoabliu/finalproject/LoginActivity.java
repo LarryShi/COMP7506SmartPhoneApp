@@ -13,10 +13,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.json.JSONObject;
-
-import java.io.Serializable;
-
 import mangoabliu.finalproject.Model.GameModel;
 
 
@@ -89,9 +85,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void successful(String jsonObject){
+    public void successful(){
         Intent myIntent = new Intent(LoginActivity.this, MainGameActivity.class);
-        myIntent.putExtra("UserAccount",jsonObject);
         startActivityForResult(myIntent, 0);
     }
 

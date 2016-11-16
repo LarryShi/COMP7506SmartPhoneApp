@@ -105,7 +105,7 @@ public class GameModel {
         try {
             JSONObject jsonObj = new JSONObject(str_result);
             if((Integer)jsonObj.get("code")==0) {
-                loginActivity.successful(jsonObj.toString());
+                loginActivity.successful();
             }
             else
                 loginActivity.errorMessage((String)jsonObj.get("message"));

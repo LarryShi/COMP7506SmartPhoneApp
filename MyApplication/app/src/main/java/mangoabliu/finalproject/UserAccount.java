@@ -7,18 +7,22 @@ package mangoabliu.finalproject;
 public class UserAccount {
 
     private String userName;
-    private String password;
+    private double walkDistance;
 
-    public UserAccount(String newUserName, String newPassword){
+
+    public UserAccount(String newUserName, double walkDistance){
         userName = newUserName;
-        password = newPassword;
+        walkDistance = walkDistance;
     }
 
     public String getUserName(){
         return userName;
     }
 
-    public String getPassword(){
-        return password;
+    public double getWalkDistance(){
+        return walkDistance;
     }
+
+
+
 }

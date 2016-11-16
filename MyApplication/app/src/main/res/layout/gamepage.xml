@@ -1,5 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgoundmap"
+>
+
+    <Button
+        android:id="@+id/userProfile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gameuser"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/fight"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:text="FIGHT"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:text="0 Miles"
+        android:textSize="30dp"
+        android:textColor="@color/distance" />
+
+    <Button
+        android:id="@+id/location1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/location"
+        android:text="@string/location1"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="100dp"/>
+
+    <Button
+        android:id="@+id/location2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/location"
+        android:text="@string/location2"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="200dp" />
+
+    <Button
+        android:id="@+id/location3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/location"
+        android:text="@string/location3"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="300dp"/>
+
+    <Button
+        android:id="@+id/location4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/location"
+        android:text="@string/location4"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="400dp"/>
+
+
 
 </RelativeLayout>

@@ -10,4 +10,9 @@
     <string name="confirm_to_exit">Confirm to exit?</string>
     <string name="NOTICE">NOTICE</string>
     <string name="Confirm">Confirm</string>
+    <string name="location1">1</string>
+    <string name="location2">2</string>
+    <string name="location3">3</string>
+    <string name="location4">4</string>
+    <string name="location5">5</string>
 </resources>
