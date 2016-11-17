@@ -75,25 +75,29 @@ public class MainGameActivity extends AppCompatActivity {
     private class location1Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            loc.show();
         }
     }
     private class location2Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            loc.show();
         }
     }
     private class location3Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            loc.show();
         }
     }
     private class location4Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            loc.show();
         }
     }
 

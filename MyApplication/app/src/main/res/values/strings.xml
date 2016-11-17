@@ -15,4 +15,6 @@
     <string name="location3">3</string>
     <string name="location4">4</string>
     <string name="location5">5</string>
+    <string name="DropCard">Drop Card</string>
+    <string name="Go">Go</string>
 </resources>

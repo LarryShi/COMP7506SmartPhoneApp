@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="250dp"
+    android:background="@drawable/locationdialogback">
+
+
+    <TextView
+        android:id="@+id/locationDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:paddingTop="10dp"
+        android:text="Default"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/dialog1"/>
+
+
+    <Button
+        android:id="@+id/locationDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/locationDialogTitle"/>
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/locationDialogTitle"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/planet1"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/discriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/locationImage"
+        android:layout_alignTop="@+id/locationImage"
+        android:layout_marginLeft="30dp"
+        android:text="Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war, a reddish appearance."
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/dropCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/DropCard"/>
+
+    <Button
+        android:id="@+id/locationGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/Go"/>
+
+</RelativeLayout>

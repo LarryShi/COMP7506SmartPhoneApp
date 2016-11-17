@@ -10,12 +10,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 /**
- * Created by herenjie on 2016/11/16.
+ * Created by herenjie on 2016/11/17.
  */
 
-public class UserProfileAlertView extends Dialog {
-
-    protected UserProfileAlertView(Context context){
+public class LocationDialogView extends Dialog {
+    protected LocationDialogView(Context context) {
         super(context);
     }
 
@@ -25,10 +24,10 @@ public class UserProfileAlertView extends Dialog {
         //设置不显示对话框标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //设置对话框显示哪个布局文件
-        setContentView(R.layout.userprofiledialog);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        setContentView(R.layout.locationdialog);
+        //getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
-        Button bt = (Button) findViewById(R.id.userProfileDialogCancel);
+        Button bt = (Button) findViewById(R.id.locationDialogCancel);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +35,5 @@ public class UserProfileAlertView extends Dialog {
             }
         });
     }
-
-
 }
+
