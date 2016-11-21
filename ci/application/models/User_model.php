@@ -30,11 +30,7 @@ class User_model extends CI_Model {
                 'Password'    => $paramemter['Password'],
                 'Nickname'    => $paramemter['Nickname'],
                 'Alliance'    => $paramemter['Alliance'],
-                'PositionX'   => $paramemter['PositionX'],
-                'PositionY'   => $paramemter['PositionY'] ,
-                'WalkDistance'=>$paramemter['WalkDistance'],
-                'GpsLat'      => $paramemter['GpsLat'],
-                'GpsLon'      => $paramemter['GpsLon']
+                'WalkDistance'=> $paramemter['WalkDistance'],
             );
             $this->db->trans_start();
             $this->db->insert('User', $data);
@@ -55,14 +51,20 @@ class User_model extends CI_Model {
 
     function login($paramemter)
     {
-
         $query = $this->db->get_where('User', array('UserName' => $paramemter['UserName']),   1);
         if ($query->num_rows() > 0)
         {
             $result['UserInfo'] = $query->row_array(); 
-
             $result['ret']=200;
-            
+            $this->db->select('LocationID,LocationName');
+            $this->db->from('Location');  
+            $query = $this->db->get();
+            $result['LocationInfo'] = $query->result_array(); 
+
+            $this->db->select('*');
+            $this->db->from('LocationRelation');  
+            $query = $this->db->get();
+            $result['LocationRelation'] = $query->result_array(); 
             $password = $paramemter['Password'];
             if($result['UserInfo']['Password'] != $password){
                 $result['ret'] = 401;
@@ -74,6 +76,27 @@ class User_model extends CI_Model {
             $result['ret']=404;
             return $result;
         }
+    }
+
+    function getUserCards($paramemter)
+    {
+
+        $this->db->select('*');
+        $this->db->from('UserCardRelation as a');
+        $this->db->join('Cards as b', 'a.CardID = b.CardID');
+        $this->db->where('a.UserID', $paramemter['UserID']);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            $result['UserCards'] = $query->result_array(); 
+            $result['ret']=200;          
+            return $result;
+        }else{
+           
+            $result['ret']=404;
+            return $result;
+        }
+       
     }
  
 }

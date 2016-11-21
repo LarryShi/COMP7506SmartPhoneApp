@@ -91,6 +91,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 </div>
 
+<div id="container">
+	<h1>GetUserCards</h1>
+
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/getUserCards" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <input type="submit" value="GetUserCards" />
+	</form>
+
+	
+</div>
+
 
 
 </body>

@@ -67,7 +67,7 @@ class Server extends CI_Controller {
 				$data['code'] = 0;
 				$data['message'] = "Successful";	
 			}
-			else if($result['ret'] === 401)
+			elseif($result['ret'] === 401)
 			{
 				$data['code'] = 2;
 				$data['message'] = "Used UserName";
@@ -118,7 +118,7 @@ class Server extends CI_Controller {
 	        			->set_output(json_encode($data));
 				
 			}
-			else if($result['ret'] === 401)
+			elseif($result['ret'] === 401)
 			{
 				$data['code'] = 2;
 				$data['message'] = "Used UserName";
@@ -157,6 +157,8 @@ class Server extends CI_Controller {
 			
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
+				$data['LocationInfo']=$result['LocationInfo'];
+				$data['LocationRelation']=$result['LocationRelation'];
 
 			}else{
 				$data['code']=2;
@@ -196,6 +198,9 @@ class Server extends CI_Controller {
 			
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
+				$data['LocationInfo']=$result['LocationInfo'];
+				$data['LocationRelation']=$result['LocationRelation'];
+
 				$this->output
 	        			->set_content_type('application/json')
 	        			->set_output(json_encode($data));
@@ -208,4 +213,62 @@ class Server extends CI_Controller {
 			}
 		}
 	}
+
+	public function getUserCards(){
+
+		$json_string = $this->input->post();
+		
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$result = $this->user_model->getUserCards($paramemter);
+		if($result['ret']==200)
+			{		
+				$data['code'] = 0;
+				$data['UserInfo']=$result['UserCards'];
+			}else{
+				$data['code']=2;
+				$data['message'] = "No Such UserID";
+			}
+
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/getUserCardsM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data, true);
+
+		$this->load->view('result',$content_data);
+	}
+
+	public function getUserCardsM(){
+
+		$json_string = $this->input->post();
+		
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$result = $this->user_model->getUserCards($paramemter);
+		if($result['ret']==200)
+			{		
+				$data['code'] = 0;
+				$data['UserInfo']=$result['UserCards'];
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}else{
+				$data['code']=2;
+				$data['message'] = "No Such UserID";
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}
+	}
+
+
 }
