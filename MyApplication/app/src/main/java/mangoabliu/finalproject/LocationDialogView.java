@@ -62,6 +62,7 @@ public class LocationDialogView extends Dialog {
         public void onClick(View v) {
             v.getContext().startService(new Intent(v.getContext(),StepService.class));
             //v.getContext().stopService(new Intent(v.getContext(),StepService.class));
+            dismiss();
         }
 
     }
