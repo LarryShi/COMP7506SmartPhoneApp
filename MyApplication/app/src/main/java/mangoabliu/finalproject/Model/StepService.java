@@ -19,14 +19,10 @@ public class StepService extends Service {
     String TAG = "StepService";
     GameModel gameModel;
     private  boolean isRunning = true;
-    private int totalStepsTaken = 0;
     private int stepCount;
     private int sendStepCounter;
 
 
-    public int getTotalStepsTaken(){
-        return totalStepsTaken;
-    }
 
 
     @Override

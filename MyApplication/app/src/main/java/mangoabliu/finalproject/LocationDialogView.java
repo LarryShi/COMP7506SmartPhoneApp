@@ -12,15 +12,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.StepService;
 
 /**
  * Created by herenjie on 2016/11/17.
  */
 
+
+
 public class LocationDialogView extends Dialog {
-    protected LocationDialogView(Context context) {
+
+    GameModel gameModel;
+    int clickedLoc;
+
+    protected LocationDialogView(Context context, int loc) {
         super(context);
+        clickedLoc = loc;
     }
 
     @Override
@@ -35,6 +43,14 @@ public class LocationDialogView extends Dialog {
         Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         Button start = (Button) findViewById(R.id.locationGo);
         Button drop = (Button) findViewById(R.id.dropCard);
+
+        gameModel = GameModel.getInstance();
+
+        if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc)
+        {
+            start.setVisibility(View.GONE);
+            start.setEnabled(false);
+        }
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,5 +82,6 @@ public class LocationDialogView extends Dialog {
         }
 
     }
+
 }
 

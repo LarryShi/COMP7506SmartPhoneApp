@@ -81,13 +81,17 @@
         android:layout_marginTop="100dp"
         android:layout_marginLeft="400dp"/>
 
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/touxiang"/>
+
     <Button
         android:id="@+id/stepTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="step"/>
-
-
 
 </RelativeLayout>

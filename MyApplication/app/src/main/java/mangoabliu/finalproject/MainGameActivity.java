@@ -13,7 +13,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +39,12 @@ public class MainGameActivity extends AppCompatActivity {
     UserAccount myUser;
     Button userProfile, loc1,loc2,loc3,loc4,fight,stepTest;
     TextView distance;
-    int currentDistance=0;
+    ImageView thumbnail;
     int walkedDistance=0;
-    StepService myService;
 
     int stepCount;
     int sendStepCounter;
+
 
 
     @Override
@@ -63,6 +66,7 @@ public class MainGameActivity extends AppCompatActivity {
         fight = (Button) findViewById(R.id.fight);
 
         distance = (TextView) findViewById(R.id.distance);
+        thumbnail = (ImageView) findViewById(R.id.thumbnail);
 
         stepTest = (Button) findViewById(R.id.stepTest);
         stepTest.setOnClickListener(new stepTestListener());
@@ -81,8 +85,48 @@ public class MainGameActivity extends AppCompatActivity {
 
         //currentDistance = myService.getTotalStepsTaken();
         //Log.d(TAG, String.valueOf(step));
-        gameModel.getUserAccount().setWalkDistance(step + gameModel.getUserAccount().getWalkDistance());
+        double startLocX = 0;
+        double startLocY = 0;
+        double destLocX = 500;
+        double destLocY = 500;
+
+        double currentLocX = gameModel.getUserAccount().getCurrentLocCoordinate()[0];
+        double currentLocY = gameModel.getUserAccount().getCurrentLocCoordinate()[1];
+        double nextLocX = 0;
+        double nextLocY = 0;
+
+        int totalSteps = 200;
+
+        int walkedDis = gameModel.getUserAccount().getWalkDistance();
+
+        int[] currentCoordinate = gameModel.getUserAccount().getCurrentLocCoordinate();
+
+        gameModel.getUserAccount().setWalkDistance(step + walkedDis);
         distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+        if (walkedDis >= 1000){
+            //gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
+            //        gameModel.getUserAccount().getTargetLocId());
+            stopService(new Intent(MainGameActivity.this,StepService.class));
+            return;
+        }
+
+        nextLocY = Math.sqrt(((Math.pow(destLocX-startLocX,2)+Math.pow(destLocY-startLocY,2))/Math.pow(totalSteps,2))/
+                    (Math.pow((destLocX-startLocX)/(destLocY-startLocY),2)+1))+currentLocY;
+
+        nextLocX = (destLocX-startLocX)/(destLocY-startLocY)*(nextLocY-currentLocY)+currentLocX;
+
+        Log.d(TAG,Double.toString((Math.pow(destLocX-startLocX,2)+Math.pow(destLocY-startLocY,2))
+                /Math.pow(totalSteps,2)));
+        Log.d(TAG,Float.toString((float)nextLocX));
+        Log.d(TAG,Float.toString((float)nextLocY));
+
+        gameModel.getUserAccount().setCurrentLocCoordinate(new int[]{(int)nextLocX,(int)nextLocY});
+
+        Animation animation = new TranslateAnimation(currentCoordinate[0],(float) nextLocX,
+                currentCoordinate[1],(float) nextLocY);
+        animation.setDuration(300);
+        animation.setFillAfter(true);
+        thumbnail.startAnimation(animation);
     }
 
 
@@ -108,6 +152,10 @@ public class MainGameActivity extends AppCompatActivity {
         Log.d(TAG,result);
     }
 
+    public void updateTargetLocationSuccessful(String result){
+        Log.d(TAG, result);
+    }
+
     public void errorMessage(String err){
         gameModel.showToast(MainGameActivity.this, err);
     }
@@ -126,28 +174,28 @@ public class MainGameActivity extends AppCompatActivity {
     private class location1Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,1);
             loc.show();
         }
     }
     private class location2Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,2);
             loc.show();
         }
     }
     private class location3Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,3);
             loc.show();
         }
     }
     private class location4Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,4);
             loc.show();
         }
     }
@@ -203,9 +251,6 @@ public class MainGameActivity extends AppCompatActivity {
 
     public void initiateGame(){
         String data = getIntent().getExtras().getString("UserAccount");
-        myService = new StepService();
-        currentDistance =  myService.getTotalStepsTaken();
-
         try {
                 JSONObject passedData = new JSONObject(data);
                 int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));

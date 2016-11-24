@@ -35,6 +35,7 @@ public class GameModel {
     protected final static String str_registration_function="registration";
 
     protected final static String str_updateUserStep_function = "updateUserStep";
+    protected final static String str_updateTargetLocation_function = "";
 
 
     private UserAccount myUser;
@@ -158,6 +159,34 @@ public class GameModel {
     }
 
 
+    public void updateTargetLocation(int str_UserId, int targetLocation){
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("UserID",str_UserId);
+            jsonObject.put("TargetLocationID",targetLocation);
+
+            serverPHPPostConnection(getUpdateTargetLocationURL(),jsonObject.toString(),
+                    str_updateTargetLocation_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTargetLocationFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.updateTargetLocationSuccessful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
         try{
@@ -176,7 +205,13 @@ public class GameModel {
         return String_base_url+"Server/registerM";
     }
 
-    public String getUpdateUserStepURL(){ return String_base_url+"Server/updateUserStepM";}
+    public String getUpdateUserStepURL(){
+        return String_base_url+"Server/updateUserStepM";
+    }
+
+    public String getUpdateTargetLocationURL(){
+        return String_base_url + "Server/";
+    }
     //HTTP Request Related End
 
     public void addActivity(AppCompatActivity activity){
