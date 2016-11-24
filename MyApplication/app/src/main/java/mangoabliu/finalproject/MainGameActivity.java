@@ -2,6 +2,7 @@ package mangoabliu.finalproject;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -33,14 +34,14 @@ import static mangoabliu.finalproject.R.attr.height;
 public class MainGameActivity extends AppCompatActivity {
     GameModel gameModel;
     UserAccount myUser;
-    Button userProfile, loc1,loc2,loc3,loc4,fight;
+    Button userProfile, loc1,loc2,loc3,loc4,fight,stepTest;
     TextView distance;
-    double currentDistance=0;
-    double walkedDistance=0;
-    double totalDistance=0;
+    int currentDistance=0;
+    int walkedDistance=0;
     StepService myService;
-    Handler distanceHandler;
-    Runnable distanceRunnable;
+
+    int stepCount;
+    int sendStepCounter;
 
 
     @Override
@@ -63,6 +64,11 @@ public class MainGameActivity extends AppCompatActivity {
 
         distance = (TextView) findViewById(R.id.distance);
 
+        stepTest = (Button) findViewById(R.id.stepTest);
+        stepTest.setOnClickListener(new stepTestListener());
+        stepCount = 0;
+        sendStepCounter = 0;
+
         userProfile.setOnClickListener(new userProfileListener());
         loc1.setOnClickListener(new location1Listener());
 
@@ -74,12 +80,37 @@ public class MainGameActivity extends AppCompatActivity {
     public void updateDistance(int step){
 
         //currentDistance = myService.getTotalStepsTaken();
-        Log.d(TAG, String.valueOf(step));
-        totalDistance = step + walkedDistance;
-        distance.setText(totalDistance + "Miles");
-
+        //Log.d(TAG, String.valueOf(step));
+        gameModel.getUserAccount().setWalkDistance(step + gameModel.getUserAccount().getWalkDistance());
+        distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
     }
 
+
+    private class stepTestListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            stepCount++;
+            sendStepCounter++;
+            //Log.d(TAG, String.valueOf(totalStepsTaken));
+            if (stepCount == 1) {
+                gameModel.updateMainGameStep(stepCount);
+                stepCount = 0;
+            }
+            if (sendStepCounter == 10){
+                gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),
+                        gameModel.getUserAccount().getWalkDistance());
+                sendStepCounter = 0;
+            }
+        }
+    }
+
+    public void sendStepSuccessful(String result){
+        Log.d(TAG,result);
+    }
+
+    public void errorMessage(String err){
+        gameModel.showToast(MainGameActivity.this, err);
+    }
 
 
     private class userProfileListener implements View.OnClickListener {
@@ -177,10 +208,12 @@ public class MainGameActivity extends AppCompatActivity {
 
         try {
                 JSONObject passedData = new JSONObject(data);
+                int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
                 String userName = (String) passedData.getJSONObject("UserInfo").get("UserName");
-                walkedDistance = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
-                myUser = new UserAccount(userName,walkedDistance);
-                distance.setText(Double.toString(walkedDistance) + "Miles");
+                walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
+                myUser = new UserAccount(id,userName,walkedDistance);
+                gameModel.setUserAccount(myUser);
+                distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
                 Log.i(TAG, "UserName = " + userName +" walkDistance = " + walkedDistance);
         } catch (JSONException e) {
             e.printStackTrace();

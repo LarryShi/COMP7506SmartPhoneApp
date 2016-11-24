@@ -7,22 +7,31 @@ package mangoabliu.finalproject;
 public class UserAccount {
 
     private String userName;
-    private double walkDistance;
+    private int walkDistance;
+    private int userId;
 
 
-    public UserAccount(String newUserName, double walkDistance){
+    public UserAccount(int id, String newUserName, int distance){
+        userId = id;
         userName = newUserName;
-        walkDistance = walkDistance;
+        walkDistance = distance;
     }
 
     public String getUserName(){
         return userName;
     }
 
-    public double getWalkDistance(){
+    public int getWalkDistance(){
         return walkDistance;
     }
 
+    public void setWalkDistance(int distance){
+        walkDistance = distance;
+    }
+
+    public int getUserId(){
+        return userId;
+    }
 
 
 }

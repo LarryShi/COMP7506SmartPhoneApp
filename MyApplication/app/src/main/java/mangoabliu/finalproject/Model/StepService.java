@@ -20,7 +20,8 @@ public class StepService extends Service {
     GameModel gameModel;
     private  boolean isRunning = true;
     private int totalStepsTaken = 0;
-    private int stepCount=0;
+    private int stepCount;
+    private int sendStepCounter;
 
 
     public int getTotalStepsTaken(){
@@ -32,7 +33,9 @@ public class StepService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         gameModel=GameModel.getInstance();
         int retVal = super.onStartCommand(intent,flags,startId);
-
+        stepCount = 0;
+        sendStepCounter = 0;
+        Log.d(TAG,String.valueOf(stepCount));
         Log.d(TAG, "onStartCommand" + intent);
         registerForSensorEvents();
         return retVal;
@@ -66,12 +69,17 @@ public class StepService extends Service {
                 public void onSensorChanged(SensorEvent event) {
                     if (isRunning){
 
-                        totalStepsTaken = (int) event.values[0];
                         stepCount++;
-                        Log.d(TAG, String.valueOf(totalStepsTaken));
-                        if(stepCount==5){
-                            stepCount=0;
-                            gameModel.updateMainGameStep(totalStepsTaken);
+                        sendStepCounter++;
+                        //Log.d(TAG, String.valueOf(totalStepsTaken));
+                        if (stepCount == 1) {
+                            gameModel.updateMainGameStep(stepCount);
+                            stepCount = 0;
+                        }
+                        if (sendStepCounter == 10){
+                            gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),
+                                    gameModel.getUserAccount().getWalkDistance());
+                            sendStepCounter = 0;
                         }
                     }
                 }

@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import mangoabliu.finalproject.LoginActivity;
 import mangoabliu.finalproject.MainGameActivity;
 import mangoabliu.finalproject.RegistrationActivity;
+import mangoabliu.finalproject.UserAccount;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,8 +34,20 @@ public class GameModel {
     protected final static String str_login_function="login";
     protected final static String str_registration_function="registration";
 
-    private GameModel() {
+    protected final static String str_updateUserStep_function = "updateUserStep";
 
+
+    private UserAccount myUser;
+
+    private GameModel() {
+    }
+
+    public void setUserAccount(UserAccount user){
+        myUser = user;
+    }
+
+    public UserAccount getUserAccount(){
+        return myUser;
     }
 
     public static GameModel getInstance(){
@@ -118,6 +131,32 @@ public class GameModel {
 
     }
 
+    public void sendUserStep(int str_UserId,int walkDistance){
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("UserID",str_UserId);
+            jsonObject.put("WalkDistance",walkDistance);
+
+            serverPHPPostConnection(getUpdateUserStepURL(),jsonObject.toString(),str_updateUserStep_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendUserStepFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.sendStepSuccessful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
@@ -136,6 +175,8 @@ public class GameModel {
     public String getRegistrationURL(){
         return String_base_url+"Server/registerM";
     }
+
+    public String getUpdateUserStepURL(){ return String_base_url+"Server/updateUserStepM";}
     //HTTP Request Related End
 
     public void addActivity(AppCompatActivity activity){
@@ -148,7 +189,7 @@ public class GameModel {
         for (AppCompatActivity activity : activityLinkedList) {
             activity.finish();
         }
-
+        sendUserStep(myUser.getUserId(),myUser.getWalkDistance());
     }
 
 
