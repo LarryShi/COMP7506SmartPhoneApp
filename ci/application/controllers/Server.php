@@ -280,12 +280,12 @@ class Server extends CI_Controller {
     	//传过来的是JSON Object，用下面这句
 		$json = $json_string;
 		$paramemter['UserID']=$json['UserID'];
-		$paramemter['WalkDistance']=$json['Steps'];
+		$paramemter['WalkDistance']=$json['WalkDistance'];
 		$result = $this->user_model->updateUserStep($paramemter);
 		if($result['ret']==200)
 			{		
 				$data['code'] = 0;
-				$data['Steps']=$paramemter['WalkDistance'];
+				$data['WalkDistance']=$paramemter['WalkDistance'];
 			}else{
 				$data['code']=2;
 				$data['message'] = "Update Error";
@@ -310,7 +310,7 @@ class Server extends CI_Controller {
     	//传过来的是JSON Object，用下面这句
 		//$json = $json_string;
 		$paramemter['UserID']=$json['UserID'];
-		$paramemter['WalkDistance']=$json['Steps'];
+		$paramemter['WalkDistance']=$json['WalkDistance'];
 		$result = $this->user_model->updateUserStep($paramemter);
 		if($result['ret']==200)
 			{		

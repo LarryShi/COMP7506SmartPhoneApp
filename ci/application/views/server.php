@@ -109,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserStep" method="post">
 	  <p>UserID: <input type="text" name="UserID" /></p>
-	  <p>Steps: <input type="test" name="Steps" /></p>
+	  <p>WalkDistance: <input type="test" name="WalkDistance" /></p>
 	  <input type="submit" value="updateUserStep" />
 	</form>
 

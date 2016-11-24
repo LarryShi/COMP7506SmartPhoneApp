@@ -34,6 +34,26 @@ class User_model extends CI_Model {
             );
             $this->db->trans_start();
             $this->db->insert('User', $data);
+            $query = $this->db->get_where('User', array('UserName' => $paramemter['UserName']),   1);
+            $result['UserInfo'] = $query->row_array();
+
+            $cardData[0] = array(
+                'UserID'    => $result['UserInfo']['UserID'] ,  
+                'CardID'  => '1',
+                'Level'    => '1'
+            );
+            $cardData[1] = array(
+                'UserID'    => $result['UserInfo']['UserID'] ,  
+                'CardID'  => '2',
+                'Level'    => '1'
+            );
+            $cardData[2]= array(
+                'UserID' => $result['UserInfo']['UserID'] ,  
+                'CardID'  => '3',
+                'Level' => '1'
+            );
+            $this->db->insert_batch('UserCardRelation', $cardData);
+
             $this->db->trans_complete(); 
             if ($this->db->trans_status() === FALSE) {
                //检测Insert是否Fail
@@ -113,9 +133,7 @@ class User_model extends CI_Model {
             return $result;
         }
         $result['ret']=200;          
-        return $result;
-
-       
+        return $result;    
     }
 
 
