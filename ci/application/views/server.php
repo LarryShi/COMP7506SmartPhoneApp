@@ -103,6 +103,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 </div>
 
+<div id="container">
+	<h1>updateUserStep</h1>
+
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserStep" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>Steps: <input type="test" name="Steps" /></p>
+	  <input type="submit" value="updateUserStep" />
+	</form>
+
+	
+</div>
+
 
 
 </body>

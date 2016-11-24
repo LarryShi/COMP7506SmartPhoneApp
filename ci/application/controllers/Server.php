@@ -245,13 +245,13 @@ class Server extends CI_Controller {
 
 	public function getUserCardsM(){
 
-		$json_string = $this->input->post();
+		$json_string = $this->input->raw_input_stream;
 		
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
-    	//$json = json_decode($json_string, true);
+    	$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
-		$json = $json_string;
+		//$json = $json_string;
 		$paramemter['UserID']=$json['UserID'];
 		$result = $this->user_model->getUserCards($paramemter);
 		if($result['ret']==200)
@@ -270,5 +270,62 @@ class Server extends CI_Controller {
 			}
 	}
 
+	public function updateUserStep(){
+
+		$json_string = $this->input->post();
+		
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['WalkDistance']=$json['Steps'];
+		$result = $this->user_model->updateUserStep($paramemter);
+		if($result['ret']==200)
+			{		
+				$data['code'] = 0;
+				$data['Steps']=$paramemter['WalkDistance'];
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+			}
+
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserStepM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data, true);
+
+		$this->load->view('result',$content_data);
+	}
+
+	public function updateUserStepM(){
+
+		$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['WalkDistance']=$json['Steps'];
+		$result = $this->user_model->updateUserStep($paramemter);
+		if($result['ret']==200)
+			{		
+				$data['code'] = 0;
+				$data['Steps']=$paramemter['WalkDistance'];
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}
+	}
 
 }
