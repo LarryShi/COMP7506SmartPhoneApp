@@ -35,9 +35,9 @@ public class MainGameActivity extends AppCompatActivity {
     UserAccount myUser;
     Button userProfile, loc1,loc2,loc3,loc4,fight;
     TextView distance;
-    double currentDistance;
-    double walkedDistance;
-    double totalDistance;
+    double currentDistance=0;
+    double walkedDistance=0;
+    double totalDistance=0;
     StepService myService;
     Handler distanceHandler;
     Runnable distanceRunnable;
@@ -67,27 +67,17 @@ public class MainGameActivity extends AppCompatActivity {
         loc1.setOnClickListener(new location1Listener());
 
         initiateGame();
-        updateDistance();
 
     }
 
 
-    public void updateDistance(){
-        distanceHandler = new Handler();
-        distanceRunnable = new Runnable() {
-            @Override
-            public void run() {
-                currentDistance = myService.getTotalStepsTaken();
-                totalDistance = currentDistance + walkedDistance;
-                distance.setText(totalDistance + "Miles");
-                distanceHandler.postDelayed(this,5000);
-            }
-        };
-        distanceHandler.postDelayed(distanceRunnable,5000);//打开定时器，执行操作
+    public void updateDistance(int step){
 
-        if (totalDistance >= 200){
-            distanceHandler.removeCallbacks(distanceRunnable);// 关闭定时器处理
-        }
+        //currentDistance = myService.getTotalStepsTaken();
+        Log.d(TAG, String.valueOf(step));
+        totalDistance = step + walkedDistance;
+        distance.setText(totalDistance + "Miles");
+
     }
 
 

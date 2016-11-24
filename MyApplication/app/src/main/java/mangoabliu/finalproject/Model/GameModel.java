@@ -77,6 +77,9 @@ public class GameModel {
 
     }
 
+    public void updateMainGameStep(int step){
+        this.mainGameActivity.updateDistance(step);
+    }
 
     //Main Game Related
     public void setMainGameActivity(MainGameActivity mainGameActivity){

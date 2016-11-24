@@ -17,8 +17,10 @@ import android.util.Log;
 
 public class StepService extends Service {
     String TAG = "StepService";
+    GameModel gameModel;
     private  boolean isRunning = true;
     private int totalStepsTaken = 0;
+    private int stepCount=0;
 
 
     public int getTotalStepsTaken(){
@@ -28,7 +30,7 @@ public class StepService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-
+        gameModel=GameModel.getInstance();
         int retVal = super.onStartCommand(intent,flags,startId);
 
         Log.d(TAG, "onStartCommand" + intent);
@@ -45,7 +47,6 @@ public class StepService extends Service {
         isRunning = false;
         Log.d(TAG,"onDestroy");
     }
-
 
     @Nullable
     @Override
@@ -64,8 +65,14 @@ public class StepService extends Service {
                 @Override
                 public void onSensorChanged(SensorEvent event) {
                     if (isRunning){
+
                         totalStepsTaken = (int) event.values[0];
+                        stepCount++;
                         Log.d(TAG, String.valueOf(totalStepsTaken));
+                        if(stepCount==5){
+                            stepCount=0;
+                            gameModel.updateMainGameStep(totalStepsTaken);
+                        }
                     }
                 }
 
