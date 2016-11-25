@@ -5,16 +5,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
 import mangoabliu.finalproject.LoginActivity;
 import mangoabliu.finalproject.MainGameActivity;
+import mangoabliu.finalproject.Planet;
 import mangoabliu.finalproject.RegistrationActivity;
 import mangoabliu.finalproject.UserAccount;
 
@@ -37,6 +40,8 @@ public class GameModel {
     protected final static String str_updateUserStep_function = "updateUserStep";
     protected final static String str_updateTargetLocation_function = "";
 
+    ArrayList<Planet> planets = new ArrayList<Planet>();
+
 
     private UserAccount myUser;
 
@@ -57,6 +62,12 @@ public class GameModel {
         }
         return instance;
     }
+
+    public ArrayList<Planet> getPlanets(){
+        return planets;
+    }
+
+
     //Registration Related
     public void setRegistrationActivity(RegistrationActivity registrationActivity){
         this.registrationActivity=registrationActivity;

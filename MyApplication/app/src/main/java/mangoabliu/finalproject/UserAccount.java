@@ -11,7 +11,7 @@ public class UserAccount {
     private int userId;
     private int currentLocId;
     private int targetLocId;
-    private int[] currentLocCoordinate;
+    private double[] currentLocCoordinate;
 
 
     public UserAccount(int id, String newUserName, int distance){
@@ -19,7 +19,8 @@ public class UserAccount {
         userName = newUserName;
         walkDistance = distance;
         currentLocId = 1;
-        currentLocCoordinate = new int[]{0, 0};
+        targetLocId = 2;
+        currentLocCoordinate = new double[]{350, 440};
     }
 
     public String getUserName(){
@@ -47,18 +48,18 @@ public class UserAccount {
     }
 
     public int getTargetLocId(){
-        return currentLocId;
+        return targetLocId;
     }
 
     public void setTargetLocId(int loc){
         targetLocId = loc;
     }
 
-    public void setCurrentLocCoordinate(int[] coordinate){
+    public void setCurrentLocCoordinate(double[] coordinate){
         currentLocCoordinate = coordinate;
     }
 
-    public int[] getCurrentLocCoordinate(){
+    public double[] getCurrentLocCoordinate(){
         return currentLocCoordinate;
     }
 
