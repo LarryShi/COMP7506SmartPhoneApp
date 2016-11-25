@@ -107,7 +107,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <input type="submit" value="isFightReady" />
 	</form>
 </div>
+<div id="container">
+	<h1>playCard</h1>
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/playCard" method="post">
+	  <p>RoomID: <input type="text" name="RoomID" /></p>
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>Player1CardID: <input type="text" name="Player1CardID" /></p>
+	  <p>Player2CardID: <input type="text" name="Player2CardID" /></p>
+	  <p>Player1CardNum: <input type="text" name="Player1CardNum" /></p>
+	  <p>Player2CardNum: <input type="text" name="Player2CardNum" /></p>
+	  <p>Player: <input type="text" name="Player" /></p>
+	  <input type="submit" value="playCard" />
+	</form>
+</div>
 
+<div id="container">
+	<h1>myTurn</h1>
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/myTurn" method="post">
+	  <p>RoomID: <input type="text" name="RoomID" /></p>
+	  <input type="submit" value="myTurn" />
+	</form>
+</div>
 
 </body>
 </html>

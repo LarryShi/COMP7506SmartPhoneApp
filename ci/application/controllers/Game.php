@@ -27,7 +27,39 @@ class Game extends CI_Controller {
 
 	}
 
-	function playCard(){
+
+
+	public function myTurn(){
+    	$json_string = $this->input->post();
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+
+		$parameter['RoomID'] = $json['RoomID'];
+		$result = $this->game_model->myTurn($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['LastPlay'] = $result['LastPlay'];
+		}
+		else{
+			$data['code'] = 1;
+			$data['message'] = "Waiting";		
+		}
+		
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/isFightReadyM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data);
+
+		$this->load->view('result',$content_data);
+    }
+
+	public function playCard(){
     	$json_string = $this->input->post();
 		
 		$this->load->model('game_model','',true);
@@ -38,15 +70,18 @@ class Game extends CI_Controller {
 
 		$parameter['RoomID'] = $json['RoomID'];
 		$parameter['UserID'] = $json['UserID'];
-		$parameter['MyCard'] = $json['MyCard'];
-		$parameter['OpCard'] = $json['OpCard'];
-		$parameter['PlayNum'] = $json['PlayNum']; 
+		$parameter['Player1CardID']= $json['Player1CardID'];
+		$parameter['Player2CardID']= $json['Player2CardID'];
+		$parameter['Player1CardNum']= $json['Player1CardNum'];
+		$parameter['Player2CardNum']= $json['Player2CardNum'];
+		$parameter['Player']= $json['Player'];
        
 		$result = $this->game_model->playCard($paramemter);
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
-			$data['RoomInfo'] = $result['RoomInfo'];
+			$data['Hurt'] = $result['Hurt'];
+			$data['Win']=$result['Win'];
 		}
 		else{
 			$data['code'] = 2;
@@ -149,6 +184,7 @@ class Game extends CI_Controller {
 		{
 			$data['code'] = 0;	
 			$data['RoomID'] = $result['RoomID'];
+			$data['UserName'] = $result['UserName'];
 		}
 		else{
 			$data['code'] = 2;

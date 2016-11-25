@@ -8,9 +8,66 @@ class Game_model extends CI_Model {
     }
 
     function playCard($parameter){
+		$this->db->trans_start();
+		$this->db->select('*');
+        $this->db->from('Cards');
+        $this->db->where('Cards',$parameter['Player1CardID']);
+        $Card1=$this->db->get()->row_array();
+        $this->db->select('*');
+        $this->db->from('Cards');
+        $this->db->where('Cards',$parameter['Player2CardID']);
+        $Card2=$this->db->get()->row_array();
 
-    	
+		$this->db->select('*');
 
+        $this->db->from('Room'.$parameter['RoomID']);
+        $this->db->where('Cards',$parameter['Player2CardID']);
+      
+        $this->db->order_by('PlayID','desc');
+        $this->db->limit(1);
+
+        $LastData=$this->db->get()->row_array();
+
+        $this->db->trans_complete(); 
+       	if ($this->db->trans_status() === FALSE) {
+               //检测Insert是否Fail
+               $result['ret'] = 400;
+               return $result;
+        } 
+        $result['ret'] = 200;
+		if($parameter['Player']==1){
+			//攻击力x(1-(防御力/(400+防御力)))
+			$result['Hurt']=$Card1['CardAttack']*(1-($Card2['CardArmor']/($Card2['CardArmor']+100)));
+			$LastData['UserID']=$parameter['UserID'];
+			$LastData['FromNum']=$parameter['Player1CardNum'];
+			$LastData['ToNum']=$parameter['Player2CardNum'];
+			$LastData['Player2Card'.$parameter['Player2CardNum']."HP"]=$LastData['Player2Card'.$parameter['Player2CardNum']."HP"]-$result['Hurt'];
+			$result['Win']='0';
+			if($LastData['Player2Card1HP']<=0){
+				if($LastData['Player2Card2HP']<=0){
+					if($LastData['Player2Card3HP']<=0){
+						$result['Win']='1';
+					}
+				}
+			}
+		}
+		else{
+			//攻击力x(1-(防御力/(400+防御力)))
+			$result['Hurt']=$Card2['CardAttack']*(1-($Card1['CardArmor']/($Card1['CardArmor']+100)));
+			$LastData['UserID']=$parameter['UserID'];
+			$LastData['FromNum']=$parameter['Player2CardNum'];
+			$LastData['ToNum']=$parameter['Player1CardNum'];
+			$LastData['Player1Card'.$parameter['Player1CardNum']."HP"]=$LastData['Player1Card'.$parameter['Player2CardNum']."HP"]-$result['Hurt'];
+			$result['Win']='0';
+			if($LastData['Player1Card1HP']<=0){
+				if($LastData['Player1Card2HP']<=0){
+					if($LastData['Player1Card3HP']<=0){
+						$result['Win']='2';
+					}
+				}
+			}
+		}
+		return $result;
     }
 
     function setCards($parameter){
@@ -41,16 +98,25 @@ class Game_model extends CI_Model {
         $this->db->where('RoomID',$parameter['RoomID']);
         $query=$this->db->get();
         $NumberOfPlayer = $query->num_rows();
-        $this->db->trans_complete(); 
+        $query_result=$query->result_array();
+  		$this->db->trans_complete(); 
         if ($this->db->trans_status() === FALSE) {
                //检测Insert是否Fail
                $result['ret'] = 400;
                return $result;
         } 
+     
 
         if($NumberOfPlayer==2){
         	$result['ret'] = 200;
+        	$this->db->select('User.UserID, User.UserName');
+	        $this->db->from('User');
+	        $where = "UserID=".$query_result[0]['UserID']." Or UserID='".$query_result[1]['UserID']."'";
+	        $this->db->where($where);
+	        $query=$this->db->get();
+	        $PlayerInfo = $query->result_array();
         	$result['RoomID']=$parameter['RoomID'];
+        	$result['UserName']=$PlayerInfo;
         	return $result;
         }
         else{
@@ -68,6 +134,8 @@ class Game_model extends CI_Model {
         $query=$this->db->get();
         $query_result=$query->result_array();
         $NumberOfPlayer = $query->num_rows();
+        $this->db->where('RoomID', $parameter['RoomID']);
+ 		$this->db->delete('Rooms'); 
         if($NumberOfPlayer==2){
         	$this->load->dbforge();
         	$fields = array(
@@ -148,9 +216,58 @@ class Game_model extends CI_Model {
 			$this->dbforge->add_field($fields);
 			$this->dbforge->add_key('PlayID', TRUE);
 			$this->dbforge->create_table('Room'.$parameter['RoomID']);
-			$this->db->where('RoomID', $parameter['RoomID']);
-     		$this->db->delete('Rooms'); 
+		
 
+     		$this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[0]['CardID1']);
+	        $Card1=$this->db->get()->row_array();
+	        $this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[0]['CardID2']);
+	        $Card2=$this->db->get()->row_array();
+	        $this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[0]['CardID3']);
+
+	        $Card4=$this->db->get()->row_array();
+	        $this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[1]['CardID1']);
+	        $Card5=$this->db->get()->row_array();
+	        $this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[1]['CardID2']);
+	        $Card6=$this->db->get()->row_array();
+	        $this->db->select('*');
+	        $this->db->from('Cards');
+	        $this->db->where('CardID',$query_result[1]['CardID3']);
+	        $Card3=$this->db->get()->row_array();
+
+
+     		$data = array(
+					        'Player1ID' => $query_result[0]['UserID'],
+					        'Player2ID' => $query_result[1]['UserID'],
+					        'UserID' => 0,
+					        'Player1Card1ID' => $query_result[0]['CardID1'],
+					        'Player1Card1HP' => $Card1['CardHP'],
+					        'Player1Card2ID' => $query_result[0]['CardID2'],
+					        'Player1Card2HP' => $Card1['CardHP'],
+					        'Player1Card3ID' => $query_result[0]['CardID3'],
+					        'Player1Card3HP' => $Card1['CardHP'],
+					        'Player2Card1ID' => $query_result[1]['CardID1'],
+					        'Player2Card1HP' => $Card1['CardHP'],
+					        'Player2Card2ID' => $query_result[1]['CardID2'],
+					        'Player2Card2HP' => $Card1['CardHP'],
+					        'Player2Card3ID' => $query_result[1]['CardID3'],
+					        'Player2Card3HP' => $Card1['CardHP'],
+					        'FromNum' => 0,
+					        'ToNum' => 0,     
+					);
+
+     		$this->db->insert('Room'.$parameter['RoomID'], $data);
+
+     	
 			$result['ret'] = 200;
         	$result['RoomInfo']=$query_result;
         	return $result;
