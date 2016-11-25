@@ -76,7 +76,7 @@ class User_model extends CI_Model {
         {
             $result['UserInfo'] = $query->row_array(); 
             $result['ret']=200;
-            $this->db->select('LocationID,LocationName');
+            $this->db->select('*');
             $this->db->from('Location');  
             $query = $this->db->get();
             $result['LocationInfo'] = $query->result_array(); 
