@@ -27,6 +27,41 @@ class Game extends CI_Controller {
 
 	}
 
+	function playCard(){
+    	$json_string = $this->input->post();
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+
+		$parameter['RoomID'] = $json['RoomID'];
+		$parameter['UserID'] = $json['UserID'];
+		$parameter['MyCard'] = $json['MyCard'];
+		$parameter['OpCard'] = $json['OpCard'];
+		$parameter['PlayNum'] = $json['PlayNum']; 
+       
+		$result = $this->game_model->playCard($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['RoomInfo'] = $result['RoomInfo'];
+		}
+		else{
+			$data['code'] = 2;
+			$data['message'] = "Waiting";		
+		}
+		
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/isFightReadyM";
+		
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data);
+
+		$this->load->view('result',$content_data);
+    }
+
 
 	public function isFightReady(){
 		$json_string = $this->input->post();
@@ -43,7 +78,7 @@ class Game extends CI_Controller {
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
-			$data['RoomID'] = $result['RoomID'];
+			$data['RoomInfo'] = $result['RoomInfo'];
 		}
 		else{
 			$data['code'] = 2;

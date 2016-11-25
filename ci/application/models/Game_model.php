@@ -7,6 +7,12 @@ class Game_model extends CI_Model {
         parent::__construct();
     }
 
+    function playCard($parameter){
+
+    	
+
+    }
+
     function setCards($parameter){
     	$data['CardID1'] = $parameter['CardID1'];
         $data['CardID2'] = $parameter['CardID2'];
@@ -144,87 +150,9 @@ class Game_model extends CI_Model {
 			$this->dbforge->create_table('Room'.$parameter['RoomID']);
 			$this->db->where('RoomID', $parameter['RoomID']);
      		$this->db->delete('Rooms'); 
-     		$data = array(
-     			'PlayID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					                'auto_increment' => TRUE,
-					        ),
-					        'Player1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'UserID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card1HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card2HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card3ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card3HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card1HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card2HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card3ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card3HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'FromNum' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'ToNum' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),     
-     			);
-
-
-
 
 			$result['ret'] = 200;
-        	$result['RoomID']=$parameter['RoomID'];
+        	$result['RoomInfo']=$query_result;
         	return $result;
         }
         else{
