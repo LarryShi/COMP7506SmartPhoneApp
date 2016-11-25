@@ -37,7 +37,7 @@ import static mangoabliu.finalproject.R.attr.height;
 public class MainGameActivity extends AppCompatActivity {
     GameModel gameModel;
     UserAccount myUser;
-    Button userProfile, loc1,loc2,loc3,loc4,fight,stepTest;
+    Button userProfile, loc1,loc2,loc3,loc4,loc5,loc6,fight,stepTest;
     TextView distance;
     ImageView thumbnail;
     int walkedDistance=0;
@@ -63,6 +63,8 @@ public class MainGameActivity extends AppCompatActivity {
         loc2 = (Button) findViewById(R.id.location2);
         loc3 = (Button) findViewById(R.id.location3);
         loc4 = (Button) findViewById(R.id.location4);
+        loc5 = (Button) findViewById(R.id.location5);
+        loc6 = (Button) findViewById(R.id.location6);
         fight = (Button) findViewById(R.id.fight);
 
         distance = (TextView) findViewById(R.id.distance);
@@ -75,6 +77,11 @@ public class MainGameActivity extends AppCompatActivity {
 
         userProfile.setOnClickListener(new userProfileListener());
         loc1.setOnClickListener(new location1Listener());
+        loc2.setOnClickListener(new location2Listener());
+        loc3.setOnClickListener(new location3Listener());
+        loc4.setOnClickListener(new location4Listener());
+        loc5.setOnClickListener(new location5Listener());
+        loc6.setOnClickListener(new location6Listener());
 
         initiateGame();
 
@@ -196,6 +203,20 @@ public class MainGameActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,4);
+            loc.show();
+        }
+    }
+    private class location5Listener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,5);
+            loc.show();
+        }
+    }
+    private class location6Listener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,6);
             loc.show();
         }
     }
