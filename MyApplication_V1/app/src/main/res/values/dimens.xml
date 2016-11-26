@@ -44,6 +44,20 @@
     <dimen name="location_text_marginStart">50dp</dimen>
     <dimen name="location_text_padding">8dp</dimen>
 
+    <!-- layout_card -->
+    <dimen name="card_layout_width">150dp</dimen>
+    <dimen name="card_layout_height">214dp</dimen>
+    <dimen name="card_hp_width">15dp</dimen>
+    <dimen name="card_hp_height">15dp</dimen>
+    <dimen name="card_hp_padding">0dp</dimen>
+    <dimen name="card_hp_textsize">8sp</dimen>
+    <dimen name="card_atk_width">40dp</dimen>
+    <dimen name="card_atk_height">20dp</dimen>
+    <dimen name="card_atk_padding">2dp</dimen>
+    <dimen name="card_atk_textsize">10sp</dimen>
+    <dimen name="card_atk_marginleft">34dp</dimen>
+    <dimen name="card_atk_marginbottom">2dp</dimen>
+
 
 
 
