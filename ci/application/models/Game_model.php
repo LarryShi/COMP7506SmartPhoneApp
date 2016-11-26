@@ -59,7 +59,7 @@ class Game_model extends CI_Model {
         $result['ret'] = 200;
 		if($parameter['Player']==1){
 			//攻击力x(1-(防御力/(400+防御力)))
-			$result['Hurt']=$Card1['CardAttack']*(1-($Card2['CardArmor']/($Card2['CardArmor']+100)));
+			$result['Hurt']=$Card1['CardAttack']*(1-($Card2['CardArmor']/($Card2['CardArmor']+50)));
 			$LastData['UserID']=$parameter['UserID'];
 			$LastData['FromNum']=$parameter['Player1CardNum'];
 			$LastData['ToNum']=$parameter['Player2CardNum'];
@@ -75,7 +75,7 @@ class Game_model extends CI_Model {
 		}
 		else{
 			//攻击力x(1-(防御力/(400+防御力)))
-			$result['Hurt']=$Card2['CardAttack']*(1-($Card1['CardArmor']/($Card1['CardArmor']+100)));
+			$result['Hurt']=$Card2['CardAttack']*(1-($Card1['CardArmor']/($Card1['CardArmor']+50)));
 			$LastData['UserID']=$parameter['UserID'];
 			$LastData['FromNum']=$parameter['Player2CardNum'];
 			$LastData['ToNum']=$parameter['Player1CardNum'];
