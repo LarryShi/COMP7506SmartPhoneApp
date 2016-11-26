@@ -129,6 +129,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div>
 
+<div id="container">
+	<h1>updateCurrentLocationID</h1>
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateCurrentLocationID" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>CurrentLocationID: <input type="text" name="CurrentLocationID" /></p>
+	  <input type="submit" value="updateCurrentLocationID" />
+	</form>
+
+</div>
+
+<div id="container">
+	<h1>updateCurrentPosition</h1>
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateCurrentPosition" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>CurrentPositionX: <input type="text" name="CurrentPositionX" /></p>
+		<p>CurrentPositionY: <input type="text" name="CurrentPositionY" /></p>
+	  <input type="submit" value="updateCurrentPosition" />
+	</form>
+
+</div>
 
 
 </body>

@@ -152,6 +152,40 @@ class User_model extends CI_Model {
         $result['ret']=200;
         return $result;
     }
+    function updateCurrentLocationID($paramemter)
+    {
+
+        $this->db->where('UserID', $paramemter['UserID']);
+        $this->db->update('User', $paramemter);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $result['ret']=200;
+            return $result;
+        }
+        $result['ret']=200;
+        return $result;
+    }
+    function updateCurrentPosition($paramemter)
+    {
+
+        $this->db->where('UserID', $paramemter['UserID']);
+        $this->db->update('User', $paramemter);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $result['ret']=200;
+            return $result;
+        }
+        $result['ret']=200;
+        return $result;
+    }
+
+
 
 
 
