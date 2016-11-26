@@ -69,8 +69,10 @@ public class StepService extends Service {
                         sendStepCounter++;
                         //Log.d(TAG, String.valueOf(totalStepsTaken));
                         if (stepCount == 1) {
+
                             gameModel.updateMainGameStep(stepCount);
                             stepCount = 0;
+
                         }
                         if (sendStepCounter == 10){
                             gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),

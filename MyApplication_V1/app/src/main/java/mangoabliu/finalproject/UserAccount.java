@@ -14,13 +14,13 @@ public class UserAccount {
     private double[] currentLocCoordinate;
 
 
-    public UserAccount(int id, String newUserName, int distance){
+    public UserAccount(int id, String newUserName, int distance, int currentID, int targetID, double[] position){
         userId = id;
         userName = newUserName;
         walkDistance = distance;
-        currentLocId = 1;
-        targetLocId = 2;
-        currentLocCoordinate = new double[]{350, 440};
+        currentLocId = currentID;
+        targetLocId = targetID;
+        currentLocCoordinate = position;
     }
 
     public String getUserName(){

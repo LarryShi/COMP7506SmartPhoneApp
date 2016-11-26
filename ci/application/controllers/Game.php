@@ -46,7 +46,7 @@ class Game extends CI_Controller {
 
 		$parameter['RoomID'] = $json['RoomID'];
 		$parameter['UserID'] = $json['UserID'];
-		$result = $this->game_model->myTurn($paramemter);
+		$result = $this->game_model->myTurn($parameter);
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
@@ -77,7 +77,7 @@ class Game extends CI_Controller {
 
 		$parameter['RoomID'] = $json['RoomID'];
 		$parameter['UserID'] = $json['UserID'];
-		$result = $this->game_model->myTurn($paramemter);
+		$result = $this->game_model->myTurn($parameter);
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
@@ -113,7 +113,7 @@ class Game extends CI_Controller {
 		$parameter['Player2CardNum']= $json['Player2CardNum'];
 		$parameter['Player']= $json['Player'];
        
-		$result = $this->game_model->playCard($paramemter);
+		$result = $this->game_model->playCard($parameter);
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
@@ -151,7 +151,7 @@ class Game extends CI_Controller {
 		$parameter['Player2CardNum']= $json['Player2CardNum'];
 		$parameter['Player']= $json['Player'];
        
-		$result = $this->game_model->playCard($paramemter);
+		$result = $this->game_model->playCard($parameter);
 		if($result['ret'] === 200)
 		{
 			$data['code'] = 0;	
@@ -163,7 +163,7 @@ class Game extends CI_Controller {
 		}
 		else{
 			$data['code'] = 2;
-			$data['message'] = "Error";		
+			$data['message'] = "Not Your Turn";		
 			$this->output
 	        			->set_content_type('application/json')
 	        			->set_output(json_encode($data));

@@ -34,11 +34,11 @@ class Game_model extends CI_Model {
 		$this->db->trans_start();
 		$this->db->select('*');
         $this->db->from('Cards');
-        $this->db->where('Cards',$parameter['Player1CardID']);
+        $this->db->where('CardID',$parameter['Player1CardID']);
         $Card1=$this->db->get()->row_array();
         $this->db->select('*');
         $this->db->from('Cards');
-        $this->db->where('Cards',$parameter['Player2CardID']);
+        $this->db->where('CardID',$parameter['Player2CardID']);
         $Card2=$this->db->get()->row_array();
 
 		$this->db->select('*');
@@ -49,7 +49,10 @@ class Game_model extends CI_Model {
         $this->db->limit(1);
 
         $LastData=$this->db->get()->row_array();
-
+ 		if($LastData['UserID']==$parameter['UserID']){
+        	$result['ret'] = 201;
+        	return $result; 
+        }
         $this->db->trans_complete(); 
        	if ($this->db->trans_status() === FALSE) {
                //检测Insert是否Fail
@@ -59,7 +62,7 @@ class Game_model extends CI_Model {
         $result['ret'] = 200;
 		if($parameter['Player']==1){
 			//攻击力x(1-(防御力/(400+防御力)))
-			$result['Hurt']=$Card1['CardAttack']*(1-($Card2['CardArmor']/($Card2['CardArmor']+100)));
+			$result['Hurt']=$Card1['CardAttack']*(1-($Card2['CardArmor']/($Card2['CardArmor']+50)));
 			$LastData['UserID']=$parameter['UserID'];
 			$LastData['FromNum']=$parameter['Player1CardNum'];
 			$LastData['ToNum']=$parameter['Player2CardNum'];
@@ -75,7 +78,7 @@ class Game_model extends CI_Model {
 		}
 		else{
 			//攻击力x(1-(防御力/(400+防御力)))
-			$result['Hurt']=$Card2['CardAttack']*(1-($Card1['CardArmor']/($Card1['CardArmor']+100)));
+			$result['Hurt']=$Card2['CardAttack']*(1-($Card1['CardArmor']/($Card1['CardArmor']+50)));
 			$LastData['UserID']=$parameter['UserID'];
 			$LastData['FromNum']=$parameter['Player2CardNum'];
 			$LastData['ToNum']=$parameter['Player1CardNum'];
@@ -89,6 +92,7 @@ class Game_model extends CI_Model {
 				}
 			}
 		}
+		$LastData['PlayID']=$LastData['PlayID']+1;
 		$this->db->insert('Room'.$parameter['RoomID'], $LastData);
 		return $result;
     }
@@ -271,7 +275,7 @@ class Game_model extends CI_Model {
      		$data = array(
 					        'Player1ID' => $query_result[0]['UserID'],
 					        'Player2ID' => $query_result[1]['UserID'],
-					        'UserID' => 0,
+					        'UserID' => $query_result[1]['UserID'],
 					        'Player1Card1ID' => $query_result[0]['CardID1'],
 					        'Player1Card1HP' => $Card1['CardHP'],
 					        'Player1Card2ID' => $query_result[0]['CardID2'],
