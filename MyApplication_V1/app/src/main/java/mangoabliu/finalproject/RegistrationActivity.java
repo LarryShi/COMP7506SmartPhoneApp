@@ -23,7 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btn_cancel,btn_register;
     EditText et_UserName,et_Password,et_Password_repeat;
 
-    //REVISED BY XP   11/26+++
+    //REVISED BY LYRIS   11/26+++
     TextView tv_UserName,tv_Password,tv_Password_repeat;
 
     @Override
@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
         et_Password = (EditText) findViewById(R.id.passwordRegisterText);
         et_Password_repeat = (EditText) findViewById(R.id.passwordConfirmText);
 
-        //REVISED BY XP   11/26+++
+        //REVISED BY LYRIS   11/26+++
         tv_UserName =(TextView) findViewById(R.id.usernameRegister);
         tv_Password =(TextView)findViewById(R.id.passwordRegister);
         tv_Password_repeat =(TextView) findViewById(R.id.passwordRegisterConfirm);

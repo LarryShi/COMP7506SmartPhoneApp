@@ -18,7 +18,7 @@ import mangoabliu.finalproject.Model.GameModel;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //REVISED BY XP   11/26+++
+    //REVISED BY LYRIS   11/26+++
     //TYPEFACE FONT
     TextView tv_UserName;
     TextView tv_Password;
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         et_UserName = (EditText) findViewById(R.id.usernameText);
         et_Password = (EditText) findViewById(R.id.passwordText);
 
-        //REVISED BY XP   11/26+++
+        //REVISED BY LYRIS   11/26+++
         tv_UserName =(TextView) findViewById(R.id.username);
         tv_Password =(TextView)findViewById(R.id.password);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");

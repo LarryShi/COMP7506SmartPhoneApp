@@ -20,5 +20,6 @@
 
 
     <!-- for test layout / Lyris -->
+    <string name="testtext">Test</string>
     <string name="testvalue">222</string>
 </resources>

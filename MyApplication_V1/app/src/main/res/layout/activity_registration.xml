@@ -16,7 +16,7 @@
             android:layout_width="@dimen/btn_side"
             android:layout_height="@dimen/btn_side"
             android:background="@color/transparent"
-            android:text="t_r"
+            android:text="@string/testtext"
             android:layout_gravity="center_vertical"/>
 
         <RelativeLayout
@@ -109,7 +109,7 @@
             android:layout_width="@dimen/btn_side"
             android:layout_height="@dimen/btn_side"
             android:background="@color/transparent"
-            android:text="t_c"
+            android:text="@string/testtext"
             android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
