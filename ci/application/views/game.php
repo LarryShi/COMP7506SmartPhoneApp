@@ -129,5 +129,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <input type="submit" value="myTurn" />
 	</form>
 </div>
+
+<div id="container">
+	<h1>getTime</h1>
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/getTime" method="post">
+	  <input type="submit" value="getTime" />
+	</form>
+</div>
 </body>
 </html>

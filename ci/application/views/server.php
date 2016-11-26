@@ -78,6 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <input type="submit" value="Register" />
 	</form>
 </div>
+
 <div id="container">
 	<h1>Login</h1>
 
@@ -88,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <input type="submit" value="Login" />
 	</form>
 
-	
+
 </div>
 
 <div id="container">
@@ -100,7 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <input type="submit" value="GetUserCards" />
 	</form>
 
-	
+
 </div>
 
 <div id="container">
@@ -109,11 +110,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserStep" method="post">
 	  <p>UserID: <input type="text" name="UserID" /></p>
-	  <p>WalkDistance: <input type="test" name="WalkDistance" /></p>
+	  <p>WalkDistance: <input type="text" name="WalkDistance" /></p>
 	  <input type="submit" value="updateUserStep" />
 	</form>
 
-	
+
+</div>
+
+<div id="container">
+	<h1>updateTargetLocationID</h1>
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateTargetLocationID" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>TargetLocationID: <input type="text" name="TargetLocationID" /></p>
+	  <input type="submit" value="updateTargetLocationID" />
+	</form>
+
+
 </div>
 
 

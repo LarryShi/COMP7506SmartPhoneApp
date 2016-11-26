@@ -42,12 +42,12 @@ class Server extends CI_Controller {
 	public function register()
 	{
 		$json_string = $this->input->post();
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
-    
+
 		$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
         $paramemter['Password'] = md5($json['Password']);
@@ -65,7 +65,7 @@ class Server extends CI_Controller {
 			if($result['ret'] === 200)
 			{
 				$data['code'] = 0;
-				$data['message'] = "Successful";	
+				$data['message'] = "Successful";
 			}
 			elseif($result['ret'] === 401)
 			{
@@ -74,23 +74,23 @@ class Server extends CI_Controller {
 			}
 			else{
 				$data['code'] = 3;
-				$data['message'] = "Fail";		
+				$data['message'] = "Fail";
 			}
 		}
 		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/registerM";
-		
+
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 
 		$content_data['display_value']['Return']=json_encode($data);
 
 		$this->load->view('result',$content_data);
-		
+
 	}
 
 	public function registerM()
 	{
 		$json_string = $this->input->raw_input_stream;
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	$json = json_decode($json_string, true);
@@ -116,7 +116,7 @@ class Server extends CI_Controller {
 				$this->output
 	        			->set_content_type('application/json')
 	        			->set_output(json_encode($data));
-				
+
 			}
 			elseif($result['ret'] === 401)
 			{
@@ -132,7 +132,7 @@ class Server extends CI_Controller {
 				$this->output
 	        			->set_content_type('application/json')
 	        			->set_output(json_encode($data));
-				
+
 			}
 		}
 	}
@@ -140,7 +140,7 @@ class Server extends CI_Controller {
 	public function login()
 	{
 		$json_string = $this->input->post();
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
@@ -154,7 +154,7 @@ class Server extends CI_Controller {
 			$result = $this->user_model->login($paramemter);
 			if($result['ret']==200)
 			{
-			
+
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
 				$data['LocationInfo']=$result['LocationInfo'];
@@ -167,7 +167,7 @@ class Server extends CI_Controller {
 			}
 		}
 		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/loginM";
-		
+
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 
 		$content_data['display_value']['Return']=json_encode($data, true);
@@ -179,12 +179,12 @@ class Server extends CI_Controller {
 	public function loginM()
 	{
 		$json_string = $this->input->raw_input_stream;
-	
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
 
     	$json = json_decode($json_string, true);
-    	
+
     	//传过来的是JSON Object，用下面这句
 		//$json = $json_string;
 		$paramemter['UserName'] = $json['UserName'];
@@ -195,7 +195,7 @@ class Server extends CI_Controller {
 			$result = $this->user_model->login($paramemter);
 			if($result['ret']==200)
 			{
-			
+
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
 				$data['LocationInfo']=$result['LocationInfo'];
@@ -217,7 +217,7 @@ class Server extends CI_Controller {
 	public function getUserCards(){
 
 		$json_string = $this->input->post();
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
@@ -226,7 +226,7 @@ class Server extends CI_Controller {
 		$paramemter['UserID']=$json['UserID'];
 		$result = $this->user_model->getUserCards($paramemter);
 		if($result['ret']==200)
-			{		
+			{
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserCards'];
 			}else{
@@ -235,7 +235,7 @@ class Server extends CI_Controller {
 			}
 
 		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/getUserCardsM";
-		
+
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 
 		$content_data['display_value']['Return']=json_encode($data, true);
@@ -246,7 +246,7 @@ class Server extends CI_Controller {
 	public function getUserCardsM(){
 
 		$json_string = $this->input->raw_input_stream;
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	$json = json_decode($json_string, true);
@@ -255,7 +255,7 @@ class Server extends CI_Controller {
 		$paramemter['UserID']=$json['UserID'];
 		$result = $this->user_model->getUserCards($paramemter);
 		if($result['ret']==200)
-			{		
+			{
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserCards'];
 				$this->output
@@ -273,7 +273,7 @@ class Server extends CI_Controller {
 	public function updateUserStep(){
 
 		$json_string = $this->input->post();
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	//$json = json_decode($json_string, true);
@@ -283,7 +283,7 @@ class Server extends CI_Controller {
 		$paramemter['WalkDistance']=$json['WalkDistance'];
 		$result = $this->user_model->updateUserStep($paramemter);
 		if($result['ret']==200)
-			{		
+			{
 				$data['code'] = 0;
 				$data['WalkDistance']=$paramemter['WalkDistance'];
 			}else{
@@ -292,7 +292,7 @@ class Server extends CI_Controller {
 			}
 
 		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserStepM";
-		
+
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 
 		$content_data['display_value']['Return']=json_encode($data, true);
@@ -303,7 +303,7 @@ class Server extends CI_Controller {
 	public function updateUserStepM(){
 
 		$json_string = $this->input->raw_input_stream;
-		
+
 		$this->load->model('user_model','',true);
 		//传过来的是JSON String，用下面这句
     	$json = json_decode($json_string, true);
@@ -313,7 +313,7 @@ class Server extends CI_Controller {
 		$paramemter['WalkDistance']=$json['WalkDistance'];
 		$result = $this->user_model->updateUserStep($paramemter);
 		if($result['ret']==200)
-			{		
+			{
 				$data['code'] = 0;
 				$data['Steps']=$paramemter['WalkDistance'];
 				$this->output
@@ -327,4 +327,65 @@ class Server extends CI_Controller {
 	        			->set_output(json_encode($data));
 			}
 	}
+	public function updateTargetLocationID(){
+
+		$json_string = $this->input->post();
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['TargetLocationID']=$json['TargetLocationID'];
+		$result = $this->user_model->updateTargetLocationID($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['TargetLocationID']=$paramemter['TargetLocationID'];
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+			}
+
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateTargetLocationIDM";
+
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data, true);
+
+		$this->load->view('result',$content_data);
+	}
+
+	public function updateTargetLocationIDM(){
+
+		$json_string = $this->input->raw_input_stream;
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['TargetLocationID']=$json['TargetLocationID'];
+		$result = $this->user_model->updateTargetLocationID($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['TargetLocationID']=$paramemter['TargetLocationID'];
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}
+	}
+
+
+
+
 }

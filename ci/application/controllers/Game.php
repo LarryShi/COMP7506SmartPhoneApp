@@ -27,7 +27,13 @@ class Game extends CI_Controller {
 
 	}
 
-
+	public function getTime(){
+		$data['code'] = 1;
+		$data['time'] = time();	
+		$this->output
+        			->set_content_type('application/json')
+        			->set_output(json_encode($data));	
+	}
 
 	public function myTurn(){
     	$json_string = $this->input->post();
@@ -51,13 +57,43 @@ class Game extends CI_Controller {
 			$data['message'] = "Waiting";		
 		}
 		
-		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/isFightReadyM";
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/myTurnM";
 		
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 
 		$content_data['display_value']['Return']=json_encode($data);
 
 		$this->load->view('result',$content_data);
+    }
+
+    public function myTurnM(){
+    	$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+
+		$parameter['RoomID'] = $json['RoomID'];
+		$parameter['UserID'] = $json['UserID'];
+		$result = $this->game_model->myTurn($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['LastPlay'] = $result['LastPlay'];
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+		else{
+			$data['code'] = 1;
+			$data['message'] = "Waiting";	
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));	
+		}
+	
     }
 
 	public function playCard(){
@@ -98,6 +134,42 @@ class Game extends CI_Controller {
 		$this->load->view('result',$content_data);
     }
 
+    public function playCardM(){
+    	$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+
+		$parameter['RoomID'] = $json['RoomID'];
+		$parameter['UserID'] = $json['UserID'];
+		$parameter['Player1CardID']= $json['Player1CardID'];
+		$parameter['Player2CardID']= $json['Player2CardID'];
+		$parameter['Player1CardNum']= $json['Player1CardNum'];
+		$parameter['Player2CardNum']= $json['Player2CardNum'];
+		$parameter['Player']= $json['Player'];
+       
+		$result = $this->game_model->playCard($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['Hurt'] = $result['Hurt'];
+			$data['Win']=$result['Win'];
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+		else{
+			$data['code'] = 2;
+			$data['message'] = "Error";		
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+    }
+
 
 	public function isFightReady(){
 		$json_string = $this->input->post();
@@ -128,6 +200,35 @@ class Game extends CI_Controller {
 		$content_data['display_value']['Return']=json_encode($data);
 
 		$this->load->view('result',$content_data);
+	}
+
+	public function isFightReadyM(){
+		$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+
+		$paramemter['RoomID'] = $json['RoomID'];
+       
+		$result = $this->game_model->isFightReady($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['RoomInfo'] = $result['RoomInfo'];
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+		else{
+			$data['code'] = 2;
+			$data['message'] = "Waiting";
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));		
+		}
 	}
 
 	public function setCards(){
@@ -169,6 +270,41 @@ class Game extends CI_Controller {
 
 	}
 
+	public function setCardsM(){
+		$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+
+		$paramemter['RoomID'] = $json['RoomID'];
+		$paramemter['UserID'] = $json['UserID'];
+		$paramemter['CardID1'] = $json['CardID1'];
+		$paramemter['CardID2'] = $json['CardID2'];
+		$paramemter['CardID3'] = $json['CardID3'];
+       
+		$result = $this->game_model->setCards($paramemter);
+
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['RoomID'] = $result['RoomID'];
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+		else{
+			$data['code'] = 2;
+			$data['message'] = "Waiting";
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));		
+		}
+		
+	}
+
 	public function isRoomReady(){
 		$json_string = $this->input->post();
 		
@@ -199,6 +335,36 @@ class Game extends CI_Controller {
 		$content_data['display_value']['Return']=json_encode($data);
 
 		$this->load->view('result',$content_data);
+	}
+
+	public function isRoomReadyM(){
+		$json_string = $this->input->raw_input_stream;
+		
+		$this->load->model('game_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+
+		$paramemter['RoomID'] = $json['RoomID'];
+       
+		$result = $this->game_model->isRoomReady($paramemter);
+		if($result['ret'] === 200)
+		{
+			$data['code'] = 0;	
+			$data['RoomID'] = $result['RoomID'];
+			$data['UserName'] = $result['UserName'];
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+		}
+		else{
+			$data['code'] = 2;
+			$data['message'] = "Waiting";
+			$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));		
+		}
 	}
 
 	public function applyForFight()

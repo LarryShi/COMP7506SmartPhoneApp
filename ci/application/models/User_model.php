@@ -1,5 +1,5 @@
 <?php
-    
+
 class User_model extends CI_Model {
 
     function __construct()
@@ -9,9 +9,9 @@ class User_model extends CI_Model {
 
     function getall(){
         $this->db->select('*');
-        $this->db->from('User');  
+        $this->db->from('User');
         $query = $this->db->get();
-        return  $query->result(); 
+        return  $query->result();
     }
 
     function register($paramemter){
@@ -23,9 +23,9 @@ class User_model extends CI_Model {
         }
         else
         {
-   
+
             $data = array(
-                'UserName'    => $paramemter['UserName'] ,  
+                'UserName'    => $paramemter['UserName'] ,
                 'UserIconID'  => $paramemter['UserIconID'],
                 'Password'    => $paramemter['Password'],
                 'Nickname'    => $paramemter['Nickname'],
@@ -38,29 +38,29 @@ class User_model extends CI_Model {
             $result['UserInfo'] = $query->row_array();
 
             $cardData[0] = array(
-                'UserID'    => $result['UserInfo']['UserID'] ,  
+                'UserID'    => $result['UserInfo']['UserID'] ,
                 'CardID'  => '1',
                 'Level'    => '1'
             );
             $cardData[1] = array(
-                'UserID'    => $result['UserInfo']['UserID'] ,  
+                'UserID'    => $result['UserInfo']['UserID'] ,
                 'CardID'  => '2',
                 'Level'    => '1'
             );
             $cardData[2]= array(
-                'UserID' => $result['UserInfo']['UserID'] ,  
+                'UserID' => $result['UserInfo']['UserID'] ,
                 'CardID'  => '3',
                 'Level' => '1'
             );
             $this->db->insert_batch('UserCardRelation', $cardData);
 
-            $this->db->trans_complete(); 
+            $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {
                //检测Insert是否Fail
                $result['ret'] = 400;
                return $result;
             } else {
-               
+
             }
             $result['ret'] = 200;
             return $result;
@@ -74,25 +74,25 @@ class User_model extends CI_Model {
         $query = $this->db->get_where('User', array('UserName' => $paramemter['UserName']),   1);
         if ($query->num_rows() > 0)
         {
-            $result['UserInfo'] = $query->row_array(); 
+            $result['UserInfo'] = $query->row_array();
             $result['ret']=200;
             $this->db->select('*');
-            $this->db->from('Location');  
+            $this->db->from('Location');
             $query = $this->db->get();
-            $result['LocationInfo'] = $query->result_array(); 
+            $result['LocationInfo'] = $query->result_array();
 
             $this->db->select('*');
-            $this->db->from('LocationRelation');  
+            $this->db->from('LocationRelation');
             $query = $this->db->get();
-            $result['LocationRelation'] = $query->result_array(); 
+            $result['LocationRelation'] = $query->result_array();
             $password = $paramemter['Password'];
             if($result['UserInfo']['Password'] != $password){
                 $result['ret'] = 401;
             }
-            
+
             return $result;
         }else{
-           
+
             $result['ret']=404;
             return $result;
         }
@@ -108,15 +108,15 @@ class User_model extends CI_Model {
         $query = $this->db->get();
         if ($query->num_rows() > 0)
         {
-            $result['UserCards'] = $query->result_array(); 
-            $result['ret']=200;          
+            $result['UserCards'] = $query->result_array();
+            $result['ret']=200;
             return $result;
         }else{
-           
+
             $result['ret']=404;
             return $result;
         }
-       
+
     }
 
     function updateUserStep($paramemter)
@@ -124,18 +124,36 @@ class User_model extends CI_Model {
 
         $this->db->where('UserID', $paramemter['UserID']);
         $this->db->update('User', $paramemter);
-      
+
         $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE)
-        {      
-            $result['ret']=200;          
+        {
+            $result['ret']=200;
             return $result;
         }
-        $result['ret']=200;          
-        return $result;    
+        $result['ret']=200;
+        return $result;
+    }
+
+    function updateTargetLocationID($paramemter)
+    {
+
+        $this->db->where('UserID', $paramemter['UserID']);
+        $this->db->update('User', $paramemter);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $result['ret']=200;
+            return $result;
+        }
+        $result['ret']=200;
+        return $result;
     }
 
 
- 
+
+
 }
