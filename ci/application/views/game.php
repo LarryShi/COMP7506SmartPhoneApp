@@ -125,9 +125,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>myTurn</h1>
 	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/myTurn" method="post">
 	  <p>RoomID: <input type="text" name="RoomID" /></p>
+	  <p>UserID: <input type="text" name="UserID" /></p>
 	  <input type="submit" value="myTurn" />
 	</form>
 </div>
-
 </body>
 </html>

@@ -39,6 +39,7 @@ class Game extends CI_Controller {
 		$json = $json_string;
 
 		$parameter['RoomID'] = $json['RoomID'];
+		$parameter['UserID'] = $json['UserID'];
 		$result = $this->game_model->myTurn($paramemter);
 		if($result['ret'] === 200)
 		{

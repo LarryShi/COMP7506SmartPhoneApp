@@ -7,6 +7,29 @@ class Game_model extends CI_Model {
         parent::__construct();
     }
 
+
+    function myTurn($parameter){
+        $this->db->trans_start();
+        $this->db->select('*');
+        $this->db->from('Room'.$parameter['RoomID']);       
+        $this->db->order_by('PlayID','desc');
+        $this->db->limit(1);
+        $result['LastPlay']=$this->db->get()->row_array();
+
+        $this->db->trans_complete(); 
+       	if ($this->db->trans_status() === FALSE) {
+               //检测Insert是否Fail
+               $result['ret'] = 400;
+               return $result;
+            }
+        $result['ret'] = 200;
+        if($result['LastPlay']['UserID']==$parameter['UserID'])
+        	$result['ret'] = 201; 
+
+        return $result;
+    }
+
+
     function playCard($parameter){
 		$this->db->trans_start();
 		$this->db->select('*');
@@ -21,8 +44,7 @@ class Game_model extends CI_Model {
 		$this->db->select('*');
 
         $this->db->from('Room'.$parameter['RoomID']);
-        $this->db->where('Cards',$parameter['Player2CardID']);
-      
+           
         $this->db->order_by('PlayID','desc');
         $this->db->limit(1);
 
@@ -67,6 +89,7 @@ class Game_model extends CI_Model {
 				}
 			}
 		}
+		$this->db->insert('Room'.$parameter['RoomID'], $LastData);
 		return $result;
     }
 
