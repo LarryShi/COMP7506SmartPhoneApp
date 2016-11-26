@@ -34,11 +34,11 @@ class Game_model extends CI_Model {
 		$this->db->trans_start();
 		$this->db->select('*');
         $this->db->from('Cards');
-        $this->db->where('Cards',$parameter['Player1CardID']);
+        $this->db->where('CardID',$parameter['Player1CardID']);
         $Card1=$this->db->get()->row_array();
         $this->db->select('*');
         $this->db->from('Cards');
-        $this->db->where('Cards',$parameter['Player2CardID']);
+        $this->db->where('CardID',$parameter['Player2CardID']);
         $Card2=$this->db->get()->row_array();
 
 		$this->db->select('*');
@@ -49,7 +49,10 @@ class Game_model extends CI_Model {
         $this->db->limit(1);
 
         $LastData=$this->db->get()->row_array();
-
+ 		if($LastData['UserID']==$parameter['UserID']){
+        	$result['ret'] = 201;
+        	return $result; 
+        }
         $this->db->trans_complete(); 
        	if ($this->db->trans_status() === FALSE) {
                //检测Insert是否Fail
@@ -89,6 +92,7 @@ class Game_model extends CI_Model {
 				}
 			}
 		}
+		$LastData['PlayID']=$LastData['PlayID']+1;
 		$this->db->insert('Room'.$parameter['RoomID'], $LastData);
 		return $result;
     }
