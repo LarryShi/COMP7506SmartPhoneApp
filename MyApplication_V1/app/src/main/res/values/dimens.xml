@@ -1,0 +1,50 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="userProfileDialog_Height">225dp</dimen>
+    <dimen name="userProfileDialog_Width">400dp</dimen>
+    <dimen name="userProfileDialog_UserNameSize">30dp</dimen>
+
+    <!-- activity_menu -->
+
+
+    <!-- activity_login & activity_registration -->
+    <dimen name="content_outerwidth">400dp</dimen>
+    <dimen name="content_height">160dp</dimen>
+    <dimen name="content_innerwidth">275dp</dimen>
+    <dimen name="btn_side">60dp</dimen>
+    <dimen name="label_text">16sp</dimen>
+
+    <dimen name="login_padding_top">25dp</dimen>
+    <dimen name="login_padding_left">15dp</dimen>
+    <dimen name="login_padding_right">30dp</dimen>
+    <dimen name="login_text_padding">8dp</dimen>
+    <dimen name="login_edittext_padding">2dp</dimen>
+
+    <dimen name="register_padding_top">5dp</dimen>
+    <dimen name="register_padding_left">15dp</dimen>
+    <dimen name="register_padding_right">30dp</dimen>
+    <dimen name="register_marginTop">10dp</dimen>
+    <dimen name="register_text_padding">2dp</dimen>
+
+    <!-- activity_map -->
+
+
+    <!-- activity_gamepage -->
+
+
+    <!-- dialog_location -->
+    <dimen name="location_side">300dp</dimen>
+    <dimen name="location_btn_go">60dp</dimen>
+    <dimen name="location_btn_margin">15dp</dimen>
+    <dimen name="location_text">20sp</dimen>
+    <dimen name="location_text_width">200dp</dimen>
+    <dimen name="location_text_height">40dp</dimen>
+    <dimen name="location_text_marginStart">50dp</dimen>
+    <dimen name="location_text_padding">8dp</dimen>
+
+
+
+
+</resources>
