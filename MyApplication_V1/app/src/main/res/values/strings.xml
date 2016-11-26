@@ -17,4 +17,8 @@
     <string name="location5">5</string>
     <string name="DropCard">Drop Card</string>
     <string name="Go">Go</string>
+
+
+    <!-- for test layout / Lyris -->
+    <string name="testvalue">222</string>
 </resources>
