@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,10 @@ public class RegistrationActivity extends AppCompatActivity {
         gameModel.addActivity(this);
         gameModel.setRegistrationActivity(this);
 
+        // FULLSCREEN  /LYRIS 11.26
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_registration);
 
         btn_cancel = (Button)findViewById(R.id.cancelButton);

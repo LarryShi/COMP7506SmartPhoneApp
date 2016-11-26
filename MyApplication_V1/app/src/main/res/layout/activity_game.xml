@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/myLayout"
-    android:background="@drawable/bg_mappage"
+    android:background="@drawable/bg_mappage_copy"
     >
+    <RelativeLayout android:layout_height="360dp"
+        android:layout_width="600dp" />
 
     <Button
         android:id="@+id/userProfile"

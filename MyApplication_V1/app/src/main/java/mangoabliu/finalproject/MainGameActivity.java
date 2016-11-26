@@ -10,13 +10,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +62,9 @@ public class MainGameActivity extends AppCompatActivity {
         gameModel.addActivity(this);
         gameModel.setMainGameActivity(this);
 
+        // FULLSCREEN  /LYRIS 11.26
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game);
 
 
