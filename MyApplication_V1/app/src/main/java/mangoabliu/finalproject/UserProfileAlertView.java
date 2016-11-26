@@ -14,8 +14,9 @@ import android.widget.Button;
 
 public class UserProfileAlertView extends Dialog {
 
-    protected UserProfileAlertView(Context context){
-        super(context);
+    //Add Style_transparent
+    protected UserProfileAlertView(Context context,int style){
+        super(context,style);
     }
 
     @Override

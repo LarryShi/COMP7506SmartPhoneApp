@@ -7,6 +7,9 @@
     <dimen name="userProfileDialog_UserNameSize">30dp</dimen>
 
     <!-- activity_menu -->
+    <dimen name="menu_text_paddingStart">50dp</dimen>
+    <dimen name="menu_text_paddingBottom">15dp</dimen>
+    <dimen name="menu_textsize">20sp</dimen>
 
 
     <!-- activity_login & activity_registration -->

@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     //TYPEFACE FONT
     TextView tv_UserName;
     TextView tv_Password;
+    CheckBox cb_ShowPW;
 
     EditText et_UserName;
     EditText et_Password;
@@ -49,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         et_UserName = (EditText) findViewById(R.id.usernameText);
         et_Password = (EditText) findViewById(R.id.passwordText);
 
-        //REVISED BY LYRIS   11/26+++
+        //ADD TV CB IME BY LYRIS   11/26+++
         tv_UserName =(TextView) findViewById(R.id.username);
         tv_Password =(TextView)findViewById(R.id.password);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
@@ -57,7 +62,9 @@ public class LoginActivity extends AppCompatActivity {
         tv_Password.setTypeface(typeFace);
         //IME
         et_UserName.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        et_Password.setInputType(EditorInfo.TYPE_CLASS_TEXT);
+        et_Password.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        cb_ShowPW=(CheckBox) findViewById(R.id.cb_showpassword);
+        cb_ShowPW.setOnClickListener(new cb_OnclickListener());
 
 
         //Elements on the Screen Ends
@@ -102,6 +109,19 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivityForResult(myIntent, 0);
+        }
+    }
+
+    //show password /Lyris 11-26
+    private class cb_OnclickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(LoginActivity.this.cb_ShowPW.isChecked()){
+                LoginActivity.this.et_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                LoginActivity.this.et_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
         }
     }
 

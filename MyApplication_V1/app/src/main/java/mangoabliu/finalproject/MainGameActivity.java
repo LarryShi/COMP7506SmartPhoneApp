@@ -191,7 +191,7 @@ public class MainGameActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this);
+            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent);
             dialog.show();
 
         }

@@ -59,14 +59,13 @@
                 android:layout_toEndOf="@+id/username"
                 android:layout_alignBaseline="@id/username"
                 android:maxLines="1"
+                android:inputType="textPassword"
                 android:padding="@dimen/login_edittext_padding"
                 android:textColorHint="#ffffffff"
                 android:textColor="@android:color/black"
                 android:backgroundTint="@android:color/white"
                 android:background="@drawable/edittext"
                 android:imeOptions="flagNoExtractUi|actionNext"/>
-
-
 
             <EditText
                 android:id="@+id/passwordText"
@@ -80,9 +79,16 @@
                 android:backgroundTint="@android:color/white"
                 android:background="@drawable/edittext"
                 android:maxLines="1"
+                android:inputType="textPassword"
                 android:padding="@dimen/login_edittext_padding"
                 android:imeOptions="flagNoExtractUi"/>
-
+            <CheckBox
+                android:id="@+id/cb_showpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password"
+                android:textColor="@color/clr_login_text"
+                android:text="@string/login_cipher_pw" />
 
         </RelativeLayout>
 

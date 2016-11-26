@@ -1,6 +1,7 @@
 package mangoabliu.finalproject;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+//Lyris-11.26
 
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
@@ -27,7 +30,6 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // FULLSCREEN  /LYRIS 11.26
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -35,6 +37,8 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         btn_Switch = (Button) findViewById(R.id.btn_SwitchLogin);
         btn_Switch.setOnClickListener(new bt_SwitchListener());
         tv_Menu = (TextView) findViewById(R.id.tv_menu);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
+        tv_Menu.setTypeface(typeFace);
 
         // translation animate -deleted
 ////        tv_Menu.setOnClickListener(new tv_MenuListener());
