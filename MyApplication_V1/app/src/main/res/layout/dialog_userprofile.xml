@@ -2,27 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/userProfileDialog"
-    android:background="@android:color/holo_red_dark">
+    android:background="@drawable/bg_userprofile1">
 
     <ImageView
         android:id="@+id/userIcon"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/userfile_icon_width"
+        android:layout_height="@dimen/userfile_icon_height"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:text="@string/cancel"
+        android:layout_marginTop="@dimen/userfile_icon_marginTop"
+        android:layout_marginStart="@dimen/userfile_icon_marginStart"
         android:src="@drawable/usericon"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/userIcon"
+        android:layout_toEndOf="@+id/userIcon"
         android:layout_alignTop="@+id/userIcon"
-        android:text="老石"
-        android:textSize="@dimen/userProfileDialog_UserNameSize"
+        android:paddingTop="@dimen/userfile_username_padding"
+        android:paddingStart="@dimen/userfile_username_padding"
+        android:text="@string/UserName"
+        android:textSize="@dimen/userfile_username_textsize"
         android:textColor="@color/userProfileDialog_UserNameColor"
         />
 
@@ -30,64 +32,62 @@
         android:id="@+id/userProfileDialogCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+        android:text="@string/Back"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/userfile_btn_marginEnd"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/userIcon"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_red_dark">
+        android:layout_marginTop="@dimen/userfile_scroll_marginTop"
+        android:layout_marginBottom="@dimen/userfile_scroll_marginBottom"
+        android:layout_marginStart="@dimen/userfile_scroll_marginHorizontal"
+        android:layout_marginEnd="@dimen/userfile_scroll_marginHorizontal">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/transparent"
             android:orientation="vertical">
 
             <TableRow
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingBottom="10dp"
-                android:background="@android:color/holo_red_dark"
+                android:paddingBottom="@dimen/userfile_table_padding"
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
+
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
             </TableRow>
 
 
@@ -96,40 +96,37 @@
                 android:layout_width="wrap_content"
                 android:weightSum="1">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
-                    android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
+
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
+
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/sample"
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
                     android:scaleType="fitXY"
-                    android:layout_weight="0.25"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_weight="0.25"/>
+                <ImageView
+                    android:layout_width="@dimen/card_layout_width"
+                    android:layout_height="@dimen/card_layout_height"
+                    android:paddingStart="@dimen/userfile_table_padding"
+                    android:src="@drawable/card_r_magneto"
+                    android:scaleType="fitXY"
+                    android:layout_weight="0.25"/>
             </TableRow>
 
         </TableLayout>

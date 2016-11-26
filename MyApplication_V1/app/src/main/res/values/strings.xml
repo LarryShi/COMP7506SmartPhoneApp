@@ -15,7 +15,7 @@
     <string name="confirm_password">CONFIRM:</string>
     <string name="login_cipher_pw">Display Password ?</string>
 
-    <!-- activity_map -->
+    <!-- activity_map &userfile -->
     <string name="confirm_to_exit">Confirm to exit?</string>
     <string name="NOTICE">NOTICE</string>
     <string name="Confirm">Confirm</string>
@@ -26,8 +26,12 @@
     <string name="location5">5</string>
     <string name="DropCard">Drop Card</string>
     <string name="Go">Go</string>
+    <string name="Back">BACK</string>
+    <string name="UserName">UserName</string>
 
-    <!-- activity_gamepage -->
+
+
+    <!-- activity_gamepage-->
 
 
     <!-- dialog_location -->
