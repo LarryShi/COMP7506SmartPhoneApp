@@ -1,5 +1,6 @@
 package mangoabliu.finalproject;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -122,31 +123,32 @@ public class MainGameActivity extends AppCompatActivity {
 
         gameModel.getUserAccount().setWalkDistance(step + walkedDis);
         distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+
         if (walkedDis + step >= 200){
-            //gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
-            //        gameModel.getUserAccount().getTargetLocId());
             stopService(new Intent(MainGameActivity.this,StepService.class));
             return;
         }
 
 
-        nextLocY = Math.sqrt(((Math.pow(destLocX-startLocX,2)+Math.pow(destLocY-startLocY,2))/Math.pow(totalSteps,2))/
+        /*nextLocY = Math.sqrt(((Math.pow(destLocX-startLocX,2)+Math.pow(destLocY-startLocY,2))/Math.pow(totalSteps,2))/
                     (Math.pow((destLocX-startLocX)/(destLocY-startLocY),2)+1))+currentLocY;
         nextLocX = (destLocX-startLocX)/(destLocY-startLocY)*(nextLocY-currentLocY)+currentLocX;
-
+        */
+        nextLocX = currentLocX + (destLocX-startLocX)/totalSteps;
+        nextLocY = currentLocY + (destLocY-startLocY)/totalSteps;
         gameModel.getUserAccount().setCurrentLocCoordinate(new double[]{ nextLocX, nextLocY});
 
-        //Animation animation = new TranslateAnimation((float)currentLocX,(float)nextLocX,
-         //       (float) currentLocY,(float)nextLocY);
-
         System.out.println("currentLocX " + currentLocX);
-        System.out.println("nextLocX " + nextLocX);
         System.out.println("currentLocY " + currentLocY);
+        System.out.println("startLocX " + startLocX);
+        System.out.println("startLocY " + startLocY);
+        System.out.println("nextLocX " + nextLocX);
         System.out.println("nextLocY " + nextLocY);
 
         float differenceX = (float)nextLocX- (float)startLocX;
         float differenceY = (float)nextLocY- (float)startLocY;
-        Animation animation = new TranslateAnimation(differenceX,differenceX,differenceY,differenceY);
+        Animation animation = new TranslateAnimation(differenceX,differenceX,
+                differenceY,differenceY);
         animation.setDuration(300);
         animation.setFillAfter(true);
         thumbnail.startAnimation(animation);
@@ -293,7 +295,12 @@ public class MainGameActivity extends AppCompatActivity {
                 int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
                 String userName = (String) passedData.getJSONObject("UserInfo").get("UserName");
                 walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
-                myUser = new UserAccount(id,userName,walkedDistance);
+                int currentLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("CurrentLocationID"));
+                int targetLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("TargetLocationID"));
+                double currentPositionX = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionX"));
+                double currentPositionY = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionY"));
+                double[] currentPosition = new double[]{currentPositionX,currentPositionY};
+                myUser = new UserAccount(id,userName,walkedDistance,currentLocID,targetLocID,currentPosition);
                 gameModel.setUserAccount(myUser);
                 distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
                 Log.i(TAG, "UserName = " + userName +" walkDistance = " + walkedDistance);

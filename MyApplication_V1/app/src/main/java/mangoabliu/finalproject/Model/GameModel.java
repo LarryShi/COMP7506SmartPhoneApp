@@ -38,7 +38,7 @@ public class GameModel {
     protected final static String str_registration_function="registration";
 
     protected final static String str_updateUserStep_function = "updateUserStep";
-    protected final static String str_updateTargetLocation_function = "";
+    protected final static String str_updateTargetLocation_function = "updateTargetLocation";
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
 
@@ -221,7 +221,7 @@ public class GameModel {
     }
 
     public String getUpdateTargetLocationURL(){
-        return String_base_url + "Server/";
+        return String_base_url + "Server/updateTargetLocationIDM";
     }
     //HTTP Request Related End
 
