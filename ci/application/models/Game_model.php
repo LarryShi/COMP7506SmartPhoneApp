@@ -271,7 +271,7 @@ class Game_model extends CI_Model {
      		$data = array(
 					        'Player1ID' => $query_result[0]['UserID'],
 					        'Player2ID' => $query_result[1]['UserID'],
-					        'UserID' => 0,
+					        'UserID' => $query_result[1]['UserID'],
 					        'Player1Card1ID' => $query_result[0]['CardID1'],
 					        'Player1Card1HP' => $Card1['CardHP'],
 					        'Player1Card2ID' => $query_result[0]['CardID2'],
