@@ -66,6 +66,10 @@ public class LocationDialogView extends Dialog {
     private class drop_DropCardListener implements View.OnClickListener {
 
         public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(v.getContext(), CardDropActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            v.getContext().startActivity(intent);
 
         }
     }
