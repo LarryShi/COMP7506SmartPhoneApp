@@ -15,4 +15,8 @@
     <color name="clr_register_text">#f2e3b4</color>
     <color name="clr_menu_text">#AFFF</color>
 
+
+    <!-- clr for test-->
+    <color name="clr_test">#FFFF</color>
+
 </resources>

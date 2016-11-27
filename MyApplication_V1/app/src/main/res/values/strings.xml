@@ -29,7 +29,7 @@
     <string name="Back">BACK</string>
     <string name="UserName">UserName</string>
 
-    <!-- carddrop activity cards name-->
+    <!-- activity_carddrop cards name-->
     <string-array name="cards_name">
         <item>card_r_beast</item>
         <item>card_r_hawkeye</item>

@@ -1,25 +1,17 @@
 package mangoabliu.finalproject;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageButton;
-import android.widget.Button;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.view.Window;
-import android.widget.TextView;
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import com.nineoldandroids.view.ViewHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -27,7 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.Random;
 
 import mangoabliu.finalproject.Model.GameModel;
-import mangoabliu.finalproject.RotateObject;
+
 import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 
@@ -54,7 +46,11 @@ public class CardDropActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.carddropactivity);
+        // FULLSCREEN  /LYRIS 11.27
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_carddrop);
         initView();
         int DropCardId = GeneDropCardID();
         initData(DropCardId);
@@ -71,7 +67,7 @@ public class CardDropActivity extends AppCompatActivity  {
         CardRootL = (RelativeLayout) findViewById(R.id.CardRootL);
         CardBackL = (ImageView) findViewById(R.id.CardBackL);
         CardFrontL = (ImageView) findViewById(R.id.CardFrontL);
-        ReturnMain = (Button) findViewById(R.id.ReturnMain);
+        ReturnMain = (Button) findViewById(R.id.btn_returnMain);
 
         CardBackM.setOnClickListener(new CardBackM_Listener());
         CardBackR.setOnClickListener(new CardBackR_Listener());
