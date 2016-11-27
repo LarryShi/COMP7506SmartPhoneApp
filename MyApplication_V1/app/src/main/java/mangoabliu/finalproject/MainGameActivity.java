@@ -182,6 +182,11 @@ public class MainGameActivity extends AppCompatActivity {
         Log.d(TAG, result);
     }
 
+    public void updateUserCardRelationSuccessful(String result){
+        Log.d(TAG, result);
+    }
+
+
     public void errorMessage(String err){
         gameModel.showToast(MainGameActivity.this, err);
     }

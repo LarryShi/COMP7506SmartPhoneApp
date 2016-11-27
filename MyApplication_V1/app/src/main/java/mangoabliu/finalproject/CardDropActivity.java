@@ -36,8 +36,9 @@ import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOpt
  */
 
 
-public class CardDropActivity extends AppCompatActivity implements View.OnClickListener {
+public class CardDropActivity extends AppCompatActivity  {
 
+    GameModel gameModel;
     private RelativeLayout CardRootM;
     private ImageView CardBackM;
     private ImageView CardFrontM;
@@ -47,18 +48,16 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
     private RelativeLayout CardRootL;
     private ImageView CardBackL;
     private ImageView CardFrontL;
+    private Button ReturnMain;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.carddropactivity);
-
-
-
         initView();
-        initData();
+        int DropCardId = GeneDropCardID();
+        initData(DropCardId);
     }
 
     private void initView() {
@@ -72,11 +71,11 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
         CardRootL = (RelativeLayout) findViewById(R.id.CardRootL);
         CardBackL = (ImageView) findViewById(R.id.CardBackL);
         CardFrontL = (ImageView) findViewById(R.id.CardFrontL);
-        Button ReturnMain = (Button) findViewById(R.id.ReturnMain);
+        ReturnMain = (Button) findViewById(R.id.ReturnMain);
 
-        CardBackM.setOnClickListener(this);
-        CardBackR.setOnClickListener(this);
-        CardBackL.setOnClickListener(this);
+        CardBackM.setOnClickListener(new CardBackM_Listener());
+        CardBackR.setOnClickListener(new CardBackR_Listener());
+        CardBackL.setOnClickListener(new CardBackL_Listener());
         ReturnMain.setOnClickListener(new ReturnMain_Listener());
 
     }
@@ -85,9 +84,6 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
 
         public void onClick(View v) {
             Intent intent = new Intent();
-            //setClass函数的第一个参数是一个Context对象
-            //Context是一个类，Activity是Context类的子类，也就是说，所有的Activity对象，都可以向上转型为Context对象
-            //setClass函数的第二个参数是一个Class对象，在当前场景下，应该传入需要被启动的Activity类的class对象
             intent.setClass(CardDropActivity.this, MainGameActivity.class);
             startActivity(intent);
 
@@ -95,10 +91,80 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    private class CardBackL_Listener implements View.OnClickListener {
+
+        public void onClick(View v) {
+
+            ViewHelper.setRotationY(CardFrontL, 180f);//先翻转180，转回来时就不是反转的了
+            RotateObject rotatable = new RotateObject.Builder(CardRootL)
+                    .sides(R.id.CardBackL, R.id.CardFrontL)
+                    .direction(RotateObject.ROTATE_Y)
+                    .rotationCount(1)
+                    .build();
+            rotatable.setTouchEnable(false);
+            rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
+            CardBackM.setEnabled(false);
+            CardBackR.setEnabled(false);
+
+        }
+    }
+
+
+    private class CardBackR_Listener implements View.OnClickListener {
+
+        public void onClick(View v) {
+
+            ViewHelper.setRotationY(CardFrontR, 180f);//先翻转180，转回来时就不是反转的了
+            RotateObject rotatable = new RotateObject.Builder(CardRootR)
+                    .sides(R.id.CardBackR, R.id.CardFrontR)
+                    .direction(RotateObject.ROTATE_Y)
+                    .rotationCount(1)
+                    .build();
+            rotatable.setTouchEnable(false);
+            rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
+            CardBackM.setEnabled(false);
+            CardBackL.setEnabled(false);
+
+        }
+    }
+
+    private class CardBackM_Listener implements View.OnClickListener {
+
+        public void onClick(View v) {
+
+            ViewHelper.setRotationY(CardFrontM, 180f);//先翻转180，转回来时就不是反转的了
+            RotateObject rotatable = new RotateObject.Builder(CardRootM)
+                    .sides(R.id.CardBackM, R.id.CardFrontM)
+                    .direction(RotateObject.ROTATE_Y)
+                    .rotationCount(1)
+                    .build();
+            rotatable.setTouchEnable(false);
+            rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
+            CardBackL.setEnabled(false);
+            CardBackR.setEnabled(false);
+
+
+        }
+    }
+
+    private int GeneDropCardID(){
+        Random random=new Random();
+        int DropOneCard =random.nextInt(18);
+
+    //    gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
+        Resources res = getResources();
+        String[] CardsName = res.getStringArray(R.array.cards_name);
+        Context context = CardBackM.getContext();
+        int DropCardId = context.getResources().getIdentifier(CardsName[DropOneCard], "drawable", context.getPackageName());
+        return DropCardId;
+
+    }
+
+
     /**
      * 设置数据
      */
-    public void initData() {
+    public void initData(int DropCardId) {
 
         ImageLoader imageLoader;
         imageLoader = ImageLoader.getInstance();
@@ -108,12 +174,7 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
         ImageLoader.getInstance().displayImage(imageUri, CardBackR, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUri, CardBackL, getDisplayImageOptions());
 
-        Random random=new Random();
-        int DropOneCard =random.nextInt(17);
-        Resources res = getResources();
-        String[] CardsName = res.getStringArray(R.array.cards_name);
-        Context context = CardBackM.getContext();
-        int DropCardId = context.getResources().getIdentifier(CardsName[DropOneCard], "drawable", context.getPackageName());
+
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         String imageUriFront = "drawable://" + DropCardId ;
@@ -130,6 +191,7 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
         setCameraDistance(CardRootL);
         setCameraDistance(CardRootR);
 
+
     }
 
 
@@ -142,56 +204,5 @@ public class CardDropActivity extends AppCompatActivity implements View.OnClickL
         CardTurnRoot.setCameraDistance(scale);
     }
 
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-            case R.id.CardBackL: {
-                ViewHelper.setRotationY(CardFrontL, 180f);//先翻转180，转回来时就不是反转的了
-                RotateObject rotatable = new RotateObject.Builder(CardRootL)
-                        .sides(R.id.CardBackL, R.id.CardFrontL)
-                        .direction(RotateObject.ROTATE_Y)
-                        .rotationCount(1)
-                        .build();
-                rotatable.setTouchEnable(false);
-                rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
-                CardBackM.setEnabled(false);
-                CardBackR.setEnabled(false);
-
-            }break;
-            case R.id.CardBackM: {
-
-                ViewHelper.setRotationY(CardFrontM, 180f);//先翻转180，转回来时就不是反转的了
-                RotateObject rotatable = new RotateObject.Builder(CardRootM)
-                        .sides(R.id.CardBackM, R.id.CardFrontM)
-                        .direction(RotateObject.ROTATE_Y)
-                        .rotationCount(1)
-                        .build();
-                rotatable.setTouchEnable(false);
-                rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
-                CardBackL.setEnabled(false);
-                CardBackR.setEnabled(false);
-
-
-            }break;
-            case R.id.CardBackR: {
-
-                ViewHelper.setRotationY(CardFrontR, 180f);//先翻转180，转回来时就不是反转的了
-                RotateObject rotatable = new RotateObject.Builder(CardRootR)
-                        .sides(R.id.CardBackR, R.id.CardFrontR)
-                        .direction(RotateObject.ROTATE_Y)
-                        .rotationCount(1)
-                        .build();
-                rotatable.setTouchEnable(false);
-                rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
-                CardBackM.setEnabled(false);
-                CardBackL.setEnabled(false);
-
-
-            }
-                break;
-        }
-
-    }
 
 }

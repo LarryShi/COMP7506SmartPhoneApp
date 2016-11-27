@@ -39,6 +39,7 @@ public class GameModel {
 
     protected final static String str_updateUserStep_function = "updateUserStep";
     protected final static String str_updateTargetLocation_function = "updateTargetLocation";
+    protected final static String str_updateUserCardRelation_function = "updateUserCardRelation";
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
 
@@ -197,6 +198,35 @@ public class GameModel {
         }
     }
 
+    public void updateUserCardRelation(int str_UserId, int str_CardID){
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("UserID",str_UserId);
+            jsonObject.put("CardID",str_CardID);
+
+            serverPHPPostConnection(getUpdateUserCardRelationURL(),jsonObject.toString(),
+                    str_updateUserCardRelation_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserCardRelationFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.updateUserCardRelationSuccessful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
@@ -222,6 +252,9 @@ public class GameModel {
 
     public String getUpdateTargetLocationURL(){
         return String_base_url + "Server/updateTargetLocationIDM";
+    }
+    public String getUpdateUserCardRelationURL(){
+        return String_base_url + "Server/updateUserCardRelationM";
     }
     //HTTP Request Related End
 
