@@ -152,6 +152,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div>
 
+<div id="container">
+	<h1>updateUserCardRelation</h1>
+
+	<form enctype='application/json' action="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserCardRelation" method="post">
+	  <p>UserID: <input type="text" name="UserID" /></p>
+	  <p>CardID: <input type="text" name="CardID" /></p>
+	  <input type="submit" value="updateUserCardRelation" />
+	</form>
+
+</div>
+
+
 
 </body>
 </html>

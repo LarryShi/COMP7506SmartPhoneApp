@@ -506,6 +506,78 @@ class Server extends CI_Controller {
 	}
 
 
+		public function updateUserCardRelation(){
+
+			$json_string = $this->input->post();
+
+			$this->load->model('user_model','',true);
+			//传过来的是JSON String，用下面这句
+	    	//$json = json_decode($json_string, true);
+	    	//传过来的是JSON Object，用下面这句
+			$json = $json_string;
+			$paramemter['UserID']=$json['UserID'];
+			$paramemter['CardID']=$json['CardID'];
+			$result = $this->user_model->updateUserCardRelation($paramemter);
+			if($result['ret']==200)
+				{
+					$data['code'] = 0;
+					$data['UserID']=$paramemter['UserID'];
+					$data['CardID']=$paramemter['CardID'];
+				}else if($result['ret']==400){
+					$data['code']=3;
+					$data['message'] = "fail";
+
+				}else {
+					$data['code']=2;
+					$data['message'] = "Update Error";
+
+				}
+
+			$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserCardRelationM";
+
+			$content_data['display_value']['Input']=json_encode($json_string, true);
+
+			$content_data['display_value']['Return']=json_encode($data, true);
+
+			$this->load->view('result',$content_data);
+		}
+
+		public function updateUserCardRelationM(){
+
+			$json_string = $this->input->raw_input_stream;
+
+			$this->load->model('user_model','',true);
+			//传过来的是JSON String，用下面这句
+	    	$json = json_decode($json_string, true);
+	    	//传过来的是JSON Object，用下面这句
+			//$json = $json_string;
+			$paramemter['UserID']=$json['UserID'];
+			$paramemter['CardID']=$json['CardID'];
+			$result = $this->user_model->updateUserCardRelation($paramemter);
+			if($result['ret']==200)
+				{
+					$data['code'] = 0;
+					$data['UserID']=$paramemter['UserID'];
+					$data['CardID']=$paramemter['CardID'];
+					$this->output
+		        			->set_content_type('application/json')
+		        			->set_output(json_encode($data));
+				}else if($result['ret']==400)
+				{
+					$data['code']=3;
+					$data['message'] = "fail";
+					$this->output
+		        			->set_content_type('application/json')
+		        			->set_output(json_encode($data));
+				}else{
+					$data['code']=2;
+					$data['message'] = "Update Error";
+					$this->output
+									->set_content_type('application/json')
+									->set_output(json_encode($data));
+
+				}
+		}
 
 
 

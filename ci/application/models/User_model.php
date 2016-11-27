@@ -185,6 +185,27 @@ class User_model extends CI_Model {
         return $result;
     }
 
+    function updateUserCardRelation($paramemter)
+    {
+
+      $data = array(
+          'UserID'  => $paramemter['UserID'],
+          'CardID'  => $paramemter['CardID']);
+
+        $this->db->trans_start();
+        $this->db->insert('UserCardRelation', $data);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $result['ret'] = 400;
+            return $result;
+        }
+        $result['ret']=200;
+        return $result;
+    }
+
 
 
 
