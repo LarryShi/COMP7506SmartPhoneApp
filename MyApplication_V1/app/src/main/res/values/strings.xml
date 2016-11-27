@@ -31,6 +31,15 @@
 
     <!-- carddrop activity cards name-->
     <string-array name="cards_name">
+        <item>card_ssr_spiderman</item>
+        <item>card_ssr_ca</item>
+        <item>card_ssr_dr</item>
+        <item>card_sr_blackwidow</item>
+        <item>card_sr_thor</item>
+        <item>card_sr_wolverine</item>
+        <item>card_sr_deadpool</item>
+        <item>card_sr_ironman</item>
+        <item>card_sr_loki</item>
         <item>card_r_beast</item>
         <item>card_r_hawkeye</item>
         <item>card_r_hulk</item>
@@ -40,15 +49,6 @@
         <item>card_r_torch</item>
         <item>card_r_vision</item>
         <item>card_r_winter</item>
-        <item>card_sr_blackwidow</item>
-        <item>card_sr_deadpool</item>
-        <item>card_sr_ironman</item>
-        <item>card_sr_loki</item>
-        <item>card_sr_thor</item>
-        <item>card_sr_wolverine</item>
-        <item>card_ssr_ca</item>
-        <item>card_ssr_dr</item>
-        <item>card_ssr_spiderman</item>
     </string-array>
 
     <!-- activity_gamepage-->

@@ -39,6 +39,7 @@ import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOpt
 public class CardDropActivity extends AppCompatActivity  {
 
     GameModel gameModel;
+    UserAccount myUser;
     private RelativeLayout CardRootM;
     private ImageView CardBackM;
     private ImageView CardFrontM;
@@ -55,6 +56,8 @@ public class CardDropActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carddropactivity);
+        gameModel=GameModel.getInstance();
+        gameModel.addActivity(this);
         initView();
         int DropCardId = GeneDropCardID();
         initData(DropCardId);
@@ -150,8 +153,8 @@ public class CardDropActivity extends AppCompatActivity  {
     private int GeneDropCardID(){
         Random random=new Random();
         int DropOneCard =random.nextInt(18);
-
-    //    gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
+        int CardID = DropOneCard+1;
+        gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),CardID);
         Resources res = getResources();
         String[] CardsName = res.getStringArray(R.array.cards_name);
         Context context = CardBackM.getContext();
