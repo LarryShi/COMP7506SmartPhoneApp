@@ -75,7 +75,7 @@ public class StepService extends Service {
 
                         }
                         if (sendStepCounter == 10){
-                            gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),
+                            gameModel.updateUserStep(gameModel.getUserAccount().getUserId(),
                                     gameModel.getUserAccount().getWalkDistance());
                             sendStepCounter = 0;
                         }

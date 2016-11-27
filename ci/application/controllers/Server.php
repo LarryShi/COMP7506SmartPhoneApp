@@ -385,6 +385,127 @@ class Server extends CI_Controller {
 			}
 	}
 
+	public function updateCurrentLocationID(){
+
+		$json_string = $this->input->post();
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['CurrentLocationID']=$json['CurrentLocationID'];
+		$result = $this->user_model->updateCurrentLocationID($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['CurrentLocationID']=$paramemter['CurrentLocationID'];
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+			}
+
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateCurrentLocationIDM";
+
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data, true);
+
+		$this->load->view('result',$content_data);
+	}
+
+	public function updateCurrentLocationIDM(){
+
+		$json_string = $this->input->raw_input_stream;
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['CurrentLocationID']=$json['CurrentLocationID'];
+		$result = $this->user_model->updateCurrentLocationID($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['CurrentLocationID']=$paramemter['CurrentLocationID'];
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}
+	}
+
+	public function updateCurrentPosition(){
+
+		$json_string = $this->input->post();
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	//$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['CurrentPositionX']=$json['CurrentPositionX'];
+		$paramemter['CurrentPositionY']=$json['CurrentPositionY'];
+		$result = $this->user_model->updateCurrentPosition($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['CurrentPositionX']=$paramemter['CurrentPositionX'];
+				$data['CurrentPositionY']=$paramemter['CurrentPositionY'];
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+			}
+
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateCurrentPositionM";
+
+		$content_data['display_value']['Input']=json_encode($json_string, true);
+
+		$content_data['display_value']['Return']=json_encode($data, true);
+
+		$this->load->view('result',$content_data);
+	}
+
+	public function updateCurrentPositionM(){
+
+		$json_string = $this->input->raw_input_stream;
+
+		$this->load->model('user_model','',true);
+		//传过来的是JSON String，用下面这句
+    	$json = json_decode($json_string, true);
+    	//传过来的是JSON Object，用下面这句
+		//$json = $json_string;
+		$paramemter['UserID']=$json['UserID'];
+		$paramemter['CurrentPositionX']=$json['CurrentPositionX'];
+		$paramemter['CurrentPositionY']=$json['CurrentPositionY'];
+		$result = $this->user_model->updateCurrentPosition($paramemter);
+		if($result['ret']==200)
+			{
+				$data['code'] = 0;
+				$data['CurrentPositionX']=$paramemter['CurrentPositionX'];
+				$data['CurrentPositionY']=$paramemter['CurrentPositionY'];
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}else{
+				$data['code']=2;
+				$data['message'] = "Update Error";
+				$this->output
+	        			->set_content_type('application/json')
+	        			->set_output(json_encode($data));
+			}
+	}
+
+
 
 
 

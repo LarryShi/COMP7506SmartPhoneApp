@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 /**
@@ -14,8 +15,9 @@ import android.widget.Button;
 
 public class UserProfileAlertView extends Dialog {
 
-    protected UserProfileAlertView(Context context){
-        super(context);
+    //Add Style_transparent
+    protected UserProfileAlertView(Context context,int style){
+        super(context,style);
     }
 
     @Override
@@ -23,6 +25,10 @@ public class UserProfileAlertView extends Dialog {
         super.onCreate(savedInstanceState);
         //设置不显示对话框标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //ADD FULLSCREEN
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_login);
         //设置对话框显示哪个布局文件
         setContentView(R.layout.dialog_userprofile);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
