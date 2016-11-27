@@ -148,8 +148,8 @@ public class CardDropActivity extends AppCompatActivity  {
     private int GeneDropCardID(){
         Random random=new Random();
         int DropOneCard =random.nextInt(18);
-
-        gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
+        int CardID = DropOneCard+1;
+        gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),CardID);
         Resources res = getResources();
         String[] CardsName = res.getStringArray(R.array.cards_name);
         Context context = CardBackM.getContext();
