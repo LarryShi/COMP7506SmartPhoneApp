@@ -35,6 +35,18 @@
 
     <!-- activity_gamepage -->
 
+    <!-- activity_carddrop -->
+    <dimen name="carddrop_icon_width">60dp</dimen>
+    <dimen name="carddrop_icon_height">60dp</dimen>
+    <dimen name="carddrop_icon_marginTop">10dp</dimen>
+    <dimen name="carddrop_icon_marginStart">10dp</dimen>
+    <dimen name="carddrop_btn_width">40dp</dimen>
+    <dimen name="carddrop_btn_height">30dp</dimen>
+    <dimen name="carddrop_btn_marginTop">10dp</dimen>
+    <dimen name="carddrop_btn_marginEnd">10dp</dimen>
+    <dimen name="carddrop_cardlayout_width">130dp</dimen>
+    <dimen name="carddrop_cardlayout_height">200dp</dimen>
+
 
     <!-- dialog_location -->
     <dimen name="location_side">300dp</dimen>
