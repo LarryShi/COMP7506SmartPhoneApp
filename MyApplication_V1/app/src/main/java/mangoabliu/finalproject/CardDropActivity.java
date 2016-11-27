@@ -167,7 +167,7 @@ public class CardDropActivity extends AppCompatActivity  {
         ImageLoader imageLoader;
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        String imageUri = "drawable://" + R.drawable.grey_bg;
+        String imageUri = "drawable://" + R.drawable.card_back;
         ImageLoader.getInstance().displayImage(imageUri, CardBackM, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUri, CardBackR, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUri, CardBackL, getDisplayImageOptions());
