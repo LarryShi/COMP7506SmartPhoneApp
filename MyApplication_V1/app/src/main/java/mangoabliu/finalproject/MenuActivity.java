@@ -13,7 +13,10 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-//Lyris-11.26
+/**
+ * Created by LyrisXu on 2016-11-26.
+ */
+
 
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
