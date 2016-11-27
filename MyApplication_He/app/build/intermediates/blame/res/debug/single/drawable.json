@@ -1,0 +1,334 @@
+[
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_panther.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_panther.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_registerpage.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_registerpage.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_beast.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_beast.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_plus_signin_btn_icon_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_plus_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_winter.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_winter.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_ironman.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_ironman.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_plus_signin_btn_icon_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_plus_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/touxiang.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/touxiang.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/frontpagebutton.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/frontpagebutton.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_deadpool.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_deadpool.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_userprofile1.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_userprofile1.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/dialog_destination.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/dialog_destination.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_blackwidow.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_blackwidow.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_ssr_ca.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_ssr_ca.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/ufo.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/ufo.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_hulk.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_hulk.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/registrationedittext.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/registrationedittext.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_ab_back_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/location.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/location.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/planet1.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/planet1.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_google_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_loki.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_loki.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_thor.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_thor.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_dropcard.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_dropcard.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/sample.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/sample.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/destination_midgard.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/destination_midgard.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/edittext.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/edittext.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_search_api_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_gamepage.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_gamepage.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_indexpage.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_indexpage.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_tick_mark_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/gameuser.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/gameuser.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_ssr_dr.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_ssr_dr.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_ssr_spiderman.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_ssr_spiderman.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_go_search_api_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_vision.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_vision.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_hawkeye.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_hawkeye.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_torch.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_torch.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_sr_wolverine.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_sr_wolverine.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_mappage.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_mappage.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_voice_search_api_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_plus_signin_btn_text_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_plus_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/common_plus_signin_btn_text_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/res/drawable/common_plus_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_check_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/dialog1.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/dialog1.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/cardback.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/cardback.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_magneto.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_magneto.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_loginpage.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_loginpage.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/abc_ic_menu_overflow_material.xml",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/card_r_mystique.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/card_r_mystique.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/usericon.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/usericon.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_userprofile.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_userprofile.png"
+    },
+    {
+        "merged": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/res/merged/debug/drawable/bg_mappage_copy.png",
+        "source": "/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/src/main/res/drawable/bg_mappage_copy.png"
+    }
+]

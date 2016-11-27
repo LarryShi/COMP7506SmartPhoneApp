@@ -1,0 +1,7 @@
+#Sun Nov 27 22:40:43 HKT 2016
+base.0=/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_47c5c350ca896f3f3561f52838983009e2c2ba7c
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_cbd682c9294fe66c6403490e27523d1dcc89eff4/classes.dex
+base.1=/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_cbd682c9294fe66c6403490e27523d1dcc89eff4
+file.0=/Users/herenjie/Desktop/FinalProject/MyApplication_V1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_47c5c350ca896f3f3561f52838983009e2c2ba7c/classes.dex

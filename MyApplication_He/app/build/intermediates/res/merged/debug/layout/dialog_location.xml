@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/location_side"
+    android:layout_height="@dimen/location_side"
+    android:background="@drawable/destination_midgard">
+
+
+    <TextView
+        android:id="@+id/locationDialogTitle"
+        android:layout_width="@dimen/location_text_width"
+        android:layout_height="@dimen/location_text_height"
+        android:paddingTop="@dimen/location_text_padding"
+        android:layout_marginStart="@dimen/location_text_marginStart"
+        android:text="Midgard"
+        android:textSize="@dimen/location_text"
+        android:textColor="@android:color/white"
+        android:background="@color/transparent"/>
+
+
+    <Button
+        android:id="@+id/locationGo"
+        android:layout_width="@dimen/location_btn_go"
+        android:layout_height="@dimen/location_btn_go"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/location_btn_margin"
+        android:layout_marginEnd="@dimen/location_btn_margin"
+        android:background="@color/transparent"
+        android:text="@string/Go"/>
+
+    <Button
+        android:id="@+id/dropCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DropCard"
+        android:layout_marginStart="10dp"
+        android:layout_alignTop="@+id/locationImage"
+        android:layout_toEndOf="@+id/locationImage" />
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/planet1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="100dp"
+        android:layout_above="@+id/locationGo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="53dp" />
+
+    <Button
+        android:id="@+id/locationDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_below="@+id/dropCard"
+        android:layout_alignStart="@+id/dropCard"
+        android:layout_alignEnd="@+id/dropCard" />
+
+</RelativeLayout>
