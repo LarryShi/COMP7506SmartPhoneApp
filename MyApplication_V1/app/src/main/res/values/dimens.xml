@@ -4,9 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="userProfileDialog_Height">225dp</dimen>
     <dimen name="userProfileDialog_Width">400dp</dimen>
-    <dimen name="userProfileDialog_UserNameSize">30dp</dimen>
 
     <!-- activity_menu -->
+    <dimen name="menu_text_paddingStart">50dp</dimen>
+    <dimen name="menu_text_paddingBottom">15dp</dimen>
+    <dimen name="menu_textsize">20sp</dimen>
 
 
     <!-- activity_login & activity_registration -->
@@ -43,6 +45,20 @@
     <dimen name="location_text_height">40dp</dimen>
     <dimen name="location_text_marginStart">50dp</dimen>
     <dimen name="location_text_padding">8dp</dimen>
+
+    <!-- dialog_userfile -->
+    <dimen name="userfile_icon_width">60dp</dimen>
+    <dimen name="userfile_icon_height">40dp</dimen>
+    <dimen name="userfile_icon_marginTop">35dp</dimen>
+    <dimen name="userfile_icon_marginStart">20dp</dimen>
+    <dimen name="userfile_btn_marginEnd">30dp</dimen>
+    <dimen name="userfile_username_textsize">20sp</dimen>
+    <dimen name="userfile_username_padding">20dp</dimen>
+    <dimen name="userfile_scroll_marginTop">30dp</dimen>
+    <dimen name="userfile_scroll_marginBottom">10dp</dimen>
+    <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>
+    <dimen name="userfile_table_padding">10dp</dimen>
+
 
     <!-- layout_card -->
     <dimen name="card_layout_width">150dp</dimen>

@@ -12,9 +12,8 @@ import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.StepService;
 
 /**
- * Created by herenjie on 2016/11/17.
+ * Created by 10836 on 2016-11-16.
  */
-
 
 
 public class LocationDialogView extends Dialog {
@@ -22,8 +21,10 @@ public class LocationDialogView extends Dialog {
     GameModel gameModel;
     int clickedLoc;
 
-    protected LocationDialogView(Context context, int loc) {
-        super(context);
+
+    //Add Style /Lyris 11-26
+    protected LocationDialogView(Context context, int loc, int style ) {
+        super(context, style);
         clickedLoc = loc;
     }
 
@@ -35,6 +36,7 @@ public class LocationDialogView extends Dialog {
         //设置对话框显示哪个布局文件
         setContentView(R.layout.dialog_location);
         //getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
         Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         Button start = (Button) findViewById(R.id.locationGo);

@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="15dp"
-        android:paddingStart="120dp"
+        android:paddingBottom="@dimen/menu_text_paddingBottom"
+        android:paddingStart="@dimen/menu_text_paddingStart"
         android:id="@+id/tv_menu"
         android:text="Touch on the Screen to Start Battle..."
-        android:textColor="#AFFF"
-        android:textSize="20sp"/>
+        android:textColor="@color/clr_menu_text"
+        android:textSize="@dimen/menu_textsize"/>
 </RelativeLayout>

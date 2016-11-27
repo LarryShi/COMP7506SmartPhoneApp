@@ -1,5 +1,11 @@
 <resources>
+
     <string name="app_name">MarvelBattle</string>
+
+    <!-- activity_menu -->
+
+
+    <!-- activity_login & activity_registration -->
     <string name="user_name">USERNAME :</string>
     <string name="password">PASSWORD :</string>
     <string name="login">Login</string>
@@ -7,6 +13,9 @@
     <string name="register_now">Register Now</string>
     <string name="cancel">Cancel</string>
     <string name="confirm_password">CONFIRM:</string>
+    <string name="login_cipher_pw">Display Password ?</string>
+
+    <!-- activity_map &userfile -->
     <string name="confirm_to_exit">Confirm to exit?</string>
     <string name="NOTICE">NOTICE</string>
     <string name="Confirm">Confirm</string>
@@ -17,8 +26,18 @@
     <string name="location5">5</string>
     <string name="DropCard">Drop Card</string>
     <string name="Go">Go</string>
+    <string name="Back">BACK</string>
+    <string name="UserName">UserName</string>
+
+
+
+    <!-- activity_gamepage-->
+
+
+    <!-- dialog_location -->
 
 
     <!-- for test layout / Lyris -->
+    <string name="testtext">Test</string>
     <string name="testvalue">222</string>
 </resources>

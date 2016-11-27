@@ -3,12 +3,16 @@ package mangoabliu.finalproject;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,8 +27,9 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btn_cancel,btn_register;
     EditText et_UserName,et_Password,et_Password_repeat;
 
-    //REVISED BY XP   11/26+++
+    //REVISED BY LYRIS   11/26+++
     TextView tv_UserName,tv_Password,tv_Password_repeat;
+    CheckBox cb_ShowPW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
         et_Password = (EditText) findViewById(R.id.passwordRegisterText);
         et_Password_repeat = (EditText) findViewById(R.id.passwordConfirmText);
 
-        //REVISED BY XP   11/26+++
+        //ADD TV CB IME BY LYRIS   11/26+++
         tv_UserName =(TextView) findViewById(R.id.usernameRegister);
         tv_Password =(TextView)findViewById(R.id.passwordRegister);
         tv_Password_repeat =(TextView) findViewById(R.id.passwordRegisterConfirm);
@@ -60,8 +65,11 @@ public class RegistrationActivity extends AppCompatActivity {
         tv_Password_repeat.setTypeface(typeFace);
         //IME
         et_UserName.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        et_Password.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        et_Password_repeat.setInputType(EditorInfo.TYPE_CLASS_TEXT);
+        et_Password.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        et_Password_repeat.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        cb_ShowPW=(CheckBox) findViewById(R.id.cb_showconfirmpassword);
+        cb_ShowPW.setOnClickListener(new cb_OnclickListener());
 
     }
 
@@ -100,4 +108,21 @@ public class RegistrationActivity extends AppCompatActivity {
             RegistrationActivity.super.onBackPressed();
         }
     }
+
+    //show password /Lyris 11-26
+    private class cb_OnclickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(RegistrationActivity.this.cb_ShowPW.isChecked()){
+
+                RegistrationActivity.this.et_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                RegistrationActivity.this.et_Password_repeat.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                RegistrationActivity.this.et_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                RegistrationActivity.this.et_Password_repeat.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        }
+    }
+
 }

@@ -1,6 +1,5 @@
 package mangoabliu.finalproject;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -192,51 +191,53 @@ public class MainGameActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this);
+            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent);
             dialog.show();
 
         }
     }
 
+    // Increase Style /Lyris 11-26
+
     private class location1Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,1);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,1,R.style.DialogTranslucent);
             loc.show();
         }
     }
     private class location2Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,2);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,2,R.style.DialogTranslucent);
             loc.show();
         }
     }
     private class location3Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,3);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,3,R.style.DialogTranslucent);
             loc.show();
         }
     }
     private class location4Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,4);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,4,R.style.DialogTranslucent);
             loc.show();
         }
     }
     private class location5Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,5);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,5,R.style.DialogTranslucent);
             loc.show();
         }
     }
     private class location6Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,6);
+            LocationDialogView loc = new LocationDialogView(MainGameActivity.this,6,R.style.DialogTranslucent);
             loc.show();
         }
     }
