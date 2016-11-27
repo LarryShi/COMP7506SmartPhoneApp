@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="@dimen/location_side"
     android:layout_height="@dimen/location_side"
+    android:layout_gravity="center"
     android:background="@drawable/destination">
 
 

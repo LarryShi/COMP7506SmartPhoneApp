@@ -82,7 +82,6 @@ public class CardDropActivity extends AppCompatActivity  {
             Intent intent = new Intent();
             intent.setClass(CardDropActivity.this, MainGameActivity.class);
             startActivity(intent);
-
         }
     }
 
