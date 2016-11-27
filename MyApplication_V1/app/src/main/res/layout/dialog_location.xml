@@ -44,9 +44,10 @@
         android:layout_height="100dp"
         android:src="@drawable/planet1"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="100dp"
         android:layout_above="@+id/locationGo"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="53dp" />
 
     <Button
