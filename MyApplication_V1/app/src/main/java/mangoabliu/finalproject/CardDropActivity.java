@@ -31,6 +31,7 @@ import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOpt
 public class CardDropActivity extends AppCompatActivity  {
 
     GameModel gameModel;
+    UserAccount myUser;
     private RelativeLayout CardRootM;
     private ImageView CardBackM;
     private ImageView CardFrontM;
@@ -46,6 +47,8 @@ public class CardDropActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gameModel=GameModel.getInstance();
+        gameModel.addActivity(this);
         // FULLSCREEN  /LYRIS 11.27
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -146,7 +149,7 @@ public class CardDropActivity extends AppCompatActivity  {
         Random random=new Random();
         int DropOneCard =random.nextInt(18);
 
-    //    gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
+        gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
         Resources res = getResources();
         String[] CardsName = res.getStringArray(R.array.cards_name);
         Context context = CardBackM.getContext();
