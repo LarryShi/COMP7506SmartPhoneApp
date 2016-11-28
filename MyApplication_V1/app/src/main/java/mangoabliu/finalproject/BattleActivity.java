@@ -82,7 +82,7 @@ public class BattleActivity extends AppCompatActivity {
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
                 0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, -1.0f);
-        mHiddenAction.setDuration(1000);
+        mHiddenAction.setDuration(2000);
         mHiddenAction.setStartOffset(20);
         img.startAnimation(mHiddenAction);
     }
@@ -94,7 +94,7 @@ public class BattleActivity extends AppCompatActivity {
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
                 0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, 1.0f);
-        mHiddenAction.setDuration(1000);
+        mHiddenAction.setDuration(2000);
         mHiddenAction.setStartOffset(20);
         img.startAnimation(mHiddenAction);
     }
