@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gamepage">
+
+
+    <!-- Before loading -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_battle_loadingup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_loading_up"/>
+        <ImageView
+            android:id="@+id/img_battle_loadingdown"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_loading_down"/>
+
+        <mangoabliu.finalproject.Layout.FontTextView
+            android:id="@+id/battle_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/battle_loading_text"
+            android:textSize="@dimen/battle_loading_textsize"
+            android:textColor="@color/clr_battle_text"/>
+    </RelativeLayout>
+
+
+
+
+    <!-- After loading -->
+    <RelativeLayout
+        android:id="@+id/battle_afterloading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_battle_planet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_planet"/>
+        <ImageView
+            android:id="@+id/img_battle_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_banner"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/img_battle_infoP1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_info_p1"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/img_battle_infoP2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_info_p2"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+</RelativeLayout>

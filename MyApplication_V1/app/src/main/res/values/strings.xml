@@ -51,7 +51,8 @@
         <item>card_r_winter</item>
     </string-array>
 
-    <!-- activity_gamepage-->
+    <!-- activity_battle-->
+    <string name="battle_loading_text">Loading...</string>
 
 
     <!-- dialog_location -->

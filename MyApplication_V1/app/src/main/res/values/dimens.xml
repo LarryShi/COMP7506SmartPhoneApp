@@ -58,7 +58,8 @@
 
 
 
-    <!-- activity_gamepage -->
+    <!-- activity_battle -->
+    <dimen name="battle_loading_textsize">30sp</dimen>
 
     <!-- activity_carddrop -->
     <dimen name="carddrop_icon_width">60dp</dimen>
