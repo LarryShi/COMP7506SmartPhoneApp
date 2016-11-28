@@ -3,12 +3,17 @@ package mangoabliu.finalproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import mangoabliu.finalproject.Model.GameModel;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by herenjie on 2016/11/16.
@@ -18,6 +23,7 @@ public class UserProfileAlertView extends Dialog {
 
     //Add Style_transparent
     String name;
+    GameModel gameModel;
 
     protected UserProfileAlertView(Context context,int style,String username){
         super(context,style);
@@ -28,6 +34,8 @@ public class UserProfileAlertView extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //设置不显示对话框标题栏
+        gameModel.getInstance();
+        gameModel.setUserProfileAlertView(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //ADD FULLSCREEN
@@ -48,6 +56,11 @@ public class UserProfileAlertView extends Dialog {
 
         TextView tv_userName = (TextView) findViewById(R.id.usernameProfile);
         tv_userName.setText(name);
+    }
+
+
+    public void getUserCardSuccessful(String result){
+        Log.d(TAG, result);
     }
 
 }
