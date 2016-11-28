@@ -47,28 +47,22 @@ public class UserProfileAlertView extends Dialog {
         //设置不显示对话框标题栏
         gameModel=GameModel.getInstance();
         gameModel.setUserProfileAlertView(this);
-
-        ArrayList<Card> myCards = gameModel.getUserCards();
-        for (int i = 0; i < myCards.size(); i++){
-
-
-
-        }
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //ADD FULLSCREEN
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
-
         //设置对话框显示哪个布局文件
         setContentView(R.layout.dialog_userprofile);
-        final GridView gridview=(GridView)findViewById(R.id.gridview);
-
-        gridview.setAdapter(new ImageAdapter(this));
-
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        final GridView gridview=(GridView)findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(getContext()));
+
+
+
+
+
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
         Button bt = (Button) findViewById(R.id.userProfileDialogCancel);
@@ -86,12 +80,12 @@ public class UserProfileAlertView extends Dialog {
 
     public class ImageAdapter extends BaseAdapter {
 
-        Context context;
-        public Integer[] myImageIds = {R.drawable.auto1, R.drawable.auto2, R.drawable.auto3, R.drawable.auto4,
-                R.drawable.auto5, R.drawable.bike, R.drawable.bike1};
+        private Context mcontext;
+        public Integer[] myImageIds = {R.drawable.card_ssr_spiderman, R.drawable.card_ssr_ca, R.drawable.card_ssr_dr, R.drawable.card_sr_blackwidow,
+                R.drawable.card_sr_thor, R.drawable.card_sr_wolverine, R.drawable.card_sr_deadpool};
 
-        public ImageAdapter(Context context) {
-            this.context = context;
+        public ImageAdapter(Context c) {
+            mcontext = c;
         }
 
         @Override
@@ -113,6 +107,7 @@ public class UserProfileAlertView extends Dialog {
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView iv;
             if (convertView == null) {
+                iv =new ImageView(mcontext);
                 iv.setImageResource(myImageIds[position]);
                 iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 iv.setLayoutParams(new GridView.LayoutParams(85, 85));
