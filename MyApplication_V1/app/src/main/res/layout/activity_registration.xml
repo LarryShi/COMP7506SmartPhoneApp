@@ -5,22 +5,30 @@
     android:background="@drawable/bg_registerpage">
 
     <LinearLayout
-        android:layout_width="@dimen/content_outerwidth"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/content_height"
         android:orientation="horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="0.160"
+            android:layout_height="match_parent" />
+
+
         <Button
             android:id="@+id/registerButton"
-            android:layout_width="@dimen/btn_side"
+            android:layout_width="0dp"
+            android:layout_weight="0.115"
             android:layout_height="@dimen/btn_side"
             android:background="@color/transparent"
             android:text="@string/testtext"
             android:layout_gravity="center_vertical"/>
 
         <RelativeLayout
-            android:layout_width="@dimen/content_innerwidth"
+            android:layout_width="0dp"
+            android:layout_weight="0.435"
             android:layout_height="@dimen/content_height"
             android:gravity="center"
             android:paddingStart="@dimen/register_padding_left"
@@ -116,11 +124,16 @@
 
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="@dimen/btn_side"
+            android:layout_weight="0.115"
+            android:layout_width="0dp"
             android:layout_height="@dimen/btn_side"
             android:background="@color/transparent"
             android:text="@string/testtext"
             android:layout_gravity="center_vertical"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="0.170"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
