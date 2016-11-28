@@ -37,29 +37,22 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/userfile_btn_marginEnd"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/userIcon"
-        android:layout_marginTop="@dimen/userfile_scroll_marginTop"
-        android:layout_marginBottom="@dimen/userfile_scroll_marginBottom"
-        android:layout_marginStart="@dimen/userfile_scroll_marginHorizontal"
-        android:layout_marginEnd="@dimen/userfile_scroll_marginHorizontal">
 
 
         <GridView
             android:id="@+id/gridview"
+            android:layout_below="@+id/userIcon"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/userfile_scroll_marginTop"
             android:layout_marginBottom="@dimen/userfile_scroll_marginBottom"
             android:layout_marginStart="@dimen/userfile_scroll_marginHorizontal"
             android:layout_marginEnd="@dimen/userfile_scroll_marginHorizontal"
-            android:columnWidth="90dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
+            android:columnWidth="400dp"
+            android:numColumns="3"
+            android:stretchMode="none"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
             android:layout_gravity="center"
 
 
@@ -67,7 +60,7 @@
           />
 
 
-    </ScrollView>
+
 
 
 </RelativeLayout>

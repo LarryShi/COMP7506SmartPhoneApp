@@ -1,6 +1,7 @@
 package mangoabliu.finalproject;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -76,8 +77,6 @@ public class MainGameActivity extends AppCompatActivity {
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         distance.setTypeface(typeFace);
 
-
-
         userProfile.setOnClickListener(new userProfileListener());
         loc1.setOnClickListener(new location1Listener());
         loc2.setOnClickListener(new location2Listener());
@@ -85,6 +84,7 @@ public class MainGameActivity extends AppCompatActivity {
         loc4.setOnClickListener(new location4Listener());
         loc5.setOnClickListener(new location5Listener());
         loc6.setOnClickListener(new location6Listener());
+        fight.setOnClickListener(new fightListener());
 
         String fromActivity = getIntent().getExtras().getString("FromActivity");
 
@@ -217,7 +217,8 @@ public class MainGameActivity extends AppCompatActivity {
     private class fightListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            Intent myIntent = new Intent(MainGameActivity.this, BattleActivity.class);
+            startActivity(myIntent);
         }
     }
 

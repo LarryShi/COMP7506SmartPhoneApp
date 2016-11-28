@@ -81,6 +81,12 @@ public class UserProfileAlertView extends Dialog {
     public class ImageAdapter extends BaseAdapter {
 
         private Context mcontext;
+
+        ArrayList<Card> myCards = gameModel.getUserCards();
+
+
+
+
         public Integer[] myImageIds = {R.drawable.card_ssr_spiderman, R.drawable.card_ssr_ca, R.drawable.card_ssr_dr, R.drawable.card_sr_blackwidow,
                 R.drawable.card_sr_thor, R.drawable.card_sr_wolverine, R.drawable.card_sr_deadpool};
 
@@ -109,8 +115,8 @@ public class UserProfileAlertView extends Dialog {
             if (convertView == null) {
                 iv =new ImageView(mcontext);
                 iv.setImageResource(myImageIds[position]);
-                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                iv.setLayoutParams(new GridView.LayoutParams(85, 85));
+                iv.setScaleType(ImageView.ScaleType.FIT_XY);
+                iv.setLayoutParams(new GridView.LayoutParams(400,500));
             } else {
                 iv = (ImageView) convertView;
             }

@@ -22,19 +22,21 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="landscape"></activity>
+
         <activity android:name=".RegistrationActivity"
             android:screenOrientation="landscape">
-
         </activity>
         
         <activity android:name=".MainGameActivity"
             android:screenOrientation="landscape">
-
         </activity>
 
         <activity android:name=".CardDropActivity"
             android:screenOrientation="landscape">
+        </activity>
 
+        <activity android:name=".BattleActivity"
+            android:screenOrientation="landscape">
         </activity>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -6,7 +6,7 @@
     <dimen name="userProfileDialog_Width">400dp</dimen>
 
     <!-- activity_menu -->
-    <dimen name="menu_text_paddingStart">50dp</dimen>
+    <dimen name="menu_text_paddingStart">0dp</dimen>
     <dimen name="menu_text_paddingBottom">15dp</dimen>
     <dimen name="menu_textsize">20sp</dimen>
 
@@ -58,7 +58,8 @@
 
 
 
-    <!-- activity_gamepage -->
+    <!-- activity_battle -->
+    <dimen name="battle_searching_textsize">30sp</dimen>
 
     <!-- activity_carddrop -->
     <dimen name="carddrop_icon_width">60dp</dimen>
