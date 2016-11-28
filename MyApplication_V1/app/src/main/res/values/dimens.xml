@@ -42,8 +42,8 @@
     <dimen name="carddrop_icon_marginStart">10dp</dimen>
     <dimen name="carddrop_btn_width">40dp</dimen>
     <dimen name="carddrop_btn_height">30dp</dimen>
-    <dimen name="carddrop_btn_marginTop">10dp</dimen>
-    <dimen name="carddrop_btn_marginEnd">10dp</dimen>
+    <dimen name="carddrop_btn_marginTop">20dp</dimen>
+    <dimen name="carddrop_btn_marginEnd">20dp</dimen>
     <dimen name="carddrop_cardlayout_width">130dp</dimen>
     <dimen name="carddrop_cardlayout_height">200dp</dimen>
 
