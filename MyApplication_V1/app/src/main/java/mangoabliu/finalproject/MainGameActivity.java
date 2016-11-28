@@ -362,17 +362,18 @@ public class MainGameActivity extends AppCompatActivity {
         try {
             JSONObject passedData = new JSONObject(data);
             int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
-            String userName = (String) passedData.getJSONObject("UserInfo").get("UserName");
+
+            userProfileName = (String) passedData.getJSONObject("UserInfo").get("UserName");
             walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
             int currentLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("CurrentLocationID"));
             int targetLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("TargetLocationID"));
             double currentPositionX = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionX"));
             double currentPositionY = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionY"));
             double[] currentPosition = new double[]{currentPositionX,currentPositionY};
-            myUser = new UserAccount(id,userName,walkedDistance,currentLocID,targetLocID,currentPosition);
+            myUser = new UserAccount(id,userProfileName,walkedDistance,currentLocID,targetLocID,currentPosition);
             gameModel.setUserAccount(myUser);
             distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
-            Log.i(TAG, "UserName = " + userName +" walkDistance = " + walkedDistance);
+            Log.i(TAG, "UserName = " + userProfileName +" walkDistance = " + walkedDistance);
             initiatePlanetLocation(passedData);
                /* for (int i = 0; i < gameModel.getPlanets().size(); i++)
                 {
