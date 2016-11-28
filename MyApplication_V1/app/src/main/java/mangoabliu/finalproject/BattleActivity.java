@@ -21,7 +21,7 @@ import android.widget.TextView;
 import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Model.BattleModel;
 import mangoabliu.finalproject.Model.GameModel;
-import mangoabliu.finalproject.R;
+
 /**
  * Created by Lyris on 29/11/16.
  */
@@ -35,7 +35,7 @@ public class BattleActivity extends AppCompatActivity {
     BattleModel battleModel;
     GameModel gameModel;
     Button btn_test,btn_card_choose_confirm,btn_exit;
-    RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down;
+    RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down,rl_battle_waiting_other_side;
     ImageView imageView_battle_waiting;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     private static final String TAG = "MyActivity";
@@ -74,12 +74,17 @@ public class BattleActivity extends AppCompatActivity {
         btn_card_choose_confirm=(Button)findViewById(R.id.btn_battle_choose_card_finished);
         rl_battle_waiting_down = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_down);
         rl_battle_waiting_up = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_up);
+        rl_battle_waiting_other_side=(RelativeLayout)findViewById(R.id.relativeLayout_battle_waiting_otherside);
         imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
         tv_searching = (TextView)findViewById(R.id.battle_searching_text);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
         myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);
         myCard3=(CardLayout)findViewById(R.id.card_battle_mycard_3);
+
+        otherCard1=(CardLayout)findViewById(R.id.card_battle_otherside_card_1);
+        otherCard2=(CardLayout)findViewById(R.id.card_battle_otherside_card_2);
+        otherCard3=(CardLayout)findViewById(R.id.card_battle_otherside_card_3);
 
         myCard1.setOnClickListener(new clickListener_myCard(1));
         myCard2.setOnClickListener(new clickListener_myCard(2));
@@ -110,13 +115,29 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
 
+        btn_card_choose_confirm.setOnClickListener(new clickListener_Confirm());
+
         Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
         animSearch.setDuration(1500); //You can manage the blinking time with this parameter
         animSearch.setStartOffset(20);
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
+    }
 
+    public void playerWin(){
+
+    }
+
+    public void OtherWin(){
+
+    }
+
+    public void playerAttackOther(int hurt){
+
+    }
+
+    public void setTurn(String userName){
 
     }
 
@@ -126,21 +147,24 @@ public class BattleActivity extends AppCompatActivity {
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                 TranslateAnimation.RELATIVE_TO_SELF, 1);
-        animationWiatingDown.setDuration(500);
+        animationWiatingDown.setDuration(1000);
         animationWiatingDown.setFillAfter(true);
         Animation animationWaitingUp = new TranslateAnimation(
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                 TranslateAnimation.RELATIVE_TO_SELF, -1);
-        animationWaitingUp.setDuration(500);
+        animationWaitingUp.setDuration(1000);
         animationWaitingUp.setFillAfter(true);
+
         rl_battle_waiting_down.startAnimation(animationWiatingDown);
         rl_battle_waiting_up.startAnimation(animationWaitingUp);
         imageView_battle_waiting.clearAnimation();
+        tv_searching.clearAnimation();
         imageView_battle_waiting.setVisibility(View.INVISIBLE);
         rl_battle_waiting_down.setVisibility(View.INVISIBLE);
         rl_battle_waiting_up.setVisibility(View.INVISIBLE);
+        tv_searching.setVisibility(View.INVISIBLE);
         int_state=1;
     }
 
@@ -158,6 +182,7 @@ public class BattleActivity extends AppCompatActivity {
     }
     //请不要改这个...
     public void updateMyCard(int CardID,int index){
+
         if(index==1) {
             myCard1.setCardBack(CardID);
             myCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
@@ -180,8 +205,9 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    //请不要改这个...
+    //请不要修改范围外的代码
     public void updateOtherSideCard(int CardID,int index){
+
         if(index==1) {
             otherCard1.setCardBack(CardID);
             otherCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
@@ -190,17 +216,28 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         if(index==2){
-            myCard2.setCardBack(CardID);
-            myCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            myCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            myCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            otherCard2.setCardBack(CardID);
+            otherCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            otherCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            otherCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
         }
 
         if(index==3){
-            myCard3.setCardBack(CardID);
-            myCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            myCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            myCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            otherCard3.setCardBack(CardID);
+            otherCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            otherCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            otherCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            /*可修改范围*/
+            Animation animationWaitingUp = new TranslateAnimation(
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                    TranslateAnimation.RELATIVE_TO_SELF, -1);
+            animationWaitingUp.setDuration(1000);
+            animationWaitingUp.setFillAfter(true);
+            rl_battle_waiting_other_side.startAnimation(animationWaitingUp);
+            /*可修改范围*/
+            int_state=3;
         }
     }
 
@@ -211,6 +248,23 @@ public class BattleActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(int_state==1)
                 battleModel.playerCardPickConfirm();
+            int_state=2;
+            updateOtherSideCard(1,3);
+        }
+    }
+
+    //请不要改这个...
+    private class clickListener_otherCard implements View.OnClickListener {
+        int index;//从左往右第几张牌
+
+        public clickListener_otherCard(int id){
+            this.index=id;
+        }
+
+        public void onClick(View v) {
+            if(int_state==1)
+                startPickUpCard(index);
+
         }
     }
 
