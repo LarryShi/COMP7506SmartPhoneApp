@@ -1,4 +1,4 @@
-package mangoabliu.finalproject;
+package mangoabliu.finalproject.Animation;
 
 /**
  * Created by Byanka on 26/11/2016.

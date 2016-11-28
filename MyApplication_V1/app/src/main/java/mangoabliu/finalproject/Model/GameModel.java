@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -17,11 +15,7 @@ import java.util.LinkedList;
 
 import mangoabliu.finalproject.LoginActivity;
 import mangoabliu.finalproject.MainGameActivity;
-import mangoabliu.finalproject.Planet;
 import mangoabliu.finalproject.RegistrationActivity;
-import mangoabliu.finalproject.UserAccount;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by SHI Zhongqi on 2016-11-16.

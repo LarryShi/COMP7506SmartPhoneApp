@@ -1,4 +1,4 @@
-package mangoabliu.finalproject;
+package mangoabliu.finalproject.Model;
 
 /**
  * Created by herenjie on 2016/11/14.

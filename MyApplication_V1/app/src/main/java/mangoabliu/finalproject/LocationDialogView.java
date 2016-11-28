@@ -17,10 +17,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.Random;
 
 import mangoabliu.finalproject.Model.GameModel;
-import mangoabliu.finalproject.Model.StepService;
 
 import static android.content.ContentValues.TAG;
-import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOptions;
+import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 /**
  * Created by 10836 on 2016-11-16.

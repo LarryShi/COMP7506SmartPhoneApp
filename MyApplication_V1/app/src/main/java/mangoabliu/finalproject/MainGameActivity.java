@@ -20,15 +20,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
+import mangoabliu.finalproject.Model.UserAccount;
 
 import static android.content.ContentValues.TAG;
 
 /**
  * Created by 10836 on 2016-11-16.
  */
-
-
 /*
 * planet1开始坐标(350,440)           startPoint(460,510),endPoint(615,618)
 * planet2开始坐标(680,660)           startPoint(720,575),endPoint(795,284)
