@@ -32,7 +32,7 @@
             android:paddingStart="@dimen/login_padding_left"
             android:paddingEnd="@dimen/login_padding_right">
 
-            <TextView
+            <mangoabliu.finalproject.Layout.FontTextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:padding="@dimen/login_text_padding"
                 android:layout_alignParentStart="true" />
 
-            <TextView
+            <mangoabliu.finalproject.Layout.FontTextView
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
