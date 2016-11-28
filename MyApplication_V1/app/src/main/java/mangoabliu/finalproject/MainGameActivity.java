@@ -87,8 +87,8 @@ public class MainGameActivity extends AppCompatActivity {
         loc6.setOnClickListener(new location6Listener());
 
         String fromActivity = getIntent().getExtras().getString("FromActivity");
-        if (fromActivity.equals("MainActivity"))
-            initiateGame();
+
+        initiateGame();
 
         RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.myLayout);
         thumbnail = new ImageView(MainGameActivity.this);
@@ -220,9 +220,6 @@ public class MainGameActivity extends AppCompatActivity {
 
         }
     }
-
-
-
 
     @Override
     public void onStart() {

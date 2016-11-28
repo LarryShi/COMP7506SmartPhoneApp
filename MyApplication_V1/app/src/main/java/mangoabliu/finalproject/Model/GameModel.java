@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuAdapter;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -13,8 +14,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
+import mangoabliu.finalproject.CardDropActivity;
 import mangoabliu.finalproject.LoginActivity;
 import mangoabliu.finalproject.MainGameActivity;
+import mangoabliu.finalproject.MenuActivity;
 import mangoabliu.finalproject.RegistrationActivity;
 import mangoabliu.finalproject.UserProfileAlertView;
 
@@ -26,13 +29,15 @@ public class GameModel {
     private LinkedList<AppCompatActivity> activityLinkedList = new LinkedList<>();
     private static GameModel instance;
     private final String String_base_url="http://i.cs.hku.hk/~zqshi/ci/index.php/";
+    private MenuActivity menuActivity;
     private LoginActivity loginActivity;
     private RegistrationActivity registrationActivity;
     private MainGameActivity mainGameActivity;
+    private CardDropActivity cardDropActivity;
     private UserProfileAlertView userProfileAlertView;
+
     protected final static String str_login_function="login";
     protected final static String str_registration_function="registration";
-
     protected final static String str_updateUserStep_function = "updateUserStep";
     protected final static String str_updateTargetLocation_function = "updateTargetLocation";
     protected final static String str_updateUserCardRelation_function = "updateUserCardRelation";
@@ -163,6 +168,22 @@ public class GameModel {
 
         this.mainGameActivity.updateDistance(animEndX,animEndY);
 
+    }
+
+    public void setMenuActivity(MenuActivity menuActivity){
+        this.menuActivity=menuActivity;
+    }
+
+    public MenuActivity getMenuActivity(){
+        return this.menuActivity;
+    }
+
+    public void setCardDropActivity(CardDropActivity cardDropActivity){
+        this.cardDropActivity=cardDropActivity;
+    }
+
+    public CardDropActivity getCardDropActivity(){
+        return this.cardDropActivity;
     }
 
     //Main Game Related

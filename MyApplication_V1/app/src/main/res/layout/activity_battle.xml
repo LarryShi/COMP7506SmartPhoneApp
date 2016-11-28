@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:fitsSystemWindows="true"
+    >
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView_battle_turn" />
+
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/loading"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView_battle_loading" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout_battle_waiting_bg_down"
+        android:background="@drawable/battle_waiting_bg_down"
+        android:layout_below="@+id/relativeLayout_battle_waiting_bg_up"
+        android:layout_alignParentStart="true">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout_battle_waiting_bg_up"
+        android:background="@drawable/battle_waiting_bg_up"
+        android:layout_above="@+id/textView_battle_turn"
+        android:layout_alignParentStart="true">
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

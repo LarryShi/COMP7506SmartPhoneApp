@@ -13,6 +13,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 
 import mangoabliu.finalproject.Layout.FontTextView;
+import mangoabliu.finalproject.Model.GameModel;
 
 /**
  * Created by LyrisXu on 2016-11-26.
@@ -22,7 +23,7 @@ import mangoabliu.finalproject.Layout.FontTextView;
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
     Button btn_Switch;
-
+    GameModel gameModel;
     FontTextView tv_Menu;
     //    Point size;
 //    @TargetApi(16)
@@ -33,6 +34,10 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        gameModel= GameModel.getInstance();
+        gameModel.addActivity(this);
+        gameModel.setMenuActivity(this);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

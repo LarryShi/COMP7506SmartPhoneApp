@@ -256,20 +256,19 @@ class Game_model extends CI_Model {
 	        $this->db->select('*');
 	        $this->db->from('Cards');
 	        $this->db->where('CardID',$query_result[0]['CardID3']);
-
-	        $Card4=$this->db->get()->row_array();
+	        $Card3=$this->db->get()->row_array();
 	        $this->db->select('*');
 	        $this->db->from('Cards');
 	        $this->db->where('CardID',$query_result[1]['CardID1']);
-	        $Card5=$this->db->get()->row_array();
+	        $Card4=$this->db->get()->row_array();
 	        $this->db->select('*');
 	        $this->db->from('Cards');
 	        $this->db->where('CardID',$query_result[1]['CardID2']);
-	        $Card6=$this->db->get()->row_array();
+	        $Card5=$this->db->get()->row_array();
 	        $this->db->select('*');
 	        $this->db->from('Cards');
 	        $this->db->where('CardID',$query_result[1]['CardID3']);
-	        $Card3=$this->db->get()->row_array();
+	        $Card6=$this->db->get()->row_array();
 
 
      		$data = array(
@@ -279,15 +278,15 @@ class Game_model extends CI_Model {
 					        'Player1Card1ID' => $query_result[0]['CardID1'],
 					        'Player1Card1HP' => $Card1['CardHP'],
 					        'Player1Card2ID' => $query_result[0]['CardID2'],
-					        'Player1Card2HP' => $Card1['CardHP'],
+					        'Player1Card2HP' => $Card2['CardHP'],
 					        'Player1Card3ID' => $query_result[0]['CardID3'],
-					        'Player1Card3HP' => $Card1['CardHP'],
+					        'Player1Card3HP' => $Card3['CardHP'],
 					        'Player2Card1ID' => $query_result[1]['CardID1'],
-					        'Player2Card1HP' => $Card1['CardHP'],
+					        'Player2Card1HP' => $Card4['CardHP'],
 					        'Player2Card2ID' => $query_result[1]['CardID2'],
-					        'Player2Card2HP' => $Card1['CardHP'],
+					        'Player2Card2HP' => $Card5['CardHP'],
 					        'Player2Card3ID' => $query_result[1]['CardID3'],
-					        'Player2Card3HP' => $Card1['CardHP'],
+					        'Player2Card3HP' => $Card6['CardHP'],
 					        'FromNum' => 0,
 					        'ToNum' => 0,     
 					);
@@ -297,6 +296,14 @@ class Game_model extends CI_Model {
      	
 			$result['ret'] = 200;
         	$result['RoomInfo']=$query_result;
+        	$result['CardInfo']['Card1']=$Card1;
+        	$result['CardInfo']['Card2']=$Card2;
+        	$result['CardInfo']['Card3']=$Card3;
+        	$result['CardInfo']['Card4']=$Card4;
+        	$result['CardInfo']['Card5']=$Card5;
+        	$result['CardInfo']['Card6']=$Card6;
+
+
         	return $result;
         }
         else{

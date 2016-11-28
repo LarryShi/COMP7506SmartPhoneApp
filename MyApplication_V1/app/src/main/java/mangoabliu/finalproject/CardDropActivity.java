@@ -53,6 +53,7 @@ public class CardDropActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         gameModel=GameModel.getInstance();
         gameModel.addActivity(this);
+        gameModel.setCardDropActivity(this);
         // FULLSCREEN  /LYRIS 11.27
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -86,10 +87,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class ReturnMain_Listener implements View.OnClickListener {
 
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.putExtra("FromActivity","CardDropActivity");
-            intent.setClass(CardDropActivity.this, MainGameActivity.class);
-            startActivity(intent);
+            finish();
         }
     }
 
@@ -145,10 +143,9 @@ public class CardDropActivity extends AppCompatActivity  {
             rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
             CardBackL.setEnabled(false);
             CardBackR.setEnabled(false);
-
-
         }
     }
+
 
     private int GeneDropCardID(){
         Random random=new Random();
