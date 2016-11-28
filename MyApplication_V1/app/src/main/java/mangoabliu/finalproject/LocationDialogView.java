@@ -10,13 +10,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
 
 import static android.content.ContentValues.TAG;
@@ -26,13 +29,15 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
  * Created by 10836 on 2016-11-16.
  */
 
-// Add PossibleCard by Lyrisxu  11-27
+// Add PossibleCard, LocName by Lyrisxu  11-28
 
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
     int clickedLoc;
     ImageView image_pCard;
+    TextView tv_locName;
+    String clickedLocName;
 
 
     //Add Style /Lyris 11-26
@@ -55,10 +60,13 @@ public class LocationDialogView extends Dialog {
         Button start = (Button) findViewById(R.id.locationGo);
         Button drop = (Button) findViewById(R.id.dropCard);
 
-        //PossibleCardDisplay
+        //PossibleCardDisplay  /Lyris
         image_pCard =(ImageView) findViewById(R.id.locationImage);
         int pCardID = possibleCardGenerator();
         initCardData(pCardID);
+
+        //Display LocationName  /Lyris
+        tv_locName = (TextView) findViewById(R.id.locationDialogTitle);
 
         gameModel = GameModel.getInstance();
 
@@ -91,6 +99,8 @@ public class LocationDialogView extends Dialog {
             start.setEnabled(true);
         }
 
+        initLocName();
+
     }
 
     //PossibleCardGenerator - Random
@@ -113,6 +123,16 @@ public class LocationDialogView extends Dialog {
         String imageUriFront = "drawable://" + pCardID;
         ImageLoader.getInstance().displayImage(imageUriFront, image_pCard, getDisplayImageOptions());
     }
+
+    //Init Location Name
+    private  void initLocName(){
+        ArrayList<Planet> planets = gameModel.getPlanets();
+        Planet clickedPlanet = planets.get(clickedLoc-1);
+        clickedLocName = clickedPlanet.getPlanetName();
+        tv_locName.setText(clickedLocName);
+//        tv_locName.setTypeface(typeFace);
+    }
+
 
 
     private class drop_DropCardListener implements View.OnClickListener {
