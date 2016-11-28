@@ -1,4 +1,4 @@
-package mangoabliu.finalproject;
+package mangoabliu.finalproject.Layout;
 
 import android.content.Context;
 import android.graphics.Typeface;
