@@ -11,6 +11,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import mangoabliu.finalproject.MainGameActivity;
+
 /**
  * Created by herenjie on 2016/11/22.
  */
@@ -64,7 +66,37 @@ public class StepService extends Service {
 
                         stepCount++;
                         sendStepCounter++;
-                        //Log.d(TAG, String.valueOf(totalStepsTaken));
+
+                        if (gameModel.getUserAccount().getWalkDistance() + stepCount >= gameModel.getTotalSteps()){
+                            stopService(new Intent(gameModel.getMainGameActivity(),StepService.class));
+
+                            gameModel.getUserAccount().setCurrentLocId(gameModel.getUserAccount().getTargetLocId());
+
+                            gameModel.getUserAccount().setTargetLocId(0);
+
+                            gameModel.getUserAccount().setCurrentLocCoordinate(new double[]{
+                                    gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX(),
+                                    gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY()
+                            });
+
+                            gameModel.getUserAccount().setWalkDistance(0);
+
+                            gameModel.updateUserStep(gameModel.getUserAccount().getUserId(),0);
+
+                            gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),0);
+                            gameModel.updateCurrentLocation(gameModel.getUserAccount().getUserId(),
+                                    gameModel.getUserAccount().getTargetLocId());
+                            gameModel.updateCurrentPosition(gameModel.getUserAccount().getUserId(),
+                                    new double[]{gameModel.getUserAccount().getCurrentLocCoordinate()[0],
+                                            gameModel.getUserAccount().getCurrentLocCoordinate()[1]});
+                            gameModel.mainDisplayDistance();
+
+                            gameModel.mainUpdateUFO((float)gameModel.getUserAccount().getCurrentLocCoordinate()[0],
+                                    (float) gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
+                            stepCount = 0;
+                            sendStepCounter = 0;
+                        }
+
                         if (stepCount == 1) {
 
                             gameModel.updateMainGameStep(stepCount);

@@ -156,10 +156,12 @@ public class LocationDialogView extends Dialog {
 
         @Override
         public void onClick(View v) {
-            v.getContext().startService(new Intent(v.getContext(),StepService.class));
+
+            gameModel.getUserAccount().setTargetLocId(clickedLoc);
             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
                     clickedLoc);
-            gameModel.getUserAccount().setTargetLocId(clickedLoc);
+            gameModel.setTotalSteps(gameModel.getDistances()[gameModel.getWalkingLine()-1]);
+            gameModel.getMainGameActivity().startService(new Intent(gameModel.getMainGameActivity(),StepService.class));
             dismiss();
         }
 

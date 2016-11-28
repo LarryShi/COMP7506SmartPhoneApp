@@ -47,7 +47,21 @@ public class GameModel {
 
     private UserAccount myUser;
 
+    private int totalSteps = 0;
+
     private GameModel() {
+    }
+
+    public int getTotalSteps(){
+        return totalSteps;
+    }
+
+    public void setTotalSteps(int steps){
+        totalSteps = steps;
+    }
+
+    public MainGameActivity getMainGameActivity(){
+        return mainGameActivity;
     }
 
     public int[] getDistances(){
@@ -112,8 +126,43 @@ public class GameModel {
 
     }
 
+    public void mainDisplayDistance(){
+        mainGameActivity.displayDistance();
+    }
+
+    public void mainUpdateUFO(float x,float y){
+        mainGameActivity.updateUFO(x,y);
+    }
+
     public void updateMainGameStep(int step){
-        this.mainGameActivity.updateDistance(step);
+
+        double startLocX = planets.get(myUser.getCurrentLocId()-1).getPlanetX();
+        double startLocY = planets.get(myUser.getCurrentLocId()-1).getPlanetY();
+
+
+        double destLocX = planets.get(myUser.getTargetLocId()-1).getPlanetX();
+        double destLocY = planets.get(myUser.getTargetLocId()-1).getPlanetY();
+
+        double currentLocX = myUser.getCurrentLocCoordinate()[0];
+        double currentLocY = myUser.getCurrentLocCoordinate()[1];
+        double nextLocX = 0;
+        double nextLocY = 0;
+
+
+        int walkedDis = myUser.getWalkDistance();
+
+        myUser.setWalkDistance(step + walkedDis);
+
+
+        nextLocX = currentLocX + (destLocX-startLocX)/totalSteps;
+        nextLocY = currentLocY + (destLocY-startLocY)/totalSteps;
+        myUser.setCurrentLocCoordinate(new double[]{ nextLocX, nextLocY});
+
+        float animEndX = (float) nextLocX;
+        float animEndY = (float) nextLocY;
+
+        this.mainGameActivity.updateDistance(animEndX,animEndY);
+
     }
 
     //Main Game Related
