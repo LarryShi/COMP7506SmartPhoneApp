@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.Random;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.StepService;
 
+import static android.content.ContentValues.TAG;
 import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 /**
@@ -60,12 +62,6 @@ public class LocationDialogView extends Dialog {
 
         gameModel = GameModel.getInstance();
 
-        if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc)
-        {
-            start.setVisibility(View.GONE);
-            start.setEnabled(false);
-        }
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +72,24 @@ public class LocationDialogView extends Dialog {
         start.setOnClickListener(new startTripListener());
 
         drop.setOnClickListener(new drop_DropCardListener());
+
+
+        start.setVisibility(View.INVISIBLE);
+        start.setEnabled(false);
+
+        gameModel = GameModel.getInstance();
+        int currentLocID = gameModel.getUserAccount().getCurrentLocId();
+        Log.i(TAG, currentLocID+","+clickedLoc);
+        if ((currentLocID == 1 && clickedLoc == 2) ||
+                (currentLocID == 2 && (clickedLoc == 1 || clickedLoc == 3 || clickedLoc ==4)) ||
+                (currentLocID == 3 && (clickedLoc == 2 || clickedLoc == 5))||
+                (currentLocID == 4 && (clickedLoc == 2 || clickedLoc == 5))||
+                (currentLocID == 5 && (clickedLoc == 3 || clickedLoc == 4 || clickedLoc == 6))||
+                (currentLocID == 6 && (clickedLoc == 5))) {
+
+            start.setVisibility(View.VISIBLE);
+            start.setEnabled(true);
+        }
 
     }
 
@@ -111,15 +125,14 @@ public class LocationDialogView extends Dialog {
 
         }
     }
-
     private class startTripListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
-            v.getContext().startService(new Intent(v.getContext(),StepService.class));
-            //v.getContext().stopService(new Intent(v.getContext(),StepService.class));
+            //v.getContext().startService(new Intent(v.getContext(),StepService.class));
             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
                     clickedLoc);
+            gameModel.getUserAccount().setTargetLocId(clickedLoc);
             dismiss();
         }
 

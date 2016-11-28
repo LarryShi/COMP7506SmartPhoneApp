@@ -22,9 +22,6 @@ public class StepService extends Service {
     private int stepCount;
     private int sendStepCounter;
 
-
-
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         gameModel=GameModel.getInstance();
@@ -75,7 +72,7 @@ public class StepService extends Service {
 
                         }
                         if (sendStepCounter == 10){
-                            gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),
+                            gameModel.updateUserStep(gameModel.getUserAccount().getUserId(),
                                     gameModel.getUserAccount().getWalkDistance());
                             sendStepCounter = 0;
                         }

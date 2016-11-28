@@ -92,9 +92,14 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         if(str_function.equals(GameModel.str_registration_function))
             gameModel.registration_finished(result);
         if (str_function.equals(GameModel.str_updateUserStep_function))
-            gameModel.sendUserStepFinished(result);
+            gameModel.updateUserStepFinished(result);
         if (str_function.equals(GameModel.str_updateTargetLocation_function))
             gameModel.updateTargetLocationFinished(result);
+        if (str_function.equals(GameModel.str_updateCurrentLocation_function))
+            gameModel.updateCurrentLocationFinished(result);
+        if (str_function.equals(GameModel.str_updateCurrentPosition_function))
+            gameModel.updateCurrentPositionFinished(result);
+
     }
               
     //onCancelled方法用于在取消执行中的任务时更改UI

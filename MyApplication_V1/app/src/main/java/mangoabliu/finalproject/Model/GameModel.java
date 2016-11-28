@@ -40,13 +40,20 @@ public class GameModel {
     protected final static String str_updateUserStep_function = "updateUserStep";
     protected final static String str_updateTargetLocation_function = "updateTargetLocation";
     protected final static String str_updateUserCardRelation_function = "updateUserCardRelation";
+    protected final static String str_updateCurrentLocation_function = "updateCurrentLocation";
+    protected final static String str_updateCurrentPosition_function = "updateCurrentPosition";
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
 
+    int[] distances = new int[]{5,8,5,10,5,8};
 
     private UserAccount myUser;
 
     private GameModel() {
+    }
+
+    public int[] getDistances(){
+        return distances;
     }
 
     public void setUserAccount(UserAccount user){
@@ -144,7 +151,34 @@ public class GameModel {
 
     }
 
-    public void sendUserStep(int str_UserId,int walkDistance){
+    public void updateUserCardRelation(int str_UserId, int str_CardID){
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("UserID",str_UserId);
+            jsonObject.put("CardID",str_CardID);
+
+            serverPHPPostConnection(getUpdateUserCardRelationURL(),jsonObject.toString(),
+                    str_updateUserCardRelation_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserCardRelationFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.updateUserCardRelationSuccessful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserStep(int str_UserId,int walkDistance){
         try {
             JSONObject jsonObject = new JSONObject();
 
@@ -157,7 +191,7 @@ public class GameModel {
         }
     }
 
-    public void sendUserStepFinished(String str_result){
+    public void updateUserStepFinished(String str_result){
         try {
             JSONObject jsonObj = new JSONObject(str_result);
             if((Integer)jsonObj.get("code")==0) {
@@ -198,25 +232,25 @@ public class GameModel {
         }
     }
 
-    public void updateUserCardRelation(int str_UserId, int str_CardID){
+    public void updateCurrentLocation(int str_UserId, int currentLocation){
         try {
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("UserID",str_UserId);
-            jsonObject.put("CardID",str_CardID);
+            jsonObject.put("CurrentLocationID",currentLocation);
 
-            serverPHPPostConnection(getUpdateUserCardRelationURL(),jsonObject.toString(),
-                    str_updateUserCardRelation_function);
+            serverPHPPostConnection(getUpdateCurrentLocationURL(),jsonObject.toString(),
+                    str_updateCurrentLocation_function);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateUserCardRelationFinished(String str_result){
+    public void updateCurrentLocationFinished(String str_result){
         try {
             JSONObject jsonObj = new JSONObject(str_result);
             if((Integer)jsonObj.get("code")==0) {
-                mainGameActivity.updateUserCardRelationSuccessful(jsonObj.toString());
+                mainGameActivity.updateCurrentLocationSuccessful(jsonObj.toString());
             }
             else
                 mainGameActivity.errorMessage((String)jsonObj.get("message"));
@@ -225,8 +259,31 @@ public class GameModel {
         }
     }
 
+    public void updateCurrentPosition(int str_UserId, double[] currentLocation){
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserID",str_UserId);
+            jsonObject.put("CurrentPositionX",currentLocation[0]);
+            jsonObject.put("CurrentPositionY",currentLocation[1]);
+            serverPHPPostConnection(getUpdateCurrentPositionURL(),jsonObject.toString(),
+                    str_updateCurrentPosition_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-
+    public void updateCurrentPositionFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.updateCurrentPositionSuccessful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
@@ -256,6 +313,14 @@ public class GameModel {
     public String getUpdateUserCardRelationURL(){
         return String_base_url + "Server/updateUserCardRelationM";
     }
+
+    public String getUpdateCurrentLocationURL(){
+        return String_base_url + "Server/updateCurrentLocationIDM";
+    }
+
+    public String getUpdateCurrentPositionURL(){
+        return String_base_url + "Server/updateCurrentPositionM";
+    }
     //HTTP Request Related End
 
     public void addActivity(AppCompatActivity activity){
@@ -265,10 +330,11 @@ public class GameModel {
 
 
     public void finshAllActivities() {
+        updateUserStep(myUser.getUserId(),myUser.getWalkDistance());
+        updateCurrentPosition(myUser.getUserId(), myUser.getCurrentLocCoordinate());
         for (AppCompatActivity activity : activityLinkedList) {
             activity.finish();
         }
-        sendUserStep(myUser.getUserId(),myUser.getWalkDistance());
     }
 
 
@@ -296,5 +362,27 @@ public class GameModel {
         return false;
     }
 
+    public int getWalkingLine(){
+        if ((myUser.getCurrentLocId() == 1 && myUser.getTargetLocId() == 2)
+                || (myUser.getCurrentLocId() == 2 && myUser.getTargetLocId() == 1))
+            return 1;
+        else if ((myUser.getCurrentLocId() == 2 && myUser.getTargetLocId() == 3)
+                || (myUser.getCurrentLocId() == 3 && myUser.getTargetLocId() == 2))
+            return 2;
+        else if ((myUser.getCurrentLocId() == 2 && myUser.getTargetLocId() == 4)
+                || (myUser.getCurrentLocId() == 4 && myUser.getTargetLocId() == 2))
+            return 3;
+        else if ((myUser.getCurrentLocId() == 3 && myUser.getTargetLocId() == 5)
+                || (myUser.getCurrentLocId() == 5 && myUser.getTargetLocId() == 3))
+            return 4;
+        else if ((myUser.getCurrentLocId() == 4 && myUser.getTargetLocId() == 5)
+                || (myUser.getCurrentLocId() == 5 && myUser.getTargetLocId() == 4))
+            return 5;
+        else if ((myUser.getCurrentLocId() == 5 && myUser.getTargetLocId() == 6)
+                || (myUser.getCurrentLocId() == 6 && myUser.getTargetLocId() == 5))
+            return 6;
+        else
+            return 0;
+    }
 
 }
