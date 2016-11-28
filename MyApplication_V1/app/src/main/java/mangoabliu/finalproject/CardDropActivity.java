@@ -31,6 +31,7 @@ import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOpt
 public class CardDropActivity extends AppCompatActivity  {
 
     GameModel gameModel;
+    UserAccount myUser;
     private RelativeLayout CardRootM;
     private ImageView CardBackM;
     private ImageView CardFrontM;
@@ -46,6 +47,8 @@ public class CardDropActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gameModel=GameModel.getInstance();
+        gameModel.addActivity(this);
         // FULLSCREEN  /LYRIS 11.27
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -145,8 +148,8 @@ public class CardDropActivity extends AppCompatActivity  {
     private int GeneDropCardID(){
         Random random=new Random();
         int DropOneCard =random.nextInt(18);
-
-    //    gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),DropOneCard);
+        int CardID = DropOneCard+1;
+        gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),CardID);
         Resources res = getResources();
         String[] CardsName = res.getStringArray(R.array.cards_name);
         Context context = CardBackM.getContext();
@@ -164,7 +167,7 @@ public class CardDropActivity extends AppCompatActivity  {
         ImageLoader imageLoader;
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        String imageUri = "drawable://" + R.drawable.grey_bg;
+        String imageUri = "drawable://" + R.drawable.card_back;
         ImageLoader.getInstance().displayImage(imageUri, CardBackM, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUri, CardBackR, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUri, CardBackL, getDisplayImageOptions());

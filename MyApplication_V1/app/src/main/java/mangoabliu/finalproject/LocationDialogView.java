@@ -3,23 +3,34 @@ package mangoabliu.finalproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.util.Random;
 
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.StepService;
+
+import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 /**
  * Created by 10836 on 2016-11-16.
  */
 
+// Add PossibleCard by Lyrisxu  11-27
 
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
     int clickedLoc;
+    ImageView image_pCard;
 
 
     //Add Style /Lyris 11-26
@@ -42,6 +53,11 @@ public class LocationDialogView extends Dialog {
         Button start = (Button) findViewById(R.id.locationGo);
         Button drop = (Button) findViewById(R.id.dropCard);
 
+        //PossibleCardDisplay
+        image_pCard =(ImageView) findViewById(R.id.locationImage);
+        int pCardID = possibleCardGenerator();
+        initCardData(pCardID);
+
         gameModel = GameModel.getInstance();
 
         if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc)
@@ -59,9 +75,31 @@ public class LocationDialogView extends Dialog {
 
         start.setOnClickListener(new startTripListener());
 
-
         drop.setOnClickListener(new drop_DropCardListener());
+
     }
+
+    //PossibleCardGenerator - Random
+    private int possibleCardGenerator(){
+        Random rand = new Random();
+        int pOneCard = rand.nextInt(18);
+        Resources res = this.getContext().getResources();
+        String[] CardsName = res.getStringArray(R.array.cards_name);
+        Context context = image_pCard.getContext();
+        int pCardID = context.getResources().getIdentifier(CardsName[pOneCard], "drawable", context.getPackageName());
+        return pCardID;
+    }
+
+    //Init Card
+    private void initCardData(int pCardID){
+
+        ImageLoader imageLoader;
+        imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
+        String imageUriFront = "drawable://" + pCardID;
+        ImageLoader.getInstance().displayImage(imageUriFront, image_pCard, getDisplayImageOptions());
+    }
+
 
     private class drop_DropCardListener implements View.OnClickListener {
 
@@ -86,6 +124,7 @@ public class LocationDialogView extends Dialog {
         }
 
     }
+
 
 }
 

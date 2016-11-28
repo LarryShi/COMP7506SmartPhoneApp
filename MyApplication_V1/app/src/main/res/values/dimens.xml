@@ -50,8 +50,13 @@
 
     <!-- dialog_location -->
     <dimen name="location_side">300dp</dimen>
+    <dimen name="location_inner_width">200dp</dimen>
+    <dimen name="location_inner_height">120dp</dimen>
+    <dimen name="location_inner_padding">10dp</dimen>
     <dimen name="location_btn_go">60dp</dimen>
     <dimen name="location_btn_margin">15dp</dimen>
+    <dimen name="location_img_width">100dp</dimen>
+    <dimen name="location_img_height">120dp</dimen>
     <dimen name="location_text">20sp</dimen>
     <dimen name="location_text_width">200dp</dimen>
     <dimen name="location_text_height">40dp</dimen>

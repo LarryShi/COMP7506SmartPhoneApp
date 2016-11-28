@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by herenjie on 2016/11/16.
@@ -16,8 +17,11 @@ import android.widget.Button;
 public class UserProfileAlertView extends Dialog {
 
     //Add Style_transparent
-    protected UserProfileAlertView(Context context,int style){
+    String name;
+
+    protected UserProfileAlertView(Context context,int style,String username){
         super(context,style);
+        name=username;
     }
 
     @Override
@@ -40,7 +44,10 @@ public class UserProfileAlertView extends Dialog {
                 dismiss();
             }
         });
-    }
 
+
+        TextView tv_userName = (TextView) findViewById(R.id.usernameProfile);
+        tv_userName.setText(name);
+    }
 
 }

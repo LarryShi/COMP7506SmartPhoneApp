@@ -51,6 +51,8 @@ public class MainGameActivity extends AppCompatActivity {
     int stepCount;
     int sendStepCounter;
 
+    String userProfileName;
+
 
 
     @Override
@@ -196,7 +198,7 @@ public class MainGameActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent);
+            UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent,userProfileName);
             dialog.show();
 
         }
@@ -302,6 +304,7 @@ public class MainGameActivity extends AppCompatActivity {
                 JSONObject passedData = new JSONObject(data);
                 int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
                 String userName = (String) passedData.getJSONObject("UserInfo").get("UserName");
+                userProfileName = (String) passedData.getJSONObject("UserInfo").get("UserName");
                 walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
                 int currentLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("CurrentLocationID"));
                 int targetLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("TargetLocationID"));
