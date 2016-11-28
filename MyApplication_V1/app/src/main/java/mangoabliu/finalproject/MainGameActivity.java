@@ -1,7 +1,7 @@
 package mangoabliu.finalproject;
 
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +22,6 @@ import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
-import mangoabliu.finalproject.Model.StepService;
 import mangoabliu.finalproject.Model.UserAccount;
 
 import static android.content.ContentValues.TAG;
@@ -74,6 +73,8 @@ public class MainGameActivity extends AppCompatActivity {
         fight = (Button) findViewById(R.id.fight);
 
         distance = (FontTextView) findViewById(R.id.distance);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
+        distance.setTypeface(typeFace);
 
         userProfile.setOnClickListener(new userProfileListener());
         loc1.setOnClickListener(new location1Listener());
