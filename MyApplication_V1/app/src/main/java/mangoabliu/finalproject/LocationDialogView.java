@@ -107,6 +107,9 @@ public class LocationDialogView extends Dialog {
 
     }
 
+
+
+
     //PossibleCardGenerator - Random
     private int possibleCardGenerator(){
         Random rand = new Random();
@@ -161,6 +164,8 @@ public class LocationDialogView extends Dialog {
         }
 
     }
+
+
 
 
 }
