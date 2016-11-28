@@ -10,7 +10,7 @@
 
 
     <!-- menu/ login/ registration -->
-    <color name="transparent">#0000</color>  //test #5000  , act #0000
+    <color name="transparent">#A000</color>  //test #5000  , act #0000
     <color name="clr_login_text">#88d4db</color>
     <color name="clr_register_text">#f2e3b4</color>
     <color name="clr_menu_text">#AFFF</color>

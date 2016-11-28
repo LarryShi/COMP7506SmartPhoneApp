@@ -257,7 +257,6 @@ public class MainGameActivity extends AppCompatActivity {
 
             UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent,userProfileName);
             dialog.show();
-
         }
     }
 

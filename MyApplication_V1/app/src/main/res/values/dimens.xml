@@ -70,7 +70,7 @@
     <dimen name="userfile_icon_marginStart">20dp</dimen>
     <dimen name="userfile_btn_marginEnd">30dp</dimen>
     <dimen name="userfile_username_textsize">20sp</dimen>
-    <dimen name="userfile_username_padding">20dp</dimen>
+    <dimen name="userfile_username_padding">10dp</dimen>
     <dimen name="userfile_scroll_marginTop">30dp</dimen>
     <dimen name="userfile_scroll_marginBottom">10dp</dimen>
     <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>
