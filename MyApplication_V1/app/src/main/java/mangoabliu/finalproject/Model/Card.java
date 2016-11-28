@@ -21,6 +21,7 @@ public class Card {
         CardArmor = _CardArmor;
         CardRarity = _CardRarity;
     }
+    public int getCardID(){return CardID;}
     public String getCardName(){ return CardName;}
     public int getCardHP(){return CardHP;}
     public int getCardAttack(){return CardAttack;}

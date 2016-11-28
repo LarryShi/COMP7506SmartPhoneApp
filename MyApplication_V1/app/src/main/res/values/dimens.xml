@@ -117,7 +117,9 @@
     <dimen name="card_atk_marginleft">34dp</dimen>
     <dimen name="card_atk_marginbottom">2dp</dimen>
 
-
-
-
+    <!--Activity_Battle-->
+    <dimen name="battle_card_width">100dp</dimen>
+    <dimen name="battle_card_height">142dp</dimen>
+    <dimen name="battle_player_area_margin_top">20dp</dimen>
+    <dimen name="battle_player_area_margin_left">15dp</dimen>
 </resources>

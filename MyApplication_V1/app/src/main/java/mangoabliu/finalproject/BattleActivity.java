@@ -1,133 +1,239 @@
 package mangoabliu.finalproject;
 
-import android.content.Intent;
-import android.graphics.Typeface;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import mangoabliu.finalproject.Layout.FontTextView;
-
+import mangoabliu.finalproject.Layout.CardLayout;
+import mangoabliu.finalproject.Model.BattleModel;
+import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.R;
 /**
  * Created by Lyris on 29/11/16.
  */
 
 public class BattleActivity extends AppCompatActivity {
 
-    private FontTextView tv_searching;
+    private TextView tv_searching;
     private ImageView img_searchingUp,img_searchingDown;
     private RelativeLayout rl_battleStart;
 
+    BattleModel battleModel;
+    GameModel gameModel;
+    Button btn_test,btn_card_choose_confirm,btn_exit;
+    RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down;
+    ImageView imageView_battle_waiting;
+    CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
+    private static final String TAG = "MyActivity";
+    int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
     //Test
     private Button btnTest;
-    private Button btnExit;
-
-    Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
-    Animation animShow= new AlphaAnimation(0.0f, 1.0f);
-//    TranslateAnimation animMove;
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        gameModel= GameModel.getInstance();
+        gameModel.addActivity(this);
+        battleModel= BattleModel.getInstance();
+        battleModel.setBattleActivity(this);
+        battleModel.setUserAccount(gameModel.getUserAccount());
+        Log.i("Battle Activity", gameModel.getUserAccount().getUserName());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_battle);
         initBattleView();
         //blink
+        Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
         animSearch.setDuration(1500); //You can manage the blinking time with this parameter
         animSearch.setStartOffset(20);
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
 
-        animShow.setDuration(1500);
-        animShow.setStartOffset(1000);
     }
 
 
     private void initBattleView(){
 
-        tv_searching = (FontTextView) findViewById(R.id.battle_searching_text);
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
-        tv_searching.setTypeface(typeFace);
+        setContentView(R.layout.activity_battle);
+        btn_test = (Button) findViewById(R.id.btn_battle_test);
+        btn_exit = (Button) findViewById(R.id.btn_battle_exit);
+        btn_card_choose_confirm=(Button)findViewById(R.id.btn_battle_choose_card_finished);
+        rl_battle_waiting_down = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_down);
+        rl_battle_waiting_up = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_up);
+        imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
+        tv_searching = (TextView)findViewById(R.id.battle_searching_text);
 
-        img_searchingUp = (ImageView) findViewById(R.id.img_battle_searchingup);
-        img_searchingDown = (ImageView) findViewById(R.id.img_battle_searchingdown);
-        rl_battleStart = (RelativeLayout) findViewById(R.id.battle_start);
+        myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
+        myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);
+        myCard3=(CardLayout)findViewById(R.id.card_battle_mycard_3);
 
-        btnTest = (Button) findViewById(R.id.btn_battle_test);
-        btnExit = (Button) findViewById(R.id.btn_battle_exit);
+        myCard1.setOnClickListener(new clickListener_myCard(1));
+        myCard2.setOnClickListener(new clickListener_myCard(2));
+        myCard3.setOnClickListener(new clickListener_myCard(3));
 
-        btnTest.setOnClickListener(new btnTestListener());
-        btnExit.setOnClickListener(new btnExitListener());
+        float center_height=imageView_battle_waiting.getDrawable().getIntrinsicHeight();
+        float center_width=imageView_battle_waiting.getDrawable().getIntrinsicHeight();
+        RotateAnimation animationWaitingIcon = new RotateAnimation(0, 360.0f,center_width/2,center_height/2);
+        animationWaitingIcon.setDuration(2000);
+        animationWaitingIcon.setRepeatMode(Animation.RESTART);
+        animationWaitingIcon.setRepeatCount(Animation.INFINITE);
+        LinearInterpolator lin = new LinearInterpolator();
+        animationWaitingIcon.setInterpolator(lin);
+
+        imageView_battle_waiting.startAnimation(animationWaitingIcon);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waitingRoomFinished();
+            }
+        });
+
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
+        animSearch.setDuration(1500); //You can manage the blinking time with this parameter
+        animSearch.setStartOffset(20);
+        animSearch.setRepeatMode(Animation.REVERSE);
+        animSearch.setRepeatCount(Animation.INFINITE);
+        tv_searching.startAnimation(animSearch);
+
 
     }
 
-    //向上隐藏动画
-    private void hiddenScrollAnimUp(ImageView img) {
-        img.setVisibility(View.GONE);
-        TranslateAnimation mHiddenAction = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, -1.0f);
-        mHiddenAction.setDuration(2000);
-        mHiddenAction.setStartOffset(20);
-        img.startAnimation(mHiddenAction);
+    public void waitingRoomFinished(){
+        Animation animationWiatingDown = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 1);
+        animationWiatingDown.setDuration(500);
+        animationWiatingDown.setFillAfter(true);
+        Animation animationWaitingUp = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, -1);
+        animationWaitingUp.setDuration(500);
+        animationWaitingUp.setFillAfter(true);
+        rl_battle_waiting_down.startAnimation(animationWiatingDown);
+        rl_battle_waiting_up.startAnimation(animationWaitingUp);
+        imageView_battle_waiting.clearAnimation();
+        imageView_battle_waiting.setVisibility(View.INVISIBLE);
+        rl_battle_waiting_down.setVisibility(View.INVISIBLE);
+        rl_battle_waiting_up.setVisibility(View.INVISIBLE);
+        int_state=1;
     }
 
-    //向下隐藏动画
-    private void hiddenScrollAnimDown(ImageView img) {
-        img.setVisibility(View.GONE);
-        TranslateAnimation mHiddenAction = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 1.0f);
-        mHiddenAction.setDuration(2000);
-        mHiddenAction.setStartOffset(20);
-        img.startAnimation(mHiddenAction);
+    //请不要改这个...
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+        return false;
     }
 
+    //请不要改这个...
+    public void gameFinished(){
+        finish();
+    }
+    //请不要改这个...
+    public void updateMyCard(int CardID,int index){
+        if(index==1) {
+            myCard1.setCardBack(CardID);
+            myCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            myCard1.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            myCard1.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+        }
 
-    private class btnTestListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
+        if(index==2){
+            myCard2.setCardBack(CardID);
+            myCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            myCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            myCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+        }
 
-            tv_searching.clearAnimation();
-            tv_searching.setVisibility(View.GONE);
-            hiddenScrollAnimUp(img_searchingUp);
-            hiddenScrollAnimDown(img_searchingDown);
-
-//            //MOVING ANIM
-//            animMove.setDuration(3000);
-//            animMove = new TranslateAnimation(0,0,500,0);
-//            img_searchingUp.setAnimation(animMove);
-//            img_searchingUp.setVisibility(View.GONE);
-
-            rl_battleStart.startAnimation(animShow);
-            rl_battleStart.setVisibility(View.VISIBLE);
-
+        if(index==3){
+            myCard3.setCardBack(CardID);
+            myCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            myCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            myCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
         }
     }
 
-    private class btnExitListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent myIntent = new Intent(BattleActivity.this, MainGameActivity.class);
-            startActivity(myIntent);
+    //请不要改这个...
+    public void updateOtherSideCard(int CardID,int index){
+        if(index==1) {
+            otherCard1.setCardBack(CardID);
+            otherCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            otherCard1.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            otherCard1.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+        }
+
+        if(index==2){
+            myCard2.setCardBack(CardID);
+            myCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            myCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            myCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+        }
+
+        if(index==3){
+            myCard3.setCardBack(CardID);
+            myCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
+            myCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
+            myCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
         }
     }
+
+    //请不要改这个...
+    private class clickListener_Confirm implements View.OnClickListener {
+        int index;//从左往右第几张牌
+
+        public void onClick(View v) {
+            if(int_state==1)
+                battleModel.playerCardPickConfirm();
+        }
+    }
+
+    //请不要改这个...
+    private class clickListener_myCard implements View.OnClickListener {
+        int index;//从左往右第几张牌
+
+        public clickListener_myCard(int id){
+            this.index=id;
+        }
+
+        public void onClick(View v) {
+            if(int_state==1)
+                startPickUpCard(index);
+
+        }
+    }
+    //请不要改这个...
+    public void startPickUpCard(int index){
+        BattlePickCardDialog cardPicker = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,index);
+        cardPicker.show();
+    }
+
 
 
 }
