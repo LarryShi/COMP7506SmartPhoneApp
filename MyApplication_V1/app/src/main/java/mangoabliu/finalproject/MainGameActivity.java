@@ -76,6 +76,8 @@ public class MainGameActivity extends AppCompatActivity {
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         distance.setTypeface(typeFace);
 
+
+
         userProfile.setOnClickListener(new userProfileListener());
         loc1.setOnClickListener(new location1Listener());
         loc2.setOnClickListener(new location2Listener());
@@ -96,6 +98,8 @@ public class MainGameActivity extends AppCompatActivity {
         thumbnail.setY((float)gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
         thumbnail.setImageResource(R.drawable.ufo);
         myLayout.addView(thumbnail,layoutParams);
+
+        distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
     }
 
 
@@ -275,15 +279,11 @@ public class MainGameActivity extends AppCompatActivity {
             myUser = new UserAccount(id,userProfileName,walkedDistance,currentLocID,targetLocID,currentPosition);
             gameModel.setUserAccount(myUser);
             distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+
             Log.i(TAG, "UserName = " + userProfileName +" walkDistance = " + walkedDistance);
+
             initiatePlanetLocation(passedData);
-               /* for (int i = 0; i < gameModel.getPlanets().size(); i++)
-                {
-                    Log.i(TAG,"LocationID: " + gameModel.getPlanets().get(i).getPlanetID());
-                    Log.i(TAG,"LocationName: " + gameModel.getPlanets().get(i).getPlanetName());
-                    Log.i(TAG,"LocationX: " + gameModel.getPlanets().get(i).getPlanetX());
-                    Log.i(TAG,"LocationY: " + gameModel.getPlanets().get(i).getPlanetY());
-                }*/
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -311,6 +311,5 @@ public class MainGameActivity extends AppCompatActivity {
         }
 
     }
-
 
 }

@@ -20,7 +20,7 @@ import mangoabliu.finalproject.MainGameActivity;
 public class StepService extends Service {
     String TAG = "StepService";
     GameModel gameModel;
-    private  boolean isRunning = true;
+    private  boolean isRunning;
     private int stepCount;
     private int sendStepCounter;
 
@@ -30,6 +30,7 @@ public class StepService extends Service {
         int retVal = super.onStartCommand(intent,flags,startId);
         stepCount = 0;
         sendStepCounter = 0;
+        isRunning = true;
         Log.d(TAG,String.valueOf(stepCount));
         Log.d(TAG, "onStartCommand" + intent);
         registerForSensorEvents();
@@ -66,9 +67,9 @@ public class StepService extends Service {
 
                         stepCount++;
                         sendStepCounter++;
-
+                        Log.i(TAG,""+stepCount);
                         if (gameModel.getUserAccount().getWalkDistance() + stepCount >= gameModel.getTotalSteps()){
-                            stopService(new Intent(gameModel.getMainGameActivity(),StepService.class));
+
 
                             gameModel.getUserAccount().setCurrentLocId(gameModel.getUserAccount().getTargetLocId());
 
@@ -85,16 +86,19 @@ public class StepService extends Service {
 
                             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),0);
                             gameModel.updateCurrentLocation(gameModel.getUserAccount().getUserId(),
-                                    gameModel.getUserAccount().getTargetLocId());
+                                    gameModel.getUserAccount().getCurrentLocId());
                             gameModel.updateCurrentPosition(gameModel.getUserAccount().getUserId(),
                                     new double[]{gameModel.getUserAccount().getCurrentLocCoordinate()[0],
                                             gameModel.getUserAccount().getCurrentLocCoordinate()[1]});
+
                             gameModel.mainDisplayDistance();
 
                             gameModel.mainUpdateUFO((float)gameModel.getUserAccount().getCurrentLocCoordinate()[0],
                                     (float) gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
                             stepCount = 0;
                             sendStepCounter = 0;
+                            gameModel.getMainGameActivity().stopService(new Intent(gameModel.getMainGameActivity(),StepService.class));
+                            isRunning = false;
                         }
 
                         if (stepCount == 1) {
