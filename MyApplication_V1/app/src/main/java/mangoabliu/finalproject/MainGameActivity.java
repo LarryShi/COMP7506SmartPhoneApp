@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mangoabliu.finalproject.Layout.FontTextView;
+import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
@@ -250,12 +251,34 @@ public class MainGameActivity extends AppCompatActivity {
         gameModel.showToast(MainGameActivity.this, err);
     }
 
+    public void getUserCards_successful(String jsonObject) {
+        try {
+            JSONObject passedData = new JSONObject(jsonObject);
+            JSONArray UserCards = passedData.getJSONArray("UserInfo");
+            for (int i = 0; i < UserCards.length(); i++) {
+                JSONObject currentCard = UserCards.getJSONObject(i);
+                int CardID = currentCard.getInt("CardID");
+                String CardName = currentCard.getString("CardName");
+                int CardHP = currentCard.getInt("CardHP");
+                int CardAttack = currentCard.getInt("CardAttack");
+                int CardArmor = currentCard.getInt("CardArmor");
+                int CardRarity = currentCard.getInt("CardRarity");
+                Card myCard = new Card(CardID,CardName,CardHP,CardAttack,CardArmor,CardRarity);
+                gameModel.getUserCards().add(myCard);
+            }
+            }catch(JSONException e){
+                e.printStackTrace();
+
+        }
+    }
+
 
     private class userProfileListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            gameModel.getUserCard(gameModel.getUserAccount().getUserId());
             UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent,userProfileName);
+
             dialog.show();
         }
     }

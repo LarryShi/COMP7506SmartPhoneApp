@@ -38,9 +38,10 @@ public class GameModel {
     protected final static String str_updateUserCardRelation_function = "updateUserCardRelation";
     protected final static String str_updateCurrentLocation_function = "updateCurrentLocation";
     protected final static String str_updateCurrentPosition_function = "updateCurrentPosition";
-    protected final static String str_getUserCard_function = "getUserCard";
+    protected final static String str_getUserCard_function = "GetUserCards";
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
+    ArrayList<Card> UserCards= new ArrayList<Card>();
 
     int[] distances = new int[]{5,8,5,10,5,8};
 
@@ -70,6 +71,10 @@ public class GameModel {
 
     public ArrayList<Planet> getPlanets(){
         return planets;
+    }
+
+    public ArrayList<Card> getUserCards(){
+        return UserCards;
     }
 
 
@@ -151,6 +156,37 @@ public class GameModel {
         }
 
     }
+
+
+    public void getUserCard(int str_UserId){
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("UserID",str_UserId);
+
+            serverPHPPostConnection(getUserCardURL(),jsonObject.toString(),
+                    str_getUserCard_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getUserCardFinished(String str_result){
+        try {
+            JSONObject jsonObj = new JSONObject(str_result);
+            if((Integer)jsonObj.get("code")==0) {
+                mainGameActivity.getUserCards_successful(jsonObj.toString());
+            }
+            else
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 
     public void updateUserCardRelation(int str_UserId, int str_CardID){
