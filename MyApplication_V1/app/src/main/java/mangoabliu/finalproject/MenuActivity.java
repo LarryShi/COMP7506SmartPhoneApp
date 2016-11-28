@@ -1,7 +1,6 @@
 package mangoabliu.finalproject;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import mangoabliu.finalproject.Layout.FontTextView;
+
 /**
  * Created by LyrisXu on 2016-11-26.
  */
@@ -22,7 +23,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 
     Button btn_Switch;
 
-    TextView tv_Menu;
+    FontTextView tv_Menu;
     //    Point size;
 //    @TargetApi(16)
 //    Animation animationFadeIn, animationFadeOut;
@@ -39,9 +40,9 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         setContentView(R.layout.activity_menu);
         btn_Switch = (Button) findViewById(R.id.btn_SwitchLogin);
         btn_Switch.setOnClickListener(new bt_SwitchListener());
-        tv_Menu = (TextView) findViewById(R.id.tv_menu);
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
-        tv_Menu.setTypeface(typeFace);
+        tv_Menu = (FontTextView) findViewById(R.id.tv_menu);
+//        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
+//        tv_Menu.setTypeface(typeFace);
 
         // translation animate -deleted
 ////        tv_Menu.setOnClickListener(new tv_MenuListener());
