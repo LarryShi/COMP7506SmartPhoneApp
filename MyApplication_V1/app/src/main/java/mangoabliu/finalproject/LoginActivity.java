@@ -128,7 +128,8 @@ public class LoginActivity extends AppCompatActivity {
     public void successful(String jsonObject){
         Intent myIntent = new Intent(LoginActivity.this, MainGameActivity.class);
         myIntent.putExtra("UserAccount",jsonObject);
-        startActivityForResult(myIntent, 0);
+        myIntent.putExtra("FromActivity","MainActivity");
+        startActivity(myIntent);
     }
 
     public void errorMessage(String err){

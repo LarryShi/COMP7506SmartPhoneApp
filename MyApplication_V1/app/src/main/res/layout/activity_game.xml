@@ -73,7 +73,7 @@
             android:layout_marginLeft="207dp" />
 
         <Button
-            android:id="@+id/location3"
+            android:id="@+id/location4"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="#00000000"
@@ -81,7 +81,7 @@
             android:layout_marginLeft="303dp"/>
 
         <Button
-            android:id="@+id/location4"
+            android:id="@+id/location5"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#00000000"
@@ -89,7 +89,7 @@
             android:layout_marginLeft="450dp"/>
 
         <Button
-            android:id="@+id/location5"
+            android:id="@+id/location3"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00000000"

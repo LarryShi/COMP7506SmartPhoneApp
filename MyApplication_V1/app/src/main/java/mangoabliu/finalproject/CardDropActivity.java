@@ -18,9 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Random;
 
+import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.UserAccount;
 
-import static mangoabliu.finalproject.DisplayImageOptionsUtil.getDisplayImageOptions;
+import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 
 /**
@@ -83,6 +85,7 @@ public class CardDropActivity extends AppCompatActivity  {
 
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra("FromActivity","CardDropActivity");
             intent.setClass(CardDropActivity.this, MainGameActivity.class);
             startActivity(intent);
         }

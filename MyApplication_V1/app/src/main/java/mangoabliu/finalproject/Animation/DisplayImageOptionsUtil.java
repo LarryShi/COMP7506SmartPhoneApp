@@ -1,4 +1,4 @@
-package mangoabliu.finalproject;
+package mangoabliu.finalproject.Animation;
 
 /**
  * Created by Byanka on 26/11/2016.
@@ -14,6 +14,8 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import mangoabliu.finalproject.R;
 
 public final class DisplayImageOptionsUtil {
 

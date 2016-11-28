@@ -10,8 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,15 +20,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
+import mangoabliu.finalproject.Model.UserAccount;
 
 import static android.content.ContentValues.TAG;
 
 /**
  * Created by 10836 on 2016-11-16.
  */
-
-
 /*
 * planet1开始坐标(350,440)           startPoint(460,510),endPoint(615,618)
 * planet2开始坐标(680,660)           startPoint(720,575),endPoint(795,284)
@@ -46,13 +44,13 @@ public class MainGameActivity extends AppCompatActivity {
     Button userProfile, loc1,loc2,loc3,loc4,loc5,loc6,fight,stepTest;
     TextView distance;
     ImageView thumbnail;
+    String userProfileName;
     int walkedDistance=0;
 
     int stepCount;
     int sendStepCounter;
 
-    String userProfileName;
-
+    float animStartX, animStartY, animEndX, animEndY;
 
 
     @Override
@@ -73,16 +71,16 @@ public class MainGameActivity extends AppCompatActivity {
         userProfile = (Button) findViewById(R.id.userProfile);
         loc1 = (Button) findViewById(R.id.location1);
         loc2 = (Button) findViewById(R.id.location2);
-        loc3 = (Button) findViewById(R.id.location3);
         loc4 = (Button) findViewById(R.id.location4);
         loc5 = (Button) findViewById(R.id.location5);
+        loc3 = (Button) findViewById(R.id.location3);
         loc6 = (Button) findViewById(R.id.location6);
         fight = (Button) findViewById(R.id.fight);
 
         distance = (TextView) findViewById(R.id.distance);
 
-        stepTest = (Button) findViewById(R.id.stepTest);
-        stepTest.setOnClickListener(new stepTestListener());
+      //  stepTest = (Button) findViewById(R.id.stepTest);
+      //  stepTest.setOnClickListener(new stepTestListener());
         stepCount = 0;
         sendStepCounter = 0;
 
@@ -94,13 +92,16 @@ public class MainGameActivity extends AppCompatActivity {
         loc5.setOnClickListener(new location5Listener());
         loc6.setOnClickListener(new location6Listener());
 
-        initiateGame();
+        String fromActivity = getIntent().getExtras().getString("FromActivity");
+        if (fromActivity.equals("MainActivity"))
+            initiateGame();
 
         RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.myLayout);
         thumbnail = new ImageView(MainGameActivity.this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
-        thumbnail.setX(gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX());
-        thumbnail.setY(gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY());
+
+        thumbnail.setX((float)gameModel.getUserAccount().getCurrentLocCoordinate()[0]);
+        thumbnail.setY((float)gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
         thumbnail.setImageResource(R.drawable.ufo);
         myLayout.addView(thumbnail,layoutParams);
     }
@@ -112,6 +113,8 @@ public class MainGameActivity extends AppCompatActivity {
         //Log.d(TAG, String.valueOf(step));
         double startLocX = gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX();
         double startLocY = gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY();
+        int loc = gameModel.getUserAccount().getTargetLocId()-1;
+        //System.out.println("TargetLocID " + loc);
         double destLocX = gameModel.getPlanets().get(gameModel.getUserAccount().getTargetLocId()-1).getPlanetX();
         double destLocY = gameModel.getPlanets().get(gameModel.getUserAccount().getTargetLocId()-1).getPlanetY();
 
@@ -120,16 +123,47 @@ public class MainGameActivity extends AppCompatActivity {
         double nextLocX = 0;
         double nextLocY = 0;
 
-        int totalSteps = 200;
+        int totalSteps = gameModel.getDistances()[gameModel.getWalkingLine()-1];
+
+        //System.out.println("totalSteps " + totalSteps);
 
         int walkedDis = gameModel.getUserAccount().getWalkDistance();
 
         gameModel.getUserAccount().setWalkDistance(step + walkedDis);
         distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
 
-        if (walkedDis + step >= 200){
+        nextLocX = currentLocX + (destLocX-startLocX)/totalSteps;
+        nextLocY = currentLocY + (destLocY-startLocY)/totalSteps;
+        gameModel.getUserAccount().setCurrentLocCoordinate(new double[]{ nextLocX, nextLocY});
+
+        animStartX = (float)currentLocX;
+        animStartY = (float) currentLocY;
+        animEndX = (float) nextLocX;
+        animEndY = (float) nextLocY;
+
+        thumbnail.setX(animEndX);
+        thumbnail.setY(animEndY);
+
+        if (walkedDis + step >= totalSteps){
             stopService(new Intent(MainGameActivity.this,StepService.class));
-            return;
+            gameModel.updateCurrentLocation(gameModel.getUserAccount().getUserId(),
+                    gameModel.getUserAccount().getTargetLocId());
+            gameModel.getUserAccount().setCurrentLocId(gameModel.getUserAccount().getTargetLocId());
+            gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),0);
+            gameModel.getUserAccount().setTargetLocId(0);
+            gameModel.updateUserStep(myUser.getUserId(),0);
+            gameModel.getUserAccount().setCurrentLocCoordinate(new double[]{
+                    gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX(),
+                    gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY()
+            });
+            gameModel.getUserAccount().setWalkDistance(0);
+            distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+
+            gameModel.updateCurrentPosition(gameModel.getUserAccount().getUserId(),
+                    new double[]{gameModel.getUserAccount().getCurrentLocCoordinate()[0],
+                            gameModel.getUserAccount().getCurrentLocCoordinate()[1]});
+            //this.getWindow().getContext().stopService(new Intent(this.getWindow().getContext(),StepService.class));
+           // return;
         }
 
 
@@ -137,27 +171,47 @@ public class MainGameActivity extends AppCompatActivity {
                     (Math.pow((destLocX-startLocX)/(destLocY-startLocY),2)+1))+currentLocY;
         nextLocX = (destLocX-startLocX)/(destLocY-startLocY)*(nextLocY-currentLocY)+currentLocX;
         */
-        nextLocX = currentLocX + (destLocX-startLocX)/totalSteps;
-        nextLocY = currentLocY + (destLocY-startLocY)/totalSteps;
-        gameModel.getUserAccount().setCurrentLocCoordinate(new double[]{ nextLocX, nextLocY});
 
-        System.out.println("currentLocX " + currentLocX);
-        System.out.println("currentLocY " + currentLocY);
+
+        /*
         System.out.println("startLocX " + startLocX);
         System.out.println("startLocY " + startLocY);
+        System.out.println("currentLocX " + currentLocX);
+        System.out.println("currentLocY " + currentLocY);
         System.out.println("nextLocX " + nextLocX);
         System.out.println("nextLocY " + nextLocY);
+        */
+        // float differenceX = (float)nextLocX- (float)startLocX;
+        // float differenceY = (float)nextLocY- (float)startLocY;
 
-        float differenceX = (float)nextLocX- (float)startLocX;
-        float differenceY = (float)nextLocY- (float)startLocY;
-        Animation animation = new TranslateAnimation(differenceX,differenceX,
-                differenceY,differenceY);
-        animation.setDuration(300);
-        animation.setFillAfter(true);
-        thumbnail.startAnimation(animation);
+
+
+        /*
+        TranslateAnimation anim = new TranslateAnimation(0,animEndX-animStartX, 0, animEndY-animStartY);
+
+        anim.setAnimationListener(new TranslateAnimation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) { }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation)
+            {
+                thumbnail.setX(animEndX-animStartX);
+                thumbnail.setY(animEndY-animStartY);
+            }
+        });
+
+        anim.setDuration(300);
+        anim.setFillAfter(true);
+        thumbnail.startAnimation(anim);
+        */
     }
 
-
+    /*
     private class stepTestListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -169,12 +223,12 @@ public class MainGameActivity extends AppCompatActivity {
                 stepCount = 0;
             }
             if (sendStepCounter == 10){
-                gameModel.sendUserStep(gameModel.getUserAccount().getUserId(),
+                gameModel.updateUserStep(gameModel.getUserAccount().getUserId(),
                         gameModel.getUserAccount().getWalkDistance());
                 sendStepCounter = 0;
             }
         }
-    }
+    }*/
 
     public void sendStepSuccessful(String result){
         Log.d(TAG,result);
@@ -184,10 +238,13 @@ public class MainGameActivity extends AppCompatActivity {
         Log.d(TAG, result);
     }
 
-    public void updateUserCardRelationSuccessful(String result){
+    public void updateCurrentLocationSuccessful(String result){
         Log.d(TAG, result);
     }
 
+    public void updateCurrentPositionSuccessful(String result){
+        Log.d(TAG, result);
+    }
 
     public void errorMessage(String err){
         gameModel.showToast(MainGameActivity.this, err);
@@ -301,21 +358,21 @@ public class MainGameActivity extends AppCompatActivity {
     public void initiateGame(){
         String data = getIntent().getExtras().getString("UserAccount");
         try {
-                JSONObject passedData = new JSONObject(data);
-                int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
-                String userName = (String) passedData.getJSONObject("UserInfo").get("UserName");
-                userProfileName = (String) passedData.getJSONObject("UserInfo").get("UserName");
-                walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
-                int currentLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("CurrentLocationID"));
-                int targetLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("TargetLocationID"));
-                double currentPositionX = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionX"));
-                double currentPositionY = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionY"));
-                double[] currentPosition = new double[]{currentPositionX,currentPositionY};
-                myUser = new UserAccount(id,userName,walkedDistance,currentLocID,targetLocID,currentPosition);
-                gameModel.setUserAccount(myUser);
-                distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
-                Log.i(TAG, "UserName = " + userName +" walkDistance = " + walkedDistance);
-                initiatePlanetLocation(passedData);
+            JSONObject passedData = new JSONObject(data);
+            int id = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("UserID"));
+
+            userProfileName = (String) passedData.getJSONObject("UserInfo").get("UserName");
+            walkedDistance = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("WalkDistance"));
+            int currentLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("CurrentLocationID"));
+            int targetLocID = Integer.parseInt((String) passedData.getJSONObject("UserInfo").get("TargetLocationID"));
+            double currentPositionX = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionX"));
+            double currentPositionY = Double.parseDouble((String) passedData.getJSONObject("UserInfo").get("CurrentPositionY"));
+            double[] currentPosition = new double[]{currentPositionX,currentPositionY};
+            myUser = new UserAccount(id,userProfileName,walkedDistance,currentLocID,targetLocID,currentPosition);
+            gameModel.setUserAccount(myUser);
+            distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+            Log.i(TAG, "UserName = " + userProfileName +" walkDistance = " + walkedDistance);
+            initiatePlanetLocation(passedData);
                /* for (int i = 0; i < gameModel.getPlanets().size(); i++)
                 {
                     Log.i(TAG,"LocationID: " + gameModel.getPlanets().get(i).getPlanetID());
@@ -328,6 +385,9 @@ public class MainGameActivity extends AppCompatActivity {
         }
     }
 
+    public void updateUserCardRelationSuccessful(String result) {
+
+    }
 
     public void initiatePlanetLocation(JSONObject data){
         try {
