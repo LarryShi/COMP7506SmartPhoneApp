@@ -34,7 +34,7 @@ public class UserProfileAlertView extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //设置不显示对话框标题栏
-        gameModel.getInstance();
+        gameModel=GameModel.getInstance();
         gameModel.setUserProfileAlertView(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -59,8 +59,5 @@ public class UserProfileAlertView extends Dialog {
     }
 
 
-    public void getUserCardSuccessful(String result){
-        Log.d(TAG, result);
-    }
 
 }

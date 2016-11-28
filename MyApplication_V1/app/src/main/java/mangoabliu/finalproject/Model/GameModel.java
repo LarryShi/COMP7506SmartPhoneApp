@@ -153,34 +153,6 @@ public class GameModel {
     }
 
 
-    public void getUserCard(int str_UserId){
-        try {
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.put("UserID",str_UserId);
-
-            serverPHPPostConnection(getUserCardURL(),jsonObject.toString(),
-                    str_getUserCard_function);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getUserCardFinished(String str_result){
-        try {
-            JSONObject jsonObj = new JSONObject(str_result);
-            if((Integer)jsonObj.get("code")==0) {
-                userProfileAlertView.getUserCardSuccessful(jsonObj.toString());
-            }
-            else
-                mainGameActivity.errorMessage((String)jsonObj.get("message"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
     public void updateUserCardRelation(int str_UserId, int str_CardID){
         try {
             JSONObject jsonObject = new JSONObject();
