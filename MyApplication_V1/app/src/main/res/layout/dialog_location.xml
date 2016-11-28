@@ -7,13 +7,13 @@
     android:background="@drawable/destination">
 
 
-    <TextView
+    <mangoabliu.finalproject.Layout.FontTextView
         android:id="@+id/locationDialogTitle"
         android:layout_width="@dimen/location_text_width"
         android:layout_height="@dimen/location_text_height"
         android:paddingTop="@dimen/location_text_padding"
         android:layout_marginStart="@dimen/location_text_marginStart"
-        android:text="Midgard"
+        android:text=""
         android:textSize="@dimen/location_text"
         android:textColor="@android:color/white"
         android:background="@color/transparent"/>

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -18,6 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.ArrayList;
 import java.util.Random;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
@@ -34,9 +34,9 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
-    int clickedLoc;
+ int clickedLoc;
     ImageView image_pCard;
-    TextView tv_locName;
+    FontTextView tv_locName;
     String clickedLocName;
 
 
@@ -66,7 +66,7 @@ public class LocationDialogView extends Dialog {
         initCardData(pCardID);
 
         //Display LocationName  /Lyris
-        tv_locName = (TextView) findViewById(R.id.locationDialogTitle);
+        tv_locName = (FontTextView) findViewById(R.id.locationDialogTitle);
 
         gameModel = GameModel.getInstance();
 
