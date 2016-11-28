@@ -60,7 +60,7 @@ public class LocationDialogView extends Dialog {
         //getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
-        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
+//        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         Button start = (Button) findViewById(R.id.locationGo);
         Button drop = (Button) findViewById(R.id.dropCard);
 
@@ -74,12 +74,12 @@ public class LocationDialogView extends Dialog {
 
         gameModel = GameModel.getInstance();
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//            }
+//        });
 
         start.setOnClickListener(new startTripListener());
 

@@ -44,14 +44,14 @@
             android:layout_alignTop="@+id/locationImage"
             android:layout_toEndOf="@+id/locationImage" />
 
-        <Button
-            android:id="@+id/locationDialogCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:layout_below="@+id/dropCard"
-            android:layout_alignStart="@+id/dropCard"
-            android:layout_alignEnd="@+id/dropCard" />
+        <!--<Button-->
+            <!--android:id="@+id/locationDialogCancel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/cancel"-->
+            <!--android:layout_below="@+id/dropCard"-->
+            <!--android:layout_alignStart="@+id/dropCard"-->
+            <!--android:layout_alignEnd="@+id/dropCard" />-->
 
     </RelativeLayout>
 
