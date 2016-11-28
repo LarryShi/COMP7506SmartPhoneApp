@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 
 import static android.content.ContentValues.TAG;
@@ -54,7 +54,7 @@ public class UserProfileAlertView extends Dialog {
         });
 
 
-        TextView tv_userName = (TextView) findViewById(R.id.usernameProfile);
+        FontTextView tv_userName = (FontTextView) findViewById(R.id.usernameProfile);
         tv_userName.setText(name);
     }
 

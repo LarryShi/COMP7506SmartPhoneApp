@@ -16,7 +16,7 @@
         android:layout_marginStart="@dimen/userfile_icon_marginStart"
         android:src="@drawable/usericon"/>
 
-    <TextView
+    <mangoabliu.finalproject.Layout.FontTextView
         android:id="@+id/usernameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

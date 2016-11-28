@@ -26,7 +26,7 @@
             android:paddingStart="@dimen/register_padding_left"
             android:paddingEnd="@dimen/register_padding_right">
 
-            <TextView
+            <mangoabliu.finalproject.Layout.FontTextView
                 android:id="@+id/usernameRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_alignParentTop="true"
                 android:padding="@dimen/login_text_padding"/>
 
-            <TextView
+            <mangoabliu.finalproject.Layout.FontTextView
                 android:id="@+id/passwordRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_below="@+id/usernameRegister"
                 android:padding="@dimen/login_text_padding"/>
 
-            <TextView
+            <mangoabliu.finalproject.Layout.FontTextView
                 android:id="@+id/passwordRegisterConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
