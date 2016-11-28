@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.Random;
 
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.StepService;
 
 import static android.content.ContentValues.TAG;
 import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDisplayImageOptions;
@@ -128,7 +129,7 @@ public class LocationDialogView extends Dialog {
 
         @Override
         public void onClick(View v) {
-            //v.getContext().startService(new Intent(v.getContext(),StepService.class));
+            v.getContext().startService(new Intent(v.getContext(),StepService.class));
             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
                     clickedLoc);
             gameModel.getUserAccount().setTargetLocId(clickedLoc);

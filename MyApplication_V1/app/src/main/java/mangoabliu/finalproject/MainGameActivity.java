@@ -79,8 +79,8 @@ public class MainGameActivity extends AppCompatActivity {
 
         distance = (TextView) findViewById(R.id.distance);
 
-        stepTest = (Button) findViewById(R.id.stepTest);
-        stepTest.setOnClickListener(new stepTestListener());
+      //  stepTest = (Button) findViewById(R.id.stepTest);
+      //  stepTest.setOnClickListener(new stepTestListener());
         stepCount = 0;
         sendStepCounter = 0;
 
@@ -92,15 +92,13 @@ public class MainGameActivity extends AppCompatActivity {
         loc5.setOnClickListener(new location5Listener());
         loc6.setOnClickListener(new location6Listener());
 
-        initiateGame();
+        String fromActivity = getIntent().getExtras().getString("FromActivity");
+        if (fromActivity.equals("MainActivity"))
+            initiateGame();
 
         RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.myLayout);
         thumbnail = new ImageView(MainGameActivity.this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
-        System.out.println("currentX " +
-                gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX());
-        System.out.println("currentY " +
-                gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY());
 
         thumbnail.setX((float)gameModel.getUserAccount().getCurrentLocCoordinate()[0]);
         thumbnail.setY((float)gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
@@ -116,7 +114,7 @@ public class MainGameActivity extends AppCompatActivity {
         double startLocX = gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetX();
         double startLocY = gameModel.getPlanets().get(gameModel.getUserAccount().getCurrentLocId()-1).getPlanetY();
         int loc = gameModel.getUserAccount().getTargetLocId()-1;
-        System.out.println("TargetLocID " + loc);
+        //System.out.println("TargetLocID " + loc);
         double destLocX = gameModel.getPlanets().get(gameModel.getUserAccount().getTargetLocId()-1).getPlanetX();
         double destLocY = gameModel.getPlanets().get(gameModel.getUserAccount().getTargetLocId()-1).getPlanetY();
 
@@ -165,7 +163,7 @@ public class MainGameActivity extends AppCompatActivity {
                     new double[]{gameModel.getUserAccount().getCurrentLocCoordinate()[0],
                             gameModel.getUserAccount().getCurrentLocCoordinate()[1]});
             //this.getWindow().getContext().stopService(new Intent(this.getWindow().getContext(),StepService.class));
-            return;
+           // return;
         }
 
 
@@ -213,7 +211,7 @@ public class MainGameActivity extends AppCompatActivity {
         */
     }
 
-
+    /*
     private class stepTestListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -230,7 +228,7 @@ public class MainGameActivity extends AppCompatActivity {
                 sendStepCounter = 0;
             }
         }
-    }
+    }*/
 
     public void sendStepSuccessful(String result){
         Log.d(TAG,result);

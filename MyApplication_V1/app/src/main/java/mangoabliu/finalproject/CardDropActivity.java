@@ -85,6 +85,7 @@ public class CardDropActivity extends AppCompatActivity  {
 
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra("FromActivity","CardDropActivity");
             intent.setClass(CardDropActivity.this, MainGameActivity.class);
             startActivity(intent);
         }
