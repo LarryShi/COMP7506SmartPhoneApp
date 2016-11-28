@@ -8,18 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/userProfile"
-                android:layout_width="@dimen/carddrop_icon_width"
-                android:layout_height="@dimen/carddrop_icon_height"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/usericon"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/carddrop_icon_marginStart"
-                android:layout_marginTop="@dimen/carddrop_icon_marginTop"/>
-
-         <Button
+        <Button
              android:id="@+id/btn_returnMain"
              android:layout_width="@dimen/carddrop_btn_width"
              android:layout_height="@dimen/carddrop_btn_height"

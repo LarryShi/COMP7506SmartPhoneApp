@@ -31,6 +31,31 @@
     <dimen name="register_text_padding">2dp</dimen>
 
     <!-- activity_map -->
+    <dimen name="map_layout_width">600dp</dimen>
+    <dimen name="map_layout_height">360dp</dimen>
+    <dimen name="map_icon_marginTop">25dp</dimen>
+    <dimen name="map_icon_marginStart">20dp</dimen>
+    <dimen name="map_btnFight_width">60dp</dimen>
+    <dimen name="map_btnFight_height">60dp</dimen>
+    <dimen name="map_btnFight_marginEnd">20dp</dimen>
+    <dimen name="map_btnFight_marginBottom">20dp</dimen>
+    <dimen name="map_dist_textsize">30sp</dimen>
+
+    <dimen name="map_btnLoc1_size">70dp</dimen>
+    <dimen name="map_btnLoc2_size">55dp</dimen>
+    <dimen name="map_btnLoc3_size">40dp</dimen>
+    <dimen name="map_btnLoc4_size">60dp</dimen>
+    <dimen name="map_btnLoc5_size">55dp</dimen>
+    <dimen name="map_btnLoc6_size">55dp</dimen>
+
+    <dimen name="map_R1_marginBottom">20dp</dimen>
+    <dimen name="map_R2_marginBottom">40dp</dimen>
+    <dimen name="map_R3_marginPadding">10dp</dimen>
+    <dimen name="map_R4_marginBottom">30dp</dimen>
+    <dimen name="map_R5_marginEnd">20dp</dimen>
+    <dimen name="map_R5_marginTop">10dp</dimen>
+    <dimen name="map_R6_marginPadding">5dp</dimen>
+
 
 
     <!-- activity_gamepage -->
@@ -42,8 +67,8 @@
     <dimen name="carddrop_icon_marginStart">10dp</dimen>
     <dimen name="carddrop_btn_width">40dp</dimen>
     <dimen name="carddrop_btn_height">30dp</dimen>
-    <dimen name="carddrop_btn_marginTop">10dp</dimen>
-    <dimen name="carddrop_btn_marginEnd">10dp</dimen>
+    <dimen name="carddrop_btn_marginTop">20dp</dimen>
+    <dimen name="carddrop_btn_marginEnd">20dp</dimen>
     <dimen name="carddrop_cardlayout_width">130dp</dimen>
     <dimen name="carddrop_cardlayout_height">200dp</dimen>
 
@@ -57,7 +82,7 @@
     <dimen name="location_btn_margin">15dp</dimen>
     <dimen name="location_img_width">100dp</dimen>
     <dimen name="location_img_height">120dp</dimen>
-    <dimen name="location_text">20sp</dimen>
+    <dimen name="location_text">24sp</dimen>
     <dimen name="location_text_width">200dp</dimen>
     <dimen name="location_text_height">40dp</dimen>
     <dimen name="location_text_marginStart">50dp</dimen>
@@ -70,7 +95,7 @@
     <dimen name="userfile_icon_marginStart">20dp</dimen>
     <dimen name="userfile_btn_marginEnd">30dp</dimen>
     <dimen name="userfile_username_textsize">20sp</dimen>
-    <dimen name="userfile_username_padding">20dp</dimen>
+    <dimen name="userfile_username_padding">10dp</dimen>
     <dimen name="userfile_scroll_marginTop">30dp</dimen>
     <dimen name="userfile_scroll_marginBottom">10dp</dimen>
     <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>

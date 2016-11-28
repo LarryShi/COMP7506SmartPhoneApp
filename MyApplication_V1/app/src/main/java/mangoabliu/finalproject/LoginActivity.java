@@ -15,8 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 
 
@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //REVISED BY LYRIS   11/26+++
     //TYPEFACE FONT
-    TextView tv_UserName;
-    TextView tv_Password;
+    FontTextView tv_UserName;
+    FontTextView tv_Password;
     CheckBox cb_ShowPW;
 
     EditText et_UserName;
@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         et_Password = (EditText) findViewById(R.id.passwordText);
 
         //ADD TV CB IME BY LYRIS   11/26+++
-        tv_UserName =(TextView) findViewById(R.id.username);
-        tv_Password =(TextView)findViewById(R.id.password);
+        tv_UserName =(FontTextView) findViewById(R.id.username);
+        tv_Password =(FontTextView)findViewById(R.id.password);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         tv_UserName.setTypeface(typeFace);
         tv_Password.setTypeface(typeFace);

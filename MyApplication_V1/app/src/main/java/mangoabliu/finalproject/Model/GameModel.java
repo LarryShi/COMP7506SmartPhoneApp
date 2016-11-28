@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import mangoabliu.finalproject.LoginActivity;
 import mangoabliu.finalproject.MainGameActivity;
 import mangoabliu.finalproject.RegistrationActivity;
+import mangoabliu.finalproject.UserProfileAlertView;
 
 /**
  * Created by SHI Zhongqi on 2016-11-16.
@@ -28,6 +29,7 @@ public class GameModel {
     private LoginActivity loginActivity;
     private RegistrationActivity registrationActivity;
     private MainGameActivity mainGameActivity;
+    private UserProfileAlertView userProfileAlertView;
     protected final static String str_login_function="login";
     protected final static String str_registration_function="registration";
 
@@ -36,6 +38,7 @@ public class GameModel {
     protected final static String str_updateUserCardRelation_function = "updateUserCardRelation";
     protected final static String str_updateCurrentLocation_function = "updateCurrentLocation";
     protected final static String str_updateCurrentPosition_function = "updateCurrentPosition";
+    protected final static String str_getUserCard_function = "getUserCard";
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
 
@@ -113,6 +116,10 @@ public class GameModel {
         this.mainGameActivity=mainGameActivity;
     }
 
+    public void setUserProfileAlertView(UserProfileAlertView userProfileAlertView){
+        this.userProfileAlertView = userProfileAlertView;
+    }
+
     //login related Activity
     public void setLoginActivity(LoginActivity loginActivity){
         this.loginActivity=loginActivity;
@@ -144,6 +151,7 @@ public class GameModel {
         }
 
     }
+
 
     public void updateUserCardRelation(int str_UserId, int str_CardID){
         try {
@@ -314,6 +322,10 @@ public class GameModel {
 
     public String getUpdateCurrentPositionURL(){
         return String_base_url + "Server/updateCurrentPositionM";
+    }
+
+    public String getUserCardURL(){
+        return String_base_url + "Server/getUserCardsM";
     }
     //HTTP Request Related End
 

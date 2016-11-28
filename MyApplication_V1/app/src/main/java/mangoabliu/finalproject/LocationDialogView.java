@@ -8,15 +8,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
+import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
 
 import static android.content.ContentValues.TAG;
@@ -26,13 +30,15 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
  * Created by 10836 on 2016-11-16.
  */
 
-// Add PossibleCard by Lyrisxu  11-27
+// Add PossibleCard, LocName by Lyrisxu  11-28
 
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
-    int clickedLoc;
+ int clickedLoc;
     ImageView image_pCard;
+    FontTextView tv_locName;
+    String clickedLocName;
 
 
     //Add Style /Lyris 11-26
@@ -47,27 +53,33 @@ public class LocationDialogView extends Dialog {
         //设置不显示对话框标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //设置对话框显示哪个布局文件
+
+        //ADD FULLSCREEN
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.dialog_location);
         //getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
-        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
+//        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         Button start = (Button) findViewById(R.id.locationGo);
         Button drop = (Button) findViewById(R.id.dropCard);
 
-        //PossibleCardDisplay
+        //PossibleCardDisplay  /Lyris
         image_pCard =(ImageView) findViewById(R.id.locationImage);
         int pCardID = possibleCardGenerator();
         initCardData(pCardID);
 
+        //Display LocationName  /Lyris
+        tv_locName = (FontTextView) findViewById(R.id.locationDialogTitle);
+
         gameModel = GameModel.getInstance();
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//            }
+//        });
 
         start.setOnClickListener(new startTripListener());
 
@@ -91,6 +103,8 @@ public class LocationDialogView extends Dialog {
             start.setEnabled(true);
         }
 
+        initLocName();
+
     }
 
     //PossibleCardGenerator - Random
@@ -113,6 +127,16 @@ public class LocationDialogView extends Dialog {
         String imageUriFront = "drawable://" + pCardID;
         ImageLoader.getInstance().displayImage(imageUriFront, image_pCard, getDisplayImageOptions());
     }
+
+    //Init Location Name
+    private  void initLocName(){
+        ArrayList<Planet> planets = gameModel.getPlanets();
+        Planet clickedPlanet = planets.get(clickedLoc-1);
+        clickedLocName = clickedPlanet.getPlanetName();
+        tv_locName.setText(clickedLocName);
+//        tv_locName.setTypeface(typeFace);
+    }
+
 
 
     private class drop_DropCardListener implements View.OnClickListener {

@@ -13,12 +13,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
 import mangoabliu.finalproject.Model.StepService;
@@ -42,7 +42,7 @@ public class MainGameActivity extends AppCompatActivity {
     GameModel gameModel;
     UserAccount myUser;
     Button userProfile, loc1,loc2,loc3,loc4,loc5,loc6,fight,stepTest;
-    TextView distance;
+    FontTextView distance;
     ImageView thumbnail;
     String userProfileName;
     int walkedDistance=0;
@@ -77,7 +77,7 @@ public class MainGameActivity extends AppCompatActivity {
         loc6 = (Button) findViewById(R.id.location6);
         fight = (Button) findViewById(R.id.fight);
 
-        distance = (TextView) findViewById(R.id.distance);
+        distance = (FontTextView) findViewById(R.id.distance);
 
       //  stepTest = (Button) findViewById(R.id.stepTest);
       //  stepTest.setOnClickListener(new stepTestListener());
@@ -257,7 +257,6 @@ public class MainGameActivity extends AppCompatActivity {
 
             UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent,userProfileName);
             dialog.show();
-
         }
     }
 

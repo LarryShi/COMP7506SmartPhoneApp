@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 
 /**
@@ -28,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText et_UserName,et_Password,et_Password_repeat;
 
     //REVISED BY LYRIS   11/26+++
-    TextView tv_UserName,tv_Password,tv_Password_repeat;
+    FontTextView tv_UserName,tv_Password,tv_Password_repeat;
     CheckBox cb_ShowPW;
 
     @Override
@@ -56,9 +57,9 @@ public class RegistrationActivity extends AppCompatActivity {
         et_Password_repeat = (EditText) findViewById(R.id.passwordConfirmText);
 
         //ADD TV CB IME BY LYRIS   11/26+++
-        tv_UserName =(TextView) findViewById(R.id.usernameRegister);
-        tv_Password =(TextView)findViewById(R.id.passwordRegister);
-        tv_Password_repeat =(TextView) findViewById(R.id.passwordRegisterConfirm);
+        tv_UserName =(FontTextView) findViewById(R.id.usernameRegister);
+        tv_Password =(FontTextView)findViewById(R.id.passwordRegister);
+        tv_Password_repeat =(FontTextView) findViewById(R.id.passwordRegisterConfirm);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         tv_UserName.setTypeface(typeFace);
         tv_Password.setTypeface(typeFace);

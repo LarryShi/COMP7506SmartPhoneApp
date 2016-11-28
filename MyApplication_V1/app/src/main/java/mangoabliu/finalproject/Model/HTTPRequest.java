@@ -99,6 +99,8 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
             gameModel.updateCurrentLocationFinished(result);
         if (str_function.equals(GameModel.str_updateCurrentPosition_function))
             gameModel.updateCurrentPositionFinished(result);
+        if (str_function.equals(GameModel.str_updateUserCardRelation_function))
+            gameModel.updateUserCardRelationFinished(result);
 
     }
               
