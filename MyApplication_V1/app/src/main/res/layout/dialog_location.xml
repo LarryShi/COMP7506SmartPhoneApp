@@ -50,7 +50,8 @@
             android:src="@drawable/card_back"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"/>
 
         <ImageButton
             android:id="@+id/dropCard"
