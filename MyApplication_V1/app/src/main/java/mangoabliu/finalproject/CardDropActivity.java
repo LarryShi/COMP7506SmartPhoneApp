@@ -3,7 +3,9 @@ package mangoabliu.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.Image;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.Random;
 
 import mangoabliu.finalproject.Animation.RotateObject;
+import mangoabliu.finalproject.Animation.ZoomObject;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.UserAccount;
 
@@ -46,6 +49,8 @@ public class CardDropActivity extends AppCompatActivity  {
     private ImageView CardBackL;
     private ImageView CardFrontL;
     private Button ReturnMain;
+
+    private ImageView expandedCard;
 
 
     @Override
@@ -77,10 +82,16 @@ public class CardDropActivity extends AppCompatActivity  {
         CardFrontL = (ImageView) findViewById(R.id.CardFrontL);
         ReturnMain = (Button) findViewById(R.id.btn_returnMain);
 
+        expandedCard = (ImageView) findViewById(R.id.expanded_image);
+
         CardBackM.setOnClickListener(new CardBackM_Listener());
         CardBackR.setOnClickListener(new CardBackR_Listener());
         CardBackL.setOnClickListener(new CardBackL_Listener());
         ReturnMain.setOnClickListener(new ReturnMain_Listener());
+
+        CardFrontL.setOnClickListener(new CardFrontL_Listener());
+        CardFrontM.setOnClickListener(new CardFrontM_Listener());
+        CardFrontR.setOnClickListener(new CardFrontR_Listener());
 
     }
 
@@ -181,12 +192,16 @@ public class CardDropActivity extends AppCompatActivity  {
         ImageLoader.getInstance().displayImage(imageUriFront, CardFrontL, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUriFront, CardFrontM, getDisplayImageOptions());
         ImageLoader.getInstance().displayImage(imageUriFront, CardFrontR, getDisplayImageOptions());
+
+        ImageLoader.getInstance().displayImage(imageUriFront, expandedCard, getDisplayImageOptions());
+
         CardFrontL.setVisibility(View.INVISIBLE);
         CardFrontR.setVisibility(View.INVISIBLE);
         CardFrontM.setVisibility(View.INVISIBLE);
         CardBackM.setVisibility(View.VISIBLE);
         CardBackR.setVisibility(View.VISIBLE);
         CardBackL.setVisibility(View.VISIBLE);
+
         setCameraDistance(CardRootM);
         setCameraDistance(CardRootL);
         setCameraDistance(CardRootR);
@@ -203,6 +218,37 @@ public class CardDropActivity extends AppCompatActivity  {
         float scale = getResources().getDisplayMetrics().density * distance;
         CardTurnRoot.setCameraDistance(scale);
     }
+
+
+
+    private class CardFrontL_Listener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            ZoomObject zoomHelper = new ZoomObject();
+            zoomHelper.zoomImageFromThumb(CardFrontL,expandedCard,findViewById(R.id.dropCardLayout));
+        }
+
+    }
+
+    private class CardFrontM_Listener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            ZoomObject zoomHelper = new ZoomObject();
+            zoomHelper.zoomImageFromThumb(CardFrontM,expandedCard,findViewById(R.id.dropCardLayout));
+        }
+
+    }
+
+    private class CardFrontR_Listener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            ZoomObject zoomHelper = new ZoomObject();
+            zoomHelper.zoomImageFromThumb(CardFrontR,expandedCard,findViewById(R.id.dropCardLayout));
+        }
+
+    }
+
+
 
 
 }

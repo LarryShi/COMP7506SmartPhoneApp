@@ -21,18 +21,17 @@ public class ZoomObject {
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
     ImageView expandedImageView;
-    LocationDialogView currentDialogView;
+    LocationDialogView currentDialogView = null;
 
     public ZoomObject(LocationDialogView myDialogView){
-        //原值- Lyris修改
-//        mShortAnimationDuration = 300;
+
         mShortAnimationDuration = 0;
         currentDialogView = myDialogView;
     }
 
 
     public ZoomObject(){
-        mShortAnimationDuration = 300;
+        mShortAnimationDuration = 0;
     }
 
 
@@ -43,6 +42,7 @@ public class ZoomObject {
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
         }
+
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView = expandedOne;
@@ -133,7 +133,6 @@ public class ZoomObject {
         // to the original bounds and show the thumbnail instead of
         // the expanded image.
         final float startScaleFinal = startScale;
-
 
         expandedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
