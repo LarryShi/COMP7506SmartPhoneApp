@@ -16,9 +16,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import mangoabliu.finalproject.Layout.CardLayout;
+import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.BattleModel;
 import mangoabliu.finalproject.Model.GameModel;
 
@@ -29,7 +29,7 @@ import mangoabliu.finalproject.Model.GameModel;
 
 public class BattleActivity extends AppCompatActivity {
 
-    private TextView tv_searching;
+    private FontTextView tv_searching;
 
 
     BattleModel battleModel;
@@ -39,8 +39,7 @@ public class BattleActivity extends AppCompatActivity {
     ImageView imageView_battle_waiting;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
-    //Test
-    private Button btnTest;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class BattleActivity extends AppCompatActivity {
         rl_battle_waiting_other_side=(RelativeLayout)findViewById(R.id.relativeLayout_battle_waiting_otherside);
         imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
 
-        tv_searching = (TextView)findViewById(R.id.battle_searching_text);
+        tv_searching = (FontTextView)findViewById(R.id.battle_searching_text);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
         myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);

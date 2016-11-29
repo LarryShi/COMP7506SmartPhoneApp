@@ -60,6 +60,13 @@
 
     <!-- activity_battle -->
     <dimen name="battle_searching_textsize">30sp</dimen>
+    <dimen name="battle_card_width">100dp</dimen>
+    <dimen name="battle_card_height">142dp</dimen>
+    <dimen name="battle_player_area_margin_top">20dp</dimen>
+    <dimen name="battle_player_area_margin_left">15dp</dimen>
+    <dimen name="battle_searching_icon">128dp</dimen>
+    <dimen name="battle_planet_width">150dp</dimen>
+    <dimen name="battle_planet_height">37dp</dimen>
 
     <!-- activity_carddrop -->
     <dimen name="carddrop_icon_width">60dp</dimen>
@@ -117,9 +124,5 @@
     <dimen name="card_atk_marginleft">34dp</dimen>
     <dimen name="card_atk_marginbottom">2dp</dimen>
 
-    <!--Activity_Battle-->
-    <dimen name="battle_card_width">100dp</dimen>
-    <dimen name="battle_card_height">142dp</dimen>
-    <dimen name="battle_player_area_margin_top">20dp</dimen>
-    <dimen name="battle_player_area_margin_left">15dp</dimen>
+
 </resources>

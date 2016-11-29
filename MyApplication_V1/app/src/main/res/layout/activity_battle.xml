@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     android:fitsSystemWindows="true"
-    android:background="@drawable/bg_battlepage"
+    android:background="@drawable/bg_battle_noborder"
     >
-
+    <!--另一边的卡-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,8 +72,25 @@
             </TableRow>
         </TableLayout>
     </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_info_p1"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" 
+            android:background="@drawable/battle_info_p2"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/battle_banner"/>
+    </RelativeLayout>
 
-    <TextView
+    <mangoabliu.finalproject.Layout.FontTextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +98,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/textView_battle_turn" />
 
+    <!--等待另一边选卡-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -171,6 +189,7 @@
         </TableLayout>
     </RelativeLayout>
 
+    <!--Searching bg down-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -179,9 +198,9 @@
         android:layout_below="@+id/relativeLayout_battle_waiting_bg_up"
         android:layout_alignParentStart="true">
 
-
     </RelativeLayout>
 
+    <!--Searching bg up-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -191,23 +210,32 @@
         android:layout_alignParentStart="true">
     </RelativeLayout>
 
-
+    <!--Searching border&planet-->
     <ImageView
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/battle_border1"/>
+
+    <!--"Searching rotate icon"-->
+    <ImageView
+        android:layout_width="@dimen/battle_searching_icon"
+        android:layout_height="@dimen/battle_searching_icon"
         android:src="@drawable/loading"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/imageView_battle_loading" />
 
-    <TextView
+    <!--"Searching" 字样-->
+    <mangoabliu.finalproject.Layout.FontTextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:textSize="@dimen/battle_searching_textsize"
         android:id="@+id/battle_searching_text" />
 
+    <!--Test Btn-->
     <Button
         android:text="Test"
         android:layout_width="wrap_content"
