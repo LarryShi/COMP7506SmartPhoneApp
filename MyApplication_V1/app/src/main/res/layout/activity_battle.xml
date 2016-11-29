@@ -72,23 +72,6 @@
             </TableRow>
         </TableLayout>
     </RelativeLayout>
-    
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/battle_info_p1"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" 
-            android:background="@drawable/battle_info_p2"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/battle_banner"/>
-    </RelativeLayout>
 
     <mangoabliu.finalproject.Layout.FontTextView
         android:text="TextView"
