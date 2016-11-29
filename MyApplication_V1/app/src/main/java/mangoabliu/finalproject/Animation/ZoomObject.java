@@ -6,13 +6,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import mangoabliu.finalproject.LocationDialogView;
-import mangoabliu.finalproject.R;
 
 /**
  * Created by herenjie on 2016/11/29.
@@ -26,7 +24,9 @@ public class ZoomObject {
     LocationDialogView currentDialogView;
 
     public ZoomObject(LocationDialogView myDialogView){
-        mShortAnimationDuration = 300;
+        //原值- Lyris修改
+//        mShortAnimationDuration = 300;
+        mShortAnimationDuration = 0;
         currentDialogView = myDialogView;
     }
 

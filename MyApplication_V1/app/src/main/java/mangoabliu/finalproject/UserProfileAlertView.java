@@ -3,28 +3,19 @@ package mangoabliu.finalproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.BaseAdapter;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import mangoabliu.finalproject.Layout.FontTextView;
-import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by herenjie on 2016/11/16.
@@ -110,8 +101,12 @@ public class UserProfileAlertView extends Dialog {
             if (convertView == null) {
                 iv =new ImageView(mcontext);
                 iv.setImageResource(myImageIds.get(position));
-                iv.setScaleType(ImageView.ScaleType.FIT_XY);
-                iv.setLayoutParams(new GridView.LayoutParams(400,500));
+
+                //原值- Lyris修改
+//                iv.setScaleType(ImageView.ScaleType.FIT_XY);
+//                iv.setLayoutParams(new GridView.LayoutParams(400,400));
+                iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                iv.setLayoutParams(new GridView.LayoutParams(350,450));
             } else {
                 iv = (ImageView) convertView;
             }
