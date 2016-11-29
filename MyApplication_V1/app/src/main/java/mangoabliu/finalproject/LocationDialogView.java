@@ -40,16 +40,14 @@ public class LocationDialogView extends Dialog {
     int clickedLoc;
     ImageView image_pCard,expandedImageView;
 
-    Button start;
-    ImageButton drop;
+    Button action;
 
     FontTextView tv_locName;
     String clickedLocName;
 
     ZoomObject zoomHelper;
 
-    boolean startVisible;
-    boolean dropVisible;
+    boolean actionVisible;
 
     //Add Style /Lyris 11-26
     protected LocationDialogView(Context context, int loc, int style ) {
@@ -58,21 +56,15 @@ public class LocationDialogView extends Dialog {
         gameModel= GameModel.getInstance();
     }
 
-    public Button getStart(){
-        return start;
+
+    public Button getAction(){
+        return action;
     }
 
-    public ImageButton getDrop(){
-        return drop;
+    public boolean getActionVisible(){
+        return actionVisible;
     }
 
-    public boolean getStartVisible(){
-        return startVisible;
-    }
-
-    public boolean getDropVisible(){
-        return dropVisible;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +80,15 @@ public class LocationDialogView extends Dialog {
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
-        start = (Button) findViewById(R.id.locationGo);
-        drop = (ImageButton) findViewById(R.id.dropCard);
+        action = (Button) findViewById(R.id.locationAction);
 
-        drop.setVisibility(View.INVISIBLE);
-        drop.setEnabled(false);
-        dropVisible = false;
+        action.setEnabled(false);
+        action.setText("");
 
-        if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc)
-        {
-            drop.setVisibility(View.VISIBLE);
-            dropVisible = true;
-            drop.setEnabled(true);
+        if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc) {
+            action.setText("DROP");
+            action.setEnabled(true);
+            actionVisible = true;
         }
 
         //PossibleCardDisplay  /Lyris
@@ -128,14 +117,6 @@ public class LocationDialogView extends Dialog {
 //            }
 //        });
 
-        start.setOnClickListener(new startTripListener());
-
-        drop.setOnClickListener(new drop_DropCardListener());
-
-
-        start.setVisibility(View.INVISIBLE);
-        startVisible = false;
-        start.setEnabled(false);
 
         gameModel = GameModel.getInstance();
         int currentLocID = gameModel.getUserAccount().getCurrentLocId();
@@ -147,10 +128,15 @@ public class LocationDialogView extends Dialog {
                 (currentLocID == 5 && (clickedLoc == 3 || clickedLoc == 4 || clickedLoc == 6))||
                 (currentLocID == 6 && (clickedLoc == 5))) {
 
-            start.setVisibility(View.VISIBLE);
-            startVisible = true;
-            start.setEnabled(true);
+            action.setText("GO");
+            action.setEnabled(true);
+            actionVisible = true;
         }
+
+        if (action.getText().equals("GO"))
+            action.setOnClickListener(new startTripListener());
+        else if (action.getText().equals("DROP"))
+            action.setOnClickListener(new drop_DropCardListener());
 
         initLocName();
 

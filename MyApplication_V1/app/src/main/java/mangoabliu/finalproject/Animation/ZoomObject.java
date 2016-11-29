@@ -23,8 +23,7 @@ public class ZoomObject {
     ImageView expandedImageView;
     LocationDialogView currentDialogView = null;
 
-    boolean showStart;
-    boolean showDrop;
+    boolean showAction;
 
     public ZoomObject(LocationDialogView myDialogView){
 
@@ -42,24 +41,10 @@ public class ZoomObject {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
 
-        if (currentDialogView.getStartVisible() && currentDialogView.getDropVisible()) {
-            showStart = true;
-            showDrop = true;
-        }
-        else if (!currentDialogView.getStartVisible() && currentDialogView.getDropVisible())
-        {
-            showStart = false;
-            showDrop = true;
-        }
-        else if (currentDialogView.getStartVisible() && !currentDialogView.getDropVisible())
-        {
-            showStart = true;
-            showDrop = false;
-        }
-        else{
-            showStart = false;
-            showDrop = false;
-        }
+        if (currentDialogView.getActionVisible())
+            showAction = true;
+        else
+            showAction = false;
 
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
@@ -146,11 +131,9 @@ public class ZoomObject {
         set.start();
         mCurrentAnimator = set;
 
-        if (currentDialogView != null) {
-            if(showStart)
-                currentDialogView.getStart().setVisibility(View.INVISIBLE);
-            if(showDrop)
-                currentDialogView.getDrop().setVisibility(View.INVISIBLE);
+        if (currentDialogView != null && showAction) {
+            currentDialogView.getAction().setVisibility(View.INVISIBLE);
+            currentDialogView.getAction().setEnabled(false);
         }
 
         // Upon clicking the zoomed-in image, it should zoom back down
@@ -198,11 +181,9 @@ public class ZoomObject {
                 });
                 set.start();
                 mCurrentAnimator = set;
-                if (currentDialogView != null) {
-                    if(showStart)
-                        currentDialogView.getStart().setVisibility(View.VISIBLE);
-                    if(showDrop)
-                        currentDialogView.getDrop().setVisibility(View.VISIBLE);
+                if (currentDialogView != null && showAction) {
+                        currentDialogView.getAction().setVisibility(View.VISIBLE);
+                        currentDialogView.getAction().setEnabled(true);
                 }
             }
         });
