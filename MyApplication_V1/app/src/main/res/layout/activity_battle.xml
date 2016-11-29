@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView_battle_turn"
+        android:layout_above="@+id/battle_line"
         android:layout_alignParentEnd="true">
 
         <TableLayout
@@ -83,12 +83,20 @@
         android:id="@+id/textView_battle_turn"
         />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/battle_line"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout_battle_waiting_otherside"
         android:background="@drawable/battle_waiting_otherside"
-        android:layout_above="@+id/textView_battle_turn"
+        android:layout_above="@+id/battle_line"
         android:layout_alignParentStart="true">
     </RelativeLayout>
 
@@ -96,7 +104,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_battle_turn"
+        android:layout_below="@+id/battle_line"
         android:layout_alignParentStart="true">
 
         <TableLayout
@@ -189,7 +197,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout_battle_waiting_bg_up"
         android:background="@drawable/battle_searching_up"
-        android:layout_above="@+id/textView_battle_turn"
+        android:layout_above="@+id/battle_line"
         android:layout_alignParentStart="true">
     </RelativeLayout>
 
