@@ -1,16 +1,25 @@
 package mangoabliu.finalproject;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -18,6 +27,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.ArrayList;
 import java.util.Random;
 
+import mangoabliu.finalproject.Animation.ZoomObject;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
@@ -35,16 +45,28 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
- int clickedLoc;
+    int clickedLoc;
     ImageView image_pCard;
+
+    Button start, drop;
+
     FontTextView tv_locName;
     String clickedLocName;
-
+    ImageView expandedImageView;
+    ZoomObject zoomHelper;
 
     //Add Style /Lyris 11-26
     protected LocationDialogView(Context context, int loc, int style ) {
         super(context, style);
         clickedLoc = loc;
+    }
+
+    public Button getStart(){
+        return start;
+    }
+
+    public Button getDrop(){
+        return drop;
     }
 
     @Override
@@ -61,13 +83,22 @@ public class LocationDialogView extends Dialog {
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
-        Button start = (Button) findViewById(R.id.locationGo);
-        Button drop = (Button) findViewById(R.id.dropCard);
+        start = (Button) findViewById(R.id.locationGo);
+        drop = (Button) findViewById(R.id.dropCard);
 
         //PossibleCardDisplay  /Lyris
         image_pCard =(ImageView) findViewById(R.id.locationImage);
-        int pCardID = possibleCardGenerator();
+        final int pCardID = possibleCardGenerator();
+        expandedImageView =  (ImageView) findViewById(
+                R.id.expanded_image);
         initCardData(pCardID);
+        zoomHelper = new ZoomObject(this);
+        image_pCard.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                zoomHelper.zoomImageFromThumb(image_pCard,expandedImageView,findViewById(R.id.expanded_image));
+            }
+        });
 
         //Display LocationName  /Lyris
         tv_locName = (FontTextView) findViewById(R.id.locationDialogTitle);
@@ -129,6 +160,7 @@ public class LocationDialogView extends Dialog {
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
         String imageUriFront = "drawable://" + pCardID;
         ImageLoader.getInstance().displayImage(imageUriFront, image_pCard, getDisplayImageOptions());
+        ImageLoader.getInstance().displayImage(imageUriFront, expandedImageView, getDisplayImageOptions());
     }
 
     //Init Location Name
@@ -166,8 +198,6 @@ public class LocationDialogView extends Dialog {
         }
 
     }
-
-
 
 
 }
