@@ -198,8 +198,8 @@ public class CardDropActivity extends AppCompatActivity  {
 
     }
 
-    public void showMessage(String err){
-        errMessage = err;
+    public void showMessage(){
+        errMessage = "YOU ALREADY HAVE THIS CARD";
 
     }
 

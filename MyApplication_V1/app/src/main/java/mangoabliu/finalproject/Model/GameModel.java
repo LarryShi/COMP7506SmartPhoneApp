@@ -253,7 +253,7 @@ public class GameModel {
                 mainGameActivity.getUserCards_successful(jsonObj.toString());
             }
             else
-                cardDropActivity.showMessage((String)jsonObj.get("message"));
+                mainGameActivity.errorMessage((String)jsonObj.get("message"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -277,11 +277,13 @@ public class GameModel {
     public void updateUserCardRelationFinished(String str_result){
         try {
             JSONObject jsonObj = new JSONObject(str_result);
-            if((Integer)jsonObj.get("code")==0) {
+            if ((Integer) jsonObj.get("code") == 0) {
                 mainGameActivity.updateUserCardRelationSuccessful(jsonObj.toString());
-            }
-            else
+            } else if((Integer) jsonObj.get("code") == 1) {
+                cardDropActivity.showMessage();
+            }else{
                 mainGameActivity.errorMessage((String)jsonObj.get("message"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
