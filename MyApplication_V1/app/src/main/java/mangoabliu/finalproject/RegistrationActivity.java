@@ -14,7 +14,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
@@ -71,6 +70,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         cb_ShowPW=(CheckBox) findViewById(R.id.cb_showconfirmpassword);
         cb_ShowPW.setOnClickListener(new cb_OnclickListener());
+        cb_ShowPW.setTypeface(typeFace);
 
     }
 

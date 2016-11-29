@@ -39,6 +39,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:text="0 Miles"
+        android:shadowColor="@color/clr_map_shadow"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="3"
         android:textSize="@dimen/map_dist_textsize"
         android:textColor="@color/clr_map_text" />
 

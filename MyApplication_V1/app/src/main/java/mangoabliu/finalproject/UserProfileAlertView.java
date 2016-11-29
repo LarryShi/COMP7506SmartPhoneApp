@@ -104,7 +104,7 @@ public class UserProfileAlertView extends Dialog {
 
                 //原值- Lyris修改
 //                iv.setScaleType(ImageView.ScaleType.FIT_XY);
-//                iv.setLayoutParams(new GridView.LayoutParams(400,400));
+//                iv.setLayoutParams(new GridView.LayoutParams(400,500));
                 iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 iv.setLayoutParams(new GridView.LayoutParams(350,450));
             } else {

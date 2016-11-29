@@ -118,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/passwordRegisterConfirm"
                 android:textColor="@color/clr_register_text"
-                android:text="@string/login_cipher_pw"/>
+                android:text="@string/login_cipher_pw"
+                android:textSize="@dimen/cb_text"/>
 
         </RelativeLayout>
 

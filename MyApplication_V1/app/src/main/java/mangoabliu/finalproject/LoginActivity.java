@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         et_UserName.setInputType(EditorInfo.TYPE_CLASS_TEXT);
         et_Password.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
         cb_ShowPW=(CheckBox) findViewById(R.id.cb_showpassword);
+        cb_ShowPW.setTypeface(typeFace);
         cb_ShowPW.setOnClickListener(new cb_OnclickListener());
 
 

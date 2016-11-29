@@ -16,7 +16,11 @@
         android:layout_marginStart="@dimen/location_text_marginStart"
         android:text=""
         android:textSize="@dimen/location_text"
-        android:textColor="@android:color/white"
+        android:shadowColor="@color/clr_loc_shadow"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="2"
+        android:textColor="@color/clr_loc_text"
         android:background="@color/transparent"/>
 
     <ImageView

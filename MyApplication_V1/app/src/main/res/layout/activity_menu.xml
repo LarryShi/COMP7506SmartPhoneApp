@@ -29,5 +29,9 @@
         android:id="@+id/tv_menu"
         android:text="@string/menu_hint"
         android:textColor="@color/clr_menu_text"
-        android:textSize="@dimen/menu_textsize"/>
+        android:textSize="@dimen/menu_textsize"
+        android:shadowColor="@color/clr_map_shadow"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="3"/>
 </RelativeLayout>

@@ -5,19 +5,24 @@
     <color name="colorAccent">#FF4081</color>
     <color name="buttonColor">#0B2349</color>
     <color name="location">#0000E5</color>
-    <color name="distance">#ffffff</color>
+    <color name="distance">#fff</color>
     <color name="userProfileDialog_UserNameColor">#ffffff</color>
 
 
     <!-- menu/ login/ registration -->
     <color name="transparent">#0000</color>  //test #5000  , act #0000
-    <color name="clr_login_text">#88d4db</color>
-    <color name="clr_register_text">#f2e3b4</color>
+    <color name="clr_login_text">#88D4DB</color>
+    <color name="clr_register_text">#f2E3B4</color>
     <color name="clr_menu_text">#AFFF</color>
     <color name="clr_battle_text">#DFFF</color>
 
     <!-- map -->
-    <color name="clr_map_text">#AA82d0d8</color>  //DARKER:#49858b
+    <color name="clr_map_text">#DD82D0D8 </color>  //DARKER:#2d5d62 #49858B  LIGHTER:#AA82D0D8
+    <color name="clr_map_shadow">#9999</color>
+
+    <!-- location -->
+    <color name="clr_loc_text">#FFF</color>
+    <color name="clr_loc_shadow">#0A2942</color>
 
     <!-- clr for test-->
     <color name="clr_test">#FFFF</color>

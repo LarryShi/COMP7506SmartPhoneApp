@@ -20,4 +20,14 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+
+    <!--<style name="shining">-->
+        <!--android:shadowColor="@color/clr_shadow"-->
+        <!--android:shadowDx="0"-->
+        <!--android:shadowDy="0"-->
+        <!--android:shadowRadius="2"-->
+        <!--android:textSize="@dimen/map_dist_textsize"-->
+        <!--android:textColor="@color/clr_map_text"-->
+    <!--</style>-->
+
 </resources>
