@@ -66,8 +66,6 @@ public class MainGameActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game);
 
-
-
         userProfile = (Button) findViewById(R.id.userProfile);
         loc1 = (Button) findViewById(R.id.location1);
         loc2 = (Button) findViewById(R.id.location2);

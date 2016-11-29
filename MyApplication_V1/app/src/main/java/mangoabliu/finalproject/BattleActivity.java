@@ -209,23 +209,23 @@ public class BattleActivity extends AppCompatActivity {
 
         if(index==1) {
             myCard1.setCardBack(CardID);
-            myCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            myCard1.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            myCard1.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            myCard1.setCardHP(battleModel.getCard(CardID).getCardHP());
+            myCard1.setCardArmor(battleModel.getCard(CardID).getCardArmor());
+            myCard1.setCardAttack(battleModel.getCard(CardID).getCardAttack());
         }
 
         if(index==2){
             myCard2.setCardBack(CardID);
-            myCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            myCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            myCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            myCard2.setCardHP(battleModel.getCard(CardID).getCardHP());
+            myCard2.setCardArmor(battleModel.getCard(CardID).getCardArmor());
+            myCard2.setCardAttack(battleModel.getCard(CardID).getCardAttack());
         }
 
         if(index==3){
             myCard3.setCardBack(CardID);
-            myCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            myCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            myCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            myCard3.setCardHP(battleModel.getCard(CardID).getCardHP());
+            myCard3.setCardArmor(battleModel.getCard(CardID).getCardArmor());
+            myCard3.setCardAttack(battleModel.getCard(CardID).getCardAttack());
         }
     }
 
@@ -234,23 +234,23 @@ public class BattleActivity extends AppCompatActivity {
 
         if(index==1) {
             otherCard1.setCardBack(CardID);
-            otherCard1.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            otherCard1.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            otherCard1.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            otherCard1.setCardHP(battleModel.getOtherCard(CardID).getCardHP());
+            otherCard1.setCardArmor(battleModel.getOtherCard(CardID).getCardArmor());
+            otherCard1.setCardAttack(battleModel.getOtherCard(CardID).getCardAttack());
         }
 
         if(index==2){
             otherCard2.setCardBack(CardID);
-            otherCard2.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            otherCard2.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            otherCard2.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            otherCard2.setCardHP(battleModel.getOtherCard(CardID).getCardHP());
+            otherCard2.setCardArmor(battleModel.getOtherCard(CardID).getCardArmor());
+            otherCard2.setCardAttack(battleModel.getOtherCard(CardID).getCardAttack());
         }
 
         if(index==3){
             otherCard3.setCardBack(CardID);
-            otherCard3.setCardHP(battleModel.getUserCards().get(CardID).getCardHP());
-            otherCard3.setCardArmor(battleModel.getUserCards().get(CardID).getCardArmor());
-            otherCard3.setCardAttack(battleModel.getUserCards().get(CardID).getCardAttack());
+            otherCard3.setCardHP(battleModel.getOtherCard(CardID).getCardHP());
+            otherCard3.setCardArmor(battleModel.getOtherCard(CardID).getCardArmor());
+            otherCard3.setCardAttack(battleModel.getOtherCard(CardID).getCardAttack());
             /*可修改范围*/
             Animation animationWaitingUp = new TranslateAnimation(
                     TranslateAnimation.RELATIVE_TO_SELF, 0.0f,

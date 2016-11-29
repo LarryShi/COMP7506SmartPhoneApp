@@ -20,11 +20,15 @@ public class BattleModel {
     private final String String_base_url="http://i.cs.hku.hk/~zqshi/ci/index.php/";
     private BattleActivity battleActivity;
     private ArrayList<Card> UserCards;
-    private HashMap<Card,Integer> CardPickMap=new HashMap<>();
-    private HashMap<Integer,Card> CardIDMap=new HashMap<>();
-    private HashMap<Integer,Card> playChooseCard = new HashMap<>();
+
+    private HashMap<Card,Integer> mapIsUserCardPicked =new HashMap<>();
+    private HashMap<Integer,Card> mapCardIDtoCard =new HashMap<>();
+    private HashMap<Integer,Card> mapBtnNumberChooseCard = new HashMap<>();
+
     private UserAccount myUser;
     private UserAccount otherUser;
+    private HashMap<Integer,Card> mapOtherCardIDtoCard =new HashMap<>();
+    private HashMap<Integer,Card> mapOtherBtnNumberChooseCard = new HashMap<>();
     private Handler handler = new Handler( );
     private Runnable runnable;
     private int stateCase=0;
@@ -81,8 +85,8 @@ public class BattleModel {
     public void setUserCards(ArrayList<Card> userCards){
         this.UserCards=userCards;
         for(int i=0;i<UserCards.size();i++){
-            CardPickMap.put(UserCards.get(i),1);//1 就是可以选的，0是不可以选的
-            CardIDMap.put(UserCards.get(i).getCardID(),UserCards.get(i));
+            mapIsUserCardPicked.put(UserCards.get(i),1);//1 就是可以选的，0是不可以选的
+            mapCardIDtoCard.put(UserCards.get(i).getCardID(),UserCards.get(i));
         }
     }
 
@@ -91,9 +95,16 @@ public class BattleModel {
     }
     //1 就是可以选的，0是不可以选的
     public int checkCardPick(int CardID){
-        return CardPickMap.get(CardIDMap.get(CardID));
+        return mapIsUserCardPicked.get(mapCardIDtoCard.get(CardID));
     }
 
+    public Card getCard(int CardID){
+        return mapCardIDtoCard.get(CardID);
+    }
+
+    public Card getOtherCard(int CardID){
+        return mapOtherCardIDtoCard.get(CardID);
+    }
 
     public void attackOtherTarget(int otherSideIndex){
 
@@ -104,15 +115,15 @@ public class BattleModel {
     }
 
     public void pickCard(int CardID,int index){
-        CardPickMap.put(CardIDMap.get(CardID),0);
-        if(playChooseCard.containsKey(index))
-            CardPickMap.put(playChooseCard.get(index),1);
-        playChooseCard.put(index,CardIDMap.get(CardID));
+        mapIsUserCardPicked.put(mapCardIDtoCard.get(CardID),0);
+        if(mapBtnNumberChooseCard.containsKey(index))
+            mapIsUserCardPicked.put(mapBtnNumberChooseCard.get(index),1);
+        mapBtnNumberChooseCard.put(index, mapCardIDtoCard.get(CardID));
         battleActivity.updateMyCard(CardID,index);
     }
 
     public int chosedCardNo(){
-        return playChooseCard.size();
+        return mapBtnNumberChooseCard.size();
     }
 
     public void setUserAccount(UserAccount user){
