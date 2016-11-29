@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout_battle_waiting_otherside"
-        android:background="@drawable/battle_waiting_bg_up"
+        android:background="@drawable/battle_waiting_otherside"
         android:layout_above="@+id/textView_battle_turn"
         android:layout_alignParentStart="true">
     </RelativeLayout>

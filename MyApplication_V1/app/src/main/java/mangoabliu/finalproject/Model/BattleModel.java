@@ -45,12 +45,25 @@ public class BattleModel {
         this.battleActivity=battleActivity;
     }
 
+    public void setUserCards(ArrayList<Card> userCards){
+        this.UserCards=userCards;
+    }
+
     public ArrayList<Card> getUserCards(){
         return this.UserCards;
     }
     //1 就是可以选的，0是不可以选的
     public int checkCardPick(int CardID){
         return CardPickMap.get(CardIDMap.get(CardID));
+    }
+
+
+    public void attackOtherTarget(int otherSideIndex){
+
+    }
+
+    public void chooseMyCard(int myIndex){
+
     }
 
     public void pickCard(int CardID,int index){

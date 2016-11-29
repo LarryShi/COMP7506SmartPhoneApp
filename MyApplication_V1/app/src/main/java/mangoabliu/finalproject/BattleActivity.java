@@ -24,13 +24,13 @@ import mangoabliu.finalproject.Model.GameModel;
 
 /**
  * Created by Lyris on 29/11/16.
+ * Modify by SHI Zhongqi on 29/11/16
  */
 
 public class BattleActivity extends AppCompatActivity {
 
     private TextView tv_searching;
-    private ImageView img_searchingUp,img_searchingDown;
-    private RelativeLayout rl_battleStart;
+
 
     BattleModel battleModel;
     GameModel gameModel;
@@ -38,7 +38,6 @@ public class BattleActivity extends AppCompatActivity {
     RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down,rl_battle_waiting_other_side;
     ImageView imageView_battle_waiting;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
-    private static final String TAG = "MyActivity";
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
     //Test
     private Button btnTest;
@@ -76,6 +75,7 @@ public class BattleActivity extends AppCompatActivity {
         rl_battle_waiting_up = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_up);
         rl_battle_waiting_other_side=(RelativeLayout)findViewById(R.id.relativeLayout_battle_waiting_otherside);
         imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
+
         tv_searching = (TextView)findViewById(R.id.battle_searching_text);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
@@ -90,10 +90,15 @@ public class BattleActivity extends AppCompatActivity {
         myCard2.setOnClickListener(new clickListener_myCard(2));
         myCard3.setOnClickListener(new clickListener_myCard(3));
 
+        otherCard1.setOnClickListener(new clickListener_otherCard(1));
+        otherCard2.setOnClickListener(new clickListener_otherCard(2));
+        otherCard3.setOnClickListener(new clickListener_otherCard(3));
+
         float center_height=imageView_battle_waiting.getDrawable().getIntrinsicHeight();
         float center_width=imageView_battle_waiting.getDrawable().getIntrinsicHeight();
         RotateAnimation animationWaitingIcon = new RotateAnimation(0, 360.0f,center_width/2,center_height/2);
         animationWaitingIcon.setDuration(2000);
+        animationWaitingIcon.setStartOffset(120);
         animationWaitingIcon.setRepeatMode(Animation.RESTART);
         animationWaitingIcon.setRepeatCount(Animation.INFINITE);
         LinearInterpolator lin = new LinearInterpolator();
@@ -126,18 +131,32 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void playerWin(){
-
+    //用户赢了
     }
 
     public void OtherWin(){
-
+    //对面赢了
     }
 
-    public void playerAttackOther(int hurt){
 
+    public void playerAttackOther(int hurt){
+    //用户攻击对面后对面减少的HP
+    }
+
+
+    public void otherSideAttackPlayer(int hurt){
+        //对面攻击用户减少的HP
     }
 
     public void setTurn(String userName){
+        //设置中间的Turn信息
+    }
+
+    public void setTime(int times){
+        //设置旁边的时间
+    }
+
+    public void setOtherSideUserName(String userName){
 
     }
 
@@ -262,8 +281,8 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         public void onClick(View v) {
-            if(int_state==1)
-                startPickUpCard(index);
+            if(int_state==3)
+                battleModel.attackOtherTarget(index);
 
         }
     }
@@ -279,6 +298,8 @@ public class BattleActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(int_state==1)
                 startPickUpCard(index);
+            if(int_state==3)
+                battleModel.chooseMyCard(index);
 
         }
     }
