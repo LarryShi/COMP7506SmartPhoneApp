@@ -84,11 +84,9 @@
     <!--等待另一边选卡-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/relativeLayout_battle_waiting_otherside"
-        android:background="@drawable/battle_waiting_otherside"
-        android:layout_above="@+id/textView_battle_turn"
-        android:layout_alignParentStart="true">
+        android:background="@drawable/battle_waiting">
     </RelativeLayout>
 
 
