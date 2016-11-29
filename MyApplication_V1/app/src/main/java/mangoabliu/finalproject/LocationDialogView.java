@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -37,10 +35,11 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
 public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
-    int clickedLoc;
+    int clickedLoc, btnJudge=0;
     ImageView image_pCard,expandedImageView;
 
-    Button action;
+    //change into imageview
+    ImageView action;
 
     FontTextView tv_locName;
     String clickedLocName;
@@ -57,7 +56,7 @@ public class LocationDialogView extends Dialog {
     }
 
 
-    public Button getAction(){
+    public ImageView getAction(){
         return action;
     }
 
@@ -80,15 +79,15 @@ public class LocationDialogView extends Dialog {
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
-        action = (Button) findViewById(R.id.locationAction);
 
+        action = (ImageView) findViewById(R.id.locationAction);
         action.setEnabled(false);
-        action.setText("");
 
         if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc) {
-            action.setText("DROP");
+            action.setBackgroundResource(R.drawable.btn_drop);
             action.setEnabled(true);
             actionVisible = true;
+            btnJudge=1;   //判断是drop按钮
         }
 
         //PossibleCardDisplay  /Lyris
@@ -128,14 +127,15 @@ public class LocationDialogView extends Dialog {
                 (currentLocID == 5 && (clickedLoc == 3 || clickedLoc == 4 || clickedLoc == 6))||
                 (currentLocID == 6 && (clickedLoc == 5))) {
 
-            action.setText("GO");
+            action.setBackgroundResource(R.drawable.btn_go);
             action.setEnabled(true);
             actionVisible = true;
+            btnJudge =2; //判断是go按钮
         }
 
-        if (action.getText().equals("GO"))
+        if (btnJudge==2)  //go
             action.setOnClickListener(new startTripListener());
-        else if (action.getText().equals("DROP"))
+        else if (btnJudge==1) //drop
             action.setOnClickListener(new drop_DropCardListener());
 
         initLocName();
