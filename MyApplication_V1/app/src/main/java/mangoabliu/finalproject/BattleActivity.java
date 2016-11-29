@@ -36,9 +36,12 @@ public class BattleActivity extends AppCompatActivity {
     GameModel gameModel;
     Button btn_test,btn_card_choose_confirm,btn_exit;
     RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down,rl_battle_waiting_other_side;
-    ImageView imageView_battle_waiting;
+    ImageView imageView_battle_waiting,imageView_battle_border;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
+    BattlePickCardDialog cardPicker1;
+    BattlePickCardDialog cardPicker2;
+    BattlePickCardDialog cardPicker3;
 
 
     @Override
@@ -60,7 +63,9 @@ public class BattleActivity extends AppCompatActivity {
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
-
+        cardPicker1 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,1);
+        cardPicker2 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,2);
+        cardPicker3 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,3);
     }
 
 
@@ -74,7 +79,7 @@ public class BattleActivity extends AppCompatActivity {
         rl_battle_waiting_up = (RelativeLayout) findViewById(R.id.relativeLayout_battle_waiting_bg_up);
         rl_battle_waiting_other_side=(RelativeLayout)findViewById(R.id.relativeLayout_battle_waiting_otherside);
         imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
-
+        imageView_battle_border=(ImageView)findViewById(R.id.imageView_battle_border);
         tv_searching = (FontTextView)findViewById(R.id.battle_searching_text);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
@@ -180,6 +185,7 @@ public class BattleActivity extends AppCompatActivity {
         imageView_battle_waiting.clearAnimation();
         tv_searching.clearAnimation();
         imageView_battle_waiting.setVisibility(View.INVISIBLE);
+        imageView_battle_border.setVisibility(View.INVISIBLE);
         rl_battle_waiting_down.setVisibility(View.INVISIBLE);
         rl_battle_waiting_up.setVisibility(View.INVISIBLE);
         tv_searching.setVisibility(View.INVISIBLE);
@@ -294,16 +300,15 @@ public class BattleActivity extends AppCompatActivity {
 
         public void onClick(View v) {
             if(int_state==1)
-                startPickUpCard(index);
+                switch(index){
+                    case 1:cardPicker1.show();break;
+                    case 2:cardPicker2.show();break;
+                    case 3:cardPicker3.show();break;
+                }
             if(int_state==3)
                 battleModel.chooseMyCard(index);
 
         }
-    }
-    //请不要改这个...
-    public void startPickUpCard(int index){
-        BattlePickCardDialog cardPicker = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,index);
-        cardPicker.show();
     }
 
     //显示Toast

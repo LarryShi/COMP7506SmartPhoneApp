@@ -27,19 +27,20 @@ public class BattlePickCardDialog extends Dialog {
         super(context,style);
         battleModel=BattleModel.getInstance();
         this.index=index;
+        Log.i("PickCardDialog","Object Create");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_battle_cardpick);
-
+        Log.i("PickCardDialog","Create");
         linearLayout_cardList=(LinearLayout)findViewById(R.id.LinearLayout_battle_cardPickup);
         UserCards=battleModel.getUserCards();
 
-
         for (int i = 0; i < UserCards.size(); i++)
         {
+            Log.i("PickCardDialog","Repeat,"+i);
             //1 就是可以选的，0是不可以选的
             if(battleModel.checkCardPick(UserCards.get(i).getCardID())==1) {
                 CardLayout cardLayout = new CardLayout(this.getContext());

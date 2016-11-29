@@ -19,7 +19,7 @@ public class BattleModel {
     private static BattleModel instance;
     private final String String_base_url="http://i.cs.hku.hk/~zqshi/ci/index.php/";
     private BattleActivity battleActivity;
-    private ArrayList<Card> UserCards= new ArrayList<>();
+    private ArrayList<Card> UserCards;
     private HashMap<Card,Integer> CardPickMap=new HashMap<>();
     private HashMap<Integer,Card> CardIDMap=new HashMap<>();
     private HashMap<Integer,Card> playChooseCard = new HashMap<>();
