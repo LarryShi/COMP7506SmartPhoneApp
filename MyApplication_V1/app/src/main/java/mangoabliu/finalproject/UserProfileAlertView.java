@@ -106,7 +106,7 @@ public class UserProfileAlertView extends Dialog {
 //                iv.setScaleType(ImageView.ScaleType.FIT_XY);
 //                iv.setLayoutParams(new GridView.LayoutParams(400,500));
                 iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                iv.setLayoutParams(new GridView.LayoutParams(350,450));
+                iv.setLayoutParams(new GridView.LayoutParams(300,375));
             } else {
                 iv = (ImageView) convertView;
             }

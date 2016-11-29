@@ -29,17 +29,15 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 
 
     <RelativeLayout
-        android:layout_width="@dimen/location_inner_width"
-        android:layout_height="@dimen/location_inner_height"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:paddingEnd="@dimen/location_inner_padding"
-        android:paddingBottom="@dimen/location_inner_padding">
+        android:layout_marginEnd="@dimen/location_inner_margin"
+        android:layout_marginBottom="@dimen/location_inner_margin">
 
 
         <ImageButton
@@ -48,7 +46,7 @@
             android:layout_height="@dimen/location_img_height"
             android:src="@drawable/card_back"
             android:layout_centerInParent="true"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:background="@color/transparent"/>
 
         <!--<ImageButton-->
