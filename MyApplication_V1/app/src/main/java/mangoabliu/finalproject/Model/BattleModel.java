@@ -27,6 +27,7 @@ public class BattleModel {
     private UserAccount otherUser;
     private Handler handler = new Handler( );
     private Runnable runnable;
+    private int stateCase=0;
     private int roomId;
 
 
@@ -41,12 +42,35 @@ public class BattleModel {
 
     private BattleModel() {
         // public Card(int _CardID,String _CardName,int _CardHP,int _CardAttack,int _CardArmor,int _CardRarity);
+        runnable = new Runnable( ) {
+            public void run ( ) {
+                switch(stateCase){
+                    case 1:
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+
+                            jsonObject.put("RoomID",roomId);
+
+                            serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_isRoomReadyM_function);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+
+
+
+                handler.postDelayed(this,2000);
+                //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
+            }
+        };
     }
 
     public static BattleModel getInstance(){
         if(null == instance){
             instance = new BattleModel();
         }
+        instance.stateCase=0;
         return instance;
     }
 
@@ -113,6 +137,10 @@ public class BattleModel {
 
     }
 
+    public void roomIsReady(){
+        
+    }
+
     public void playerCardPickConfirm(){
 
 
@@ -123,12 +151,14 @@ public class BattleModel {
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("UserID",myUser.getUserId());
-
+            stateCase=1;
             serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
 
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
