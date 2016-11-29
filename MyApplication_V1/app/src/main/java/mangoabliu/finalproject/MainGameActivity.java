@@ -140,12 +140,12 @@ public class MainGameActivity extends AppCompatActivity {
     public void errorMessage(String err){
         gameModel.showToast(MainGameActivity.this, err);
     }
-    int asdfasdfasdf=0;
+
     public void getUserCards_successful(String jsonObject) {
-        try {asdfasdfasdf++;
+        try {
             JSONObject passedData = new JSONObject(jsonObject);
             JSONArray UserCards = passedData.getJSONArray("UserInfo");
-            Log.i("MainGame，userCards",asdfasdfasdf+",,,"+jsonObject);
+            Log.i("MainGame，userCards",jsonObject);
             for (int i = 0; i < UserCards.length(); i++) {
                 JSONObject currentCard = UserCards.getJSONObject(i);
                 int CardID = currentCard.getInt("CardID");
