@@ -185,7 +185,7 @@ public class BattleActivity extends AppCompatActivity {
         imageView_battle_waiting.clearAnimation();
         tv_searching.clearAnimation();
         imageView_battle_waiting.setVisibility(View.INVISIBLE);
-        imageView_battle_border.setVisibility(View.INVISIBLE);
+//        imageView_battle_border.setVisibility(View.INVISIBLE);
         rl_battle_waiting_down.setVisibility(View.INVISIBLE);
         rl_battle_waiting_up.setVisibility(View.INVISIBLE);
         tv_searching.setVisibility(View.INVISIBLE);
