@@ -23,6 +23,9 @@ public class ZoomObject {
     ImageView expandedImageView;
     LocationDialogView currentDialogView = null;
 
+    boolean showStart;
+    boolean showDrop;
+
     public ZoomObject(LocationDialogView myDialogView){
 
         mShortAnimationDuration = 0;
@@ -38,6 +41,25 @@ public class ZoomObject {
     public void zoomImageFromThumb(final View thumbView, ImageView expandedOne, final View largeView) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
+
+        if (currentDialogView.getStartVisible() && currentDialogView.getDropVisible()) {
+            showStart = true;
+            showDrop = true;
+        }
+        else if (!currentDialogView.getStartVisible() && currentDialogView.getDropVisible())
+        {
+            showStart = false;
+            showDrop = true;
+        }
+        else if (currentDialogView.getStartVisible() && !currentDialogView.getDropVisible())
+        {
+            showStart = true;
+            showDrop = false;
+        }
+        else{
+            showStart = false;
+            showDrop = false;
+        }
 
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
@@ -125,8 +147,10 @@ public class ZoomObject {
         mCurrentAnimator = set;
 
         if (currentDialogView != null) {
-            currentDialogView.getStart().setVisibility(View.INVISIBLE);
-            currentDialogView.getDrop().setVisibility(View.INVISIBLE);
+            if(showStart)
+                currentDialogView.getStart().setVisibility(View.INVISIBLE);
+            if(showDrop)
+                currentDialogView.getDrop().setVisibility(View.INVISIBLE);
         }
 
         // Upon clicking the zoomed-in image, it should zoom back down
@@ -175,8 +199,10 @@ public class ZoomObject {
                 set.start();
                 mCurrentAnimator = set;
                 if (currentDialogView != null) {
-                    currentDialogView.getStart().setVisibility(View.VISIBLE);
-                    currentDialogView.getDrop().setVisibility(View.VISIBLE);
+                    if(showStart)
+                        currentDialogView.getStart().setVisibility(View.VISIBLE);
+                    if(showDrop)
+                        currentDialogView.getDrop().setVisibility(View.VISIBLE);
                 }
             }
         });

@@ -48,10 +48,14 @@ public class LocationDialogView extends Dialog {
 
     ZoomObject zoomHelper;
 
+    boolean startVisible;
+    boolean dropVisible;
+
     //Add Style /Lyris 11-26
     protected LocationDialogView(Context context, int loc, int style ) {
         super(context, style);
         clickedLoc = loc;
+        gameModel= GameModel.getInstance();
     }
 
     public Button getStart(){
@@ -60,6 +64,14 @@ public class LocationDialogView extends Dialog {
 
     public ImageButton getDrop(){
         return drop;
+    }
+
+    public boolean getStartVisible(){
+        return startVisible;
+    }
+
+    public boolean getDropVisible(){
+        return dropVisible;
     }
 
     @Override
@@ -78,6 +90,17 @@ public class LocationDialogView extends Dialog {
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         start = (Button) findViewById(R.id.locationGo);
         drop = (ImageButton) findViewById(R.id.dropCard);
+
+        drop.setVisibility(View.INVISIBLE);
+        drop.setEnabled(false);
+        dropVisible = false;
+
+        if (gameModel.getUserAccount().getCurrentLocId() == clickedLoc)
+        {
+            drop.setVisibility(View.VISIBLE);
+            dropVisible = true;
+            drop.setEnabled(true);
+        }
 
         //PossibleCardDisplay  /Lyris
         image_pCard =(ImageView) findViewById(R.id.locationImage);
@@ -111,6 +134,7 @@ public class LocationDialogView extends Dialog {
 
 
         start.setVisibility(View.INVISIBLE);
+        startVisible = false;
         start.setEnabled(false);
 
         gameModel = GameModel.getInstance();
@@ -124,6 +148,7 @@ public class LocationDialogView extends Dialog {
                 (currentLocID == 6 && (clickedLoc == 5))) {
 
             start.setVisibility(View.VISIBLE);
+            startVisible = true;
             start.setEnabled(true);
         }
 

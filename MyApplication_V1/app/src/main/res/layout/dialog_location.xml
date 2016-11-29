@@ -60,7 +60,6 @@
             android:layout_marginStart="20dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/locationImage" />
-
         <!--<Button-->
             <!--android:id="@+id/locationDialogCancel"-->
             <!--android:layout_width="wrap_content"-->
