@@ -99,8 +99,18 @@ public class BattleModel {
         return myUser;
     }
 
-    public void setRoomId(int id){
-        this.roomId=id;
+    public void setRoomId(String result){
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            if((Integer)jsonObj.get("code")==0) {
+                this.roomId=(Integer)jsonObj.get("RoomID");
+            }
+            else
+                battleActivity.displayMessage((String)jsonObj.get("message"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void playerCardPickConfirm(){

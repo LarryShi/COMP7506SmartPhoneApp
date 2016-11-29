@@ -307,6 +307,10 @@ public class BattleActivity extends AppCompatActivity {
         cardPicker.show();
     }
 
+    //显示Toast
+    public void displayMessage(String msg){
+            gameModel.showToast(BattleActivity.this, msg);
 
+    }
 
 }

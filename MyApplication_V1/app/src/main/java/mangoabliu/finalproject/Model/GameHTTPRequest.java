@@ -87,7 +87,8 @@ public class GameHTTPRequest extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         Log.i(TAG, "onPostExecute(Result result) called");
-       
+        if(str_function.equals(BattleModel.str_applyForFightM_function))
+            battleModel.setRoomId(result);
 
     }
 
