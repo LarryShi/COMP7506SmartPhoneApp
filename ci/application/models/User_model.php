@@ -39,12 +39,12 @@ class User_model extends CI_Model {
 
             $cardData[0] = array(
                 'UserID'    => $result['UserInfo']['UserID'] ,
-                'CardID'  => '5'
+                'CardID'  => '16'
 
             );
             $cardData[1] = array(
                 'UserID'    => $result['UserInfo']['UserID'] ,
-                'CardID'  => '15'
+                'CardID'  => '17'
 
             );
             $cardData[2]= array(
@@ -81,9 +81,11 @@ class User_model extends CI_Model {
             $result['LocationInfo'] = $query->result_array();
 
             $this->db->select('*');
-            $this->db->from('LocationRelation');
+            $this->db->from('LocationCardRelation as a');
+            $this->db->join('Location as b','a.LocationID = b.LocationID');
             $query = $this->db->get();
-            $result['LocationRelation'] = $query->result_array();
+            $result['LocationCardRelationInfo'] = $query->result_array();
+            
             $password = $paramemter['Password'];
             if($result['UserInfo']['Password'] != $password){
                 $result['ret'] = 401;
@@ -200,13 +202,14 @@ class User_model extends CI_Model {
       {
         $result['ret'] = 400;
         return $result;
+
       }else{
         $this->db->trans_start();
         $this->db->insert('UserCardRelation', $data);
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE)
         {
-            $result['ret'] = 200;
+            $result['ret'] = 401;
             return $result;
         }
         $result['ret']=200;
@@ -215,8 +218,6 @@ class User_model extends CI_Model {
 
 
     }
-
-
 
 
 

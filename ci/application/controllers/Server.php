@@ -162,7 +162,7 @@ class Server extends CI_Controller {
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
 				$data['LocationInfo']=$result['LocationInfo'];
-				$data['LocationRelation']=$result['LocationRelation'];
+				$data['LocationCardRelationInfo']=$result['LocationCardRelationInfo'];
 
 			}else{
 				$data['code']=2;
@@ -203,7 +203,7 @@ class Server extends CI_Controller {
 				$data['code'] = 0;
 				$data['UserInfo']=$result['UserInfo'];
 				$data['LocationInfo']=$result['LocationInfo'];
-				$data['LocationRelation']=$result['LocationRelation'];
+				$data['LocationCardRelationInfo']=$result['LocationCardRelationInfo'];
 
 				$this->output
 	        			->set_content_type('application/json')
@@ -527,11 +527,14 @@ class Server extends CI_Controller {
 					$data['code'] = 0;
 					$data['UserID']=$paramemter['UserID'];
 					$data['CardID']=$paramemter['CardID'];
-				}else {
-					$data['code']=2;
-					$data['message'] = "You already have this Card";
+				}else if($result['ret']==400){
+					$data['code'] = 1;
 
-				}
+
+				}	else{
+					$data['code'] = 2;
+					$data['message'] = "update error";
+					}
 
 			$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Server/updateUserCardRelationM";
 
@@ -562,15 +565,22 @@ class Server extends CI_Controller {
 					$this->output
 		        			->set_content_type('application/json')
 		        			->set_output(json_encode($data));
-				}else	{
-					$data['code']=2;
-					$data['message'] = "You already have this Card";
+				}else if($result['ret']==400)	{
+					$data['code']=1;
 					$this->output
 									->set_content_type('application/json')
 									->set_output(json_encode($data));
 
-				}
+
+				}else{
+				$data['code']=2;
+				$data['message'] = "update error";
+				$this->output
+								->set_content_type('application/json')
+								->set_output(json_encode($data));
+						}
 		}
+
 
 
 
