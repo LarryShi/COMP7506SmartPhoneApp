@@ -39,18 +39,17 @@ class User_model extends CI_Model {
 
             $cardData[0] = array(
                 'UserID'    => $result['UserInfo']['UserID'] ,
-                'CardID'  => '1',
-                'Level'    => '1'
+                'CardID'  => '5'
+
             );
             $cardData[1] = array(
                 'UserID'    => $result['UserInfo']['UserID'] ,
-                'CardID'  => '2',
-                'Level'    => '1'
+                'CardID'  => '15'
+
             );
             $cardData[2]= array(
                 'UserID' => $result['UserInfo']['UserID'] ,
-                'CardID'  => '3',
-                'Level' => '1'
+                'CardID'  => '18'
             );
             $this->db->insert_batch('UserCardRelation', $cardData);
 
@@ -192,18 +191,29 @@ class User_model extends CI_Model {
           'UserID'  => $paramemter['UserID'],
           'CardID'  => $paramemter['CardID']);
 
+      $this->db->select('*');
+      $this->db->from('UserCardRelation');
+      $this->db->where('UserID', $paramemter['UserID']);
+      $this->db->where('CardID', $paramemter['CardID']);
+      $query = $this->db->get();
+      if ($query->num_rows() > 0)
+      {
+        $result['ret'] = 400;
+        return $result;
+      }else{
         $this->db->trans_start();
         $this->db->insert('UserCardRelation', $data);
-
         $this->db->trans_complete();
-
         if ($this->db->trans_status() === FALSE)
         {
-            $result['ret'] = 400;
+            $result['ret'] = 200;
             return $result;
         }
         $result['ret']=200;
         return $result;
+      }
+
+
     }
 
 

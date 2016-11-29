@@ -57,6 +57,10 @@ class Server extends CI_Controller {
         $paramemter['PositionX']='20';
         $paramemter['PositionY']='20';
         $paramemter['WalkDistance']='0';
+				$paramemter['CurrentLocationID']='1';
+				$paramemter['TargetLocationID']='2';
+				$paramemter['CurrentPositionX']='350';
+				$paramemter['CurrentPositionY']='440';
         $paramemter['GpsLat']='0';
         $paramemter['GpsLon']='0';
         $data['code']="1";
@@ -523,13 +527,9 @@ class Server extends CI_Controller {
 					$data['code'] = 0;
 					$data['UserID']=$paramemter['UserID'];
 					$data['CardID']=$paramemter['CardID'];
-				}else if($result['ret']==400){
-					$data['code']=3;
-					$data['message'] = "fail";
-
 				}else {
 					$data['code']=2;
-					$data['message'] = "Update Error";
+					$data['message'] = "You already have this Card";
 
 				}
 
@@ -562,16 +562,9 @@ class Server extends CI_Controller {
 					$this->output
 		        			->set_content_type('application/json')
 		        			->set_output(json_encode($data));
-				}else if($result['ret']==400)
-				{
-					$data['code']=3;
-					$data['message'] = "fail";
-					$this->output
-		        			->set_content_type('application/json')
-		        			->set_output(json_encode($data));
-				}else{
+				}else	{
 					$data['code']=2;
-					$data['message'] = "Update Error";
+					$data['message'] = "You already have this Card";
 					$this->output
 									->set_content_type('application/json')
 									->set_output(json_encode($data));
