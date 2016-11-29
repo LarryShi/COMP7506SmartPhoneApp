@@ -157,7 +157,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void setOtherSideUserName(String userName){
-
+        //设置对面用户名字
     }
 
     public void waitingRoomFinished(){

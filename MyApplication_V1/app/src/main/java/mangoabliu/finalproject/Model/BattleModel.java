@@ -29,6 +29,16 @@ public class BattleModel {
     private Runnable runnable;
     private int roomId;
 
+
+    protected final static String str_getTime_function="getTime";
+    protected final static String str_myTurnM_function = "myTurnM";
+    protected final static String str_playCardM_function = "playCardM";
+    protected final static String str_isFightReadyM_function = "isFightReadyM";
+    protected final static String str_setCardsM_function = "setCardsM";
+    protected final static String str_isRoomReadyM_function = "isRoomReadyM";
+    protected final static String str_applyForFightM_function = "applyForFightM";
+
+
     private BattleModel() {
         // public Card(int _CardID,String _CardName,int _CardHP,int _CardAttack,int _CardArmor,int _CardRarity);
     }
@@ -89,13 +99,25 @@ public class BattleModel {
         return myUser;
     }
 
+    public void setRoomId(int id){
+        this.roomId=id;
+    }
+
     public void playerCardPickConfirm(){
 
 
     }
 
     public void applyForFight(){
+        try {
+            JSONObject jsonObject = new JSONObject();
 
+            jsonObject.put("UserID",myUser.getUserId());
+
+            serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     //HTTP Request Related Info
