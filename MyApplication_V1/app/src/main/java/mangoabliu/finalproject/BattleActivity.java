@@ -31,7 +31,6 @@ public class BattleActivity extends AppCompatActivity {
 
     private FontTextView tv_searching;
 
-
     BattleModel battleModel;
     GameModel gameModel;
     Button btn_test,btn_card_choose_confirm,btn_exit;
@@ -51,6 +50,7 @@ public class BattleActivity extends AppCompatActivity {
         gameModel.addActivity(this);
         battleModel= BattleModel.getInstance();
         battleModel.setBattleActivity(this);
+        battleModel.setUserCards(gameModel.getUserCards());
         battleModel.setUserAccount(gameModel.getUserAccount());
         Log.i("Battle Activity", gameModel.getUserAccount().getUserName());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
