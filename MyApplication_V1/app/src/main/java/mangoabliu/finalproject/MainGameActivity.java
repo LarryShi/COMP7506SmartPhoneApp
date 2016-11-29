@@ -104,6 +104,8 @@ public class MainGameActivity extends AppCompatActivity {
         myLayout.addView(thumbnail,layoutParams);
 
         distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
+
+        gameModel.getUserCard(gameModel.getUserAccount().getUserId());
     }
 
 
@@ -145,6 +147,7 @@ public class MainGameActivity extends AppCompatActivity {
         try {
             JSONObject passedData = new JSONObject(jsonObject);
             JSONArray UserCards = passedData.getJSONArray("UserInfo");
+            Log.i("MainGame，userCards",jsonObject);
             for (int i = 0; i < UserCards.length(); i++) {
                 JSONObject currentCard = UserCards.getJSONObject(i);
                 int CardID = currentCard.getInt("CardID");
@@ -166,7 +169,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class userProfileListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            gameModel.getUserCard(gameModel.getUserAccount().getUserId());
+            //gameModel.getUserCard(gameModel.getUserAccount().getUserId());
             Resources res = getResources();
             String[] CardsName = res.getStringArray(R.array.cards_name);
             ArrayList<Card> myCards = gameModel.getUserCards();
