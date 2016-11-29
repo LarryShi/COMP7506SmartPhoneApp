@@ -18,12 +18,12 @@
         android:background="@color/transparent"/>
 
     <!--Button Fight-->
-    <Button
+    <ImageButton
         android:id="@+id/fight"
-        android:layout_width="@dimen/map_btnFight_width"
-        android:layout_height="@dimen/map_btnFight_height"
+        android:background="@drawable/btn_fight"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:text="FIGHT"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/map_btnFight_marginEnd"

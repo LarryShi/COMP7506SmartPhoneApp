@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -46,7 +47,8 @@ import static android.content.ContentValues.TAG;
 public class MainGameActivity extends AppCompatActivity {
     GameModel gameModel;
     UserAccount myUser;
-    Button userProfile, loc1,loc2,loc3,loc4,loc5,loc6,fight;
+    Button userProfile, loc1,loc2,loc3,loc4,loc5,loc6;
+    ImageButton fight;
     FontTextView distance;
     ImageView thumbnail;
     String userProfileName;
@@ -73,7 +75,7 @@ public class MainGameActivity extends AppCompatActivity {
         loc5 = (Button) findViewById(R.id.location5);
         loc3 = (Button) findViewById(R.id.location3);
         loc6 = (Button) findViewById(R.id.location6);
-        fight = (Button) findViewById(R.id.fight);
+        fight = (ImageButton) findViewById(R.id.fight);
 
         distance = (FontTextView) findViewById(R.id.distance);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
