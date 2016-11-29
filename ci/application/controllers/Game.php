@@ -125,7 +125,7 @@ class Game extends CI_Controller {
 			$data['message'] = "Waiting";		
 		}
 		
-		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/isFightReadyM";
+		$content_data['display_value']['Link']="http://i.cs.hku.hk/~zqshi/ci/index.php/Game/playCardM";
 		
 		$content_data['display_value']['Input']=json_encode($json_string, true);
 

@@ -1,6 +1,11 @@
 package mangoabliu.finalproject.Model;
 
 
+import android.os.Handler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,26 +18,19 @@ import mangoabliu.finalproject.BattleActivity;
 public class BattleModel {
     private static BattleModel instance;
     private final String String_base_url="http://i.cs.hku.hk/~zqshi/ci/index.php/";
-    BattleActivity battleActivity;
-    ArrayList<Card> UserCards= new ArrayList<>();
-    HashMap<Card,Integer> CardPickMap=new HashMap<>();
-    HashMap<Integer,Card> CardIDMap=new HashMap<>();
-    HashMap<Integer,Card> playChooseCard = new HashMap<>();
+    private BattleActivity battleActivity;
+    private ArrayList<Card> UserCards= new ArrayList<>();
+    private HashMap<Card,Integer> CardPickMap=new HashMap<>();
+    private HashMap<Integer,Card> CardIDMap=new HashMap<>();
+    private HashMap<Integer,Card> playChooseCard = new HashMap<>();
     private UserAccount myUser;
-
+    private UserAccount otherUser;
+    private Handler handler = new Handler( );
+    private Runnable runnable;
+    private int roomId;
 
     private BattleModel() {
-        // public Card(int _CardID,String _CardName,int _CardHP,int _CardAttack,int _CardArmor,int _CardRarity){
-        UserCards.add(new Card(1,"Spider Man",300,100,100,3));
-        UserCards.add(new Card(2,"Captain America",300,100,100,3));
-        UserCards.add(new Card(3,"Dr Strange",300,100,100,3));
-        UserCards.add(new Card(4,"Black Widow",200,75,75,2));
-        UserCards.add(new Card(5,"Thor",200,75,75,2));
-        UserCards.add(new Card(6,"Wolverine",200,75,75,2));
-        for(int i=0;i<UserCards.size();i++){
-            CardPickMap.put(UserCards.get(i),1);//1 就是可以选的，0是不可以选的
-            CardIDMap.put(UserCards.get(i).getCardID(),UserCards.get(i));
-        }
+        // public Card(int _CardID,String _CardName,int _CardHP,int _CardAttack,int _CardArmor,int _CardRarity);
     }
 
     public static BattleModel getInstance(){
@@ -48,6 +46,10 @@ public class BattleModel {
 
     public void setUserCards(ArrayList<Card> userCards){
         this.UserCards=userCards;
+        for(int i=0;i<UserCards.size();i++){
+            CardPickMap.put(UserCards.get(i),1);//1 就是可以选的，0是不可以选的
+            CardIDMap.put(UserCards.get(i).getCardID(),UserCards.get(i));
+        }
     }
 
     public ArrayList<Card> getUserCards(){
@@ -89,6 +91,11 @@ public class BattleModel {
 
     public void playerCardPickConfirm(){
 
+
+    }
+
+    public void applyForFight(){
+
     }
 
     //HTTP Request Related Info
@@ -101,5 +108,31 @@ public class BattleModel {
         }
     }
 
+    private String getTimeUrl(){
+        return String_base_url+"/Game/getTime";
+    }
 
+    private String getMyTurnUrl(){
+        return String_base_url+"/Game/myTurnM";
+    }
+
+    private String getPlayCardUrl(){
+        return String_base_url+"/Game/playCardM";
+    }
+
+    private String getIsFightReadyUrl(){
+        return String_base_url+"/Game/isFightReadyM";
+    }
+
+    private String getSetCardsUrl(){
+        return String_base_url+"/Game/setCardsM";
+    }
+
+    private String getIsRoomReadyUrl(){
+        return String_base_url+"/Game/isRoomReadyM";
+    }
+
+    private String getApplyForFightUrl(){
+        return String_base_url+"/Game/applyForFightM";
+    }
 }
