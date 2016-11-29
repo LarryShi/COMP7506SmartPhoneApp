@@ -52,13 +52,13 @@
             android:layout_alignParentBottom="true"
             android:scaleType="fitCenter"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/dropCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/DropCard"
-            android:layout_marginStart="10dp"
-            android:layout_alignTop="@+id/locationImage"
+            android:background="@drawable/btn_drop"
+            android:layout_width="@dimen/location_btn_drop_width"
+            android:layout_height="@dimen/location_btn_drop_height"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/locationImage" />
 
         <!--<Button-->

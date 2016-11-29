@@ -1,25 +1,17 @@
 package mangoabliu.finalproject;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -46,13 +38,14 @@ public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
     int clickedLoc;
-    ImageView image_pCard;
+    ImageView image_pCard,expandedImageView;
 
-    Button start, drop;
+    Button start;
+    ImageButton drop;
 
     FontTextView tv_locName;
     String clickedLocName;
-    ImageView expandedImageView;
+
     ZoomObject zoomHelper;
 
     //Add Style /Lyris 11-26
@@ -65,7 +58,7 @@ public class LocationDialogView extends Dialog {
         return start;
     }
 
-    public Button getDrop(){
+    public ImageButton getDrop(){
         return drop;
     }
 
@@ -84,7 +77,7 @@ public class LocationDialogView extends Dialog {
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
         start = (Button) findViewById(R.id.locationGo);
-        drop = (Button) findViewById(R.id.dropCard);
+        drop = (ImageButton) findViewById(R.id.dropCard);
 
         //PossibleCardDisplay  /Lyris
         image_pCard =(ImageView) findViewById(R.id.locationImage);

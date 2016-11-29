@@ -96,6 +96,8 @@
     <dimen name="location_text_height">40dp</dimen>
     <dimen name="location_text_marginStart">50dp</dimen>
     <dimen name="location_text_padding">8dp</dimen>
+    <dimen name="location_btn_drop_width">60dp</dimen>
+    <dimen name="location_btn_drop_height">60dp</dimen>
 
     <!-- dialog_userfile -->
     <dimen name="userfile_icon_width">60dp</dimen>
