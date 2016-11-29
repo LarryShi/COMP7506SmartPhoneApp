@@ -47,6 +47,7 @@ public class GameModel {
 
     ArrayList<Planet> planets = new ArrayList<Planet>();
     ArrayList<Card> UserCards= new ArrayList<Card>();
+    ArrayList<Integer> myImageIds = new ArrayList<Integer>();
 
     int[] distances = new int[]{5,8,5,10,5,8};
 
@@ -94,6 +95,10 @@ public class GameModel {
 
     public ArrayList<Card> getUserCards(){
         return UserCards;
+    }
+
+    public ArrayList<Integer> getMyImageIds(){
+        return myImageIds;
     }
 
 

@@ -82,13 +82,8 @@ public class UserProfileAlertView extends Dialog {
 
         private Context mcontext;
 
-        ArrayList<Card> myCards = gameModel.getUserCards();
+        ArrayList<Integer> myImageIds = gameModel.getMyImageIds();
 
-
-
-
-        public Integer[] myImageIds = {R.drawable.card_ssr_spiderman, R.drawable.card_ssr_ca, R.drawable.card_ssr_dr, R.drawable.card_sr_blackwidow,
-                R.drawable.card_sr_thor, R.drawable.card_sr_wolverine, R.drawable.card_sr_deadpool};
 
         public ImageAdapter(Context c) {
             mcontext = c;
@@ -96,7 +91,7 @@ public class UserProfileAlertView extends Dialog {
 
         @Override
         public int getCount() {
-            return myImageIds.length;
+            return myImageIds.size();
         }
 
         @Override
@@ -114,13 +109,13 @@ public class UserProfileAlertView extends Dialog {
             ImageView iv;
             if (convertView == null) {
                 iv =new ImageView(mcontext);
-                iv.setImageResource(myImageIds[position]);
+                iv.setImageResource(myImageIds.get(position));
                 iv.setScaleType(ImageView.ScaleType.FIT_XY);
                 iv.setLayoutParams(new GridView.LayoutParams(400,500));
             } else {
                 iv = (ImageView) convertView;
             }
-            iv.setImageResource(myImageIds[position]);
+            iv.setImageResource(myImageIds.get(position));
             return iv;
 
 
