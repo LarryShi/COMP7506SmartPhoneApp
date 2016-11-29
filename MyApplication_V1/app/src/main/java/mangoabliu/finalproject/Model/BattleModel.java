@@ -31,9 +31,16 @@ public class BattleModel {
     private HashMap<Integer,Card> mapOtherBtnNumberChooseCard = new HashMap<>();
     private Handler handler = new Handler( );
     private Runnable runnable;
+    private Runnable timeRunnable;
     private int stateCase=0;
+    /**
+     *  0  just start
+     *  1  循环str_isRoomReadyM_function
+     *  3  循环，str_isFightReadyM_function
+     *  4  循环，str_myTurnM_function
+     *  5  循环，str_getTime_function ->单独拿出来写
+     */
     private int roomId;
-
 
     protected final static String str_getTime_function="getTime";
     protected final static String str_myTurnM_function = "myTurnM";
@@ -59,12 +66,46 @@ public class BattleModel {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        handler.postDelayed(this,3000);
+                        break;
+
+                    case 3:
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+
+                            jsonObject.put("RoomID",roomId);
+
+                            serverPHPPostConnection(getIsFightReadyUrl(),jsonObject.toString(),str_isFightReadyM_function);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        handler.postDelayed(this,3000);
+
+                        break;
+                    case 4:
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+
+                            jsonObject.put("RoomID",roomId);
+
+                            serverPHPPostConnection(getMyTurnUrl(),jsonObject.toString(),str_myTurnM_function);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        handler.postDelayed(this,3000);
+
                         break;
                 }
-
-
-
                 handler.postDelayed(this,2000);
+                //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
+            }
+        };
+
+
+        timeRunnable = new Runnable( ) {
+            public void run ( ) {
+                serverPHPPostConnection(getTimeUrl(),"",str_getTime_function);
+                handler.postDelayed(this,3000);
                 //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
             }
         };
@@ -153,8 +194,26 @@ public class BattleModel {
     }
 
     public void playerCardPickConfirm(){
+        /*
+        $paramemter['RoomID'] = $json['RoomID'];
+        $paramemter['UserID'] = $json['UserID'];
+        $paramemter['CardID1'] = $json['CardID1'];
+        $paramemter['CardID2'] = $json['CardID2'];
+        $paramemter['CardID3'] = $json['CardID3'];
+         */
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("RoomID",roomId);
+            jsonObject.put("UserID",myUser.getUserId());
+            jsonObject.put("CardID1", mapBtnNumberChooseCard.get(1));
+            jsonObject.put("CardID2", mapBtnNumberChooseCard.get(2));
+            jsonObject.put("CardID3", mapBtnNumberChooseCard.get(3));
 
-
+            stateCase=3;
+            serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void applyForFight(){
