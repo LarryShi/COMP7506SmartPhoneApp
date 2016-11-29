@@ -12,6 +12,7 @@ import mangoabliu.finalproject.BattleActivity;
 
 public class BattleModel {
     private static BattleModel instance;
+    private final String String_base_url="http://i.cs.hku.hk/~zqshi/ci/index.php/";
     BattleActivity battleActivity;
     ArrayList<Card> UserCards= new ArrayList<>();
     HashMap<Card,Integer> CardPickMap=new HashMap<>();
@@ -85,4 +86,7 @@ public class BattleModel {
     public void playerCardPickConfirm(){
 
     }
+
+
+
 }
