@@ -26,6 +26,6 @@
 
     <!-- clr for test-->
     <color name="clr_test">#FFFF</color>
-    <color name="btn_test">#5000</color>
+    <color name="btn_test">#0000</color>  #5000
 
 </resources>
