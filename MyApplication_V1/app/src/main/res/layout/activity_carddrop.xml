@@ -14,11 +14,11 @@
              android:layout_width="@dimen/carddrop_btn_width"
              android:layout_height="@dimen/carddrop_btn_height"
              android:layout_centerHorizontal="true"
-             android:background="@color/clr_test"
-             android:layout_alignParentTop="true"
+             android:background="@drawable/btn_back"
+             android:layout_alignParentBottom="true"
              android:layout_alignParentEnd="true"
              android:layout_marginEnd="@dimen/carddrop_btn_marginEnd"
-             android:layout_marginTop="@dimen/carddrop_btn_marginTop"/>
+             android:layout_marginBottom="@dimen/carddrop_btn_marginBottom" />
 
         <RelativeLayout
             android:id="@+id/CardRootM"

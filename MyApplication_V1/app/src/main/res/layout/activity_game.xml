@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/myLayout"
     android:background="@drawable/bg_mappage">
 
@@ -52,7 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="step"/>
+        android:text="step"
+        android:background="#5FFF"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"/>
 
 
     <!--Planet Button Layout-->

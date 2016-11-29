@@ -239,14 +239,14 @@
         android:id="@+id/btn_battle_test"
         />
     <Button
-        android:text="Exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/battle_btn_exit_width"
+        android:layout_height="@dimen/battle_btn_exit_height"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="144dp"
         android:id="@+id/btn_battle_exit"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/btn_back"/>
 
 
 </RelativeLayout>
