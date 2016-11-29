@@ -253,7 +253,7 @@ public class GameModel {
                 mainGameActivity.getUserCards_successful(jsonObj.toString());
             }
             else
-                mainGameActivity.errorMessage((String)jsonObj.get("message"));
+                cardDropActivity.showMessage((String)jsonObj.get("message"));
         } catch (Exception e) {
             e.printStackTrace();
         }

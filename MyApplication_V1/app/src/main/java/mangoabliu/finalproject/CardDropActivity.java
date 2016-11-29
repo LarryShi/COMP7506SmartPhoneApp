@@ -7,12 +7,14 @@ import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.nineoldandroids.view.ViewHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,9 +24,11 @@ import java.util.Random;
 
 import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Animation.ZoomObject;
+import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.UserAccount;
 
+import static android.widget.Toast.LENGTH_LONG;
 import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 
@@ -49,8 +53,10 @@ public class CardDropActivity extends AppCompatActivity  {
     private ImageView CardBackL;
     private ImageView CardFrontL;
     private Button ReturnMain;
-
+    private String errMessage;
     private ImageView expandedCard;
+
+
 
 
     @Override
@@ -67,6 +73,8 @@ public class CardDropActivity extends AppCompatActivity  {
         initView();
         int DropCardId = GeneDropCardID();
         initData(DropCardId);
+
+
     }
 
     private void initView() {
@@ -117,6 +125,12 @@ public class CardDropActivity extends AppCompatActivity  {
             rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
             CardBackM.setEnabled(false);
             CardBackR.setEnabled(false);
+            if(errMessage != null) {
+                Toast toast = Toast.makeText(CardDropActivity.this,errMessage, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+
 
         }
     }
@@ -136,6 +150,12 @@ public class CardDropActivity extends AppCompatActivity  {
             rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
             CardBackM.setEnabled(false);
             CardBackL.setEnabled(false);
+            if(errMessage != null) {
+                Toast toast = Toast.makeText(CardDropActivity.this,errMessage, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+
 
         }
     }
@@ -154,6 +174,12 @@ public class CardDropActivity extends AppCompatActivity  {
             rotatable.rotate(RotateObject.ROTATE_Y, -180, 1500);
             CardBackL.setEnabled(false);
             CardBackR.setEnabled(false);
+            if(errMessage != null) {
+                Toast toast = Toast.makeText(CardDropActivity.this,errMessage, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+
         }
     }
 
@@ -163,6 +189,7 @@ public class CardDropActivity extends AppCompatActivity  {
         int DropOneCard =random.nextInt(18);
         int CardID = DropOneCard+1;
         gameModel.updateUserCardRelation(gameModel.getUserAccount().getUserId(),CardID);
+        gameModel.getUserCard(gameModel.getUserAccount().getUserId());
         Resources res = getResources();
         String[] CardsName = res.getStringArray(R.array.cards_name);
         Context context = CardBackM.getContext();
@@ -171,6 +198,10 @@ public class CardDropActivity extends AppCompatActivity  {
 
     }
 
+    public void showMessage(String err){
+        errMessage = err;
+
+    }
 
     /**
      * 设置数据

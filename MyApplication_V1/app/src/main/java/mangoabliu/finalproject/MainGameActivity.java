@@ -146,6 +146,8 @@ public class MainGameActivity extends AppCompatActivity {
             JSONObject passedData = new JSONObject(jsonObject);
             JSONArray UserCards = passedData.getJSONArray("UserInfo");
             Log.i("MainGame，userCards",jsonObject);
+            if(gameModel.getUserCards()!= null){
+                gameModel.getUserCards().clear();}
             for (int i = 0; i < UserCards.length(); i++) {
                 JSONObject currentCard = UserCards.getJSONObject(i);
                 int CardID = currentCard.getInt("CardID");
@@ -167,19 +169,17 @@ public class MainGameActivity extends AppCompatActivity {
     private class userProfileListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            //gameModel.getUserCard(gameModel.getUserAccount().getUserId());
             Resources res = getResources();
             String[] CardsName = res.getStringArray(R.array.cards_name);
             ArrayList<Card> myCards = gameModel.getUserCards();
             Context context = v.getContext();
-            //   if(gameModel.getMyImageIds()!= null){
-            //    gameModel.getMyImageIds().clear();}
+            if(gameModel.getMyImageIds()!= null){
+                gameModel.getMyImageIds().clear();}
             for (int i = 0; i < myCards.size(); i++){
                 int id = context.getResources().getIdentifier(CardsName[myCards.get(i).getCardID()-1], "drawable",context.getPackageName());
                 gameModel.getMyImageIds().add(id);
             }
             UserProfileAlertView dialog = new UserProfileAlertView(MainGameActivity.this,R.style.DialogTranslucent,userProfileName);
-
             dialog.show();
         }
     }
@@ -303,6 +303,7 @@ public class MainGameActivity extends AppCompatActivity {
     }
 
     public void updateUserCardRelationSuccessful(String result) {
+
 
     }
 
