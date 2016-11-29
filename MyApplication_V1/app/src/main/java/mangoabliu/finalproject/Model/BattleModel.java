@@ -75,6 +75,10 @@ public class BattleModel {
         battleActivity.updateMyCard(CardID,index);
     }
 
+    public int chosedCardNo(){
+        return playChooseCard.size();
+    }
+
     public void setUserAccount(UserAccount user){
         myUser = user;
     }
@@ -87,6 +91,15 @@ public class BattleModel {
 
     }
 
+    //HTTP Request Related Info
+    private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
+        try{
+            GameHTTPRequest mTask = new GameHTTPRequest();
+            mTask.execute(str_URL,str_JSON,str_Function);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

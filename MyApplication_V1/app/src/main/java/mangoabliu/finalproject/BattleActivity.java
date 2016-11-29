@@ -260,15 +260,13 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    //请不要改这个...
     private class clickListener_Confirm implements View.OnClickListener {
-        int index;//从左往右第几张牌
-
         public void onClick(View v) {
-            if(int_state==1)
+            if(int_state==1&&battleModel.chosedCardNo()==3) {
                 battleModel.playerCardPickConfirm();
-            int_state=2;
-            updateOtherSideCard(1,3);
+                int_state = 2;
+            }
+            //updateOtherSideCard(1,3);
         }
     }
 
