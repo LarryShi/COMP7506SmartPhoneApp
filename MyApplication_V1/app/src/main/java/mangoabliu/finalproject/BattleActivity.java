@@ -38,10 +38,6 @@ public class BattleActivity extends AppCompatActivity {
     ImageView imageView_battle_waiting,imageView_battle_border;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
-    BattlePickCardDialog cardPicker1;
-    BattlePickCardDialog cardPicker2;
-    BattlePickCardDialog cardPicker3;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,9 +59,7 @@ public class BattleActivity extends AppCompatActivity {
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
-        cardPicker1 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,1);
-        cardPicker2 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,2);
-        cardPicker3 = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,3);
+
     }
 
 
@@ -120,7 +114,7 @@ public class BattleActivity extends AppCompatActivity {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                gameFinished();
             }
         });
 
@@ -300,17 +294,17 @@ public class BattleActivity extends AppCompatActivity {
 
         public void onClick(View v) {
             if(int_state==1)
-                switch(index){
-                    case 1:cardPicker1.show();break;
-                    case 2:cardPicker2.show();break;
-                    case 3:cardPicker3.show();break;
-                }
+                startPickUpCard(index);
             if(int_state==3)
                 battleModel.chooseMyCard(index);
 
         }
     }
-
+    //请不要改这个...
+    public void startPickUpCard(int index){
+        BattlePickCardDialog cardPicker = new BattlePickCardDialog(BattleActivity.this,R.style.DialogTranslucent,index);
+        cardPicker.show();
+    }
     //显示Toast
     public void displayMessage(String msg){
             gameModel.showToast(BattleActivity.this, msg);
