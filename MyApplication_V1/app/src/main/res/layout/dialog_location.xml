@@ -79,7 +79,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/location_btn_margin"
         android:layout_marginEnd="@dimen/location_btn_margin"
-        android:background="@color/transparent"
+        android:background="@drawable/btn_forbid"
         />
 
 
