@@ -27,5 +27,4 @@ public class Card {
     public int getCardAttack(){return CardAttack;}
     public int getCardArmor(){return CardArmor;}
     public int getCardRarity(){return CardRarity;}
-
 }

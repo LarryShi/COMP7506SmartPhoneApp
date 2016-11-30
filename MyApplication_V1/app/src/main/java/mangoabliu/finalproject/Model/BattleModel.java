@@ -25,21 +25,25 @@ public class BattleModel {
     private HashMap<Card,Integer> mapIsUserCardPicked =new HashMap<>();
     private HashMap<Integer,Card> mapCardIDtoCard =new HashMap<>();
     private HashMap<Integer,Card> mapBtnNumberChooseToCard = new HashMap<>();
+    private HashMap<Integer,Integer> myCardHP = new HashMap<>();
 
     private UserAccount myUser;
 
     private HashMap<Integer,Card> mapOtherCardIDtoCard =new HashMap<>();
     private HashMap<Integer,Card> mapOtherBtnNumberChooseToCard = new HashMap<>();
+    private HashMap<Integer,Integer> otherCardHP = new HashMap<>();
+
     private Handler handler = new Handler( );
     private Runnable runnable;
     private Runnable timeRunnable;
-    private int stateCase=0;
-    private int myplayerID=0;
-    private int roomId;
-    private int myPlayCardIndex=0;
-    private int otherPlayCardIndex=0;
-    private int otherUserID=0;
-    private String otherUserName;
+    private int int_stateCase =0;
+    private int int_myplayerID =0;
+    private int int_roomId;
+    private int int_myPlayCardIndex =-1;
+    private int int_otherPlayCardIndex =-1;
+    private int int_otherUserID =0;
+    private String String_otherUserName;
+    private boolean bool_winGame=false;
     /**
      *  0  just start
      *  1  循环str_isRoomReadyM_function
@@ -62,7 +66,7 @@ public class BattleModel {
         // public Card(int _CardID,String _CardName,int _CardHP,int _CardAttack,int _CardArmor,int _CardRarity);
         runnable = new Runnable( ) {
             public void run ( ) {
-                switch(stateCase){
+                switch(int_stateCase){
                     case 1:
                         getIsRoomReady();
                         break;
@@ -92,14 +96,21 @@ public class BattleModel {
         if(null == instance){
             instance = new BattleModel();
         }
-        instance.roomId=0;
-        instance.myplayerID=0;
-        instance.stateCase=0;
-        instance.myPlayCardIndex=0;
-        instance.otherPlayCardIndex=0;
-        instance.otherUserID=0;
-        instance.otherUserName="";
+
         return instance;
+    }
+
+    public void initialBattle(){
+        int_roomId =0;
+        int_myplayerID =0;
+        int_stateCase =0;
+        int_myPlayCardIndex =0;
+        int_otherPlayCardIndex =0;
+        int_otherUserID =0;
+        String_otherUserName ="";
+        bool_winGame=false;
+        applyForFight();
+
     }
 
     public void setBattleActivity(BattleActivity battleActivity){
@@ -131,11 +142,15 @@ public class BattleModel {
     }
 
     public void attackOtherTarget(int otherSideIndex){
-        otherPlayCardIndex=otherSideIndex;
+        int_otherPlayCardIndex =otherSideIndex;
+        if(int_myPlayCardIndex>0)
+            playACard();
     }
 
     public void chooseMyCard(int myIndex){
-        myPlayCardIndex=myIndex;
+        int_myPlayCardIndex =myIndex;
+        if(myCardHP.get(int_myPlayCardIndex)<=0)
+            int_myPlayCardIndex=-1;
     }
 
     public void pickCard(int CardID,int index){
@@ -165,7 +180,7 @@ public class BattleModel {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("UserID",myUser.getUserId());
-            stateCase=1;
+            int_stateCase =1;
             serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -176,7 +191,7 @@ public class BattleModel {
         try {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
-                this.roomId=(Integer)jsonObj.get("RoomID");
+                this.int_roomId =(Integer)jsonObj.get("RoomID");
             }
             else
                 battleActivity.displayMessage((String)jsonObj.get("message"));
@@ -190,7 +205,7 @@ public class BattleModel {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("RoomID",roomId);
+            jsonObject.put("RoomID", int_roomId);
 
             serverPHPPostConnection(getIsRoomReadyUrl(),jsonObject.toString(),str_isRoomReadyM_function);
         } catch (JSONException e) {
@@ -208,20 +223,21 @@ public class BattleModel {
                 JSONObject jsonUserObject2=jsonArr.getJSONObject(0);
                 int Player1ID = (int)jsonUserObject1.get("UserID");
                 if(Player1ID==myUser.getUserId())
-                    myplayerID=1;
+                    int_myplayerID =1;
                 else
-                    myplayerID=2;
+                    int_myplayerID =2;
 
-                switch(myplayerID){
+                switch(int_myplayerID){
                     case 1:
-                        otherUserID=(int)jsonUserObject2.get("UserID");
-                        otherUserName=(String) jsonUserObject2.get("UserName");
+                        int_otherUserID =(int)jsonUserObject2.get("UserID");
+                        String_otherUserName =(String) jsonUserObject2.get("UserName");
                         break;
                     case 2:
-                        otherUserID=(int)jsonUserObject1.get("UserID");
-                        otherUserName=(String) jsonUserObject1.get("UserName");
+                        int_otherUserID =(int)jsonUserObject1.get("UserID");
+                        String_otherUserName =(String) jsonUserObject1.get("UserName");
                         break;
                 }
+                battleActivity.setOtherSideUserName(String_otherUserName);
 
             }
             else
@@ -243,13 +259,15 @@ public class BattleModel {
          */
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("RoomID",roomId);
+            jsonObject.put("RoomID", int_roomId);
             jsonObject.put("UserID",myUser.getUserId());
             jsonObject.put("CardID1", mapBtnNumberChooseToCard.get(1).getCardID());
             jsonObject.put("CardID2", mapBtnNumberChooseToCard.get(2).getCardID());
             jsonObject.put("CardID3", mapBtnNumberChooseToCard.get(3).getCardID());
+            for(int i=1;i<4;i++)
+                myCardHP.put(i,mapBtnNumberChooseToCard.get(i).getCardHP());
 
-            stateCase=3;
+            int_stateCase =3;
             serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -260,8 +278,8 @@ public class BattleModel {
         try {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
-                this.roomId=(Integer)jsonObj.get("RoomID");
-                stateCase=3;
+                this.int_roomId =(Integer)jsonObj.get("RoomID");
+                int_stateCase =3;
                 /**
                  *  0  just start
                  *  1  循环str_isRoomReadyM_function
@@ -283,7 +301,7 @@ public class BattleModel {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("RoomID",roomId);
+            jsonObject.put("RoomID", int_roomId);
 
             serverPHPPostConnection(getIsFightReadyUrl(),jsonObject.toString(),str_isFightReadyM_function);
         } catch (JSONException e) {
@@ -296,11 +314,11 @@ public class BattleModel {
             if((Integer)jsonObj.get("code")==0) {
                 JSONArray jsonArr=(JSONArray)jsonObj.get("CardInfo");
                 int temp_id=0;
-                stateCase=2;
-                if(myplayerID==1)
+                int_stateCase =2;
+                if(int_myplayerID ==1)
                     temp_id+=3;
                 else
-                    stateCase=4;
+                    int_stateCase =4;
                 JSONObject jsonUserObject1=jsonArr.getJSONObject(0+temp_id);
                 JSONObject jsonUserObject2=jsonArr.getJSONObject(1+temp_id);
                 JSONObject jsonUserObject3=jsonArr.getJSONObject(2+temp_id);
@@ -330,6 +348,8 @@ public class BattleModel {
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(2).getCardID(),mapOtherBtnNumberChooseToCard.get(2));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(3).getCardID(),mapOtherBtnNumberChooseToCard.get(3));
 
+                for(int i=1;i<4;i++)
+                    otherCardHP.put(i,mapOtherBtnNumberChooseToCard.get(i).getCardHP());
                 /**
                  *  0  just start
                  *  1  循环str_isRoomReadyM_function
@@ -347,22 +367,41 @@ public class BattleModel {
     }
 
     //playCardM
-    public void playACard(){
+    public void playACard() {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("RoomID",roomId);
-            jsonObject.put("UserID",myUser.getUserId());
-            jsonObject.put("Player"+myplayerID+"CardID", mapBtnNumberChooseToCard.get(1));
-            jsonObject.put("Player2CardID", mapBtnNumberChooseToCard.get(2));
-            jsonObject.put("Player"+myplayerID+" CardNum", mapBtnNumberChooseToCard.get(3));
-            jsonObject.put("Player2CardNum", mapBtnNumberChooseToCard.get(3));
-            jsonObject.put("Player", myplayerID);
 
-            stateCase=3;
+            jsonObject.put("RoomID", int_roomId);
+            jsonObject.put("UserID",myUser.getUserId());
+            jsonObject.put("Player"+ int_myplayerID +"CardID", mapBtnNumberChooseToCard.get(int_myPlayCardIndex).getCardID());
+            jsonObject.put("Player"+ int_otherUserID +"CardID", mapBtnNumberChooseToCard.get(int_otherPlayCardIndex).getCardID());
+            jsonObject.put("Player"+ int_myplayerID +" CardNum", int_myPlayCardIndex);
+            jsonObject.put("Player"+ int_otherUserID +"CardNum", int_otherPlayCardIndex);
+            jsonObject.put("Player", int_myplayerID);
+
+            int_stateCase =3;
             serverPHPPostConnection(getApplyForFightUrl(),jsonObject.toString(),str_applyForFightM_function);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void playACardSuccessful(String result){
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            if((Integer)jsonObj.get("code")==0) {
+                int hurt = jsonObj.getInt("Hurt");
+                battleActivity.playerAttackOther(hurt,int_myPlayCardIndex,int_otherPlayCardIndex);
+
+                if(jsonObj.getInt("win")!=0)
+                    battleActivity.playerWin();
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //isMyTurn
@@ -370,7 +409,7 @@ public class BattleModel {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("RoomID",roomId);
+            jsonObject.put("RoomID", int_roomId);
             jsonObject.put("UserID",myUser.getUserId());
 
             serverPHPPostConnection(getMyTurnUrl(),jsonObject.toString(),str_myTurnM_function);
@@ -384,15 +423,23 @@ public class BattleModel {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
                 JSONObject lastPlay = (JSONObject) jsonObj.get("LastPlay");
-                stateCase = 2;
-                int hurt;
-                int otherPlayerID=2;
-                if(myplayerID==2)
-                    otherPlayerID=1;
+                int_stateCase = 2;
                 int fromNo = lastPlay.getInt("FromNum");
                 int toNo = lastPlay.getInt("ToNum");
-
-
+                int newHP= lastPlay.getInt("Player"+ int_myplayerID +"Card"+toNo);
+                int oldHP = myCardHP.get(toNo);
+                battleActivity.otherSideAttackPlayer(oldHP-newHP,toNo,fromNo);
+                myCardHP.put(toNo,newHP);
+                bool_winGame=true;
+                for(int i=1;i<4;i++){
+                    if(myCardHP.get(i)>0) {
+                        bool_winGame = false;
+                        break;
+                    }
+                }
+                if(bool_winGame){
+                    battleActivity.OtherWin();
+                }
 
             }
         } catch (JSONException e) {

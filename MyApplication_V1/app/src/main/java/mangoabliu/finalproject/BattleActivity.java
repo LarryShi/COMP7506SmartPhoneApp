@@ -61,7 +61,7 @@ public class BattleActivity extends AppCompatActivity {
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
-
+        battleModel.initialBattle();
     }
 
 
