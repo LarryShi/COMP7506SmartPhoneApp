@@ -107,18 +107,58 @@ public class CardDropActivity extends AppCompatActivity  {
 
             public void onSwipeRight(float dis, float velocity) {
                 //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
-                rotateCard(expandedCard,"right",dis,velocity);
+                rotateCard(expandedCard,"right",dis,velocity,3000);
 
             }
             public void onSwipeLeft(float dis, float velocity) {
                 //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
-                rotateCard(expandedCard,"left",dis,velocity);
+                rotateCard(expandedCard,"left",dis,velocity,3000);
+            }
+        });
+
+
+        CardFrontL.setOnTouchListener(new OnSwipeTouchListener(CardDropActivity.this) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontL,"right",dis,velocity,2000);
+
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontL,"left",dis,velocity,2000);
+            }
+        });
+
+        CardFrontM.setOnTouchListener(new OnSwipeTouchListener(CardDropActivity.this) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontM,"right",dis,velocity,2000);
+
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontM,"left",dis,velocity,2000);
+            }
+        });
+
+        CardFrontR.setOnTouchListener(new OnSwipeTouchListener(CardDropActivity.this) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontR,"right",dis,velocity,2000);
+
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(CardFrontR,"left",dis,velocity,2000);
             }
         });
 
     }
 
-    private void rotateCard(ImageView view, String leftOrRight, float dis, float velocity){
+    private void rotateCard(ImageView view, String leftOrRight, float dis, float velocity, int duration){
         int percentage = 0;
         if (leftOrRight.equals("left"))
             dis = Math.abs(dis);
@@ -132,7 +172,7 @@ public class CardDropActivity extends AppCompatActivity  {
         else
             percentage = 4;
 
-        view.animate().setDuration(2000);
+        view.animate().setDuration(duration);
         if (leftOrRight.equals("left"))
             view.animate().rotationYBy(360*-percentage);
         else

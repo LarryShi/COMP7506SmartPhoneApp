@@ -91,7 +91,9 @@
             android:layout_width="@dimen/carddrop_cardlayout_width_expand"
             android:layout_height="@dimen/carddrop_cardlayout_height_expand"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/expand_card_marginBot">
 
             <ImageView
                 android:id="@+id/expanded_image"

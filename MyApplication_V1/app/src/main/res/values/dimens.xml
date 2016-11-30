@@ -87,8 +87,9 @@
     <dimen name="carddrop_btn_marginEnd">20dp</dimen>
     <dimen name="carddrop_cardlayout_width">130dp</dimen>
     <dimen name="carddrop_cardlayout_height">200dp</dimen>
-    <dimen name="carddrop_cardlayout_width_expand">195dp</dimen>
-    <dimen name="carddrop_cardlayout_height_expand">300dp</dimen>
+    <dimen name="carddrop_cardlayout_width_expand">210dp</dimen>
+    <dimen name="carddrop_cardlayout_height_expand">320dp</dimen>
+    <dimen name="expand_card_marginBot">10dp</dimen>
 
 
     <!-- dialog_location -->
