@@ -272,7 +272,10 @@ public class BattleActivity extends AppCompatActivity {
 
     private class clickListener_Confirm implements View.OnClickListener {
         public void onClick(View v) {
+            Log.i("BattleActivity","int_state:"+int_state);
+            Log.i("BattleActivity","int_state:"+battleModel.chosedCardNo());
             if(int_state==1&&battleModel.chosedCardNo()==3) {
+
                 battleModel.playerCardPickConfirm();
                 int_state = 2;
             }
