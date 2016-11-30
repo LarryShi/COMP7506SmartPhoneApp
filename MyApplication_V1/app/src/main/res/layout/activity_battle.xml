@@ -23,8 +23,9 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/battle_player_area_margin_top"
-                android:layout_marginRight="@dimen/battle_player_area_margin_left">
+                android:layout_marginTop="@dimen/battle_other_player_area_margin_top"
+                android:layout_marginRight="@dimen/battle_other_player_area_margin_right"
+                android:gravity="right">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
