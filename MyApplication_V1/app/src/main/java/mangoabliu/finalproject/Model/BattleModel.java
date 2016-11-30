@@ -115,9 +115,8 @@ public class BattleModel {
         mapOtherCardIDtoCard.clear();
         mapOtherBtnNumberChooseToCard.clear();
         otherCardHP.clear();
-        applyForFight();
-
     }
+
 
     public void setBattleActivity(BattleActivity battleActivity){
         this.battleActivity=battleActivity;

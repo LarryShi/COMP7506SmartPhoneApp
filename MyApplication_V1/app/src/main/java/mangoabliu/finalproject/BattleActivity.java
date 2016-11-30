@@ -96,7 +96,7 @@ public class BattleActivity extends AppCompatActivity {
 
         explosionField = ExplosionField.attach2Window(BattleActivity.this);
 
-
+        battleModel.applyForFight();
         BGMInit();
     }
 
