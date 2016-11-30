@@ -20,17 +20,17 @@
             android:layout_gravity="center" />
 
         <SeekBar
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
-            android:maxHeight="4dp"
-            android:minHeight="4dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="15dp"
+            android:maxHeight="@dimen/setting_seekbar_progress"
+            android:minHeight="@dimen/setting_seekbar_progress"
+            android:paddingStart="@dimen/setting_seekbar_padding"
+            android:paddingEnd="@dimen/setting_seekbar_padding"
             android:id="@+id/seekBar"
             android:layout_gravity="center"
             android:thumb="@drawable/seekbar_thumb"
-            android:progressDrawable="@drawable/po_seekbar"/>
+            android:progressDrawable="@drawable/progress_holo_light"/>
 
     </LinearLayout>
 

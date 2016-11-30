@@ -126,7 +126,7 @@
     <dimen name="setting_text">44sp</dimen>
     <dimen name="setting_margin">20dp</dimen>
     <dimen name="setting_icon">60dp</dimen>
-    <dimen name="setting_seekbar_process">4dp</dimen>
+    <dimen name="setting_seekbar_progress">4dp</dimen>
     <dimen name="setting_seekbar_padding">30dp</dimen>
 
     <!-- layout_card -->
