@@ -3,10 +3,12 @@ package mangoabliu.finalproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
@@ -22,26 +24,27 @@ public class SettingDialog extends Dialog {
     // setting
     private ImageButton btnMusicCtrl = null;
     private SeekBar seekbar;
+    private CheckBox cbMusic,cbSound;
     private int maxVolume;
     private int currentVolume;
     private int muteFlag,cv;
-    public AudioManager audioManager;
-    Context con;
+    private AudioManager audioManager;
+    private Context con;
+    private MediaPlayer mpBgm;
 
 
-    protected SettingDialog (Context context, int style) {
+    protected SettingDialog (Context context, int style, MediaPlayer bgm) {
         super(context,style);
         con = context;
-        gameModel= GameModel.getInstance();
+        mpBgm = bgm;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置不显示对话框标题栏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //设置对话框显示哪个布局文件
 
-        //ADD FULLSCREEN
+        gameModel= GameModel.getInstance();
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.dialog_setting);
 
@@ -49,13 +52,20 @@ public class SettingDialog extends Dialog {
 
     }
 
+
+    // SETTING INIT
     public void SettingInit(){
 
         btnMusicCtrl = (ImageButton) findViewById(R.id.btnMute);
-        seekbar = (SeekBar) findViewById(R.id.seekBar);
+
+        cbMusic =(CheckBox) findViewById(R.id.cb_musicswitch);
+        cbSound =(CheckBox) findViewById(R.id.cb_soundswitch);
+
         audioManager = (AudioManager) con.getSystemService(Context.AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         cv=currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        seekbar = (SeekBar) findViewById(R.id.seekBar);
         seekbar.setMax(maxVolume);
         seekbar.setProgress(currentVolume);
 
@@ -69,6 +79,12 @@ public class SettingDialog extends Dialog {
                 isMute();
             }
         });
+        cbMusic.setOnClickListener(new cbMusicOnclickListener());
+        cbSound.setOnClickListener(new cbSoundOnclickListener());
+
+        if(gameModel.isMusicOn()==1) cbMusic.setChecked(true);
+        else cbMusic.setChecked(false);
+
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -110,6 +126,32 @@ public class SettingDialog extends Dialog {
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);
             btnMusicCtrl.setBackgroundResource(R.drawable.unmute);
             seekbar.setProgress(cv);
+        }
+    }
+
+    private class cbMusicOnclickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(cbMusic.isChecked()){
+                gameModel.setMusicOn(1);
+                mpBgm.start();
+            }
+            else{
+                gameModel.setMusicOn(0);
+                mpBgm.pause();
+                }
+        }
+    }
+
+    private class cbSoundOnclickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(cbSound.isChecked()){
+                gameModel.setSoundOn(1);
+            }
+            else{
+                gameModel.setSoundOn(0);
+            }
         }
     }
 

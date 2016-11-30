@@ -1,11 +1,9 @@
 package mangoabliu.finalproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -25,11 +23,9 @@ import java.util.Random;
 import mangoabliu.finalproject.Animation.OnSwipeTouchListener;
 import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Animation.ZoomObject;
-import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.UserAccount;
 
-import static android.widget.Toast.LENGTH_LONG;
 import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDisplayImageOptions;
 
 
@@ -56,6 +52,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private Button ReturnMain;
     private String errMessage;
     private ImageView expandedCard;
+    private static MediaPlayer bgm;
 
 
 
@@ -74,6 +71,8 @@ public class CardDropActivity extends AppCompatActivity  {
         initView();
         int DropCardId = GeneDropCardID();
         initData(DropCardId);
+
+        BGMInit();
 
 
     }
@@ -353,6 +352,44 @@ public class CardDropActivity extends AppCompatActivity  {
             zoomHelper.zoomImageFromThumb(CardFrontR,expandedCard,findViewById(R.id.dropCardLayout));
         }
 
+    }
+
+
+    //Bgm
+    public void BGMInit(){
+        //循环播放
+        if(gameModel.isMusicOn()==1){
+            bgm = MediaPlayer.create(this,R.raw.index_bg);
+            bgm.start();
+            bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    bgm.start();
+                }
+            });
+        }
+    }
+
+    //跳转、中断暂停播放，回activity继续播放
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(gameModel.isMusicOn()==1)  bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null)
+            bgm.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
 
 

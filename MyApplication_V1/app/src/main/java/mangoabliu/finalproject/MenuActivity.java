@@ -59,7 +59,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     @Override
     protected void onStart() {
         super.onStart();
-        bgm.start();
+        if(gameModel.isMusicOn()==1)  bgm.start();
     }
 
 
@@ -129,16 +129,17 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     }
 
     public void BGMInit(){
-//        循环播放
-        bgm = MediaPlayer.create(this,R.raw.index_bg);
-        bgm.start();
-        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                bgm.start();
-            }
-        });
-
+        //循环播放
+        if(gameModel.isMusicOn()==1){
+            bgm = MediaPlayer.create(this,R.raw.index_bg);
+            bgm.start();
+            bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    bgm.start();
+                }
+            });
+        }
     }
 
     @Override
@@ -170,7 +171,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 
         public void onClick(View view) {
 
-            SettingDialog set = new SettingDialog(MenuActivity.this,R.style.DialogTranslucent);
+            SettingDialog set = new SettingDialog(MenuActivity.this,R.style.DialogTranslucent,bgm);
             set.show();
         }
     }

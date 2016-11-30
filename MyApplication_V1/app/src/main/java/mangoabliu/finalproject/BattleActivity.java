@@ -421,23 +421,24 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void BGMInit(){
-//        循环播放
-        bgm = MediaPlayer.create(this,R.raw.index_bg);
-        bgm.start();
-        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                bgm.start();
-            }
-        });
-
+        //循环播放
+        if(gameModel.isMusicOn()==1){
+            bgm = MediaPlayer.create(this,R.raw.index_bg);
+            bgm.start();
+            bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    bgm.start();
+                }
+            });
+        }
     }
 
     //跳转、中断暂停播放，回activity继续播放
     @Override
     protected void onStart() {
         super.onStart();
-        bgm.start();
+        if(gameModel.isMusicOn()==1)  bgm.start();
     }
 
 

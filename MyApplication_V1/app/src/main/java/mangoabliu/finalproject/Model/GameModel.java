@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuAdapter;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -12,7 +11,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-
 
 import mangoabliu.finalproject.CardDropActivity;
 import mangoabliu.finalproject.LoginActivity;
@@ -54,6 +52,9 @@ public class GameModel {
     private UserAccount myUser;
 
     private int totalSteps = 0;
+
+    private int musicSwitch=1;
+    private int soundSwitch=1;
 
     private GameModel() {
     }
@@ -500,4 +501,19 @@ public class GameModel {
             return 0;
     }
 
+    public int isMusicOn(){
+        return musicSwitch;
+    }
+
+    public void setMusicOn(int music){
+        musicSwitch=music;
+    }
+
+    public int isSoundOn(){
+        return soundSwitch;
+    }
+
+    public void setSoundOn(int sound){
+        soundSwitch=sound;
+    }
 }
