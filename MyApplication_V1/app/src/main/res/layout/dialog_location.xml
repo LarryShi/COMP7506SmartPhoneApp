@@ -23,13 +23,7 @@
         android:textColor="@color/clr_loc_text"
         android:background="@color/transparent"/>
 
-    <ImageView
-        android:id="@+id/expanded_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="invisible" />
+
 
 
     <RelativeLayout
@@ -39,6 +33,17 @@
         android:layout_marginEnd="@dimen/location_inner_margin"
         android:layout_marginBottom="@dimen/location_inner_margin">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/expanded_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/locationImage"

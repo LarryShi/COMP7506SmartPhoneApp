@@ -39,6 +39,7 @@
                     android:layout_marginRight="@dimen/battle_player_area_margin_left"
                     android:id="@+id/relatvieLayout_battle_otherCard_container_1"
                     >
+
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
                         android:layout_height="@dimen/battle_card_height"

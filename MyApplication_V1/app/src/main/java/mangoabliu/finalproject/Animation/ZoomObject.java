@@ -23,17 +23,24 @@ public class ZoomObject {
     ImageView expandedImageView;
     LocationDialogView currentDialogView = null;
 
+    boolean zoomed;
     boolean showAction;
+
+    public boolean getZoomed(){
+        return zoomed;
+    }
 
     public ZoomObject(LocationDialogView myDialogView){
 
         mShortAnimationDuration = 0;
         currentDialogView = myDialogView;
+        zoomed = false;
     }
 
 
     public ZoomObject(){
         mShortAnimationDuration = 0;
+        zoomed = false;
     }
 
 
@@ -41,10 +48,12 @@ public class ZoomObject {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
 
-        if (currentDialogView.getActionVisible())
-            showAction = true;
-        else
-            showAction = false;
+        if (currentDialogView != null) {
+            if (currentDialogView.getActionVisible())
+                showAction = true;
+            else
+                showAction = false;
+        }
 
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
@@ -97,12 +106,13 @@ public class ZoomObject {
         // thumbnail.
         thumbView.setAlpha(0f);
         expandedImageView.setVisibility(View.VISIBLE);
+        zoomed = true;
 
         // Set the pivot point for SCALE_X and SCALE_Y transformations
         // to the top-left corner of the zoomed-in view (the default
         // is the center of the view).
-        expandedImageView.setPivotX(0f);
-        expandedImageView.setPivotY(0f);
+       // expandedImageView.setPivotX(0f);
+       // expandedImageView.setPivotY(0f);
 
         // Construct and run the parallel animation of the four translation and
         // scale properties (X, Y, SCALE_X, and SCALE_Y).
@@ -131,9 +141,11 @@ public class ZoomObject {
         set.start();
         mCurrentAnimator = set;
 
-        if (currentDialogView != null && showAction) {
-            currentDialogView.getAction().setVisibility(View.INVISIBLE);
-            currentDialogView.getAction().setEnabled(false);
+        if (currentDialogView != null) {
+            if (showAction) {
+                currentDialogView.getAction().setVisibility(View.INVISIBLE);
+                currentDialogView.getAction().setEnabled(false);
+            }
         }
 
         // Upon clicking the zoomed-in image, it should zoom back down
@@ -181,10 +193,13 @@ public class ZoomObject {
                 });
                 set.start();
                 mCurrentAnimator = set;
-                if (currentDialogView != null && showAction) {
+                if (currentDialogView != null ) {
+                    if (showAction) {
                         currentDialogView.getAction().setVisibility(View.VISIBLE);
                         currentDialogView.getAction().setEnabled(true);
+                    }
                 }
+                zoomed = false;
             }
         });
     }
