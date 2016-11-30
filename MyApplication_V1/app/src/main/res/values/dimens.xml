@@ -9,6 +9,9 @@
     <dimen name="menu_text_paddingStart">0dp</dimen>
     <dimen name="menu_text_paddingBottom">15dp</dimen>
     <dimen name="menu_textsize">20sp</dimen>
+    <dimen name="menu_btn_setting_size">50dp</dimen>
+    <dimen name="menu_btn_marginEnd">51dp</dimen>
+    <dimen name="menu_btn_marginBottom">33dp</dimen>
 
 
     <!-- activity_login & activity_registration -->

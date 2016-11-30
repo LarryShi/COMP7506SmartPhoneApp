@@ -22,7 +22,7 @@ import mangoabliu.finalproject.Model.GameModel;
 
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
-    Button btn_Switch;
+    Button btn_Switch,btn_Setting;
     GameModel gameModel;
     FontTextView tv_Menu;
     //    Point size;
@@ -44,7 +44,9 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 
         setContentView(R.layout.activity_menu);
         btn_Switch = (Button) findViewById(R.id.btn_SwitchLogin);
+        btn_Setting = (Button) findViewById(R.id.btn_menu_setting);
         btn_Switch.setOnClickListener(new bt_SwitchListener());
+        btn_Setting.setOnClickListener(new bt_SettingListener());
         tv_Menu = (FontTextView) findViewById(R.id.tv_menu);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         tv_Menu.setTypeface(typeFace);
@@ -104,6 +106,14 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         public void onClick(View view) {
             Intent myIntent = new Intent(MenuActivity.this, LoginActivity.class);
             startActivityForResult(myIntent, 0);
+        }
+    }
+
+
+    private class bt_SettingListener implements View.OnClickListener {
+
+        public void onClick(View view) {
+
         }
     }
 

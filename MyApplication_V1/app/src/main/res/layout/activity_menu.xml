@@ -34,4 +34,14 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="3"/>
+
+    <Button
+        android:id="@+id/btn_menu_setting"
+        android:layout_width="@dimen/menu_btn_setting_size"
+        android:layout_height="@dimen/menu_btn_setting_size"
+        android:background="@drawable/btn_setting"
+        android:layout_above="@+id/tv_menu"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/menu_btn_marginEnd"
+        android:layout_marginBottom="@dimen/menu_btn_marginBottom" />
 </RelativeLayout>
