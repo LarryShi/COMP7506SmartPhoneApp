@@ -1,9 +1,11 @@
 package mangoabliu.finalproject;
 
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
@@ -44,16 +47,19 @@ public class BattleActivity extends AppCompatActivity {
     ImageView imageView_battle_waiting,imageView_battle_border,imageView_battle_win,imageView_battle_lose;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
+    int int_last_selectedMycard=0;
     ImageView imageView_attackMark;
     TextView textView_hurt;
     boolean animationFinished=true;
-
+    Animation animationAttackCardGoDown,animationAttackCardGoUp;
+    ExplosionField explosionField;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameModel= GameModel.getInstance();
         gameModel.addActivity(this);
         battleModel= BattleModel.getInstance();
+        battleModel.initialBattle();
         battleModel.setBattleActivity(this);
         battleModel.setUserCards(gameModel.getUserCards());
         battleModel.setUserAccount(gameModel.getUserAccount());
@@ -68,7 +74,28 @@ public class BattleActivity extends AppCompatActivity {
         animSearch.setRepeatMode(Animation.REVERSE);
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
-        battleModel.initialBattle();
+
+
+        animationAttackCardGoUp = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, -0.035f);
+        animationAttackCardGoUp.setDuration(100);
+        animationAttackCardGoUp.setFillAfter(true);
+        animationAttackCardGoUp.setAnimationListener(new generalAnimationListener());
+
+        animationAttackCardGoDown = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.035f);
+        animationAttackCardGoDown.setDuration(100);
+        animationAttackCardGoDown.setFillAfter(true);
+        animationAttackCardGoDown.setAnimationListener(new generalAnimationListener());
+
+        explosionField = ExplosionField.attach2Window(BattleActivity.this);
+
 
         BGMInit();
     }
@@ -186,14 +213,81 @@ public class BattleActivity extends AppCompatActivity {
             case 1:myCard=myCard1;break;
             case 2:myCard=myCard2;break;
             case 3:myCard=myCard3;break;
+            default:myCard = null;
         }
         switch(othercard){
             case 1:otherCard=otherCard1;break;
             case 2:otherCard=otherCard2;break;
             case 3:otherCard=otherCard3;break;
+            default:otherCard = null;
         }
 
+        otherCard.setCardHP(battleModel.getOtherCardHP(othercard));
 
+        imageView_attackMark = new ImageView(BattleActivity.this);
+        imageView_attackMark.setImageResource(R.drawable.attack_mark);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp.addRule(RelativeLayout.CENTER_VERTICAL);
+        imageView_attackMark.setLayoutParams(lp);
+
+        otherCard.addView(imageView_attackMark);
+
+        Animation ani_shake = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.01f,
+                TranslateAnimation.RELATIVE_TO_SELF, -0.01f);
+        ani_shake.setDuration(50);
+        ani_shake.setRepeatCount(5);
+        ani_shake.setRepeatMode(Animation.REVERSE);
+        otherCard.startAnimation(ani_shake);
+
+        float center_height = otherCard.getMeasuredHeight();
+        float center_width = otherCard.getMeasuredWidth();
+        RotateAnimation animationAttackCard = new RotateAnimation(-3.0f, 3.0f, center_width / 2, center_height / 2);
+        animationAttackCard.setDuration(600);
+        animationAttackCard.setRepeatMode(Animation.RESTART);
+
+        myCard.startAnimation(animationAttackCard);
+
+        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp2.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp2.addRule(RelativeLayout.CENTER_VERTICAL);
+
+        textView_hurt = new TextView(BattleActivity.this);
+        textView_hurt.setTextColor(Color.rgb(255, 50, 50));
+        textView_hurt.setTextSize(25);
+        textView_hurt.setLayoutParams(lp2);//设置TextView的布局
+        textView_hurt.setText("-"+hurt);
+        TextPaint tp = textView_hurt.getPaint();
+        tp.setFakeBoldText(true);
+        textView_hurt.setShadowLayer(5F, 5F,5F, Color.BLACK);
+        otherCard1.addView(textView_hurt);
+
+        Animation animationHurtTextGoUp = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, -1.5f);
+        animationHurtTextGoUp.setDuration(600);
+        animationHurtTextGoUp.setFillAfter(true);
+
+        AlphaAnimation  HideAnimation = new AlphaAnimation(1.0f, 0.0f);
+        HideAnimation.setDuration( 1000 );
+        HideAnimation.setFillAfter( true );
+
+        AnimationSet animationSet = new AnimationSet(false);
+        animationSet.addAnimation(animationHurtTextGoUp);
+        animationSet.addAnimation(HideAnimation);
+        animationSet.setAnimationListener(new myCardHurtFinishAnimation(mycard,othercard));
+
+        imageView_attackMark.startAnimation(HideAnimation);
+        textView_hurt.startAnimation(animationSet);
+
+        if(battleModel.getOtherCardHP(othercard)<=0){
+            explosionField.explode(otherCard);
+        }
 
     }
 
@@ -202,8 +296,86 @@ public class BattleActivity extends AppCompatActivity {
         //对面攻击用户减少的HP
         Log.i("BattleActivity","otherSideAttackPlayer Called");
         Log.i("BattleActivity","Hurt:"+hurt);
+        CardLayout myCard,otherCard;
+        switch(mycard){
+            case 1:myCard=myCard1;break;
+            case 2:myCard=myCard2;break;
+            case 3:myCard=myCard3;break;
+            default:myCard = null;
+        }
+        switch(othercard){
+            case 1:otherCard=otherCard1;break;
+            case 2:otherCard=otherCard2;break;
+            case 3:otherCard=otherCard3;break;
+            default:otherCard = null;
+        }
 
+        myCard.setCardHP(battleModel.getMyCardHP(mycard));
 
+        imageView_attackMark = new ImageView(BattleActivity.this);
+        imageView_attackMark.setImageResource(R.drawable.attack_mark);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp.addRule(RelativeLayout.CENTER_VERTICAL);
+        imageView_attackMark.setLayoutParams(lp);
+
+        myCard.addView(imageView_attackMark);
+
+        Animation ani_shake = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.01f,
+                TranslateAnimation.RELATIVE_TO_SELF, -0.01f);
+        ani_shake.setDuration(50);
+        ani_shake.setRepeatCount(5);
+        ani_shake.setRepeatMode(Animation.REVERSE);
+        myCard.startAnimation(ani_shake);
+
+        float center_height = otherCard.getMeasuredHeight();
+        float center_width = otherCard.getMeasuredWidth();
+        RotateAnimation animationAttackCard = new RotateAnimation(-3.0f, 3.0f, center_width / 2, center_height / 2);
+        animationAttackCard.setDuration(600);
+        animationAttackCard.setRepeatMode(Animation.RESTART);
+
+        otherCard.startAnimation(animationAttackCard);
+
+        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp2.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp2.addRule(RelativeLayout.CENTER_VERTICAL);
+
+        textView_hurt = new TextView(BattleActivity.this);
+        textView_hurt.setTextColor(Color.rgb(255, 50, 50));
+        textView_hurt.setTextSize(25);
+        textView_hurt.setLayoutParams(lp2);//设置TextView的布局
+        textView_hurt.setText("-"+hurt);
+        TextPaint tp = textView_hurt.getPaint();
+        tp.setFakeBoldText(true);
+        textView_hurt.setShadowLayer(5F, 5F,5F, Color.BLACK);
+        myCard.addView(textView_hurt);
+
+        Animation animationHurtTextGoUp = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, -1.5f);
+        animationHurtTextGoUp.setDuration(600);
+        animationHurtTextGoUp.setFillAfter(true);
+
+        AlphaAnimation  HideAnimation = new AlphaAnimation(1.0f, 0.0f);
+        HideAnimation.setDuration( 1000 );
+        HideAnimation.setFillAfter( true );
+
+        AnimationSet animationSet = new AnimationSet(false);
+        animationSet.addAnimation(animationHurtTextGoUp);
+        animationSet.addAnimation(HideAnimation);
+        animationSet.setAnimationListener(new otherCardHurtFinishAnimation(mycard,othercard));
+
+        imageView_attackMark.startAnimation(HideAnimation);
+        textView_hurt.startAnimation(animationSet);
+
+        if(battleModel.getOtherCardHP(othercard)<=0){
+            explosionField.explode(otherCard);
+        }
     }
 
     public void setTurn(String userName){
@@ -361,8 +533,21 @@ public class BattleActivity extends AppCompatActivity {
                 return;
             if(int_state==1)
                 startPickUpCard(index);
-            if(int_state==3&&battleModel.getMyCardHP(index)>0)
+            if(int_state==3&&battleModel.getMyCardHP(index)>0) {
                 battleModel.chooseMyCard(index);
+                switch(index){
+                    case 1:myCard1.startAnimation(animationAttackCardGoUp);break;
+                    case 2:myCard2.startAnimation(animationAttackCardGoUp);break;
+                    case 3:myCard3.startAnimation(animationAttackCardGoUp);break;
+                }
+                switch(int_last_selectedMycard){
+                    case 1:myCard1.startAnimation(animationAttackCardGoDown);break;
+                    case 2:myCard2.startAnimation(animationAttackCardGoDown);break;
+                    case 3:myCard3.startAnimation(animationAttackCardGoDown);break;
+                }
+                int_last_selectedMycard=index;
+
+            }
 
         }
     }
@@ -381,7 +566,12 @@ public class BattleActivity extends AppCompatActivity {
         this.int_state=1;
     }
 
-    private class hurtAnimationListener implements Animation.AnimationListener {
+    private class myCardHurtFinishAnimation implements Animation.AnimationListener {
+        int mycard,othercard;
+        myCardHurtFinishAnimation(int mycard,int othercard){
+            this.mycard=mycard;
+            this.othercard=othercard;
+        }
         @Override
         public void onAnimationRepeat(Animation animation) {
 
@@ -395,13 +585,31 @@ public class BattleActivity extends AppCompatActivity {
         @Override
         public void onAnimationEnd(Animation animation) {
             animationFinished = true;
-
-            otherCard1.removeView(imageView_attackMark);
-            otherCard1.removeView(textView_hurt);
+            CardLayout myCard,otherCard;
+            switch(mycard){
+                case 1:myCard=myCard1;break;
+                case 2:myCard=myCard2;break;
+                case 3:myCard=myCard3;break;
+                default:myCard = null;
+            }
+            switch(othercard){
+                case 1:otherCard=otherCard1;break;
+                case 2:otherCard=otherCard2;break;
+                case 3:otherCard=otherCard3;break;
+                default:otherCard = null;
+            }
+            otherCard.removeView(imageView_attackMark);
+            otherCard.removeView(textView_hurt);
+            myCard.startAnimation(animationAttackCardGoDown);
         }
     }
 
-    private class hurtFadeOutAnimationListener implements Animation.AnimationListener {
+    private class otherCardHurtFinishAnimation implements Animation.AnimationListener {
+        int mycard,othercard;
+        otherCardHurtFinishAnimation(int mycard,int othercard){
+            this.mycard=mycard;
+            this.othercard=othercard;
+        }
         @Override
         public void onAnimationRepeat(Animation animation) {
 
@@ -415,8 +623,32 @@ public class BattleActivity extends AppCompatActivity {
         @Override
         public void onAnimationEnd(Animation animation) {
             animationFinished = true;
-            otherCard1.removeView(imageView_attackMark);
-            otherCard1.removeView(textView_hurt);
+            CardLayout myCard,otherCard;
+            switch(mycard){
+                case 1:myCard=myCard1;break;
+                case 2:myCard=myCard2;break;
+                case 3:myCard=myCard3;break;
+                default:myCard = null;
+            }
+            myCard.removeView(imageView_attackMark);
+            myCard.removeView(textView_hurt);
+        }
+    }
+
+    private class generalAnimationListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            animationFinished = false;
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            animationFinished = true;
         }
     }
 
