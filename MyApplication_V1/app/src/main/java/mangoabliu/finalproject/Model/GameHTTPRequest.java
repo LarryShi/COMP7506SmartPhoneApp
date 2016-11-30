@@ -95,7 +95,8 @@ public class GameHTTPRequest extends AsyncTask<String, Integer, String> {
             battleModel.setCardsSuccessful(result);
         if(str_function.equals(BattleModel.str_isFightReadyM_function))
             battleModel.isFightReadySuccessful(result);
-
+        if(str_function.equals(BattleModel.str_myTurnM_function))
+            battleModel.isMyTurnSuccessful(result);
 
     }
 

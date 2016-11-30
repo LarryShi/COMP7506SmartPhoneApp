@@ -260,10 +260,6 @@ public class GameModel {
 
     }
 
-
-
-
-
     public void updateUserCardRelation(int str_UserId, int str_CardID){
         try {
             JSONObject jsonObject = new JSONObject();
