@@ -1,5 +1,7 @@
 package mangoabliu.finalproject.Model;
 
+import java.util.ArrayList;
+
 /**
  * Created by herenjie on 2016/11/25.
  */
@@ -10,6 +12,7 @@ public class Planet {
     String planetName;
     int planetX;
     int planetY;
+    ArrayList<Integer> LocationCardIds = new ArrayList<Integer>();
 
     public Planet(int id, String name, int x, int y){
         planetID = id;
@@ -33,5 +36,9 @@ public class Planet {
     public String getPlanetName(){
         return planetName;
     }
+    public ArrayList<Integer> getLocationCardIds(){
+        return LocationCardIds;
+    }
+
 
 }
