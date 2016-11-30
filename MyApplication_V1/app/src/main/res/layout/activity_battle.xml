@@ -28,7 +28,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/battle_player_area_margin_left">
+                    android:layout_marginRight="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_otherCard_container_1"
+                    >
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
                         android:layout_height="@dimen/battle_card_height"
@@ -42,7 +44,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/battle_player_area_margin_left">
+                    android:layout_marginRight="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_otherCard_container_2"
+                    >
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
                         android:layout_height="@dimen/battle_card_height"
@@ -56,7 +60,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/battle_player_area_margin_left">
+                    android:layout_marginRight="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_otherCard_container_3">
 
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
@@ -120,7 +125,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/battle_player_area_margin_left">
+                    android:layout_marginLeft="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_mycard_container_1">
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
                         android:layout_height="@dimen/battle_card_height"
@@ -134,13 +140,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/battle_player_area_margin_left">
+                    android:layout_marginLeft="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_mycard_container_2">
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"
                         android:layout_height="@dimen/battle_card_height"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/card_battle_mycard_2"
+
                         >
 
                     </mangoabliu.finalproject.Layout.CardLayout>
@@ -148,7 +156,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/battle_player_area_margin_left">
+                    android:layout_marginLeft="@dimen/battle_player_area_margin_left"
+                    android:id="@+id/relatvieLayout_battle_mycard_container_3">
 
                     <mangoabliu.finalproject.Layout.CardLayout
                         android:layout_width="@dimen/battle_card_width"

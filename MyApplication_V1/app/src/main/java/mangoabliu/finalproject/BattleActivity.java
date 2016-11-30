@@ -35,6 +35,8 @@ public class BattleActivity extends AppCompatActivity {
     GameModel gameModel;
     Button btn_test,btn_card_choose_confirm,btn_exit;
     RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down,rl_battle_waiting_other_side;
+    RelativeLayout rl_battle_otherCard_container1,rl_battle_otherCard_container2,rl_battle_otherCard_container3;
+    RelativeLayout rl_battle_mycard_container1,rl_battle_mycard_container2,rl_battle_mycard_container3;
     ImageView imageView_battle_waiting,imageView_battle_border;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
@@ -83,6 +85,15 @@ public class BattleActivity extends AppCompatActivity {
         otherCard1=(CardLayout)findViewById(R.id.card_battle_otherside_card_1);
         otherCard2=(CardLayout)findViewById(R.id.card_battle_otherside_card_2);
         otherCard3=(CardLayout)findViewById(R.id.card_battle_otherside_card_3);
+
+        rl_battle_otherCard_container1 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_otherCard_container_1);
+        rl_battle_otherCard_container2 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_otherCard_container_2);
+        rl_battle_otherCard_container3 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_otherCard_container_3);
+
+        rl_battle_mycard_container1 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_mycard_container_1);
+        rl_battle_mycard_container2 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_mycard_container_2);
+        rl_battle_mycard_container3 = (RelativeLayout) findViewById(R.id.relatvieLayout_battle_mycard_container_3);
+
 
         myCard1.setOnClickListener(new clickListener_myCard(1));
         myCard2.setOnClickListener(new clickListener_myCard(2));

@@ -186,7 +186,6 @@ public class BattleModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void roomIsReady(){
@@ -227,8 +226,6 @@ public class BattleModel {
             e.printStackTrace();
         }
     }
-
-
 
     //HTTP Request Related Info
     private void serverPHPPostConnection(String str_URL,String str_JSON,String str_Function){
