@@ -1,6 +1,7 @@
 package mangoabliu.finalproject;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,6 +31,7 @@ import mangoabliu.finalproject.Model.GameModel;
 public class BattleActivity extends AppCompatActivity {
 
     private FontTextView tv_searching;
+    private static MediaPlayer bgm;
 
     BattleModel battleModel;
     GameModel gameModel;
@@ -62,6 +64,8 @@ public class BattleActivity extends AppCompatActivity {
         animSearch.setRepeatCount(Animation.INFINITE);
         tv_searching.startAnimation(animSearch);
         battleModel.initialBattle();
+
+        BGMInit();
     }
 
 
@@ -334,6 +338,41 @@ public class BattleActivity extends AppCompatActivity {
 
     public void restartConfirm(){
         this.int_state=1;
+    }
+
+    public void BGMInit(){
+//        循环播放
+        bgm = MediaPlayer.create(this,R.raw.index_bg);
+        bgm.start();
+        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgm.start();
+            }
+        });
+
+    }
+
+    //跳转、中断暂停播放，回activity继续播放
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null)
+            bgm.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
 
 }
