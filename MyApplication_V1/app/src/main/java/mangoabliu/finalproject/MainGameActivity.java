@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +57,7 @@ public class MainGameActivity extends AppCompatActivity {
     String userProfileName;
     int walkedDistance=0;
     private static MediaPlayer bgm;
+    private SoundPool soundPool =null;
 
 
     @Override
@@ -176,6 +179,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class userProfileListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
             Resources res = getResources();
             String[] CardsName = res.getStringArray(R.array.cards_name);
             ArrayList<Card> myCards = gameModel.getUserCards();
@@ -196,6 +200,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location1Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,1,R.style.DialogTranslucent);
             loc.show();
         }
@@ -203,6 +208,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location2Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,2,R.style.DialogTranslucent);
             loc.show();
         }
@@ -210,6 +216,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location3Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,3,R.style.DialogTranslucent);
             loc.show();
         }
@@ -217,6 +224,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location4Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,4,R.style.DialogTranslucent);
             loc.show();
         }
@@ -224,6 +232,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location5Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,5,R.style.DialogTranslucent);
             loc.show();
         }
@@ -231,6 +240,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location6Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,6,R.style.DialogTranslucent);
             loc.show();
         }
@@ -239,6 +249,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class fightListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,1);
             Intent myIntent = new Intent(MainGameActivity.this, BattleActivity.class);
             startActivity(myIntent);
         }
@@ -335,6 +346,15 @@ public class MainGameActivity extends AppCompatActivity {
                     bgm.start();
                 }
             });
+        }
+
+        if(gameModel.isSoundOn()==1){
+            // soundpool
+            //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
+            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.map_btnfight, 1);  //按fight键
+            soundPool.load(this, R.raw.map_clickplanet, 2); //点击星球
+            soundPool.load(this, R.raw.map_info,3);  //点击个人信息键
         }
     }
 

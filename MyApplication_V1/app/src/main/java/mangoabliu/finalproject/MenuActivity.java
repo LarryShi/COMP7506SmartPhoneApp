@@ -2,7 +2,9 @@ package mangoabliu.finalproject;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -38,6 +40,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 //    Animation animationFadeIn, animationFadeOut;
 
     private static MediaPlayer bgm;
+    private SoundPool soundPool;
 
 
     @Override
@@ -140,6 +143,10 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
                 }
             });
         }
+        if(gameModel.isSoundOn()==1){
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.button, 1);  //button
+        }
     }
 
     @Override
@@ -170,6 +177,9 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     private class bt_SettingListener implements View.OnClickListener {
 
         public void onClick(View view) {
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,0,1,3);
+            }
 
             SettingDialog set = new SettingDialog(MenuActivity.this,R.style.DialogTranslucent,bgm);
             set.show();

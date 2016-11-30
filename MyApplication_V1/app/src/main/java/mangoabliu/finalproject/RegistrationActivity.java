@@ -1,7 +1,9 @@
 package mangoabliu.finalproject;
 
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -33,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
     CheckBox cb_ShowPW;
 
     private static MediaPlayer bgm;
+    private SoundPool soundPool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private class bt_RegisterListener implements View.OnClickListener {
 
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
             String str_UserName=et_UserName.getText().toString();
             String str_Password=et_Password.getText().toString();
             String str_Pwd_confirm = et_Password_repeat.getText().toString();
@@ -111,6 +117,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private class bt_CancelListener implements View.OnClickListener {
         public void onClick(View view) {
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
             RegistrationActivity.super.onBackPressed();
         }
     }
@@ -119,6 +128,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private class cb_OnclickListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
             if(RegistrationActivity.this.cb_ShowPW.isChecked()){
 
                 RegistrationActivity.this.et_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -143,6 +155,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     bgm.start();
                 }
             });
+        }
+        if(gameModel.isSoundOn()==1){
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.button, 1);  //button
         }
     }
 

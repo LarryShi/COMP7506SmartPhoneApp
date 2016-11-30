@@ -2,7 +2,9 @@ package mangoabliu.finalproject;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     //for service Reference :http://www.cnblogs.com/yejiurui/p/3429451.html
 
     private static MediaPlayer bgm;
+    private SoundPool soundPool;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +101,11 @@ public class LoginActivity extends AppCompatActivity {
     private class bt_LoginListener implements View.OnClickListener {
 
         public void onClick(View v) {
+
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
+
             String str_UserName=et_UserName.getText().toString();
             String str_Password=et_Password.getText().toString();
             Log.i("LoginActivity","bt_LoginListener onClick!");
@@ -114,6 +123,11 @@ public class LoginActivity extends AppCompatActivity {
     private class bt_RegisterListener implements View.OnClickListener {
 
         public void onClick(View view) {
+
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
+
             Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivityForResult(myIntent, 0);
         }
@@ -123,6 +137,9 @@ public class LoginActivity extends AppCompatActivity {
     private class cb_OnclickListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1){
+                soundPool.play(1,1,1,1,0,3);
+            }
             if(LoginActivity.this.cb_ShowPW.isChecked()){
                 LoginActivity.this.et_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }
@@ -154,6 +171,11 @@ public class LoginActivity extends AppCompatActivity {
                     bgm.start();
                 }
             });
+        }
+
+        if(gameModel.isSoundOn()==1){
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.button, 1);  //button
         }
     }
 

@@ -82,8 +82,12 @@ public class SettingDialog extends Dialog {
         cbMusic.setOnClickListener(new cbMusicOnclickListener());
         cbSound.setOnClickListener(new cbSoundOnclickListener());
 
+        //获取Music、Sound的初始状态
         if(gameModel.isMusicOn()==1) cbMusic.setChecked(true);
         else cbMusic.setChecked(false);
+
+        if(gameModel.isSoundOn()==1) cbSound.setChecked(true);
+        else cbSound.setChecked(false);
 
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

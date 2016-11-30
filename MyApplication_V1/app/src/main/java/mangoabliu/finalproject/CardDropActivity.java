@@ -2,7 +2,9 @@ package mangoabliu.finalproject;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -53,6 +55,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private String errMessage;
     private ImageView expandedCard;
     private static MediaPlayer bgm;
+    private SoundPool soundPool;
 
 
 
@@ -181,6 +184,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class ReturnMain_Listener implements View.OnClickListener {
 
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,1);
             finish();
         }
     }
@@ -189,6 +193,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardBackL_Listener implements View.OnClickListener {
 
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
 
             ViewHelper.setRotationY(CardFrontL, 180f);//先翻转180，转回来时就不是反转的了
             RotateObject rotatable = new RotateObject.Builder(CardRootL)
@@ -205,6 +210,7 @@ public class CardDropActivity extends AppCompatActivity  {
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
             }
+            else if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
 
 
         }
@@ -214,6 +220,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardBackR_Listener implements View.OnClickListener {
 
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
 
             ViewHelper.setRotationY(CardFrontR, 180f);//先翻转180，转回来时就不是反转的了
             RotateObject rotatable = new RotateObject.Builder(CardRootR)
@@ -230,6 +237,7 @@ public class CardDropActivity extends AppCompatActivity  {
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
             }
+            else if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
 
 
         }
@@ -238,6 +246,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardBackM_Listener implements View.OnClickListener {
 
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
 
             ViewHelper.setRotationY(CardFrontM, 180f);//先翻转180，转回来时就不是反转的了
             RotateObject rotatable = new RotateObject.Builder(CardRootM)
@@ -254,6 +263,7 @@ public class CardDropActivity extends AppCompatActivity  {
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
             }
+            else if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
 
         }
     }
@@ -330,6 +340,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardFrontL_Listener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
             ZoomObject zoomHelper = new ZoomObject();
             zoomHelper.zoomImageFromThumb(CardFrontL,expandedCard,findViewById(R.id.dropCardLayout));
         }
@@ -339,6 +350,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardFrontM_Listener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
             ZoomObject zoomHelper = new ZoomObject();
             zoomHelper.zoomImageFromThumb(CardFrontM,expandedCard,findViewById(R.id.dropCardLayout));
         }
@@ -348,6 +360,7 @@ public class CardDropActivity extends AppCompatActivity  {
     private class CardFrontR_Listener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,0.5f);
             ZoomObject zoomHelper = new ZoomObject();
             zoomHelper.zoomImageFromThumb(CardFrontR,expandedCard,findViewById(R.id.dropCardLayout));
         }
@@ -367,6 +380,14 @@ public class CardDropActivity extends AppCompatActivity  {
                     bgm.start();
                 }
             });
+        }
+        if(gameModel.isSoundOn()==1){
+            // soundpool
+            //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
+            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.button, 1);  //按键
+            soundPool.load(this, R.raw.map_cardrotate, 2); //转卡
+            soundPool.load(this, R.raw.card_getnew,3);  //getnew
         }
     }
 
