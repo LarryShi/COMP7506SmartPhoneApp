@@ -299,7 +299,7 @@ class Game extends CI_Controller {
 		}
 		else{
 			$data['code'] = 2;
-			$data['message'] = "Waiting";
+			$data['message'] = "Set Card Fail, Please Try Again";
 			$this->output
 	        			->set_content_type('application/json')
 	        			->set_output(json_encode($data));		

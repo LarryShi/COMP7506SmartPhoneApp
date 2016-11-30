@@ -88,7 +88,14 @@ public class GameHTTPRequest extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         Log.i(TAG, "onPostExecute(Result result) called");
         if(str_function.equals(BattleModel.str_applyForFightM_function))
-            battleModel.setRoomId(result);
+            battleModel.applyForFightSuccessful(result);
+        if(str_function.equals(BattleModel.str_isRoomReadyM_function))
+            battleModel.getIsRoomReadySuccessful(result);
+        if(str_function.equals(BattleModel.str_setCardsM_function))
+            battleModel.setCardsSuccessful(result);
+        if(str_function.equals(BattleModel.str_isFightReadyM_function))
+            battleModel.isFightReadySuccessful(result);
+
 
     }
 

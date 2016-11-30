@@ -322,4 +322,8 @@ public class BattleActivity extends AppCompatActivity {
 
     }
 
+    public void setState(int state){
+        this.int_state=state;
+    }
+
 }

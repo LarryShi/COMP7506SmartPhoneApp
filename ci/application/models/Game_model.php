@@ -296,12 +296,12 @@ class Game_model extends CI_Model {
      	
 			$result['ret'] = 200;
         	$result['RoomInfo']=$query_result;
-        	$result['CardInfo']['Card1']=$Card1;
-        	$result['CardInfo']['Card2']=$Card2;
-        	$result['CardInfo']['Card3']=$Card3;
-        	$result['CardInfo']['Card4']=$Card4;
-        	$result['CardInfo']['Card5']=$Card5;
-        	$result['CardInfo']['Card6']=$Card6;
+        	$result['CardInfo'][0]=$Card1;
+        	$result['CardInfo'][1]=$Card2;
+        	$result['CardInfo'][2]=$Card3;
+        	$result['CardInfo'][3]=$Card4;
+        	$result['CardInfo'][4]=$Card5;
+        	$result['CardInfo'][5]=$Card6;
 
 
         	return $result;
