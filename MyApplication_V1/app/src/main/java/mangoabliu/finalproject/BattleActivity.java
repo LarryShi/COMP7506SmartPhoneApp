@@ -17,6 +17,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
@@ -43,7 +44,8 @@ public class BattleActivity extends AppCompatActivity {
     ImageView imageView_battle_waiting,imageView_battle_border,imageView_battle_win,imageView_battle_lose;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
-
+    ImageView imageView_attackMark;
+    TextView textView_hurt;
     boolean animationFinished=true;
 
     @Override
@@ -175,11 +177,24 @@ public class BattleActivity extends AppCompatActivity {
     //对面赢了
     }
 
-
     public void playerAttackOther(int hurt, int mycard, int othercard){
     //用户攻击对面后对面减少的HP
         Log.i("BattleActivity","PlayerAttackOther Called");
         Log.i("BattleActivity","Hurt:"+hurt);
+        CardLayout myCard,otherCard;
+        switch(mycard){
+            case 1:myCard=myCard1;break;
+            case 2:myCard=myCard2;break;
+            case 3:myCard=myCard3;break;
+        }
+        switch(othercard){
+            case 1:otherCard=otherCard1;break;
+            case 2:otherCard=otherCard2;break;
+            case 3:otherCard=otherCard3;break;
+        }
+
+
+
     }
 
 
@@ -187,6 +202,8 @@ public class BattleActivity extends AppCompatActivity {
         //对面攻击用户减少的HP
         Log.i("BattleActivity","otherSideAttackPlayer Called");
         Log.i("BattleActivity","Hurt:"+hurt);
+
+
     }
 
     public void setTurn(String userName){
@@ -326,11 +343,8 @@ public class BattleActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(!animationFinished)
                 return;
-            if(battleModel.getOtherCardHP(index)<=0)
-                return;
-            if(int_state==3)
+            if(int_state==3&&battleModel.getOtherCardHP(index)>=0)
                 battleModel.attackOtherTarget(index);
-
         }
     }
 
@@ -345,11 +359,9 @@ public class BattleActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(!animationFinished)
                 return;
-            if(battleModel.getMyCardHP(index)<=0)
-                return;
             if(int_state==1)
                 startPickUpCard(index);
-            if(int_state==3)
+            if(int_state==3&&battleModel.getMyCardHP(index)>0)
                 battleModel.chooseMyCard(index);
 
         }
@@ -367,6 +379,45 @@ public class BattleActivity extends AppCompatActivity {
 
     public void restartConfirm(){
         this.int_state=1;
+    }
+
+    private class hurtAnimationListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            animationFinished = false;
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            animationFinished = true;
+
+            otherCard1.removeView(imageView_attackMark);
+            otherCard1.removeView(textView_hurt);
+        }
+    }
+
+    private class hurtFadeOutAnimationListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            animationFinished = false;
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            animationFinished = true;
+            otherCard1.removeView(imageView_attackMark);
+            otherCard1.removeView(textView_hurt);
+        }
     }
 
     public void BGMInit(){
