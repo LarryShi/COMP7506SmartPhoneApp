@@ -3,31 +3,35 @@
     android:layout_width="@dimen/setting_width"
     android:layout_height="@dimen/setting_height"
     android:layout_gravity="center"
-    android:id="@+id/rl_setting">
+    android:id="@+id/rl_setting"
+    android:background="#000">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageButton
             android:layout_width="@dimen/setting_imagebtn"
             android:layout_height="@dimen/setting_imagebtn"
             android:id="@+id/btnMute"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/setting_margin"
-            android:layout_marginTop="@dimen/setting_margin"
-            android:layout_marginBottom="@dimen/setting_margin"
             android:layout_gravity="center" />
 
         <SeekBar
-            android:layout_width="@dimen/setting_seekbar"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:maxHeight="4dp"
+            android:minHeight="4dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="15dp"
             android:id="@+id/seekBar"
             android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/btnMute" />
+            android:thumb="@drawable/seekbar_thumb"
+            android:progressDrawable="@drawable/po_seekbar"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

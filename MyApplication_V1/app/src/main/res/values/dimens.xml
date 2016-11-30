@@ -124,9 +124,10 @@
     <dimen name="setting_seekbar">200dp</dimen>
     <dimen name="setting_title">24sp</dimen>
     <dimen name="setting_text">44sp</dimen>
-    <dimen name="setting_margin">30dp</dimen>
-    <dimen name="setting_margin_small">10dp</dimen>
+    <dimen name="setting_margin">20dp</dimen>
     <dimen name="setting_icon">60dp</dimen>
+    <dimen name="setting_seekbar_process">4dp</dimen>
+    <dimen name="setting_seekbar_padding">30dp</dimen>
 
     <!-- layout_card -->
     <dimen name="card_layout_width">150dp</dimen>
