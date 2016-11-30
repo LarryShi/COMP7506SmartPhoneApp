@@ -137,12 +137,12 @@ public class BattleActivity extends AppCompatActivity {
     }
 
 
-    public void playerAttackOther(int hurt){
+    public void playerAttackOther(int hurt, int mycard, int othercard){
     //用户攻击对面后对面减少的HP
     }
 
 
-    public void otherSideAttackPlayer(int hurt){
+    public void otherSideAttackPlayer(int hurt,int mycard,int othercard){
         //对面攻击用户减少的HP
     }
 
