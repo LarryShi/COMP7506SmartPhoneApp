@@ -13,12 +13,7 @@
     android:background="@drawable/bg_indexpage"
     >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/btn_SwitchLogin"
-        android:layout_centerHorizontal="true"
-        android:background="@color/transparent"/>
+
     <mangoabliu.finalproject.Layout.FontTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +30,7 @@
         android:shadowDy="0"
         android:shadowRadius="3"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_menu_setting"
         android:layout_width="@dimen/menu_btn_setting_size"
         android:layout_height="@dimen/menu_btn_setting_size"

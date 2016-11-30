@@ -2,6 +2,7 @@ package mangoabliu.finalproject;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,7 +11,8 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
@@ -22,13 +24,18 @@ import mangoabliu.finalproject.Model.GameModel;
 
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
-    Button btn_Switch,btn_Setting;
+
     GameModel gameModel;
+
     FontTextView tv_Menu;
-    //    Point size;
-//    @TargetApi(16)
-//    Animation animationFadeIn, animationFadeOut;
+    ImageButton btn_Setting;
+    RelativeLayout rl_menu;
+
     Animation anim = new AlphaAnimation(0.0f, 1.0f);
+//    Point size;
+//    Animation animationFadeIn, animationFadeOut;
+
+    private static MediaPlayer menu_bgm;
 
 
     @Override
@@ -39,18 +46,30 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         gameModel.addActivity(this);
         gameModel.setMenuActivity(this);
 
+        UIInit();
+        AnimInit();
+        BGMInit();
+
+    }
+
+    public void UIInit(){
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_menu);
-        btn_Switch = (Button) findViewById(R.id.btn_SwitchLogin);
-        btn_Setting = (Button) findViewById(R.id.btn_menu_setting);
-        btn_Switch.setOnClickListener(new bt_SwitchListener());
+        rl_menu =(RelativeLayout)findViewById(R.id.activity_menu);
+        rl_menu.setOnClickListener(new rl_MenuListener());
+        btn_Setting = (ImageButton) findViewById(R.id.btn_menu_setting);
         btn_Setting.setOnClickListener(new bt_SettingListener());
         tv_Menu = (FontTextView) findViewById(R.id.tv_menu);
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
         tv_Menu.setTypeface(typeFace);
 
+
+    }
+
+    public void AnimInit(){
         // translation animate -deleted
 ////        tv_Menu.setOnClickListener(new tv_MenuListener());
 //        //get screen size
@@ -81,9 +100,24 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         anim.setRepeatCount(Animation.INFINITE);
         tv_Menu.startAnimation(anim);
 
+    }
 
+    public void BGMInit(){
+                //循环播放
+        menu_bgm = MediaPlayer.create(this,R.raw.index_bg);
+        menu_bgm.start();
+        menu_bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                menu_bgm.start();
+            }
+        });
 
     }
+
+
+
+
 
     @Override
     public void onAnimationStart(Animation animation) {
@@ -101,7 +135,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     }
 
 
-    private class bt_SwitchListener implements View.OnClickListener {
+    private class rl_MenuListener implements View.OnClickListener {
 
         public void onClick(View view) {
             Intent myIntent = new Intent(MenuActivity.this, LoginActivity.class);
@@ -109,11 +143,11 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         }
     }
 
-
     private class bt_SettingListener implements View.OnClickListener {
 
         public void onClick(View view) {
-
+            SettingDialog set = new SettingDialog(MenuActivity.this,R.style.DialogTranslucent);
+            set.show();
         }
     }
 

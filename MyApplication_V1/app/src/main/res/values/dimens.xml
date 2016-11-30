@@ -117,6 +117,16 @@
     <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>
     <dimen name="userfile_table_padding">10dp</dimen>
 
+    <!--dialog_setting -->
+    <dimen name="setting_width">260dp</dimen>
+    <dimen name="setting_height">100dp</dimen>
+    <dimen name="setting_imagebtn">40dp</dimen>
+    <dimen name="setting_seekbar">200dp</dimen>
+    <dimen name="setting_title">24sp</dimen>
+    <dimen name="setting_text">44sp</dimen>
+    <dimen name="setting_margin">30dp</dimen>
+    <dimen name="setting_margin_small">10dp</dimen>
+    <dimen name="setting_icon">60dp</dimen>
 
     <!-- layout_card -->
     <dimen name="card_layout_width">150dp</dimen>
@@ -131,6 +141,8 @@
     <dimen name="card_atk_textsize">10sp</dimen>
     <dimen name="card_atk_marginleft">34dp</dimen>
     <dimen name="card_atk_marginbottom">2dp</dimen>
+
+
 
 
 </resources>
