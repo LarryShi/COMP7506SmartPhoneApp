@@ -108,6 +108,13 @@ public class BattleModel {
         int_otherUserID =0;
         String_otherUserName ="";
         bool_winGame=false;
+        mapIsUserCardPicked.clear();
+        mapCardIDtoCard.clear();
+        mapBtnNumberChooseToCard.clear();
+        myCardHP.clear();
+        mapOtherCardIDtoCard.clear();
+        mapOtherBtnNumberChooseToCard.clear();
+        otherCardHP.clear();
         applyForFight();
 
     }
@@ -172,7 +179,14 @@ public class BattleModel {
         return myUser;
     }
 
+    public int getMyCardHP(int index){
+        return myCardHP.get(index);
+    }
 
+    public int getOtherCardHP(int index){
+        return otherCardHP.get(index);
+    }
+    //Server Communication from here
 
     //applyForFightM
     public void applyForFight(){

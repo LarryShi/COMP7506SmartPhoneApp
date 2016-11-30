@@ -23,6 +23,7 @@ import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.BattleModel;
 import mangoabliu.finalproject.Model.GameModel;
 
+import mangoabliu.finalproject.explosionfield.*;
 /**
  * Created by Lyris on 29/11/16.
  * Modify by SHI Zhongqi on 29/11/16
@@ -39,9 +40,11 @@ public class BattleActivity extends AppCompatActivity {
     RelativeLayout rl_battle_waiting_up,rl_battle_waiting_down,rl_battle_waiting_other_side;
     RelativeLayout rl_battle_otherCard_container1,rl_battle_otherCard_container2,rl_battle_otherCard_container3;
     RelativeLayout rl_battle_mycard_container1,rl_battle_mycard_container2,rl_battle_mycard_container3;
-    ImageView imageView_battle_waiting,imageView_battle_border;
+    ImageView imageView_battle_waiting,imageView_battle_border,imageView_battle_win,imageView_battle_lose;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
+
+    boolean animationFinished=true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class BattleActivity extends AppCompatActivity {
         rl_battle_waiting_other_side=(RelativeLayout)findViewById(R.id.relativeLayout_battle_waiting_otherside);
         imageView_battle_waiting = (ImageView) findViewById(R.id.imageView_battle_loading);
         imageView_battle_border=(ImageView)findViewById(R.id.imageView_battle_border);
+        imageView_battle_win=(ImageView)findViewById(R.id.imageView_win);
+        imageView_battle_lose=(ImageView) findViewById(R.id.imageView_lose);
         tv_searching = (FontTextView)findViewById(R.id.battle_searching_text);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
@@ -135,6 +140,11 @@ public class BattleActivity extends AppCompatActivity {
 
         btn_card_choose_confirm.setOnClickListener(new clickListener_Confirm());
 
+        btn_exit.setVisibility(View.INVISIBLE);
+        btn_exit.setClickable(false);
+        imageView_battle_win.setVisibility(View.INVISIBLE);
+        imageView_battle_lose.setVisibility(View.INVISIBLE);
+
         Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
         animSearch.setDuration(1500); //You can manage the blinking time with this parameter
         animSearch.setStartOffset(20);
@@ -145,11 +155,23 @@ public class BattleActivity extends AppCompatActivity {
 
     public void playerWin(){
         Log.i("BattleActivity","playerWin Called");
+        btn_exit.setClickable(true);
+        btn_exit.setVisibility(View.VISIBLE);
+        AlphaAnimation  ShowAnimation = new AlphaAnimation(0.0f, 1.0f);
+        ShowAnimation.setDuration( 1000 );
+        ShowAnimation.setFillAfter( true );
+        imageView_battle_win.startAnimation(ShowAnimation);
     //用户赢了
     }
 
     public void OtherWin(){
         Log.i("BattleActivity","OtherWin Called");
+        btn_exit.setClickable(true);
+        btn_exit.setVisibility(View.VISIBLE);
+        AlphaAnimation  ShowAnimation = new AlphaAnimation(0.0f, 1.0f);
+        ShowAnimation.setDuration( 1000 );
+        ShowAnimation.setFillAfter( true );
+        imageView_battle_lose.startAnimation(ShowAnimation);
     //对面赢了
     }
 
@@ -290,7 +312,6 @@ public class BattleActivity extends AppCompatActivity {
                 battleModel.playerCardPickConfirm();
                 int_state = 2;
             }
-            //updateOtherSideCard(1,3);
         }
     }
 
@@ -303,6 +324,10 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         public void onClick(View v) {
+            if(!animationFinished)
+                return;
+            if(battleModel.getOtherCardHP(index)<=0)
+                return;
             if(int_state==3)
                 battleModel.attackOtherTarget(index);
 
@@ -318,6 +343,10 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         public void onClick(View v) {
+            if(!animationFinished)
+                return;
+            if(battleModel.getMyCardHP(index)<=0)
+                return;
             if(int_state==1)
                 startPickUpCard(index);
             if(int_state==3)
