@@ -20,7 +20,9 @@ import mangoabliu.finalproject.Model.GameModel;
 /**
  * Created by LyrisXu on 2016-11-26.
  */
-
+/**
+ * Add SoundEffect & Media by LyrisXu on 2016-12-01.
+ */
 
 public class MenuActivity extends AppCompatActivity implements AnimationListener {
 
@@ -35,7 +37,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 //    Point size;
 //    Animation animationFadeIn, animationFadeOut;
 
-    private static MediaPlayer menu_bgm;
+    private static MediaPlayer bgm;
 
 
     @Override
@@ -50,6 +52,30 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
         AnimInit();
         BGMInit();
 
+    }
+
+
+    //跳转、中断暂停播放，回activity继续播放
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null){
+            bgm.pause();
+            bgm.seekTo(0);}
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
 
     public void UIInit(){
@@ -103,21 +129,17 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     }
 
     public void BGMInit(){
-                //循环播放
-        menu_bgm = MediaPlayer.create(this,R.raw.index_bg);
-        menu_bgm.start();
-        menu_bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+//        循环播放
+        bgm = MediaPlayer.create(this,R.raw.index_bg);
+        bgm.start();
+        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
             @Override
             public void onCompletion(MediaPlayer mp) {
-                menu_bgm.start();
+                bgm.start();
             }
         });
 
     }
-
-
-
-
 
     @Override
     public void onAnimationStart(Animation animation) {
@@ -138,6 +160,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     private class rl_MenuListener implements View.OnClickListener {
 
         public void onClick(View view) {
+
             Intent myIntent = new Intent(MenuActivity.this, LoginActivity.class);
             startActivityForResult(myIntent, 0);
         }
@@ -146,6 +169,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
     private class bt_SettingListener implements View.OnClickListener {
 
         public void onClick(View view) {
+
             SettingDialog set = new SettingDialog(MenuActivity.this,R.style.DialogTranslucent);
             set.show();
         }

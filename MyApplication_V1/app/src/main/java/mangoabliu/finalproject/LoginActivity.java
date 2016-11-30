@@ -2,6 +2,7 @@ package mangoabliu.finalproject;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -34,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_Login;
     GameModel gameModel;
     //for service Reference :http://www.cnblogs.com/yejiurui/p/3429451.html
+
+    private static MediaPlayer bgm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,8 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+        BGMInit();
+
     }
 
     private class bt_LoginListener implements View.OnClickListener {
@@ -136,14 +142,40 @@ public class LoginActivity extends AppCompatActivity {
         gameModel.showToast(LoginActivity.this, err);
     }
 
+    public void BGMInit(){
+//        循环播放
+        bgm = MediaPlayer.create(this,R.raw.index_bg);
+        bgm.start();
+        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgm.start();
+            }
+        });
 
+    }
+
+
+    //跳转、中断暂停播放，回activity继续播放
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
+        bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null)
+            bgm.pause();
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
+
 }

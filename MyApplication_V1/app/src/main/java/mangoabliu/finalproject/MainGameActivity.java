@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,7 @@ public class MainGameActivity extends AppCompatActivity {
     ImageView thumbnail;
     String userProfileName;
     int walkedDistance=0;
+    private static MediaPlayer bgm;
 
 
     @Override
@@ -67,6 +69,8 @@ public class MainGameActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game);
+
+        BGMInit();
 
         userProfile = (Button) findViewById(R.id.userProfile);
         loc1 = (Button) findViewById(R.id.location1);
@@ -106,6 +110,7 @@ public class MainGameActivity extends AppCompatActivity {
         distance.setText(gameModel.getUserAccount().getWalkDistance() + "Miles");
 
         gameModel.getUserCard(gameModel.getUserAccount().getUserId());
+
     }
 
 
@@ -240,16 +245,6 @@ public class MainGameActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             dialog_exit();
@@ -326,6 +321,41 @@ public class MainGameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    public void BGMInit(){
+//        循环播放
+        bgm = MediaPlayer.create(this,R.raw.index_bg);
+        bgm.start();
+        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgm.start();
+            }
+        });
+
+    }
+
+    //跳转、中断暂停播放，回activity继续播放
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null)
+            bgm.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
 
 }

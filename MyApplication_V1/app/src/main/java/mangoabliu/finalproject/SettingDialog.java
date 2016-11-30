@@ -95,8 +95,6 @@ public class SettingDialog extends Dialog {
     }
 
 
-
-
     public void isMute(){
         //按静音键,muteFlag=1说明静音状态
         if (currentVolume!=0 || muteFlag==0){

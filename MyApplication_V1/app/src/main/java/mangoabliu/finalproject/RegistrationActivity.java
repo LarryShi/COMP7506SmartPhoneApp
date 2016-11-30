@@ -1,6 +1,7 @@
 package mangoabliu.finalproject;
 
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -30,6 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
     //REVISED BY LYRIS   11/26+++
     FontTextView tv_UserName,tv_Password,tv_Password_repeat;
     CheckBox cb_ShowPW;
+
+    private static MediaPlayer bgm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ public class RegistrationActivity extends AppCompatActivity {
         cb_ShowPW=(CheckBox) findViewById(R.id.cb_showconfirmpassword);
         cb_ShowPW.setOnClickListener(new cb_OnclickListener());
         cb_ShowPW.setTypeface(typeFace);
+
+        BGMInit();
 
     }
 
@@ -124,6 +129,41 @@ public class RegistrationActivity extends AppCompatActivity {
                 RegistrationActivity.this.et_Password_repeat.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
+    }
+
+    public void BGMInit(){
+//        循环播放
+        bgm = MediaPlayer.create(this,R.raw.index_bg);
+        bgm.start();
+        bgm.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgm.start();
+            }
+        });
+
+    }
+
+    //跳转、中断暂停播放，回activity继续播放
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bgm.start();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(bgm!= null)
+            bgm.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bgm!= null)
+            bgm.release();
     }
 
 }
