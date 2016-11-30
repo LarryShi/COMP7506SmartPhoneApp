@@ -140,24 +140,31 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void playerWin(){
+        Log.i("BattleActivity","playerWin Called");
     //用户赢了
     }
 
     public void OtherWin(){
+        Log.i("BattleActivity","OtherWin Called");
     //对面赢了
     }
 
 
     public void playerAttackOther(int hurt, int mycard, int othercard){
     //用户攻击对面后对面减少的HP
+        Log.i("BattleActivity","PlayerAttackOther Called");
+        Log.i("BattleActivity","Hurt:"+hurt);
     }
 
 
     public void otherSideAttackPlayer(int hurt,int mycard,int othercard){
         //对面攻击用户减少的HP
+        Log.i("BattleActivity","otherSideAttackPlayer Called");
+        Log.i("BattleActivity","Hurt:"+hurt);
     }
 
     public void setTurn(String userName){
+        Log.i("BattleActivity","setTurn Called");
         //设置中间的Turn信息
     }
 

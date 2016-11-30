@@ -82,7 +82,7 @@ class Game_model extends CI_Model {
 			$LastData['UserID']=$parameter['UserID'];
 			$LastData['FromNum']=$parameter['Player2CardNum'];
 			$LastData['ToNum']=$parameter['Player1CardNum'];
-			$LastData['Player1Card'.$parameter['Player1CardNum']."HP"]=$LastData['Player1Card'.$parameter['Player2CardNum']."HP"]-$result['Hurt'];
+			$LastData['Player1Card'.$parameter['Player1CardNum']."HP"]=$LastData['Player1Card'.$parameter['Player1CardNum']."HP"]-$result['Hurt'];
 			$result['Win']='0';
 			if($LastData['Player1Card1HP']<=0){
 				if($LastData['Player1Card2HP']<=0){

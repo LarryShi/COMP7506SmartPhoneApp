@@ -343,11 +343,11 @@ class Game extends CI_Controller {
 		
 		$this->load->model('game_model','',true);
 		//传过来的是JSON String，用下面这句
-    	//$json = json_decode($json_string, true);
+    	$json = json_decode($json_string, true);
     	//传过来的是JSON Object，用下面这句
-		$json = $json_string;
+		//$json = $json_string;
 
-		$paramemter['RoomID'] = $json['RoomID'];
+		$paramemter['RoomID'] = $json["RoomID"];
        
 		$result = $this->game_model->isRoomReady($paramemter);
 		if($result['ret'] === 200)

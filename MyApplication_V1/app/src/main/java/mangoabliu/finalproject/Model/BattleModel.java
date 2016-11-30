@@ -77,7 +77,6 @@ public class BattleModel {
                         getIsMyTurn();
                         break;
                 }
-                handler.postDelayed(this,3000);
                 //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
             }
         };
@@ -193,7 +192,7 @@ public class BattleModel {
             if((Integer)jsonObj.get("code")==0) {
                 this.int_roomId =Integer.parseInt(jsonObj.getString("RoomID"));
                 int_stateCase=1;
-                handler.postDelayed(runnable,1000);
+                handler.postDelayed(runnable,500);
             }
             else
                 battleActivity.displayMessage((String)jsonObj.get("message"));
@@ -224,7 +223,7 @@ public class BattleModel {
                 handler.removeCallbacks(runnable);
                 JSONArray jsonArr=(JSONArray)jsonObj.get("UserName");
                 JSONObject jsonUserObject1=jsonArr.getJSONObject(0);
-                JSONObject jsonUserObject2=jsonArr.getJSONObject(0);
+                JSONObject jsonUserObject2=jsonArr.getJSONObject(1);
                 int Player1ID = Integer.parseInt(jsonUserObject1.getString("UserID"));
                 if(Player1ID==myUser.getUserId())
                     int_myplayerID =1;
@@ -233,7 +232,7 @@ public class BattleModel {
 
                 switch(int_myplayerID){
                     case 1:
-                        int_otherUserID =Integer.parseInt(jsonUserObject1.getString("UserID"));
+                        int_otherUserID =Integer.parseInt(jsonUserObject2.getString("UserID"));
                         String_otherUserName =(String) jsonUserObject2.get("UserName");
                         break;
                     case 2:
@@ -244,8 +243,10 @@ public class BattleModel {
                 battleActivity.setOtherSideUserName(String_otherUserName);
                 battleActivity.waitingRoomFinished();
             }
-            else
-                battleActivity.displayMessage((String)jsonObj.get("message"));
+            else {
+                battleActivity.displayMessage((String) jsonObj.get("message"));
+                handler.postDelayed(runnable,3000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -281,7 +282,7 @@ public class BattleModel {
         try {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
-                this.int_roomId =(Integer)jsonObj.get("RoomID");
+                this.int_roomId =Integer.parseInt(jsonObj.getString("RoomID"));
                 int_stateCase =3;
                 /**
                  *  0  just start
@@ -290,7 +291,7 @@ public class BattleModel {
                  *  4  循环，str_myTurnM_function
                  *  5  循环，str_getTime_function ->单独拿出来写
                  */
-                handler.postDelayed(runnable,1000);
+                handler.postDelayed(runnable,500);
             }
             else {
                 battleActivity.displayMessage((String) jsonObj.get("message"));
@@ -327,31 +328,33 @@ public class BattleModel {
                 JSONObject jsonUserObject2=jsonArr.getJSONObject(1+temp_id);
                 JSONObject jsonUserObject3=jsonArr.getJSONObject(2+temp_id);
 
-                int CardID = jsonUserObject1.getInt("CardID");
+                int CardID = Integer.parseInt(jsonUserObject1.getString("CardID"));
                 String CardName = jsonUserObject1.getString("CardName");
-                int CardHP = jsonUserObject1.getInt("CardHP");
-                int CardAttack = jsonUserObject1.getInt("CardAttack");
-                int CardArmor = jsonUserObject1.getInt("CardArmor");
-                int CardRarity = jsonUserObject1.getInt("CardRarity");
+                int CardHP = Integer.parseInt(jsonUserObject1.getString("CardHP"));
+                int CardAttack = Integer.parseInt(jsonUserObject1.getString("CardAttack"));
+                int CardArmor = Integer.parseInt(jsonUserObject1.getString("CardArmor"));
+                int CardRarity = Integer.parseInt(jsonUserObject1.getString("CardRarity"));
                 mapOtherBtnNumberChooseToCard.put(1,new Card(CardID,CardName,CardHP,CardAttack,CardArmor,CardRarity));
-                CardID = jsonUserObject2.getInt("CardID");
+                CardID = Integer.parseInt(jsonUserObject2.getString("CardID"));
                 CardName = jsonUserObject2.getString("CardName");
-                CardHP = jsonUserObject2.getInt("CardHP");
-                CardAttack = jsonUserObject2.getInt("CardAttack");
-                CardArmor = jsonUserObject2.getInt("CardArmor");
-                CardRarity = jsonUserObject2.getInt("CardRarity");
+                CardHP = Integer.parseInt(jsonUserObject2.getString("CardHP"));
+                CardAttack = Integer.parseInt(jsonUserObject2.getString("CardAttack"));
+                CardArmor = Integer.parseInt(jsonUserObject2.getString("CardArmor"));
+                CardRarity = Integer.parseInt(jsonUserObject2.getString("CardRarity"));
                 mapOtherBtnNumberChooseToCard.put(2,new Card(CardID,CardName,CardHP,CardAttack,CardArmor,CardRarity));
-                CardID = jsonUserObject3.getInt("CardID");
+                CardID = Integer.parseInt(jsonUserObject3.getString("CardID"));
                 CardName = jsonUserObject3.getString("CardName");
-                CardHP = jsonUserObject3.getInt("CardHP");
-                CardAttack = jsonUserObject3.getInt("CardAttack");
-                CardArmor = jsonUserObject3.getInt("CardArmor");
-                CardRarity = jsonUserObject3.getInt("CardRarity");
-                mapOtherBtnNumberChooseToCard.put(2,new Card(CardID,CardName,CardHP,CardAttack,CardArmor,CardRarity));
+                CardHP = Integer.parseInt(jsonUserObject3.getString("CardHP"));
+                CardAttack = Integer.parseInt(jsonUserObject3.getString("CardAttack"));
+                CardArmor =Integer.parseInt(jsonUserObject3.getString("CardArmor"));
+                CardRarity = Integer.parseInt(jsonUserObject3.getString("CardRarity"));
+                mapOtherBtnNumberChooseToCard.put(3,new Card(CardID,CardName,CardHP,CardAttack,CardArmor,CardRarity));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(1).getCardID(),mapOtherBtnNumberChooseToCard.get(1));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(2).getCardID(),mapOtherBtnNumberChooseToCard.get(2));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(3).getCardID(),mapOtherBtnNumberChooseToCard.get(3));
-
+                battleActivity.updateOtherSideCard(1,mapOtherBtnNumberChooseToCard.get(1).getCardID());
+                battleActivity.updateOtherSideCard(2,mapOtherBtnNumberChooseToCard.get(2).getCardID());
+                battleActivity.updateOtherSideCard(3,mapOtherBtnNumberChooseToCard.get(3).getCardID());
                 for(int i=1;i<4;i++)
                     otherCardHP.put(i,mapOtherBtnNumberChooseToCard.get(i).getCardHP());
                 /**
@@ -362,12 +365,12 @@ public class BattleModel {
                  *  5  循环，str_getTime_function ->单独拿出来写
                  *
                  */
-                if(int_myplayerID==2){
-                    int_stateCase=4;
+                if(int_stateCase==4){
                     handler.postDelayed(runnable,1000);
                 }
             }
             else {
+                handler.postDelayed(runnable,2000);
                 battleActivity.displayMessage((String) jsonObj.get("message"));
             }
         } catch (Exception e) {
@@ -379,13 +382,18 @@ public class BattleModel {
     public void playACard() {
         try {
             JSONObject jsonObject = new JSONObject();
-
+            //	{"RoomID":"19","UserID":"12","Player1CardID":"1","Player2CardID":"3","Player1CardNum":"1","Player2CardNum":"2","Player":"1"}
+            //  {"RoomID":19,"UserID":12,"Player1CardID":1,"Player12CardID":1,"Player1CardNum":1,"Player12CardNum":1,"Player":1}
             jsonObject.put("RoomID", int_roomId);
             jsonObject.put("UserID",myUser.getUserId());
+            int int_otherPlayerID=2;
+            if(int_myplayerID==2)
+                int_otherPlayerID=1;
+
             jsonObject.put("Player"+ int_myplayerID +"CardID", mapBtnNumberChooseToCard.get(int_myPlayCardIndex).getCardID());
-            jsonObject.put("Player"+ int_otherUserID +"CardID", mapBtnNumberChooseToCard.get(int_otherPlayCardIndex).getCardID());
-            jsonObject.put("Player"+ int_myplayerID +" CardNum", int_myPlayCardIndex);
-            jsonObject.put("Player"+ int_otherUserID +"CardNum", int_otherPlayCardIndex);
+            jsonObject.put("Player"+ int_otherPlayerID +"CardID", mapBtnNumberChooseToCard.get(int_otherPlayCardIndex).getCardID());
+            jsonObject.put("Player"+ int_myplayerID +"CardNum", int_myPlayCardIndex);
+            jsonObject.put("Player"+ int_otherPlayerID +"CardNum", int_otherPlayCardIndex);
             jsonObject.put("Player", int_myplayerID);
 
 
@@ -399,10 +407,10 @@ public class BattleModel {
         try {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
-                int hurt = jsonObj.getInt("Hurt");
+                int hurt = (int)jsonObj.getDouble("Hurt");
                 battleActivity.playerAttackOther(hurt,int_myPlayCardIndex,int_otherPlayCardIndex);
 
-                if(jsonObj.getInt("win")!=0)
+                if(Integer.parseInt(jsonObj.getString("Win"))!=0)
                     battleActivity.playerWin();
                 else{
                     int_stateCase = 4;
@@ -434,12 +442,14 @@ public class BattleModel {
         try {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
+                handler.removeCallbacks(runnable);
                 battleActivity.setTurn(myUser.getUserName());
                 JSONObject lastPlay = (JSONObject) jsonObj.get("LastPlay");
                 int_stateCase = 2;
+                //{"code":0,"LastPlay":{"PlayID":"3","Player1ID":"12","Player2ID":"18","UserID":"18","Player1Card1ID":"1","Player1Card1HP":"267","Player1Card2ID":"3","Player1Card2HP":"300","Player1Card3ID":"2","Player1Card3HP":"300","Player2Card1ID":"1","Player2Card1HP":"300","Player2Card2ID":"2","Player2Card2HP":"267","Player2Card3ID":"3","Player2Card3HP":"300","FromNum":"2","ToNum":"1"}}
                 int fromNo = lastPlay.getInt("FromNum");
                 int toNo = lastPlay.getInt("ToNum");
-                int newHP= lastPlay.getInt("Player"+ int_myplayerID +"Card"+toNo);
+                int newHP= lastPlay.getInt("Player"+ int_myplayerID +"Card"+toNo+"HP");
                 int oldHP = myCardHP.get(toNo);
                 battleActivity.otherSideAttackPlayer(oldHP-newHP,toNo,fromNo);
                 myCardHP.put(toNo,newHP);
@@ -456,6 +466,7 @@ public class BattleModel {
 
             }
             else{
+                handler.postDelayed(runnable,3000);
                 battleActivity.setTurn(String_otherUserName);
             }
         } catch (JSONException e) {
