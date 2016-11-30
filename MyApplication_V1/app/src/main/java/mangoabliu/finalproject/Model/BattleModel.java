@@ -333,10 +333,14 @@ public class BattleModel {
                 JSONArray jsonArr=(JSONArray)jsonObj.get("CardInfo");
                 int temp_id=0;
                 int_stateCase =2;
-                if(int_myplayerID ==1)
+                if(int_myplayerID ==1){
                     temp_id+=3;
-                else
-                    int_stateCase =4;
+                    battleActivity.setTurn(myUser.getUserName());
+                }
+                else {
+                    int_stateCase = 4;
+                    battleActivity.setTurn(String_otherUserName);
+                }
                 JSONObject jsonUserObject1=jsonArr.getJSONObject(0+temp_id);
                 JSONObject jsonUserObject2=jsonArr.getJSONObject(1+temp_id);
                 JSONObject jsonUserObject3=jsonArr.getJSONObject(2+temp_id);
@@ -422,12 +426,16 @@ public class BattleModel {
             if((Integer)jsonObj.get("code")==0) {
                 int hurt = (int)jsonObj.getDouble("Hurt");
                 battleActivity.playerAttackOther(hurt,int_myPlayCardIndex,int_otherPlayCardIndex);
+                otherCardHP.put(int_otherPlayCardIndex,otherCardHP.get(int_otherPlayCardIndex)-hurt);
 
                 if(Integer.parseInt(jsonObj.getString("Win"))!=0)
                     battleActivity.playerWin();
                 else{
                     int_stateCase = 4;
                     handler.postDelayed(runnable,1000);
+                    battleActivity.setTurn(String_otherUserName);
+                    int_myPlayCardIndex=0;
+                    int_otherPlayCardIndex=0;
                 }
 
             }

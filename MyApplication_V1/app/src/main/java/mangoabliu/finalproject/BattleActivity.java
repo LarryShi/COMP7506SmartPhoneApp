@@ -35,7 +35,7 @@ import mangoabliu.finalproject.explosionfield.*;
 
 public class BattleActivity extends AppCompatActivity {
 
-    private FontTextView tv_searching;
+    private FontTextView tv_searching,tv_turn;
     private static MediaPlayer bgm;
 
     BattleModel battleModel;
@@ -46,12 +46,13 @@ public class BattleActivity extends AppCompatActivity {
     RelativeLayout rl_battle_mycard_container1,rl_battle_mycard_container2,rl_battle_mycard_container3;
     ImageView imageView_battle_waiting,imageView_battle_border,imageView_battle_win,imageView_battle_lose;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
+
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
     int int_last_selectedMycard=0;
     ImageView imageView_attackMark;
     TextView textView_hurt;
-    boolean animationFinished=true;
-    Animation animationAttackCardGoDown,animationAttackCardGoUp;
+    boolean animationFinished=true,myTurn=true;
+    Animation animationAttackCardGoDown,animationAttackCardGoUp,animationHide;
     ExplosionField explosionField;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,9 @@ public class BattleActivity extends AppCompatActivity {
         animationAttackCardGoDown.setFillAfter(true);
         animationAttackCardGoDown.setAnimationListener(new generalAnimationListener());
 
+        animationHide=  new AlphaAnimation(1.0f, 0.0f);
+        animationHide.setDuration( 1000 );
+        animationHide.setFillAfter( true );
         explosionField = ExplosionField.attach2Window(BattleActivity.this);
 
         battleModel.applyForFight();
@@ -115,6 +119,7 @@ public class BattleActivity extends AppCompatActivity {
         imageView_battle_win=(ImageView)findViewById(R.id.imageView_win);
         imageView_battle_lose=(ImageView) findViewById(R.id.imageView_lose);
         tv_searching = (FontTextView)findViewById(R.id.battle_searching_text);
+        tv_turn=(FontTextView)findViewById(R.id.textView_battle_turn);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
         myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);
@@ -263,7 +268,7 @@ public class BattleActivity extends AppCompatActivity {
         TextPaint tp = textView_hurt.getPaint();
         tp.setFakeBoldText(true);
         textView_hurt.setShadowLayer(5F, 5F,5F, Color.BLACK);
-        otherCard1.addView(textView_hurt);
+        otherCard.addView(textView_hurt);
 
         Animation animationHurtTextGoUp = new TranslateAnimation(
                 TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
@@ -284,10 +289,6 @@ public class BattleActivity extends AppCompatActivity {
 
         imageView_attackMark.startAnimation(HideAnimation);
         textView_hurt.startAnimation(animationSet);
-
-        if(battleModel.getOtherCardHP(othercard)<=0){
-            explosionField.explode(otherCard);
-        }
 
     }
 
@@ -373,13 +374,16 @@ public class BattleActivity extends AppCompatActivity {
         imageView_attackMark.startAnimation(HideAnimation);
         textView_hurt.startAnimation(animationSet);
 
-        if(battleModel.getOtherCardHP(othercard)<=0){
-            explosionField.explode(otherCard);
-        }
+        Log.i("BattleActivity","AfterAttackHP:"+battleModel.getOtherCardHP(othercard));
     }
 
     public void setTurn(String userName){
         Log.i("BattleActivity","setTurn Called");
+        if(userName.equals(battleModel.getUserAccount().getUserName()))
+            myTurn=true;
+        else
+            myTurn=false;
+        tv_turn.setText(userName);
         //设置中间的Turn信息
     }
 
@@ -513,6 +517,9 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         public void onClick(View v) {
+            int_last_selectedMycard=0;
+            if(!myTurn)
+                return;
             if(!animationFinished)
                 return;
             if(int_state==3&&battleModel.getOtherCardHP(index)>=0)
@@ -529,6 +536,8 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         public void onClick(View v) {
+            if(!myTurn)
+                return;
             if(!animationFinished)
                 return;
             if(int_state==1)
@@ -585,13 +594,8 @@ public class BattleActivity extends AppCompatActivity {
         @Override
         public void onAnimationEnd(Animation animation) {
             animationFinished = true;
-            CardLayout myCard,otherCard;
-            switch(mycard){
-                case 1:myCard=myCard1;break;
-                case 2:myCard=myCard2;break;
-                case 3:myCard=myCard3;break;
-                default:myCard = null;
-            }
+            CardLayout otherCard;
+
             switch(othercard){
                 case 1:otherCard=otherCard1;break;
                 case 2:otherCard=otherCard2;break;
@@ -600,7 +604,11 @@ public class BattleActivity extends AppCompatActivity {
             }
             otherCard.removeView(imageView_attackMark);
             otherCard.removeView(textView_hurt);
-            myCard.startAnimation(animationAttackCardGoDown);
+            //myCard.startAnimation(animationAttackCardGoDown);
+            if(battleModel.getOtherCardHP(othercard)<=0){
+                //explosionField.explode(otherCard);
+                otherCard.startAnimation(animationHide);
+            }
         }
     }
 
@@ -623,7 +631,7 @@ public class BattleActivity extends AppCompatActivity {
         @Override
         public void onAnimationEnd(Animation animation) {
             animationFinished = true;
-            CardLayout myCard,otherCard;
+            CardLayout myCard;
             switch(mycard){
                 case 1:myCard=myCard1;break;
                 case 2:myCard=myCard2;break;
@@ -632,6 +640,10 @@ public class BattleActivity extends AppCompatActivity {
             }
             myCard.removeView(imageView_attackMark);
             myCard.removeView(textView_hurt);
+            if(battleModel.getOtherCardHP(mycard)<=0){
+                //explosionField.explode(myCard);
+                myCard.startAnimation(animationHide);
+            }
         }
     }
 
