@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Random;
 
+import mangoabliu.finalproject.Animation.OnSwipeTouchListener;
 import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Animation.ZoomObject;
 import mangoabliu.finalproject.Model.Card;
@@ -101,6 +102,41 @@ public class CardDropActivity extends AppCompatActivity  {
         CardFrontM.setOnClickListener(new CardFrontM_Listener());
         CardFrontR.setOnClickListener(new CardFrontR_Listener());
 
+
+        expandedCard.setOnTouchListener(new OnSwipeTouchListener(CardDropActivity.this) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(expandedCard,"right",dis,velocity);
+
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(expandedCard,"left",dis,velocity);
+            }
+        });
+
+    }
+
+    private void rotateCard(ImageView view, String leftOrRight, float dis, float velocity){
+        int percentage = 0;
+        if (leftOrRight.equals("left"))
+            dis = Math.abs(dis);
+
+        if (dis != 0)
+            percentage = Math.round(view.getWidth()/dis);
+        if (percentage >= 7)
+            percentage = 2;
+        else if (percentage >= 5 && percentage < 7)
+            percentage = 3;
+        else
+            percentage = 4;
+
+        view.animate().setDuration(2000);
+        if (leftOrRight.equals("left"))
+            view.animate().rotationYBy(360*-percentage);
+        else
+            view.animate().rotationYBy(360*percentage);
     }
 
     private class ReturnMain_Listener implements View.OnClickListener {

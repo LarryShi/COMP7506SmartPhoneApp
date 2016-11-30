@@ -2,7 +2,9 @@ package mangoabliu.finalproject;
 
 
 import android.media.MediaPlayer;
+import android.graphics.drawable.ClipDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -21,6 +23,7 @@ import android.widget.RelativeLayout;
 import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.BattleModel;
+import mangoabliu.finalproject.Model.Card;
 import mangoabliu.finalproject.Model.GameModel;
 
 import mangoabliu.finalproject.explosionfield.*;
@@ -175,6 +178,9 @@ public class BattleActivity extends AppCompatActivity {
     //对面赢了
     }
 
+    ClipDrawable imageDrawable;
+    Handler myHandler = new Handler();
+    private int mLevel = 0;
 
     public void playerAttackOther(int hurt, int mycard, int othercard){
     //用户攻击对面后对面减少的HP
@@ -183,7 +189,8 @@ public class BattleActivity extends AppCompatActivity {
     }
 
 
-    public void otherSideAttackPlayer(int hurt,int mycard,int othercard){
+
+    public void otherSideAttackPlayer(int hurt, int myCard, int othercard){
         //对面攻击用户减少的HP
         Log.i("BattleActivity","otherSideAttackPlayer Called");
         Log.i("BattleActivity","Hurt:"+hurt);

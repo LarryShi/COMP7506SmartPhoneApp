@@ -9,15 +9,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
 
+import mangoabliu.finalproject.Animation.OnSwipeTouchListener;
+import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Animation.ZoomObject;
+import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
@@ -36,7 +44,8 @@ public class LocationDialogView extends Dialog {
 
     GameModel gameModel;
     int clickedLoc, btnJudge=0;
-    ImageView image_pCard,expandedImageView;
+    ImageView image_pCard;
+    ImageView expandedImageView;
 
     //change into imageview
     ImageView action;
@@ -91,16 +100,44 @@ public class LocationDialogView extends Dialog {
         }
 
         //PossibleCardDisplay  /Lyris
-        image_pCard =(ImageView) findViewById(R.id.locationImage);
+        image_pCard =(ImageButton) findViewById(R.id.locationImage);
         final int pCardID = possibleCardGenerator();
         expandedImageView =  (ImageView) findViewById(
                 R.id.expanded_image);
         initCardData(pCardID);
         zoomHelper = new ZoomObject(this);
+
+
         image_pCard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 zoomHelper.zoomImageFromThumb(image_pCard,expandedImageView,findViewById(R.id.expanded_image));
+            }
+        });
+
+        image_pCard.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(image_pCard,"left",dis,velocity);
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(image_pCard,"left",dis,velocity);
+            }
+        });
+
+
+        expandedImageView.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
+
+            public void onSwipeRight(float dis, float velocity) {
+                //Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                rotateCard(expandedImageView,"right",dis,velocity);
+
+            }
+            public void onSwipeLeft(float dis, float velocity) {
+                //Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT).show();
+                rotateCard(expandedImageView,"left",dis,velocity);
             }
         });
 
@@ -143,6 +180,24 @@ public class LocationDialogView extends Dialog {
     }
 
 
+    private void rotateCard(ImageView view, String leftOrRight, float dis, float velocity){
+        int percentage = 0;
+        if (leftOrRight.equals("left"))
+            dis = Math.abs(dis);
+
+        if (dis != 0)
+            percentage = Math.round(view.getWidth()/dis);
+        if (percentage > 5)
+            percentage = 2;
+        else
+            percentage = 4;
+
+        view.animate().setDuration(2000);
+        if (leftOrRight.equals("left"))
+            view.animate().rotationYBy(360*-percentage);
+        else
+            view.animate().rotationYBy(360*percentage);
+    }
 
 
     //PossibleCardGenerator - Random
