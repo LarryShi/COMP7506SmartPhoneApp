@@ -98,7 +98,7 @@ public class BattleActivity extends AppCompatActivity {
         animationAttackCardGoDown.setFillAfter(true);
         animationAttackCardGoDown.setAnimationListener(new generalAnimationListener());
 
-        textView_myUsername.setText(battleModel.getUserAccount().getUserId());
+        textView_myUsername.setText(battleModel.getUserAccount().getUserName());
         explosionField = ExplosionField.attach2Window(BattleActivity.this);
 
         battleModel.applyForFight();
