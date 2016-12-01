@@ -20,9 +20,9 @@
 
     <Button
         android:id="@+id/userProfileDialogCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Back"
+        android:layout_width="@dimen/carddrop_btn_width"
+        android:layout_height="@dimen/carddrop_btn_height"
+        android:background="@drawable/btn_back"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/userfile_btn_marginEnd"/>
