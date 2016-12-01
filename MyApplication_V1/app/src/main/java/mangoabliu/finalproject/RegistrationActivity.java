@@ -121,6 +121,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 soundPool.play(1,1,1,1,0,3);
             }
             RegistrationActivity.super.onBackPressed();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

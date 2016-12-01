@@ -35,9 +35,6 @@ import static mangoabliu.finalproject.Animation.DisplayImageOptionsUtil.getDispl
  * Created by Byanka on 26/11/2016.
  */
 
-
-
-
 public class CardDropActivity extends AppCompatActivity  {
 
     GameModel gameModel;
