@@ -23,8 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="45dp"
+        android:textSize="30sp"
         android:id="@+id/textView_otherUserName" />
 
     <!-- my User Name -->
@@ -34,8 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="47dp"
+        android:textSize="30sp"
         android:id="@+id/textView_myUserName" />
 
     <!--另一边的卡-->
@@ -113,6 +115,8 @@
 
     <mangoabliu.finalproject.Layout.FontTextView
         android:text=""
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
