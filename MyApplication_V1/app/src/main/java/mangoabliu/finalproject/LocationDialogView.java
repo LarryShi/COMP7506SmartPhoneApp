@@ -4,28 +4,24 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.regex.Matcher;
 
 import mangoabliu.finalproject.Animation.OnSwipeTouchListener;
-import mangoabliu.finalproject.Animation.RotateObject;
 import mangoabliu.finalproject.Animation.ZoomObject;
-import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 import mangoabliu.finalproject.Model.Planet;
@@ -56,11 +52,14 @@ public class LocationDialogView extends Dialog {
     ZoomObject zoomHelper;
 
     boolean actionVisible;
+    private SoundPool soundPool =null;
+    private Context con;
 
     //Add Style /Lyris 11-26
     protected LocationDialogView(Context context, int loc, int style ) {
         super(context, style);
         clickedLoc = loc;
+        con=context;
         gameModel= GameModel.getInstance();
     }
 
@@ -88,6 +87,8 @@ public class LocationDialogView extends Dialog {
 
         //对话框也可以通过资源id找到布局文件中的组件，从而设置点击侦听
 //        Button cancel = (Button) findViewById(R.id.locationDialogCancel);
+
+        BGMInit();
 
         action = (ImageView) findViewById(R.id.locationAction);
         action.setEnabled(false);
@@ -248,6 +249,8 @@ public class LocationDialogView extends Dialog {
         @Override
         public void onClick(View v) {
 
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
+
             gameModel.getUserAccount().setTargetLocId(clickedLoc);
             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
                     clickedLoc);
@@ -256,6 +259,19 @@ public class LocationDialogView extends Dialog {
             dismiss();
         }
 
+    }
+
+
+    public void BGMInit(){
+
+        if(gameModel.isSoundOn()==1){
+            // soundpool
+            //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
+            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(con, R.raw.map_btnfight, 1);  //按fight键
+            soundPool.load(con, R.raw.map_clickplanet, 2); //点击星球
+            soundPool.load(con, R.raw.map_info,3);  //点击个人信息键
+        }
     }
 
 

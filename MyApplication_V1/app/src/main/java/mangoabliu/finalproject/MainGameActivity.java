@@ -179,7 +179,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class userProfileListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             Resources res = getResources();
             String[] CardsName = res.getStringArray(R.array.cards_name);
             ArrayList<Card> myCards = gameModel.getUserCards();
@@ -232,7 +232,7 @@ public class MainGameActivity extends AppCompatActivity {
     private class location5Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
+            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
             LocationDialogView loc = new LocationDialogView(MainGameActivity.this,5,R.style.DialogTranslucent);
             loc.show();
         }
