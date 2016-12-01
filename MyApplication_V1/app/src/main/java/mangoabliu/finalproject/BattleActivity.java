@@ -2,7 +2,9 @@ package mangoabliu.finalproject;
 
 
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextPaint;
@@ -22,14 +24,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.BattleModel;
 import mangoabliu.finalproject.Model.GameModel;
-
-import mangoabliu.finalproject.explosionfield.*;
+import mangoabliu.finalproject.explosionfield.ExplosionField;
 /**
  * Created by Lyris on 29/11/16.
  * Modify by SHI Zhongqi on 29/11/16
@@ -39,6 +38,7 @@ public class BattleActivity extends AppCompatActivity {
 
     private FontTextView tv_searching,tv_turn;
     private static MediaPlayer bgm;
+    private SoundPool soundPool;
 
     BattleModel battleModel;
     GameModel gameModel;
@@ -171,7 +171,9 @@ public class BattleActivity extends AppCompatActivity {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,3);
                 gameFinished();
+
             }
         });
 
@@ -193,6 +195,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void playerWin(){
+        if(gameModel.isSoundOn()==1) soundPool.play(4,1,1,0,0,1);
         Log.i("BattleActivity","playerWin Called");
         btn_exit.setClickable(true);
         btn_exit.setVisibility(View.VISIBLE);
@@ -204,6 +207,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void OtherWin(){
+        if(gameModel.isSoundOn()==1) soundPool.play(5,1,1,0,0,1);
         Log.i("BattleActivity","OtherWin Called");
         btn_exit.setClickable(true);
         btn_exit.setVisibility(View.VISIBLE);
@@ -215,6 +219,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void playerAttackOther(int hurt, int mycard, int othercard){
+        if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
     //用户攻击对面后对面减少的HP
         Log.i("BattleActivity","PlayerAttackOther Called");
         Log.i("BattleActivity","Hurt:"+hurt);
@@ -299,6 +304,7 @@ public class BattleActivity extends AppCompatActivity {
 
 
     public void otherSideAttackPlayer(int hurt,int mycard,int othercard){
+        if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
         //对面攻击用户减少的HP
         Log.i("BattleActivity","otherSideAttackPlayer Called");
         Log.i("BattleActivity","Hurt:"+hurt);
@@ -509,6 +515,7 @@ public class BattleActivity extends AppCompatActivity {
             Log.i("BattleActivity","int_state:"+battleModel.chosedCardNo());
             if(int_state==1&&battleModel.chosedCardNo()==3) {
 
+                if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,3);
                 battleModel.playerCardPickConfirm();
                 int_state = 2;
                 btn_card_choose_confirm.setVisibility(View.INVISIBLE);
@@ -615,6 +622,7 @@ public class BattleActivity extends AppCompatActivity {
             //myCard.startAnimation(animationAttackCardGoDown);
             if(battleModel.getOtherCardHP(othercard)<=0){
                 //explosionField.explode(otherCard);
+                if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
                 AlphaAnimation animationHide =  new AlphaAnimation(1.0f, 0.0f);
                 animationHide.setDuration( 1000 );
                 animationHide.setFillAfter( true );
@@ -654,6 +662,7 @@ public class BattleActivity extends AppCompatActivity {
             myCard.removeView(textView_hurt);
             if(battleModel.getOtherCardHP(mycard)<=0){
                 //explosionField.explode(myCard);
+                if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
                 AlphaAnimation animationHide =  new AlphaAnimation(1.0f, 0.0f);
                 animationHide.setDuration( 1000 );
                 animationHide.setFillAfter( true );
@@ -679,6 +688,7 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
+
     public void BGMInit(){
         //循环播放
         if(gameModel.isMusicOn()==1){
@@ -691,8 +701,18 @@ public class BattleActivity extends AppCompatActivity {
                 }
             });
         }
-    }
 
+        if(gameModel.isSoundOn()==1){
+            // soundpool
+            //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
+            soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(this, R.raw.button, 1);  //按键
+            soundPool.load(this, R.raw.battle_cardhit,2);
+            soundPool.load(this, R.raw.battle_carddead,3);
+            soundPool.load(this, R.raw.battle_win,4);
+            soundPool.load(this, R.raw.battle_lose,5);
+        }
+    }
     //跳转、中断暂停播放，回activity继续播放
     @Override
     protected void onStart() {

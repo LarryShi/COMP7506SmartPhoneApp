@@ -57,7 +57,7 @@ public class MainGameActivity extends AppCompatActivity {
     String userProfileName;
     int walkedDistance=0;
     private static MediaPlayer bgm;
-    private SoundPool soundPool =null;
+    private SoundPool soundPool;
 
 
     @Override
