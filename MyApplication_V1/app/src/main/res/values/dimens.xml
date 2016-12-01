@@ -118,8 +118,8 @@
     <dimen name="userfile_icon_marginTop">35dp</dimen>
     <dimen name="userfile_icon_marginStart">20dp</dimen>
     <dimen name="userfile_btn_marginEnd">20dp</dimen>
-    <dimen name="userfile_username_textsize">24sp</dimen>
-    <dimen name="userfile_username_padding">15dp</dimen>
+    <dimen name="userfile_username_textsize">30sp</dimen>
+    <dimen name="userfile_username_padding">30dp</dimen>
     <dimen name="userfile_scroll_marginTop">30dp</dimen>
     <dimen name="userfile_scroll_marginBottom">10dp</dimen>
     <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>
