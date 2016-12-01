@@ -8,12 +8,7 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/bg_battle_noborder"
     >
-    <!--Searching border&planet-->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/battle_border1"
-        android:id="@+id/imageView_battle_border"/>
+
 
     <!--other User Name-->
 
@@ -296,6 +291,11 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/btn_back"/>
 
-
+    <!--Searching border&planet-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/battle_border1"
+        android:id="@+id/imageView_battle_border"/>
 
 </RelativeLayout>

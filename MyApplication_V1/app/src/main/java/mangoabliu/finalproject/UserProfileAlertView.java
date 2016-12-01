@@ -122,21 +122,17 @@ public class UserProfileAlertView extends Dialog {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             final ImageView iv;
-            if (convertView == null) {
-                iv = new ImageView(mcontext);
-                iv.setImageResource(myImageIds.get(position));
-                Log.i("UserProfileView","position:"+position+","+myImageIds.get(position).toString());
-                Log.i("UserProfileView","myImageIdsSize:"+myImageIds.size());
-                //原值- Lyris修改
+
+            iv = new ImageView(mcontext);
+            iv.setImageResource(myImageIds.get(position));
+            Log.i("UserProfileView","position:"+position+","+myImageIds.get(position).toString());
+            Log.i("UserProfileView","myImageIdsSize:"+myImageIds.size());
+            //原值- Lyris修改
 //                iv.setScaleType(ImageView.ScaleType.FIT_XY);
 //                iv.setLayoutParams(new GridView.LayoutParams(400,500));
-                iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-                iv.setLayoutParams(new GridView.LayoutParams(350, 450));
-
-            } else {
-                iv = (ImageView) convertView;
-            }
+            iv.setLayoutParams(new GridView.LayoutParams(350, 450));
 
             return iv;
         }
