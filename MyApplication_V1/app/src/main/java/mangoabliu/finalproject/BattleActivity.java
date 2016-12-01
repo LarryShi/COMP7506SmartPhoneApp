@@ -52,7 +52,7 @@ public class BattleActivity extends AppCompatActivity {
     ImageView imageView_attackMark;
     TextView textView_hurt;
     boolean animationFinished=true,myTurn=true;
-    Animation animationAttackCardGoDown,animationAttackCardGoUp,animationHide;
+    Animation animationAttackCardGoDown,animationAttackCardGoUp;
     ExplosionField explosionField;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,9 +95,7 @@ public class BattleActivity extends AppCompatActivity {
         animationAttackCardGoDown.setFillAfter(true);
         animationAttackCardGoDown.setAnimationListener(new generalAnimationListener());
 
-        animationHide=  new AlphaAnimation(1.0f, 0.0f);
-        animationHide.setDuration( 1000 );
-        animationHide.setFillAfter( true );
+
         explosionField = ExplosionField.attach2Window(BattleActivity.this);
 
         battleModel.applyForFight();
@@ -598,7 +596,7 @@ public class BattleActivity extends AppCompatActivity {
         public void onAnimationEnd(Animation animation) {
             animationFinished = true;
             CardLayout otherCard;
-
+            Log.i("myCardHurt","Othercard No.:"+othercard);
             switch(othercard){
                 case 1:otherCard=otherCard1;break;
                 case 2:otherCard=otherCard2;break;
@@ -610,6 +608,9 @@ public class BattleActivity extends AppCompatActivity {
             //myCard.startAnimation(animationAttackCardGoDown);
             if(battleModel.getOtherCardHP(othercard)<=0){
                 //explosionField.explode(otherCard);
+                AlphaAnimation animationHide =  new AlphaAnimation(1.0f, 0.0f);
+                animationHide.setDuration( 1000 );
+                animationHide.setFillAfter( true );
                 otherCard.startAnimation(animationHide);
             }
         }
@@ -633,6 +634,7 @@ public class BattleActivity extends AppCompatActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
+            Log.i("otherCardHurt","mycardNo No.:"+mycard);
             animationFinished = true;
             CardLayout myCard;
             switch(mycard){
@@ -645,6 +647,9 @@ public class BattleActivity extends AppCompatActivity {
             myCard.removeView(textView_hurt);
             if(battleModel.getOtherCardHP(mycard)<=0){
                 //explosionField.explode(myCard);
+                AlphaAnimation animationHide =  new AlphaAnimation(1.0f, 0.0f);
+                animationHide.setDuration( 1000 );
+                animationHide.setFillAfter( true );
                 myCard.startAnimation(animationHide);
             }
         }

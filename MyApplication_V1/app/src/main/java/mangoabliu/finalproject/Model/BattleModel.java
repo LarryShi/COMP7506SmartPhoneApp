@@ -472,8 +472,8 @@ public class BattleModel {
                 int toNo = lastPlay.getInt("ToNum");
                 int newHP= lastPlay.getInt("Player"+ int_myplayerID +"Card"+toNo+"HP");
                 int oldHP = myCardHP.get(toNo);
-                battleActivity.otherSideAttackPlayer(oldHP-newHP,toNo,fromNo);
                 myCardHP.put(toNo,newHP);
+                battleActivity.otherSideAttackPlayer(oldHP-newHP,toNo,fromNo);
                 bool_winGame=true;
                 for(int i=1;i<4;i++){
                     if(myCardHP.get(i)>0) {
