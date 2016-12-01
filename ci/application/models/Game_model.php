@@ -161,88 +161,98 @@ class Game_model extends CI_Model {
         $query=$this->db->get();
         $query_result=$query->result_array();
         $NumberOfPlayer = $query->num_rows();
-        $this->db->where('RoomID', $parameter['RoomID']);
- 		$this->db->delete('Rooms'); 
+        //$this->db->where('RoomID', $parameter['RoomID']);
+ 		//$this->db->delete('Rooms'); 
+ 		$tableFound=1;
         if($NumberOfPlayer==2){
-        	$this->load->dbforge();
-        	$fields = array(
-					        'PlayID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					                'auto_increment' => TRUE,
-					        ),
-					        'Player1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'UserID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card1HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card2HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card3ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player1Card3HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card1ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card1HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card2ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card2HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card3ID' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'Player2Card3HP' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'FromNum' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),
-					        'ToNum' => array(
-					                'type' => 'INT',
-					                'constraint' => 11,
-					        ),     
-					);
-			$this->dbforge->add_field($fields);
-			$this->dbforge->add_key('PlayID', TRUE);
-			$this->dbforge->create_table('Room'.$parameter['RoomID']);
+
+        	$query = $this->db->table_exists('Room'.$parameter['RoomID']);
+			$count = count($query);
+
+			if (empty($count)) {
+			    $tableFound=0;// echo "No Table Found";
+			}
+			if($tableFound==0){
+	        	$this->load->dbforge();
+	        	$fields = array(
+						        'PlayID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						                'auto_increment' => TRUE,
+						        ),
+						        'Player1ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'UserID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card1ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card1HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card2ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card2HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card3ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player1Card3HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card1ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card1HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card2ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card2HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card3ID' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'Player2Card3HP' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'FromNum' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),
+						        'ToNum' => array(
+						                'type' => 'INT',
+						                'constraint' => 11,
+						        ),     
+						);
+				$this->dbforge->add_field($fields);
+				$this->dbforge->add_key('PlayID', TRUE);
+				$this->dbforge->create_table('Room'.$parameter['RoomID'], TRUE);
+			}
 		
 
      		$this->db->select('*');
@@ -290,8 +300,8 @@ class Game_model extends CI_Model {
 					        'FromNum' => 0,
 					        'ToNum' => 0,     
 					);
-
-     		$this->db->insert('Room'.$parameter['RoomID'], $data);
+     		if($tableFound==0)
+     			$this->db->insert('Room'.$parameter['RoomID'], $data);
 
      	
 			$result['ret'] = 200;
