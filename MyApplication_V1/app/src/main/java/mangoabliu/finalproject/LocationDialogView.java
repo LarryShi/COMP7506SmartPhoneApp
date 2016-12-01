@@ -112,6 +112,7 @@ public class LocationDialogView extends Dialog {
         image_pCard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(gameModel.isSoundOn()==1) soundPool.play(4,1,1,0,0,1);
                 zoomHelper.zoomImageFromThumb(image_pCard,expandedImageView,findViewById(R.id.expanded_image));
             }
         });
@@ -182,6 +183,7 @@ public class LocationDialogView extends Dialog {
 
 
     private void rotateCard(ImageView view, String leftOrRight, float dis, float velocity){
+        if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,1);
         int percentage = 0;
         if (leftOrRight.equals("left"))
             dis = Math.abs(dis);
@@ -237,6 +239,9 @@ public class LocationDialogView extends Dialog {
     private class drop_DropCardListener implements View.OnClickListener {
 
         public void onClick(View v) {
+
+            if(gameModel.isSoundOn()==1) soundPool.play(4,1,1,0,0,1);
+
             Intent intent = new Intent();
             intent.setClass(v.getContext(), CardDropActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -249,7 +254,7 @@ public class LocationDialogView extends Dialog {
         @Override
         public void onClick(View v) {
 
-            if(gameModel.isSoundOn()==1) soundPool.play(2,1,1,0,0,1);
+            if(gameModel.isSoundOn()==1) soundPool.play(4,1,1,0,0,1);
 
             gameModel.getUserAccount().setTargetLocId(clickedLoc);
             gameModel.updateTargetLocation(gameModel.getUserAccount().getUserId(),
@@ -268,9 +273,10 @@ public class LocationDialogView extends Dialog {
             // soundpool
             //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
             soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
-            soundPool.load(con, R.raw.map_btnfight, 1);  //按fight键
+            soundPool.load(con, R.raw.map_cardrotate, 1);  //按fight键
             soundPool.load(con, R.raw.map_clickplanet, 2); //点击星球
             soundPool.load(con, R.raw.map_info,3);  //点击个人信息键
+            soundPool.load(con, R.raw.button,4);
         }
     }
 

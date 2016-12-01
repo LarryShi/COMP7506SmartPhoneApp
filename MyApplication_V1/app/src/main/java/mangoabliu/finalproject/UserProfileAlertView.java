@@ -2,23 +2,20 @@ package mangoabliu.finalproject;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.media.Image;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-import mangoabliu.finalproject.Animation.ZoomObject;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 
@@ -31,10 +28,13 @@ public class UserProfileAlertView extends Dialog {
     //Add Style_transparent
     String name;
     GameModel gameModel;
+    private Context con;
+    private SoundPool soundPool;
 
     protected UserProfileAlertView(Context context, int style, String username) {
         super(context, style);
         name = username;
+        con=context;
 
     }
 
@@ -53,6 +53,8 @@ public class UserProfileAlertView extends Dialog {
         //设置对话框显示哪个布局文件
         setContentView(R.layout.dialog_userprofile);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        BGMInit();
+
         final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(getContext()));
 
@@ -62,6 +64,7 @@ public class UserProfileAlertView extends Dialog {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(gameModel.isSoundOn()==1) soundPool.play(4,1,1,0,0,3);
                 dismiss();
             }
         });
@@ -69,6 +72,8 @@ public class UserProfileAlertView extends Dialog {
 
         FontTextView tv_userName = (FontTextView) findViewById(R.id.usernameProfile);
         tv_userName.setText(name);
+
+
 
 
 
@@ -120,6 +125,19 @@ public class UserProfileAlertView extends Dialog {
             iv.setImageResource(myImageIds.get(position));
 
             return iv;
+        }
+    }
+
+    public void BGMInit(){
+
+        if(gameModel.isSoundOn()==1){
+            // soundpool
+            //play(id, 1, 1, 0, 0, 1) =(id, left, right, priority, loop, rate )
+            soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC,0);
+            soundPool.load(con, R.raw.map_btnfight, 1);  //按fight键
+            soundPool.load(con, R.raw.map_clickplanet, 2); //点击星球
+            soundPool.load(con, R.raw.map_info,3);  //点击个人信息键
+            soundPool.load(con, R.raw.button,4);
         }
     }
 
