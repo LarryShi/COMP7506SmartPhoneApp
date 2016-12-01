@@ -7,11 +7,11 @@
 
     <!-- activity_menu -->
     <dimen name="menu_text_paddingStart">0dp</dimen>
-    <dimen name="menu_text_paddingBottom">15dp</dimen>
+    <dimen name="menu_text_paddingBottom">20dp</dimen>
     <dimen name="menu_textsize">20sp</dimen>
     <dimen name="menu_btn_setting_size">50dp</dimen>
-    <dimen name="menu_btn_marginEnd">51dp</dimen>
-    <dimen name="menu_btn_marginBottom">33dp</dimen>
+    <dimen name="menu_btn_marginEnd">61dp</dimen>
+    <dimen name="menu_btn_marginBottom">43dp</dimen>
 
 
     <!-- activity_login & activity_registration -->
@@ -118,8 +118,9 @@
     <dimen name="userfile_icon_marginTop">35dp</dimen>
     <dimen name="userfile_icon_marginStart">20dp</dimen>
     <dimen name="userfile_btn_marginEnd">20dp</dimen>
-    <dimen name="userfile_username_textsize">24sp</dimen>
-    <dimen name="userfile_username_padding">15dp</dimen>
+    <dimen name="userfile_username_textsize">30sp</dimen>
+    <dimen name="userfile_username_paddingStart">37dp</dimen>
+    <dimen name="userfile_username_paddingTop">42dp</dimen>
     <dimen name="userfile_scroll_marginTop">30dp</dimen>
     <dimen name="userfile_scroll_marginBottom">10dp</dimen>
     <dimen name="userfile_scroll_marginHorizontal">20dp</dimen>
@@ -127,7 +128,7 @@
 
     <!--dialog_setting -->
     <dimen name="setting_width">260dp</dimen>
-    <dimen name="setting_height">160dp</dimen>
+    <dimen name="setting_height">130dp</dimen>
     <dimen name="setting_imagebtn">40dp</dimen>
     <dimen name="setting_seekbar">200dp</dimen>
     <dimen name="setting_title">24sp</dimen>

@@ -399,7 +399,7 @@ public class BattleActivity extends AppCompatActivity {
             myTurn=true;
         else
             myTurn=false;
-        tv_turn.setText(userName);
+        tv_turn.setText("Turn: "+ userName);
         //设置中间的Turn信息
     }
 

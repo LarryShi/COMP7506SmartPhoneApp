@@ -19,8 +19,7 @@
             android:layout_height="@dimen/setting_imagebtn"
             android:id="@+id/btnMute"
             android:layout_marginStart="@dimen/setting_margin"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/setting_checkbox_padding"/>
+            android:layout_alignParentStart="true"/>
 
         <SeekBar
             android:layout_width="match_parent"
