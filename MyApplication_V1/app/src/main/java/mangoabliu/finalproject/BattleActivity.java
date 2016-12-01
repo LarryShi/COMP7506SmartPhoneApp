@@ -2,6 +2,7 @@ package mangoabliu.finalproject;
 
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -123,6 +124,10 @@ public class BattleActivity extends AppCompatActivity {
         tv_turn=(FontTextView)findViewById(R.id.textView_battle_turn);
         textView_myUsername=(TextView) findViewById(R.id.textView_myUserName);
         textView_otherUsername=(TextView)findViewById(R.id.textView_otherUserName);
+
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Marvel-Bold.ttf");
+        textView_myUsername.setTypeface(typeFace);
+        textView_otherUsername.setTypeface(typeFace);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
         myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);
