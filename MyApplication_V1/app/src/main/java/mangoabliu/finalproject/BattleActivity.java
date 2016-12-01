@@ -179,6 +179,8 @@ public class BattleActivity extends AppCompatActivity {
         imageView_battle_win.setVisibility(View.INVISIBLE);
         imageView_battle_lose.setVisibility(View.INVISIBLE);
 
+        btn_test.setVisibility(View.INVISIBLE);
+
         Animation animSearch= new AlphaAnimation(0.0f, 1.0f);
         animSearch.setDuration(1500); //You can manage the blinking time with this parameter
         animSearch.setStartOffset(20);
@@ -504,6 +506,7 @@ public class BattleActivity extends AppCompatActivity {
 
                 battleModel.playerCardPickConfirm();
                 int_state = 2;
+                btn_card_choose_confirm.setVisibility(View.INVISIBLE);
             }
         }
     }

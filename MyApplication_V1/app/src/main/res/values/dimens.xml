@@ -66,9 +66,9 @@
     <dimen name="battle_searching_textsize">30sp</dimen>
     <dimen name="battle_card_width">100dp</dimen>
     <dimen name="battle_card_height">142dp</dimen>
-    <dimen name="battle_player_area_margin_top">15dp</dimen>
-    <dimen name="battle_player_area_margin_left">15dp</dimen>
-    <dimen name="battle_other_player_area_margin_top">15dp</dimen>
+    <dimen name="battle_player_area_margin_top">10dp</dimen>
+    <dimen name="battle_player_area_margin_left">10dp</dimen>
+    <dimen name="battle_other_player_area_margin_top">20dp</dimen>
     <dimen name="battle_other_player_area_margin_right">80dp</dimen>
     <dimen name="battle_searching_icon">128dp</dimen>
     <dimen name="battle_planet_width">150dp</dimen>
