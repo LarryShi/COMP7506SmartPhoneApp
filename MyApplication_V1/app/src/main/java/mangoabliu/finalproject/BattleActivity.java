@@ -468,7 +468,7 @@ public class BattleActivity extends AppCompatActivity {
 
     //请不要修改范围外的代码
     public void updateOtherSideCard(int CardID,int index){
-
+        Log.i("BattleActivity","CardID:"+CardID+",index:"+index);
         if(index==1) {
             otherCard1.setCardBack(CardID);
             otherCard1.setCardHP(battleModel.getOtherCard(CardID).getCardHP());
@@ -493,10 +493,11 @@ public class BattleActivity extends AppCompatActivity {
                     TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                     TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
                     TranslateAnimation.RELATIVE_TO_SELF, 0.0f,
-                    TranslateAnimation.RELATIVE_TO_SELF, -1);
+                    TranslateAnimation.RELATIVE_TO_SELF, -1.0f);
             animationWaitingUp.setDuration(1000);
             animationWaitingUp.setFillAfter(true);
             rl_battle_waiting_other_side.startAnimation(animationWaitingUp);
+            rl_battle_waiting_other_side.setVisibility(View.INVISIBLE);
             /*可修改范围*/
             int_state=3;
         }

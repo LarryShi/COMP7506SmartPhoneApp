@@ -369,9 +369,9 @@ public class BattleModel {
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(1).getCardID(),mapOtherBtnNumberChooseToCard.get(1));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(2).getCardID(),mapOtherBtnNumberChooseToCard.get(2));
                 mapOtherCardIDtoCard.put(mapOtherBtnNumberChooseToCard.get(3).getCardID(),mapOtherBtnNumberChooseToCard.get(3));
-                battleActivity.updateOtherSideCard(1,mapOtherBtnNumberChooseToCard.get(1).getCardID());
-                battleActivity.updateOtherSideCard(2,mapOtherBtnNumberChooseToCard.get(2).getCardID());
-                battleActivity.updateOtherSideCard(3,mapOtherBtnNumberChooseToCard.get(3).getCardID());
+                battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(1).getCardID(),1);
+                battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(2).getCardID(),2);
+                battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(3).getCardID(),3);
                 for(int i=1;i<4;i++)
                     otherCardHP.put(i,mapOtherBtnNumberChooseToCard.get(i).getCardHP());
                 /**
@@ -425,8 +425,9 @@ public class BattleModel {
             JSONObject jsonObj = new JSONObject(result);
             if((Integer)jsonObj.get("code")==0) {
                 int hurt = (int)jsonObj.getDouble("Hurt");
-                battleActivity.playerAttackOther(hurt,int_myPlayCardIndex,int_otherPlayCardIndex);
                 otherCardHP.put(int_otherPlayCardIndex,otherCardHP.get(int_otherPlayCardIndex)-hurt);
+                battleActivity.playerAttackOther(hurt,int_myPlayCardIndex,int_otherPlayCardIndex);
+
 
                 if(Integer.parseInt(jsonObj.getString("Win"))!=0)
                     battleActivity.playerWin();

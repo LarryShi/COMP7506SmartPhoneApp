@@ -8,7 +8,12 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/bg_battle_noborder"
     >
-
+    <!--Searching border&planet-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/battle_border1"
+        android:id="@+id/imageView_battle_border"/>
 
     <!--other User Name-->
 
@@ -108,7 +113,7 @@
 
 
     <mangoabliu.finalproject.Layout.FontTextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -291,11 +296,6 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/btn_back"/>
 
-    <!--Searching border&planet-->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/battle_border1"
-        android:id="@+id/imageView_battle_border"/>
+
 
 </RelativeLayout>
