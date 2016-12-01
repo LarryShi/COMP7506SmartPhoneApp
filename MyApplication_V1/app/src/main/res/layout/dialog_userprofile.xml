@@ -56,12 +56,24 @@
             android:layout_gravity="center"
           />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/gridview"
+        android:layout_alignTop="@+id/gridview"
+        android:layout_alignRight="@+id/gridview"
+        android:layout_alignBottom="@+id/gridview">
+
         <ImageView
             android:id="@+id/expandedCard"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+
 
 
 

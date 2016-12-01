@@ -47,7 +47,7 @@ public class GameModel {
     ArrayList<Card> UserCards= new ArrayList<Card>();
     ArrayList<Integer> myImageIds = new ArrayList<Integer>();
 
-    int[] distances = new int[]{5,8,5,10,5,8};
+    int[] distances = new int[]{20,32,20,40,20,32};
 
     private UserAccount myUser;
 

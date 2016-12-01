@@ -3,8 +3,10 @@ package mangoabliu.finalproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import mangoabliu.finalproject.Animation.ZoomObject;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.GameModel;
 
@@ -72,9 +75,20 @@ public class UserProfileAlertView extends Dialog {
 
         FontTextView tv_userName = (FontTextView) findViewById(R.id.usernameProfile);
         tv_userName.setText(name);
-
-
-
+/*
+        Log.i("ddd",""+gridImages.size());
+        for (int i = 0; i < gridImages.size(); i++) {
+            clickedCard = gridImages.get(i);
+            clickedExpand = expandImages.get(i);
+            gridImages.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gameModel.showToast(v.getContext(), "傻逼");
+                    ZoomObject zoomHelper = new ZoomObject();
+                    zoomHelper.zoomImageFromThumb(clickedCard, clickedExpand, findViewById(R.id.expandedCard));
+                }
+            });
+        }*/
 
 
     }
@@ -121,8 +135,6 @@ public class UserProfileAlertView extends Dialog {
             } else {
                 iv = (ImageView) convertView;
             }
-
-            iv.setImageResource(myImageIds.get(position));
 
             return iv;
         }

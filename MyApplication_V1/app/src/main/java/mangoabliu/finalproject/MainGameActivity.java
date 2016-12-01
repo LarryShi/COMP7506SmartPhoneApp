@@ -118,7 +118,6 @@ public class MainGameActivity extends AppCompatActivity {
 
 
     public void updateDistance(float animEndX, float animEndY){
-
         displayDistance();
         updateUFO(animEndX,animEndY);
     }
