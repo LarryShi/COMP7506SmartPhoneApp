@@ -89,7 +89,8 @@ public class UserProfileAlertView extends Dialog {
                 }
             });
         }*/
-
+        ImageView userIcon = (ImageView) findViewById(R.id.userIcon);
+        userIcon.setVisibility(View.INVISIBLE);
 
     }
 

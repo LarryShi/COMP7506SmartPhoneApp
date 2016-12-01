@@ -5,16 +5,6 @@
     android:id="@+id/userProfileDialog"
     android:background="@drawable/bg_userprofile1">
 
-    <ImageView
-        android:id="@+id/userIcon"
-        android:layout_width="@dimen/userfile_icon_width"
-        android:layout_height="@dimen/userfile_icon_height"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/userfile_icon_marginTop"
-        android:layout_marginStart="@dimen/userfile_icon_marginStart"
-        android:src="@drawable/usericon"/>
-
     <mangoabliu.finalproject.Layout.FontTextView
         android:id="@+id/usernameProfile"
         android:layout_width="wrap_content"
@@ -73,10 +63,13 @@
 
     </RelativeLayout>
 
-
-
-
-
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="@dimen/userfile_icon_width"
+        android:layout_height="@dimen/userfile_icon_height"
+        android:src="@drawable/usericon"
+        android:layout_alignBottom="@+id/userProfileDialogCancel"
+        android:layout_alignStart="@+id/gridview" />
 
 
 </RelativeLayout>
