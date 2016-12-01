@@ -208,9 +208,9 @@
                     android:layout_marginLeft="@dimen/battle_player_area_margin_left">
 
                     <Button
-                        android:text="@string/Confirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_confirm"
+                        android:layout_width="@dimen/battle_btn_confirm_size"
+                        android:layout_height="@dimen/battle_btn_confirm_size"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="30dp"

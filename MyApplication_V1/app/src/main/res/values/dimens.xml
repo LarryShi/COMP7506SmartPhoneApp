@@ -75,6 +75,7 @@
     <dimen name="battle_planet_height">37dp</dimen>
     <dimen name="battle_btn_exit_width">60dp</dimen>
     <dimen name="battle_btn_exit_height">50dp</dimen>
+    <dimen name="battle_btn_confirm_size">60dp</dimen>
 
     <!-- activity_carddrop -->
     <dimen name="carddrop_icon_width">60dp</dimen>
