@@ -2,6 +2,7 @@ package mangoabliu.finalproject.Model;
 
 
 import android.os.Handler;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -372,8 +373,10 @@ public class BattleModel {
                 battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(1).getCardID(),1);
                 battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(2).getCardID(),2);
                 battleActivity.updateOtherSideCard(mapOtherBtnNumberChooseToCard.get(3).getCardID(),3);
-                for(int i=1;i<4;i++)
-                    otherCardHP.put(i,mapOtherBtnNumberChooseToCard.get(i).getCardHP());
+                for(int i=1;i<4;i++) {
+                    otherCardHP.put(i, mapOtherBtnNumberChooseToCard.get(i).getCardHP());
+                    Log.i("BattleModel","OthercardHP:"+otherCardHP.get(i));
+                }
                 /**
                  *  0  just start
                  *  1  循环str_isRoomReadyM_function
@@ -473,6 +476,7 @@ public class BattleModel {
                 int toNo = lastPlay.getInt("ToNum");
                 int newHP= lastPlay.getInt("Player"+ int_myplayerID +"Card"+toNo+"HP");
                 int oldHP = myCardHP.get(toNo);
+                Log.i("BattleModel","newHP:"+newHP+",oldHP"+oldHP);
                 myCardHP.put(toNo,newHP);
                 battleActivity.otherSideAttackPlayer(oldHP-newHP,toNo,fromNo);
                 bool_winGame=true;

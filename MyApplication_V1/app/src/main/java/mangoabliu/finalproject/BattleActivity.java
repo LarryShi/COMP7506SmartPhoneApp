@@ -313,6 +313,7 @@ public class BattleActivity extends AppCompatActivity {
         //对面攻击用户减少的HP
         Log.i("BattleActivity","otherSideAttackPlayer Called");
         Log.i("BattleActivity","Hurt:"+hurt);
+        Log.i("BattleActivity","Mycard:"+mycard+",otherCard"+othercard);
         CardLayout myCard,otherCard;
         switch(mycard){
             case 1:myCard=myCard1;break;
@@ -391,6 +392,7 @@ public class BattleActivity extends AppCompatActivity {
         textView_hurt.startAnimation(animationSet);
 
         Log.i("BattleActivity","AfterAttackHP:"+battleModel.getOtherCardHP(othercard));
+
     }
 
     public void setTurn(String userName){
@@ -665,7 +667,7 @@ public class BattleActivity extends AppCompatActivity {
             }
             myCard.removeView(imageView_attackMark);
             myCard.removeView(textView_hurt);
-            if(battleModel.getOtherCardHP(mycard)<=0){
+            if(battleModel.getMyCardHP(mycard)<=0){
                 //explosionField.explode(myCard);
                 if(gameModel.isSoundOn()==1) soundPool.play(3,1,1,0,0,1);
                 AlphaAnimation animationHide =  new AlphaAnimation(1.0f, 0.0f);

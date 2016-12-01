@@ -103,7 +103,7 @@ public class MainGameActivity extends AppCompatActivity {
 
         RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.myLayout);
         thumbnail = new ImageView(MainGameActivity.this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(130, 130);
 
         thumbnail.setX((float)gameModel.getUserAccount().getCurrentLocCoordinate()[0]);
         thumbnail.setY((float)gameModel.getUserAccount().getCurrentLocCoordinate()[1]);
