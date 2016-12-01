@@ -166,10 +166,9 @@ class Game_model extends CI_Model {
  		$tableFound=1;
         if($NumberOfPlayer==2){
 
-        	$query = $this->db->table_exists('Room'.$parameter['RoomID']);
-			$count = count($query);
-
-			if (empty($count)) {
+        	$iftableexist = $this->db->table_exists('Room'.$parameter['RoomID']);
+			
+			if (!$iftableexist) {
 			    $tableFound=0;// echo "No Table Found";
 			}
 			if($tableFound==0){

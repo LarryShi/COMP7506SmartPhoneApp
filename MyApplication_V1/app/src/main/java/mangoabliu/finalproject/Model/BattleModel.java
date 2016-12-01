@@ -409,7 +409,7 @@ public class BattleModel {
 
             jsonObject.put("Player"+ int_myplayerID +"CardID", mapBtnNumberChooseToCard.get(int_myPlayCardIndex).getCardID());
             jsonObject.put("Player"+ int_otherPlayerID +"CardID", mapOtherBtnNumberChooseToCard.get(int_otherPlayCardIndex).getCardID());
-            jsonObject.put("Player"+ int_myplayerID +"CardNum", int_myPlayCardIndex);
+            jsonObject.put("Player"+ int_myplayerID +"CardNum", int_myPlayCardIndex);;
             jsonObject.put("Player"+ int_otherPlayerID +"CardNum", int_otherPlayCardIndex);
             jsonObject.put("Player", int_myplayerID);
 
