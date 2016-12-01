@@ -171,6 +171,7 @@ public class MenuActivity extends AppCompatActivity implements AnimationListener
 
             Intent myIntent = new Intent(MenuActivity.this, LoginActivity.class);
             startActivityForResult(myIntent, 0);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

@@ -251,6 +251,7 @@ public class MainGameActivity extends AppCompatActivity {
             if(gameModel.isSoundOn()==1) soundPool.play(1,1,1,0,0,1);
             Intent myIntent = new Intent(MainGameActivity.this, BattleActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

@@ -1,16 +1,19 @@
 package mangoabliu.finalproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -130,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivityForResult(myIntent, 0);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -153,6 +157,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent myIntent = new Intent(LoginActivity.this, MainGameActivity.class);
         myIntent.putExtra("UserAccount",jsonObject);
         startActivity(myIntent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void errorMessage(String err){
@@ -186,7 +191,33 @@ public class LoginActivity extends AppCompatActivity {
         if(gameModel.isMusicOn()==1)  bgm.start();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            dialog_exit();
+            return true;
+        }
+        return false;
+    }
 
+    private void dialog_exit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage(R.string.confirm_to_exit);
+        builder.setTitle(R.string.NOTICE);
+        builder.setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                gameModel.finshAllActivities();
+
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 
     @Override
     protected void onStop() {

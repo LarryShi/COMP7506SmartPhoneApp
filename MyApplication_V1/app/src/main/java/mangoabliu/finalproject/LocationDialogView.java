@@ -245,7 +245,10 @@ public class LocationDialogView extends Dialog {
             Intent intent = new Intent();
             intent.setClass(v.getContext(), CardDropActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             v.getContext().startActivity(intent);
+
+
 
         }
     }
