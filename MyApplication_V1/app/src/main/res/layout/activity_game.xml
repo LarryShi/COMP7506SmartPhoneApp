@@ -47,16 +47,7 @@
         android:textSize="@dimen/map_dist_textsize"
         android:textColor="@color/clr_map_text" />
 
-    <!--Button StepTest-->
-    <Button
-        android:id="@+id/stepTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="step"
-        android:background="#5FFF"
-        android:layout_marginBottom="15dp"
-        android:layout_marginStart="15dp"/>
+
 
 
     <!--Planet Button Layout-->

@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import mangoabliu.finalproject.Layout.CardLayout;
 import mangoabliu.finalproject.Layout.FontTextView;
 import mangoabliu.finalproject.Model.BattleModel;
@@ -46,6 +48,7 @@ public class BattleActivity extends AppCompatActivity {
     RelativeLayout rl_battle_mycard_container1,rl_battle_mycard_container2,rl_battle_mycard_container3;
     ImageView imageView_battle_waiting,imageView_battle_border,imageView_battle_win,imageView_battle_lose;
     CardLayout myCard1,myCard2,myCard3,otherCard1,otherCard2,otherCard3;
+    TextView textView_myUsername,textView_otherUsername;
 
     int int_state=0;//0在等待匹配，1在选卡，2在等待对方选卡，3在对战；
     int int_last_selectedMycard=0;
@@ -95,7 +98,7 @@ public class BattleActivity extends AppCompatActivity {
         animationAttackCardGoDown.setFillAfter(true);
         animationAttackCardGoDown.setAnimationListener(new generalAnimationListener());
 
-
+        textView_myUsername.setText(battleModel.getUserAccount().getUserId());
         explosionField = ExplosionField.attach2Window(BattleActivity.this);
 
         battleModel.applyForFight();
@@ -118,6 +121,8 @@ public class BattleActivity extends AppCompatActivity {
         imageView_battle_lose=(ImageView) findViewById(R.id.imageView_lose);
         tv_searching = (FontTextView)findViewById(R.id.battle_searching_text);
         tv_turn=(FontTextView)findViewById(R.id.textView_battle_turn);
+        textView_myUsername=(TextView) findViewById(R.id.textView_myUserName);
+        textView_otherUsername=(TextView)findViewById(R.id.textView_otherUserName);
 
         myCard1=(CardLayout)findViewById(R.id.card_battle_mycard_1);
         myCard2=(CardLayout)findViewById(R.id.card_battle_mycard_2);
@@ -393,6 +398,7 @@ public class BattleActivity extends AppCompatActivity {
 
     public void setOtherSideUserName(String userName){
         //设置对面用户名字
+        textView_otherUsername.setText(userName);
     }
 
     public void waitingRoomFinished(){
